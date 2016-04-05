@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:include src="/resources/templates/header.xhtml" />
+
+<h:body>
+
+	<h:form>
+
+		<h:outputText value="Formulario de login sin funcionalidad. Solo es un ejemplo" />
+
+		<h:panelGrid columns="2">
+
+			<h:outputText value="Usuario" />
+			<h:inputText id="usuario" />
+
+			<h:outputText value="Contraseña" />
+			<h:inputSecret id="password" />
+		</h:panelGrid>
+		<h:commandButton value="Enviar" />
+	</h:form>
+
+</h:body>
+</html>
