@@ -58,3 +58,9 @@ Una vez hecho, nos creará el proyecto.
 **Whatsapp Web** para poder enviar capturas de pantalla a través de un chat
 
 **Skype** o **TS** para mantener contacto y resolver dudas en grupo
+
+***
+
+#Para Guillermo
+
+Esto no hace falta que lo miréis, son algunas cosas que voy a usar que ya os explicaré cuando lo haya aprendido
