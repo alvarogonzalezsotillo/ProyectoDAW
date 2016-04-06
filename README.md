@@ -6,6 +6,16 @@ Repositorio para Proyecto de DAW realizado por Sara, Jorge y Guillermo
 
 ![Ejemplo de ficheros ignorados](http://s8.postimg.org/jugakenud/84dbe3bf_6b57_41e3_bdef_c5c81ddc9ce9.jpg)
 
+#¿Cómo funcionar con git y no morir en el intento?
+
+Cada uno trabaja con su propia rama haciendo sus commits y push. Cuando se hayan terminado los cambios y todo funcione tendremos que cambiar a la rama **master** y hacer el **merge** con nuestra rama.
+
+Una vez hecho el merge, se realiza un autocommit, por que solo solo haremos **push** de master para subir los cambios
+
+Una vez subidos, avisamos al resto de que se han hecho cambios en master, y el resto tiene que hacer lo siguiente:
+
+En la rama master hacemos un **pull** de los cambios, cambiamos a nuestra rama y hacemos un **merge** con la rama master y seguimos haciendo nuestro commits y push de nuestra rama.
+
 
 # Requisitos necesarios
 Eclipse versión JEE Mars 2:
