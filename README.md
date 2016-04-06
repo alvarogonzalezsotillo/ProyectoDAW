@@ -24,8 +24,12 @@ Una base de datos MySQL versión 5.7 a descargar https://dev.mysql.com/downloads
 **Cuidado y no descargar la versión test**
 
 #¿Cómo iniciar el proyecto?
-Nos vamos a la carpeta donde tengamos el **workspace** y creamos otra carpeta llamada git(por ejemplo, si tenemos el workspace en *C:/workspace*, la carpeta creada será *C:/git*). Vamos a esta nueva carpeta, creamos una nueva carpeta dentro que se va a llamar proyecto y mediante la línea de comandos de git(*git-bash*) clonamos con *git clone* el repositorio.
+Nos vamos a la carpeta donde tengamos el **workspace** y creamos otra carpeta llamada git(por ejemplo, si tenemos el workspace en *C:/workspace*, la carpeta creada será *C:/git*). Vamos a esta nueva carpeta, creamos una nueva carpeta dentro que se va a llamar proyecto y mediante la línea de comandos de git(*git-bash*) clonamos con *git clone* el repositorio de la siguiente forma.
 
+```shell
+cd /git/proyecto (ruta elegida antes)
+git clone https://github.com/Gmuela/ProyectoDAW.git
+```
 Una vez hecho lo anterior ya tendremos el projecto con todos los fuentes en la carpeta *C:/git/proyecto*
 
 Ahora en Eclipse hacemos un proyecto desde *Import -> Maven -> Existing Maven Project* y seleccionamos la carpeta **app** dentro de proyecto, es decir, los fuentes que hemos clonado del repositorio.
