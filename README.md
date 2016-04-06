@@ -36,21 +36,7 @@ Una vez hecho lo anterior ya tendremos el projecto con todos los fuentes en la c
 
 Ahora en Eclipse hacemos un proyecto desde *Import -> Maven -> Existing Maven Project* y seleccionamos la carpeta **app** dentro de proyecto, es decir, los fuentes que hemos clonado del repositorio.
 
-Una vez hecho, nos pedirá información para el projecto de maven, asegurarse de que checkeamos la opción de **Create a simple project**
-
-La información sería la siguiente:
-
-En la parte de **ARTIFACT**
-
-En *Group id* ponemos iesrey.daw
-
-En *Artifact id* ponemos app
-
-En *Version* 0.1
-
-En *Packaging* WAR
-
-Parent project lo dejamos vacío y finalizamos. Debería funcionar, repito, **debería**
+Una vez hecho, nos creará el proyecto.
 
 #Funcionalidades externas al proyecto para usar
 ##Obligatorias: 
