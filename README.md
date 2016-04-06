@@ -63,4 +63,19 @@ Una vez hecho, nos creará el proyecto.
 
 #Para Guillermo
 
-Esto no hace falta que lo miréis, son algunas cosas que voy a usar que ya os explicaré cuando lo haya aprendido
+Esto no hace falta que lo miréis, son algunas cosas que voy a usar que ya os explicaré cuando lo haya aprendido, aunque os dejo links por si queréis informaros.
+
+##SonarQube 
+Evaluaciones del código
+http://www.sonarqube.org/
+https://es.wikipedia.org/wiki/SonarQube
+
+##JUnit
+Test unitarios y de integración
+https://es.wikipedia.org/wiki/JUnit
+
+#Mockito
+Los objetos Mock permiten de una forma sencilla testear clases como Servlets o EJBs para simular su entorno. El cometido de un objeto Mock es servir de ayuda a los test
+http://mockito.org/
+https://en.wikipedia.org/wiki/Mockito
+
