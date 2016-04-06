@@ -46,16 +46,6 @@ En *Packaging* WAR
 
 Parent project lo dejamos vacío y finalizamos. Debería funcionar, repito, **debería**
 
-#¿Cómo iniciar el proyecto si falla lo anterior?
-
-Nos vamos a la carpeta donde tengamos el **workspace** y creamos otra carpeta llamada git(por ejemplo, si tenemos el workspace en *C:/workspace*, la carpeta creada será *C:/git*). Vamos a esta nueva carpeta, creamos una nueva carpeta dentro que se va a llamar proyecto y mediante la línea de comandos de git(*git-bash*) clonamos con *git clone* el repositorio.
-
-Una vez hecho lo anterior ya tendremos el projecto con todos los fuentes en la carpeta *C:/git/proyecto*
-
-Ahora en Eclipse hacemos un proyecto desde *Import -> Maven -> Existing Maven Project* y seleccionamos la carpeta **app** dentro de proyecto, es decir, los fuentes que hemos clonado del repositorio.
-
-Los siguientes pasos son iguales que en el anterior punto.
-
 #Funcionalidades externas al proyecto para usar
 ##Obligatorias: 
 **Taiga** para hacer uso de una metodología ágil (SCRUM)
