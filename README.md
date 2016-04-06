@@ -21,9 +21,9 @@ Seleccionas las ruta donde esté instalado Tomcat y finalizar
 
 Una base de datos MySQL versión 5.7 a descargar https://dev.mysql.com/downloads/mysql/
 
-Aplicación de Git para Windows/MAC/Linux a descargar de aquí: https://git-scm.com/downloads
-
 **Cuidado y no descargar la versión test**
+
+Aplicación de Git para Windows/MAC/Linux a descargar de aquí: https://git-scm.com/downloads
 
 #¿Cómo iniciar el proyecto?
 Nos vamos a la carpeta donde tengamos el **workspace** y creamos otra carpeta llamada git(por ejemplo, si tenemos el workspace en *C:/workspace*, la carpeta creada será *C:/git*). Vamos a esta nueva carpeta, creamos una nueva carpeta dentro que se va a llamar proyecto y mediante la línea de comandos de git(*git-bash ubicado en la ruta de instalación de Git*) clonamos con *git clone* el repositorio de la siguiente forma.
