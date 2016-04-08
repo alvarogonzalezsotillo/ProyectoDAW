@@ -1,0 +1,17 @@
+CREATE TABLE `iesrey`.`usuarios` (
+  `idUsuario` BIGINT(11) NOT NULL,
+  `nombre` VARCHAR(45) NOT NULL,
+  `apellido` VARCHAR(45) NOT NULL,
+  `nick` VARCHAR(65) NOT NULL,
+  `correo` VARCHAR(85) NULL,
+  `password` VARCHAR(254) NOT NULL,
+  `saltPassword` VARCHAR(45) NOT NULL,
+  `imagen` BLOB NULL,
+  `esMusico` TINYINT(1) NOT NULL,
+  `grupo` VARCHAR(35) NULL,
+  `web` VARCHAR(100) NULL,
+  `tipoMusica` VARCHAR(20) NULL,
+  `esAdmin` TINYINT(1) NOT NULL DEFAULT 0,
+  `fechaRegistro` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idUsuario`),
+  ADD UNIQUE INDEX `nick_UNIQUE` (`nick` ASC));

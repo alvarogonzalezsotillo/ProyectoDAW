@@ -6,6 +6,12 @@
 	<version>0.1</version>
 	<packaging>war</packaging>
 
+	<properties>
+		<sonar.jacoco.itreportpath>${project.build.directory}/jacoco-it.exec</sonar.jacoco.itreportpath>
+		<sonar.jacoco.utreportpath>${project.build.directory}/jacoco.exec</sonar.jacoco.utreportpath>
+	</properties>
+
+
 	<dependencies>
 
 		<!-- Primefaces/JSF -->
@@ -50,6 +56,71 @@
 			<version>5.1.38</version>
 		</dependency>
 
+		<!-- JUnit -->
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>2.0.2-beta</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>2.0.44-beta</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-mockito</artifactId>
+			<version>1.6.4</version>
+		</dependency>
+
 
 	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>0.7.2.201409121644</version>
+					<executions>
+						<execution>
+							<id>pre-unit-test</id>
+							<goals>
+								<goal>prepare-agent</goal>
+							</goals>
+							<configuration>
+								<propertyName>surefireArgLine</propertyName>
+								<destFile>${sonar.jacoco.utReportPath}</destFile>
+								<append>true</append>
+							</configuration>
+						</execution>
+						<!-- Prepares the property pointing to the JaCoCo runtime agent which 
+							is passed as VM argument when Maven the Failsafe plugin is executed. -->
+						<execution>
+							<id>pre-integration-test</id>
+							<goals>
+								<goal>prepare-agent-integration</goal>
+							</goals>
+							<configuration>
+								<propertyName>failsafeArgLine</propertyName>
+								<destFile>${sonar.jacoco.itReportPath}</destFile>
+								<append>true</append>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
 </project>
