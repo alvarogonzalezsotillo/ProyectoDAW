@@ -10,6 +10,7 @@ CREATE TABLE `iesrey`.`usuarios` (
   `esMusico` TINYINT(1) NOT NULL,
   `grupo` VARCHAR(35) NULL,
   `web` VARCHAR(100) NULL,
+  `tipoMusica` VARCHAR(20) NULL,
   `esAdmin` TINYINT(1) NOT NULL DEFAULT 0,
   `fechaRegistro` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`idUsuario`),

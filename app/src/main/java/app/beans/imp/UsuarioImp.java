@@ -31,10 +31,12 @@ public class UsuarioImp implements Usuario, Serializable {
 	private String nickDeUsuario;
 	@Column(name="correo")
 	private String correoDeUsuario;
-	@Column(name="web")
-	private String webDeUsuario;
 	@Column(name="esMusico")
 	private boolean esUsuarioMusico;
+	@Column(name="web")
+	private String webDeUsuario;
+	@Column(name="grupo")
+	private String grupoDeUsuario;
 
 	// Password -> Hash | Salt -> Cadena aleatoria
 	private String passwordDeUsuario;
@@ -83,14 +85,6 @@ public class UsuarioImp implements Usuario, Serializable {
 		this.correoDeUsuario = correoDeUsuario;
 	}
 
-	public String getWebDeUsuario() {
-		return webDeUsuario;
-	}
-
-	public void setWebDeUsuario(String webUsuario) {
-		this.webDeUsuario = webUsuario;
-	}
-
 	public boolean getEsUsuarioMusico() {
 		return esUsuarioMusico;
 	}
@@ -100,6 +94,22 @@ public class UsuarioImp implements Usuario, Serializable {
 	}
 
 	
+	public String getWebDeUsuario() {
+		return webDeUsuario;
+	}
+
+	public void setWebDeUsuario(String webUsuario) {
+		this.webDeUsuario = webUsuario;
+	}
+
+	public String getGrupoDeUsuario() {
+		return grupoDeUsuario;
+	}
+
+	public void setGrupoDeUsuario(String grupoDeUsuario) {
+		this.grupoDeUsuario = grupoDeUsuario;
+	}
+
 	//TODO Hash de la contraseña
 	public void setPasswordDeUsuario(String passwordDeUsuario) {
 		this.passwordDeUsuario = passwordDeUsuario;
