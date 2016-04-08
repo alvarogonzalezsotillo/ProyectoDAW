@@ -4,25 +4,52 @@ import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import app.beans.Usuario;
 
 @ManagedBean(name = "usuario")
 @SessionScoped
 @SuppressWarnings("unused")
+@Entity
+@Table(name="usuarios")
 public class UsuarioImp implements Usuario, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Column(name="idUsuario")
+	private Long id;
+	@Column(name="nombre")
 	private String nombreDeUsuario;
+	@Column(name="apellido")
 	private String apellidoDeUsuario;
+	@Column(name="nick")
 	private String nickDeUsuario;
+	@Column(name="correo")
 	private String correoDeUsuario;
+	@Column(name="web")
+	private String webDeUsuario;
+	@Column(name="esMusico")
 	private boolean esUsuarioMusico;
 
-	// Estos dos atributos nunca deben llevar get
+	// Password -> Hash | Salt -> Cadena aleatoria
 	private String passwordDeUsuario;
 	private String saltPassword;
+	
+	
+	@Id
+	@GeneratedValue
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getNombreDeUsuario() {
 		return nombreDeUsuario;
@@ -56,12 +83,12 @@ public class UsuarioImp implements Usuario, Serializable {
 		this.correoDeUsuario = correoDeUsuario;
 	}
 
-	public void setPasswordDeUsuario(String passwordDeUsuario) {
-		this.passwordDeUsuario = passwordDeUsuario;
+	public String getWebDeUsuario() {
+		return webDeUsuario;
 	}
 
-	public void setSaltPassword(String saltPassword) {
-		this.saltPassword = saltPassword;
+	public void setWebDeUsuario(String webUsuario) {
+		this.webDeUsuario = webUsuario;
 	}
 
 	public boolean getEsUsuarioMusico() {
@@ -70,6 +97,17 @@ public class UsuarioImp implements Usuario, Serializable {
 
 	public void setEsUsuarioMusico(boolean esUsuarioMusico) {
 		this.esUsuarioMusico = esUsuarioMusico;
+	}
+
+	
+	//TODO Hash de la contraseña
+	public void setPasswordDeUsuario(String passwordDeUsuario) {
+		this.passwordDeUsuario = passwordDeUsuario;
+	}
+
+	//TODO Generador aleatorio de una cadena
+	public void setSaltPassword(String saltPassword) {
+		this.saltPassword = saltPassword;
 	}
 
 }
