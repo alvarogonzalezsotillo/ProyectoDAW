@@ -10,7 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.mysql.jdbc.StringUtils;
+
 import app.beans.Usuario;
+import app.controller.Util;
 
 @ManagedBean(name = "usuario")
 @SessionScoped
@@ -125,12 +128,12 @@ public class UsuarioImp implements Usuario, Serializable {
 
 	// TODO Hash de la contraseña
 	public void setPasswordDeUsuario(String passwordDeUsuario) {
-		this.passwordDeUsuario = passwordDeUsuario;
+		this.passwordDeUsuario = Util.hashPasswordSHA(passwordDeUsuario);
 	}
 
 	// TODO Generador aleatorio de una cadena
 	public void setSaltPassword(String saltPassword) {
-		this.saltPassword = saltPassword;
+		this.saltPassword = Util.saltGenerator();
 	}
 
 }
