@@ -13,12 +13,25 @@
 
 	<h:form>
 
-		<h:outputText value="Formulario de login sin funcionalidad. Solo es un ejemplo" />
+		<h:outputText value="Formulario de registro de prueba" />
 
 		<h:panelGrid columns="2">
 
-			<h:outputText value="Usuario" />
-			<h:inputText id="usuario" />
+			<p:outputLabel value="Nombre " for="nombre" />
+			<p:inputText value="#{usuarioController.usuario.nombreDeUsuario}" id="nombre" title="nombre" required="true"/>
+			
+			
+			<p:outputLabel value="Apellido " for="apellido" />
+			<p:inputText value="#{usuarioController.usuario.apellidoDeUsuario}" id="apellido" title="apellido" required="true"/>
+			
+			<p:outputLabel value="Nick/Apodo " for="nick" />
+			<p:inputText value="#{usuarioController.usuario.nickDeUsuario}" id="nick" title="nick" required="true"/>
+			
+			<p:outputLabel value="Correo " for="correo" />
+			<p:inputText value="#{usuarioController.usuario.correoDeUsuario}" id="correo" title="correo" required="true"/>
+			
+			<p:outputLabel value="Password " for="password" />
+			<p:inputText value="#{usuarioController.usuario.passwordDeUsuario}" id="password" title="password" required="true"/>
 
 			<h:outputText value="Contraseña" />
 			<h:inputSecret id="password" />
@@ -30,9 +43,7 @@
 			<h:inputText id="nombreartistico" />
 		</h:panelGrid>
 		<h:commandButton value="Enviar" />
-		
-		Mi primer Commit! ^_^
-		Mi primera rama!
+
 	</h:form>
 
 </h:body>

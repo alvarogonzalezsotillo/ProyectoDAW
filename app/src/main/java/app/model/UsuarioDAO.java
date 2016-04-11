@@ -1,9 +1,18 @@
 package app.model;
 
-public class UsuarioDAO{
+import app.beans.imp.UsuarioImp;
 
-	BaseDaoHibernate dao = new BaseDaoHibernate();
+public class UsuarioDAO extends BaseDaoHibernate {
+
+	public UsuarioDAO() {
+		super();
+	}
 	
-	
-	
+	public void insertUsuario(UsuarioImp usuario){
+		
+		session.save(usuario);
+		transaction.commit();
+		
+	}
+
 }
