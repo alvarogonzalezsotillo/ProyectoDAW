@@ -126,12 +126,10 @@ public class UsuarioImp implements Usuario, Serializable {
 		this.grupoDeUsuario = grupoDeUsuario;
 	}
 
-	// TODO Hash de la contraseña
 	public void setPasswordDeUsuario(String passwordDeUsuario) {
 		this.passwordDeUsuario = Util.hashPasswordSHA(passwordDeUsuario);
 	}
 
-	// TODO Generador aleatorio de una cadena
 	public void setSaltPassword(String saltPassword) {
 		this.saltPassword = Util.saltGenerator();
 	}

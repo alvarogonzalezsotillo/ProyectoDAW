@@ -4,4 +4,6 @@ public class UsuarioDAO{
 
 	BaseDaoHibernate dao = new BaseDaoHibernate();
 	
+	
+	
 }

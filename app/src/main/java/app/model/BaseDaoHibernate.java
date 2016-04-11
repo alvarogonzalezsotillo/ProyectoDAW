@@ -7,9 +7,9 @@ import org.hibernate.cfg.Configuration;
 
 public class BaseDaoHibernate {
 	
-	Session session;
-	Transaction transaction;
-	SessionFactory factory;
+	public Session session;
+	public Transaction transaction;
+	public SessionFactory factory;
 	
 	public BaseDaoHibernate() {
 		
