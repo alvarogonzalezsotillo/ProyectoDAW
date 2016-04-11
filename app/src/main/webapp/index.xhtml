@@ -33,16 +33,10 @@
 			<p:outputLabel value="Password " for="password" />
 			<p:inputText value="#{usuarioController.usuario.passwordDeUsuario}" id="password" title="password" required="true"/>
 
-			<h:outputText value="Contraseña" />
-			<h:inputSecret id="password" />
-			
-			<h:outputText value="Correo electronico" />
-			<h:inputText id="correo" />
-			
-			<h:outputText value="Nombre artistico" />
-			<h:inputText id="nombreartistico" />
 		</h:panelGrid>
-		<h:commandButton value="Enviar" />
+		<p:commandButton value="Añadir">
+			<f:ajax execute="nombre apellido nick correo password" listener="#{usuarioController.insert}" />
+		</p:commandButton>
 
 	</h:form>
 

@@ -11,7 +11,6 @@ import app.model.UsuarioDAO;
 @ViewScoped
 public class UsuarioController {
 
-	@ManagedProperty(value="usuario")
 	private UsuarioImp usuario;
 	
 	private UsuarioDAO dao = new UsuarioDAO();
@@ -29,7 +28,5 @@ public class UsuarioController {
 	public void setUsuario(UsuarioImp usuario) {
 		this.usuario = usuario;
 	}
-	
-	
 	
 }
