@@ -16,33 +16,47 @@ import app.beans.Usuario;
 @SessionScoped
 @SuppressWarnings("unused")
 @Entity
-@Table(name="usuarios")
+@Table(name = "usuarios")
 public class UsuarioImp implements Usuario, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="idUsuario")
+	@Column(name = "idUsuario")
 	private Long id;
-	@Column(name="nombre")
+	@Column(name = "nombre")
 	private String nombreDeUsuario;
-	@Column(name="apellido")
+	@Column(name = "apellido")
 	private String apellidoDeUsuario;
-	@Column(name="nick")
+	@Column(name = "nick")
 	private String nickDeUsuario;
-	@Column(name="correo")
+	@Column(name = "correo")
 	private String correoDeUsuario;
-	@Column(name="esMusico")
+	@Column(name = "esMusico")
 	private boolean esUsuarioMusico;
-	@Column(name="web")
+	@Column(name = "web")
 	private String webDeUsuario;
-	@Column(name="grupo")
+	@Column(name = "grupo")
 	private String grupoDeUsuario;
 
 	// Password -> Hash | Salt -> Cadena aleatoria
 	private String passwordDeUsuario;
 	private String saltPassword;
-	
-	
+
+	public UsuarioImp(String nombreDeUsuario, String apellidoDeUsuario, String nickDeUsuario, String correoDeUsuario,
+			boolean esUsuarioMusico, String webDeUsuario, String grupoDeUsuario, String passwordDeUsuario,
+			String saltPassword) {
+
+		this.nombreDeUsuario = nombreDeUsuario;
+		this.apellidoDeUsuario = apellidoDeUsuario;
+		this.nickDeUsuario = nickDeUsuario;
+		this.correoDeUsuario = correoDeUsuario;
+		this.esUsuarioMusico = esUsuarioMusico;
+		this.webDeUsuario = webDeUsuario;
+		this.grupoDeUsuario = grupoDeUsuario;
+		this.passwordDeUsuario = passwordDeUsuario;
+		this.saltPassword = saltPassword;
+	}
+
 	@Id
 	@GeneratedValue
 	public Long getId() {
@@ -93,7 +107,6 @@ public class UsuarioImp implements Usuario, Serializable {
 		this.esUsuarioMusico = esUsuarioMusico;
 	}
 
-	
 	public String getWebDeUsuario() {
 		return webDeUsuario;
 	}
@@ -110,12 +123,12 @@ public class UsuarioImp implements Usuario, Serializable {
 		this.grupoDeUsuario = grupoDeUsuario;
 	}
 
-	//TODO Hash de la contraseña
+	// TODO Hash de la contraseña
 	public void setPasswordDeUsuario(String passwordDeUsuario) {
 		this.passwordDeUsuario = passwordDeUsuario;
 	}
 
-	//TODO Generador aleatorio de una cadena
+	// TODO Generador aleatorio de una cadena
 	public void setSaltPassword(String saltPassword) {
 		this.saltPassword = saltPassword;
 	}
