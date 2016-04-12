@@ -4,8 +4,16 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
-public class Util {
+import org.mockito.internal.creation.instance.InstantationException;
 
+public final class Util {
+
+	private Util() throws InstantiationError{
+		
+		throw new InstantationException("Clase estática no instanciable", null);
+		
+	}
+	
 	public static String saltGenerator() {
 
 		char[] arrayLetras = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLOMNOPQRSTUVWXYZ$%&()".toCharArray();
@@ -49,7 +57,7 @@ public class Util {
 		
 		catch (NoSuchAlgorithmException e) {
 			
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 		
 		return generatedPassword;

@@ -46,8 +46,7 @@ public class UsuarioImp implements Usuario, Serializable {
 	private String saltPassword;
 
 	public UsuarioImp(String nombreDeUsuario, String apellidoDeUsuario, String nickDeUsuario, String correoDeUsuario,
-			boolean esUsuarioMusico, String webDeUsuario, String grupoDeUsuario, String passwordDeUsuario,
-			String saltPassword) {
+			boolean esUsuarioMusico, String webDeUsuario, String grupoDeUsuario, String passwordDeUsuario) {
 
 		this.nombreDeUsuario = nombreDeUsuario;
 		this.apellidoDeUsuario = apellidoDeUsuario;
@@ -56,8 +55,8 @@ public class UsuarioImp implements Usuario, Serializable {
 		this.esUsuarioMusico = esUsuarioMusico;
 		this.webDeUsuario = webDeUsuario;
 		this.grupoDeUsuario = grupoDeUsuario;
-		this.passwordDeUsuario = passwordDeUsuario;
-		this.saltPassword = saltPassword;
+		this.passwordDeUsuario = Util.hashPasswordSHA(passwordDeUsuario);
+		this.saltPassword = Util.saltGenerator();
 	}
 
 	@Id
@@ -129,9 +128,17 @@ public class UsuarioImp implements Usuario, Serializable {
 	public void setPasswordDeUsuario(String passwordDeUsuario) {
 		this.passwordDeUsuario = Util.hashPasswordSHA(passwordDeUsuario);
 	}
+	
+	public String getPasswordDeUsuario() {
+		return passwordDeUsuario;
+	}
 
-	public void setSaltPassword(String saltPassword) {
+	public void setSaltPassword() {
 		this.saltPassword = Util.saltGenerator();
+	}
+	
+	public String getSaltPassword() {
+		 return saltPassword;
 	}
 
 }
