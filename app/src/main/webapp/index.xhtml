@@ -11,7 +11,7 @@
 
 <h:body>
 
-	<h:form>
+	<h:form enctype="multipart/form-data">
 
 		<h:outputText value="Formulario de registro de prueba" />
 
@@ -42,6 +42,15 @@
             <p:outputLabel value="Página Web " for="web" />
             <p:inputText value="#{usuarioController.usuario.webDeUsuario}" id="web" title="web" required="false"/>
 			
+			
+			
+            <!--
+             <h:inputHidden value="#{usuarioController.usuario.saltPassword}" />
+            
+             <p:outputLabel value="Imagen de usuario " for="imagen" />
+            
+            <p:fileUpload value="#{usuarioController.usuario.imagenDeUsuario}" id="imagen" title="imagen" required="false" sizeLimit="100000" 
+            allowTypes="/(\.|\/)(gif|jpe?g|png)$/" mode="simple"/> -->
 
 		</h:panelGrid>
 		<p:commandButton value="Añadir">

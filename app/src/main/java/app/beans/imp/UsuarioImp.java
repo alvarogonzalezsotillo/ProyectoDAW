@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import app.beans.Usuario;
@@ -23,25 +24,34 @@ public class UsuarioImp implements Usuario, Serializable {
 
     @Column(name = "id")
     private Long id;
+    
     @Column(name = "nombreDeUsuario")
     private String nombreDeUsuario;
     @Column(name = "apellidoDeUsuario")
     private String apellidoDeUsuario;
     @Column(name = "nickDeUsuario")
     private String nickDeUsuario;
+    @Column(name = "passwordDeUsuario")
+    private String passwordDeUsuario;
+    
+    @Column(name = "imagenDeUsuario")
+    @Lob
+    private byte[] imagenDeUsuario;
+    
     @Column(name = "correoDeUsuario")
     private String correoDeUsuario;
+    @Column(name = "webDeUsuario")
+    private String webDeUsuario;
+    
     @Column(name = "esUsuarioMusico")
     private boolean esUsuarioMusico;
     @Column(name = "grupoDeUsuario")
     private String grupoDeUsuario;
     @Column(name = "tipoMusicaDeUsuario")
     private String tipoMusicaDeUsuario;
-    @Column(name = "webDeUsuario")
-    private String webDeUsuario;
+    
     // Password -> Hash | Salt -> Cadena aleatoria
-    @Column(name = "passwordDeUsuario")
-    private String passwordDeUsuario;
+    
     @Column(name = "saltPassword")
     private String saltPassword;
     
@@ -136,6 +146,14 @@ public class UsuarioImp implements Usuario, Serializable {
 
     public void setWebDeUsuario(String webUsuario) {
         this.webDeUsuario = webUsuario;
+    }
+
+    public byte[] getImagenDeUsuario() {
+        return imagenDeUsuario;
+    }
+
+    public void setImagenDeUsuario(byte[] imagenDeUsuario) {
+        this.imagenDeUsuario = imagenDeUsuario;
     }
 
     public void setPasswordDeUsuario(String passwordDeUsuario) {
