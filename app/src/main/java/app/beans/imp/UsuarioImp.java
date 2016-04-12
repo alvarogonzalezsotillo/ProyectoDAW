@@ -3,7 +3,7 @@ package app.beans.imp;
 import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,35 +14,40 @@ import app.beans.Usuario;
 import app.controller.Util;
 
 @ManagedBean(name = "usuario")
-@SessionScoped
+@ViewScoped
 @Entity
 @Table(name = "usuarios")
 public class UsuarioImp implements Usuario, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Column(name = "idUsuario")
+    @Column(name = "id")
     private Long id;
-    @Column(name = "nombre")
+    @Column(name = "nombreDeUsuario")
     private String nombreDeUsuario;
-    @Column(name = "apellido")
+    @Column(name = "apellidoDeUsuario")
     private String apellidoDeUsuario;
-    @Column(name = "nick")
+    @Column(name = "nickDeUsuario")
     private String nickDeUsuario;
-    @Column(name = "correo")
+    @Column(name = "correoDeUsuario")
     private String correoDeUsuario;
-    @Column(name = "esMusico")
+    @Column(name = "esUsuarioMusico")
     private boolean esUsuarioMusico;
-    @Column(name = "grupo")
+    @Column(name = "grupoDeUsuario")
     private String grupoDeUsuario;
-    @Column(name = "tipoMusica")
+    @Column(name = "tipoMusicaDeUsuario")
     private String tipoMusicaDeUsuario;
-    @Column(name = "web")
+    @Column(name = "webDeUsuario")
     private String webDeUsuario;
-
     // Password -> Hash | Salt -> Cadena aleatoria
+    @Column(name = "passwordDeUsuario")
     private String passwordDeUsuario;
+    @Column(name = "saltPassword")
     private String saltPassword;
+    
+    public UsuarioImp(){
+        
+    }
 
     public UsuarioImp(String nombreDeUsuario, String apellidoDeUsuario, String nickDeUsuario, String correoDeUsuario,
             boolean esUsuarioMusico, String tipoMusicaDeUsuario, String grupoDeUsuario, String webDeUsuario, String passwordDeUsuario) {

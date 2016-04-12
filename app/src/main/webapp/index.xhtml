@@ -27,15 +27,25 @@
 			<p:outputLabel value="Nick/Apodo " for="nick" />
 			<p:inputText value="#{usuarioController.usuario.nickDeUsuario}" id="nick" title="nick" required="true"/>
 			
-			<p:outputLabel value="Correo " for="correo" />
-			<p:inputText value="#{usuarioController.usuario.correoDeUsuario}" id="correo" title="correo" required="true"/>
-			
 			<p:outputLabel value="Password " for="password" />
-			<p:inputText value="#{usuarioController.usuario.passwordDeUsuario}" id="password" title="password" required="true"/>
+            <p:password value="#{usuarioController.usuario.passwordDeUsuario}" id="password" title="password" required="true"/>
+			
+			<p:outputLabel value="Correo " for="correo" />
+			<p:inputText value="#{usuarioController.usuario.correoDeUsuario}" id="correo" title="correo" required="false"/>
+			
+			<p:outputLabel value="Grupo " for="grupo" />
+            <p:inputText value="#{usuarioController.usuario.grupoDeUsuario}" id="grupo" title="grupo" required="false"/>
+			
+			<p:outputLabel value="Tipo de Música " for="tipoMusica" />
+            <p:inputText value="#{usuarioController.usuario.tipoMusicaDeUsuario}" id="tipoMusica" title="tipoMusica" required="false"/>
+            
+            <p:outputLabel value="Página Web " for="web" />
+            <p:inputText value="#{usuarioController.usuario.webDeUsuario}" id="web" title="web" required="false"/>
+			
 
 		</h:panelGrid>
 		<p:commandButton value="Añadir">
-			<f:ajax execute="nombre apellido nick correo password" listener="#{usuarioController.insert}" />
+			<f:ajax execute="@all" listener="#{usuarioController.insert}" />
 		</p:commandButton>
 
 	</h:form>

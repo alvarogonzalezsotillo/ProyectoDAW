@@ -13,5 +13,4 @@ CREATE TABLE `iesrey`.`usuarios` (
   `tipoMusica` VARCHAR(20) NULL,
   `esAdmin` TINYINT(1) NOT NULL DEFAULT 0,
   `fechaRegistro` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`idUsuario`),
-  ADD UNIQUE INDEX `nick_UNIQUE` (`nick` ASC));
+  PRIMARY KEY (`idUsuario`));
