@@ -10,135 +10,132 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.mysql.jdbc.StringUtils;
-
 import app.beans.Usuario;
 import app.controller.Util;
 
 @ManagedBean(name = "usuario")
 @SessionScoped
-@SuppressWarnings("unused")
 @Entity
 @Table(name = "usuarios")
 public class UsuarioImp implements Usuario, Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Column(name = "idUsuario")
-	private Long id;
-	@Column(name = "nombre")
-	private String nombreDeUsuario;
-	@Column(name = "apellido")
-	private String apellidoDeUsuario;
-	@Column(name = "nick")
-	private String nickDeUsuario;
-	@Column(name = "correo")
-	private String correoDeUsuario;
-	@Column(name = "esMusico")
-	private boolean esUsuarioMusico;
-	@Column(name = "web")
-	private String webDeUsuario;
-	@Column(name = "grupo")
-	private String grupoDeUsuario;
+    @Column(name = "idUsuario")
+    private Long id;
+    @Column(name = "nombre")
+    private String nombreDeUsuario;
+    @Column(name = "apellido")
+    private String apellidoDeUsuario;
+    @Column(name = "nick")
+    private String nickDeUsuario;
+    @Column(name = "correo")
+    private String correoDeUsuario;
+    @Column(name = "esMusico")
+    private boolean esUsuarioMusico;
+    @Column(name = "web")
+    private String webDeUsuario;
+    @Column(name = "grupo")
+    private String grupoDeUsuario;
 
-	// Password -> Hash | Salt -> Cadena aleatoria
-	private String passwordDeUsuario;
-	private String saltPassword;
+    // Password -> Hash | Salt -> Cadena aleatoria
+    private String passwordDeUsuario;
+    private String saltPassword;
 
-	public UsuarioImp(String nombreDeUsuario, String apellidoDeUsuario, String nickDeUsuario, String correoDeUsuario,
-			boolean esUsuarioMusico, String webDeUsuario, String grupoDeUsuario, String passwordDeUsuario) {
+    public UsuarioImp(String nombreDeUsuario, String apellidoDeUsuario, String nickDeUsuario, String correoDeUsuario,
+            boolean esUsuarioMusico, String webDeUsuario, String grupoDeUsuario, String passwordDeUsuario) {
 
-		this.nombreDeUsuario = nombreDeUsuario;
-		this.apellidoDeUsuario = apellidoDeUsuario;
-		this.nickDeUsuario = nickDeUsuario;
-		this.correoDeUsuario = correoDeUsuario;
-		this.esUsuarioMusico = esUsuarioMusico;
-		this.webDeUsuario = webDeUsuario;
-		this.grupoDeUsuario = grupoDeUsuario;
-		this.passwordDeUsuario = Util.hashPasswordSHA(passwordDeUsuario);
-		this.saltPassword = Util.saltGenerator();
-	}
+        this.nombreDeUsuario = nombreDeUsuario;
+        this.apellidoDeUsuario = apellidoDeUsuario;
+        this.nickDeUsuario = nickDeUsuario;
+        this.correoDeUsuario = correoDeUsuario;
+        this.esUsuarioMusico = esUsuarioMusico;
+        this.webDeUsuario = webDeUsuario;
+        this.grupoDeUsuario = grupoDeUsuario;
+        this.passwordDeUsuario = Util.hashPasswordSHA(passwordDeUsuario);
+        this.saltPassword = Util.saltGenerator();
+    }
 
-	@Id
-	@GeneratedValue
-	public Long getId() {
-		return id;
-	}
+    @Id
+    @GeneratedValue
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getNombreDeUsuario() {
-		return nombreDeUsuario;
-	}
+    public String getNombreDeUsuario() {
+        return nombreDeUsuario;
+    }
 
-	public void setNombreDeUsuario(String nombreDeUsuario) {
-		this.nombreDeUsuario = nombreDeUsuario;
-	}
+    public void setNombreDeUsuario(String nombreDeUsuario) {
+        this.nombreDeUsuario = nombreDeUsuario;
+    }
 
-	public String getApellidoDeUsuario() {
-		return apellidoDeUsuario;
-	}
+    public String getApellidoDeUsuario() {
+        return apellidoDeUsuario;
+    }
 
-	public void setApellidoDeUsuario(String apellidoDeUsuario) {
-		this.apellidoDeUsuario = apellidoDeUsuario;
-	}
+    public void setApellidoDeUsuario(String apellidoDeUsuario) {
+        this.apellidoDeUsuario = apellidoDeUsuario;
+    }
 
-	public String getNickDeUsuario() {
-		return nickDeUsuario;
-	}
+    public String getNickDeUsuario() {
+        return nickDeUsuario;
+    }
 
-	public void setNickDeUsuario(String nickDeUsuario) {
-		this.nickDeUsuario = nickDeUsuario;
-	}
+    public void setNickDeUsuario(String nickDeUsuario) {
+        this.nickDeUsuario = nickDeUsuario;
+    }
 
-	public String getCorreoDeUsuario() {
-		return correoDeUsuario;
-	}
+    public String getCorreoDeUsuario() {
+        return correoDeUsuario;
+    }
 
-	public void setCorreoDeUsuario(String correoDeUsuario) {
-		this.correoDeUsuario = correoDeUsuario;
-	}
+    public void setCorreoDeUsuario(String correoDeUsuario) {
+        this.correoDeUsuario = correoDeUsuario;
+    }
 
-	public boolean getEsUsuarioMusico() {
-		return esUsuarioMusico;
-	}
+    public boolean getEsUsuarioMusico() {
+        return esUsuarioMusico;
+    }
 
-	public void setEsUsuarioMusico(boolean esUsuarioMusico) {
-		this.esUsuarioMusico = esUsuarioMusico;
-	}
+    public void setEsUsuarioMusico(boolean esUsuarioMusico) {
+        this.esUsuarioMusico = esUsuarioMusico;
+    }
 
-	public String getWebDeUsuario() {
-		return webDeUsuario;
-	}
+    public String getWebDeUsuario() {
+        return webDeUsuario;
+    }
 
-	public void setWebDeUsuario(String webUsuario) {
-		this.webDeUsuario = webUsuario;
-	}
+    public void setWebDeUsuario(String webUsuario) {
+        this.webDeUsuario = webUsuario;
+    }
 
-	public String getGrupoDeUsuario() {
-		return grupoDeUsuario;
-	}
+    public String getGrupoDeUsuario() {
+        return grupoDeUsuario;
+    }
 
-	public void setGrupoDeUsuario(String grupoDeUsuario) {
-		this.grupoDeUsuario = grupoDeUsuario;
-	}
+    public void setGrupoDeUsuario(String grupoDeUsuario) {
+        this.grupoDeUsuario = grupoDeUsuario;
+    }
 
-	public void setPasswordDeUsuario(String passwordDeUsuario) {
-		this.passwordDeUsuario = Util.hashPasswordSHA(passwordDeUsuario);
-	}
-	
-	public String getPasswordDeUsuario() {
-		return passwordDeUsuario;
-	}
+    public void setPasswordDeUsuario(String passwordDeUsuario) {
+        this.passwordDeUsuario = Util.hashPasswordSHA(passwordDeUsuario);
+    }
 
-	public void setSaltPassword() {
-		this.saltPassword = Util.saltGenerator();
-	}
-	
-	public String getSaltPassword() {
-		 return saltPassword;
-	}
+    public String getPasswordDeUsuario() {
+        return passwordDeUsuario;
+    }
+
+    public void setSaltPassword() {
+        this.saltPassword = Util.saltGenerator();
+    }
+
+    public String getSaltPassword() {
+        return saltPassword;
+    }
 
 }
