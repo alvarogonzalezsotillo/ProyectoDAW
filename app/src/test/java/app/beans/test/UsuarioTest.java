@@ -9,13 +9,15 @@ import app.controller.Util;
 
 public class UsuarioTest {
 
+    Long idTest = 1L;
     String nombreTest = "testingNombre";
     String apellidoTest = "testingApellido";
     String nickTest = "testingNick";
     String correoTest = "testingCorreo";
     boolean esUsuarioMusicoTestFalse = false;
-    String webTest = "testingWeb";
+    String tipoMusicaTest = "testingTipoMusica";
     String grupoTest = "testingGrupo";
+    String webTest = "testingWeb";
     String passwordTest = "testingPass";
     char[] arrayTestSalt = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLOMNOPQRSTUVWXYZ$%&()".toCharArray();
     UsuarioImp sut;
@@ -24,8 +26,9 @@ public class UsuarioTest {
     public void setUp() throws Exception {
 
         try {
-            sut = new UsuarioImp(nombreTest, apellidoTest, nickTest, correoTest, esUsuarioMusicoTestFalse, webTest,
-                    grupoTest, passwordTest);
+            sut = new UsuarioImp(nombreTest, apellidoTest, nickTest, correoTest, esUsuarioMusicoTestFalse, tipoMusicaTest,
+                    grupoTest, webTest, passwordTest);
+            sut.setId(idTest);
         }
 
         catch (ExceptionInInitializerError e) {
@@ -48,6 +51,21 @@ public class UsuarioTest {
             throw new ExceptionInInitializerError("No se ha podido destruir el SUT" + e);
 
         }
+    }
+
+    @Test
+    public void shouldReturnTheUserId() {
+
+        Long actual = sut.getId();
+        assertEquals(idTest, actual);
+    }
+
+    @Test
+    public void shouldEstablishTheUserID() {
+
+        Long nuevo = 2L;
+        sut.setId(nuevo);
+        assertEquals(nuevo, sut.getId());
     }
 
     @Test
@@ -117,18 +135,18 @@ public class UsuarioTest {
         sut.setEsUsuarioMusico(nuevo);
         assertEquals(nuevo, sut.getEsUsuarioMusico());
     }
-
+    
     @Test
-    public void shouldReturnTheUserWeb() {
-        String actual = sut.getWebDeUsuario();
-        assertEquals(webTest, actual);
+    public void shouldReturnTheUserMusicType() {
+        String actual = sut.getTipoMusicaDeUsuario();
+        assertEquals(tipoMusicaTest, actual);
     }
 
     @Test
-    public void shouldEstablishTheUserWeb() {
-        String nuevo = "nuevaWeb";
-        sut.setWebDeUsuario(nuevo);
-        assertEquals(nuevo, sut.getWebDeUsuario());
+    public void shouldEstablishTheUserMusicType() {
+        String nuevo = "nuevoTipoMusica";
+        sut.setTipoMusicaDeUsuario(nuevo);
+        assertEquals(nuevo, sut.getTipoMusicaDeUsuario());
     }
 
     @Test
@@ -142,6 +160,19 @@ public class UsuarioTest {
         String nuevo = "nuevoGrupo";
         sut.setGrupoDeUsuario(nuevo);
         assertEquals(nuevo, sut.getGrupoDeUsuario());
+    }
+
+    @Test
+    public void shouldReturnTheUserWeb() {
+        String actual = sut.getWebDeUsuario();
+        assertEquals(webTest, actual);
+    }
+
+    @Test
+    public void shouldEstablishTheUserWeb() {
+        String nuevo = "nuevaWeb";
+        sut.setWebDeUsuario(nuevo);
+        assertEquals(nuevo, sut.getWebDeUsuario());
     }
 
     @Test

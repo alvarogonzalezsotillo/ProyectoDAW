@@ -33,25 +33,28 @@ public class UsuarioImp implements Usuario, Serializable {
     private String correoDeUsuario;
     @Column(name = "esMusico")
     private boolean esUsuarioMusico;
-    @Column(name = "web")
-    private String webDeUsuario;
     @Column(name = "grupo")
     private String grupoDeUsuario;
+    @Column(name = "tipoMusica")
+    private String tipoMusicaDeUsuario;
+    @Column(name = "web")
+    private String webDeUsuario;
 
     // Password -> Hash | Salt -> Cadena aleatoria
     private String passwordDeUsuario;
     private String saltPassword;
 
     public UsuarioImp(String nombreDeUsuario, String apellidoDeUsuario, String nickDeUsuario, String correoDeUsuario,
-            boolean esUsuarioMusico, String webDeUsuario, String grupoDeUsuario, String passwordDeUsuario) {
+            boolean esUsuarioMusico, String tipoMusicaDeUsuario, String grupoDeUsuario, String webDeUsuario, String passwordDeUsuario) {
 
         this.nombreDeUsuario = nombreDeUsuario;
         this.apellidoDeUsuario = apellidoDeUsuario;
         this.nickDeUsuario = nickDeUsuario;
         this.correoDeUsuario = correoDeUsuario;
         this.esUsuarioMusico = esUsuarioMusico;
-        this.webDeUsuario = webDeUsuario;
+        this.tipoMusicaDeUsuario = tipoMusicaDeUsuario;
         this.grupoDeUsuario = grupoDeUsuario;
+        this.webDeUsuario = webDeUsuario;
         this.passwordDeUsuario = Util.hashPasswordSHA(passwordDeUsuario);
         this.saltPassword = Util.saltGenerator();
     }
@@ -106,6 +109,22 @@ public class UsuarioImp implements Usuario, Serializable {
         this.esUsuarioMusico = esUsuarioMusico;
     }
 
+    public String getGrupoDeUsuario() {
+        return grupoDeUsuario;
+    }
+
+    public void setGrupoDeUsuario(String grupoDeUsuario) {
+        this.grupoDeUsuario = grupoDeUsuario;
+    }
+    
+    public String getTipoMusicaDeUsuario() {
+        return tipoMusicaDeUsuario;
+    }
+
+    public void setTipoMusicaDeUsuario(String tipoMusicaDeUsuario) {
+        this.tipoMusicaDeUsuario = tipoMusicaDeUsuario;
+    }
+
     public String getWebDeUsuario() {
         return webDeUsuario;
     }
@@ -114,20 +133,18 @@ public class UsuarioImp implements Usuario, Serializable {
         this.webDeUsuario = webUsuario;
     }
 
-    public String getGrupoDeUsuario() {
-        return grupoDeUsuario;
-    }
-
-    public void setGrupoDeUsuario(String grupoDeUsuario) {
-        this.grupoDeUsuario = grupoDeUsuario;
-    }
-
     public void setPasswordDeUsuario(String passwordDeUsuario) {
         this.passwordDeUsuario = Util.hashPasswordSHA(passwordDeUsuario);
     }
 
     public String getPasswordDeUsuario() {
         return passwordDeUsuario;
+    }
+    
+    public void setSaltPassword(String saltPassword){
+        
+        this.saltPassword = saltPassword;
+        
     }
 
     public void setSaltPassword() {

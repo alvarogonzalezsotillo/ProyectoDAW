@@ -11,7 +11,4 @@ public class BaseDaoHibernate {
     public static final Session session = factory.openSession();
     public static final Transaction transaction = session.beginTransaction();
 
-    public BaseDaoHibernate() {
-    }
-
 }

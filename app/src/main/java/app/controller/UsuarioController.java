@@ -1,5 +1,7 @@
 package app.controller;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -8,7 +10,9 @@ import app.model.UsuarioDAO;
 
 @ManagedBean(name = "usuarioController")
 @ViewScoped
-public class UsuarioController {
+public class UsuarioController implements Serializable{
+
+    private static final long serialVersionUID = 1L;
 
     private UsuarioImp usuario;
 
@@ -26,6 +30,14 @@ public class UsuarioController {
 
     public void setUsuario(UsuarioImp usuario) {
         this.usuario = usuario;
+    }
+
+    public UsuarioDAO getDao() {
+        return dao;
+    }
+
+    public void setDao(UsuarioDAO dao) {
+        this.dao = dao;
     }
 
 }
