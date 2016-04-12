@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:include src="/resources/templates/header.xhtml" />
+
+<h:body>
+
+	<h:form>
+
+		<h:outputText value="Formulario de registro de prueba" />
+
+		<h:panelGrid columns="2">
+
+			<p:outputLabel value="Nombre " for="nombre" />
+			<p:inputText value="#{usuarioController.usuario.nombreDeUsuario}" id="nombre" title="nombre" required="true"/>
+			
+			
+			<p:outputLabel value="Apellido " for="apellido" />
+			<p:inputText value="#{usuarioController.usuario.apellidoDeUsuario}" id="apellido" title="apellido" required="true"/>
+			
+			<p:outputLabel value="Nick/Apodo " for="nick" />
+			<p:inputText value="#{usuarioController.usuario.nickDeUsuario}" id="nick" title="nick" required="true"/>
+			
+			<p:outputLabel value="Password " for="password" />
+            <p:password value="#{usuarioController.usuario.passwordDeUsuario}" id="password" title="password" required="true"/>
+			
+			<p:outputLabel value="Correo " for="correo" />
+			<p:inputText value="#{usuarioController.usuario.correoDeUsuario}" id="correo" title="correo" required="false">
+				<!-- Validaciones desde el lado cliente -->
+				<f:validateRegex pattern="^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$"/>
+			</p:inputText>
+			
+			<p:outputLabel value="Grupo " for="grupo" />
+            <p:inputText value="#{usuarioController.usuario.grupoDeUsuario}" id="grupo" title="grupo" required="false"/>
+			
+			<p:outputLabel value="Tipo de Música " for="tipoMusica" />
+            <p:inputText value="#{usuarioController.usuario.tipoMusicaDeUsuario}" id="tipoMusica" title="tipoMusica" required="false"/>
+            
+            <p:outputLabel value="Página Web " for="web" />
+            <p:inputText value="#{usuarioController.usuario.webDeUsuario}" id="web" title="web" required="false"/>
+			
+
+		</h:panelGrid>
+		<p:commandButton value="Empieza el show!">
+			<f:ajax execute="@all" listener="#{usuarioController.insert}" />
+		</p:commandButton>
+
+	</h:form>
+
+</h:body>
+</html>
