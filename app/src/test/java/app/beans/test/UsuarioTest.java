@@ -132,6 +132,19 @@ public class UsuarioTest {
     }
 
     @Test
+    public void shouldReturnTheUserGroup() {
+        String actual = sut.getGrupoDeUsuario();
+        assertEquals(grupoTest, actual);
+    }
+
+    @Test
+    public void shouldEstablishTheUserGroup() {
+        String nuevo = "nuevoGrupo";
+        sut.setGrupoDeUsuario(nuevo);
+        assertEquals(nuevo, sut.getGrupoDeUsuario());
+    }
+
+    @Test
     public void shouldReturnTheUserPasswordHashed() {
         String hash = Util.hashPasswordSHA(passwordTest);
         assertEquals(hash, sut.getPasswordDeUsuario());
@@ -148,5 +161,13 @@ public class UsuarioTest {
     public void shouldReturnTrueWhenSaltLenghtIsTwenty() {
         String salt = sut.getSaltPassword();
         assertTrue(salt.length() == 20);
+    }
+
+    @Test
+    public void shouldEstablishANewUserSalt() {
+
+        String anterior = sut.getSaltPassword();
+        sut.setSaltPassword();
+        assertNotEquals(anterior, sut.getSaltPassword());
     }
 }
