@@ -3,121 +3,179 @@ package app.beans.imp;
 import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import app.beans.Usuario;
+import app.controller.Util;
 
 @ManagedBean(name = "usuario")
-@SessionScoped
-@SuppressWarnings("unused")
+@ViewScoped
 @Entity
-@Table(name="usuarios")
+@Table(name = "usuarios")
 public class UsuarioImp implements Usuario, Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Column(name="idUsuario")
-	private Long id;
-	@Column(name="nombre")
-	private String nombreDeUsuario;
-	@Column(name="apellido")
-	private String apellidoDeUsuario;
-	@Column(name="nick")
-	private String nickDeUsuario;
-	@Column(name="correo")
-	private String correoDeUsuario;
-	@Column(name="esMusico")
-	private boolean esUsuarioMusico;
-	@Column(name="web")
-	private String webDeUsuario;
-	@Column(name="grupo")
-	private String grupoDeUsuario;
+    @Column(name = "id")
+    private Long id;
+    
+    @Column(name = "nombreDeUsuario")
+    private String nombreDeUsuario;
+    @Column(name = "apellidoDeUsuario")
+    private String apellidoDeUsuario;
+    @Column(name = "nickDeUsuario")
+    private String nickDeUsuario;
+    @Column(name = "passwordDeUsuario")
+    private String passwordDeUsuario;
+    
+    @Column(name = "imagenDeUsuario")
+    @Lob
+    private byte[] imagenDeUsuario;
+    
+    @Column(name = "correoDeUsuario")
+    private String correoDeUsuario;
+    @Column(name = "webDeUsuario")
+    private String webDeUsuario;
+    
+    @Column(name = "esUsuarioMusico")
+    private boolean esUsuarioMusico;
+    @Column(name = "grupoDeUsuario")
+    private String grupoDeUsuario;
+    @Column(name = "tipoMusicaDeUsuario")
+    private String tipoMusicaDeUsuario;
+    
+    // Password -> Hash | Salt -> Cadena aleatoria
+    
+    @Column(name = "saltPassword")
+    private String saltPassword;
+    
+    public UsuarioImp(){
+        
+    }
 
-	// Password -> Hash | Salt -> Cadena aleatoria
-	private String passwordDeUsuario;
-	private String saltPassword;
-	
-	
-	@Id
-	@GeneratedValue
-	public Long getId() {
-		return id;
-	}
+    public UsuarioImp(String nombreDeUsuario, String apellidoDeUsuario, String nickDeUsuario, String correoDeUsuario,
+            boolean esUsuarioMusico, String tipoMusicaDeUsuario, String grupoDeUsuario, String webDeUsuario, String passwordDeUsuario) {
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+        this.nombreDeUsuario = nombreDeUsuario;
+        this.apellidoDeUsuario = apellidoDeUsuario;
+        this.nickDeUsuario = nickDeUsuario;
+        this.correoDeUsuario = correoDeUsuario;
+        this.esUsuarioMusico = esUsuarioMusico;
+        this.tipoMusicaDeUsuario = tipoMusicaDeUsuario;
+        this.grupoDeUsuario = grupoDeUsuario;
+        this.webDeUsuario = webDeUsuario;
+        this.passwordDeUsuario = Util.hashPasswordSHA(passwordDeUsuario);
+        this.saltPassword = Util.saltGenerator();
+    }
 
-	public String getNombreDeUsuario() {
-		return nombreDeUsuario;
-	}
+    @Id
+    @GeneratedValue
+    public Long getId() {
+        return id;
+    }
 
-	public void setNombreDeUsuario(String nombreDeUsuario) {
-		this.nombreDeUsuario = nombreDeUsuario;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getApellidoDeUsuario() {
-		return apellidoDeUsuario;
-	}
+    public String getNombreDeUsuario() {
+        return nombreDeUsuario;
+    }
 
-	public void setApellidoDeUsuario(String apellidoDeUsuario) {
-		this.apellidoDeUsuario = apellidoDeUsuario;
-	}
+    public void setNombreDeUsuario(String nombreDeUsuario) {
+        this.nombreDeUsuario = nombreDeUsuario;
+    }
 
-	public String getNickDeUsuario() {
-		return nickDeUsuario;
-	}
+    public String getApellidoDeUsuario() {
+        return apellidoDeUsuario;
+    }
 
-	public void setNickDeUsuario(String nickDeUsuario) {
-		this.nickDeUsuario = nickDeUsuario;
-	}
+    public void setApellidoDeUsuario(String apellidoDeUsuario) {
+        this.apellidoDeUsuario = apellidoDeUsuario;
+    }
 
-	public String getCorreoDeUsuario() {
-		return correoDeUsuario;
-	}
+    public String getNickDeUsuario() {
+        return nickDeUsuario;
+    }
 
-	public void setCorreoDeUsuario(String correoDeUsuario) {
-		this.correoDeUsuario = correoDeUsuario;
-	}
+    public void setNickDeUsuario(String nickDeUsuario) {
+        this.nickDeUsuario = nickDeUsuario;
+    }
 
-	public boolean getEsUsuarioMusico() {
-		return esUsuarioMusico;
-	}
+    public String getCorreoDeUsuario() {
+        return correoDeUsuario;
+    }
 
-	public void setEsUsuarioMusico(boolean esUsuarioMusico) {
-		this.esUsuarioMusico = esUsuarioMusico;
-	}
+    public void setCorreoDeUsuario(String correoDeUsuario) {
+        this.correoDeUsuario = correoDeUsuario;
+    }
 
-	
-	public String getWebDeUsuario() {
-		return webDeUsuario;
-	}
+    public boolean getEsUsuarioMusico() {
+        return esUsuarioMusico;
+    }
 
-	public void setWebDeUsuario(String webUsuario) {
-		this.webDeUsuario = webUsuario;
-	}
+    public void setEsUsuarioMusico(boolean esUsuarioMusico) {
+        this.esUsuarioMusico = esUsuarioMusico;
+    }
 
-	public String getGrupoDeUsuario() {
-		return grupoDeUsuario;
-	}
+    public String getGrupoDeUsuario() {
+        return grupoDeUsuario;
+    }
 
-	public void setGrupoDeUsuario(String grupoDeUsuario) {
-		this.grupoDeUsuario = grupoDeUsuario;
-	}
+    public void setGrupoDeUsuario(String grupoDeUsuario) {
+        this.grupoDeUsuario = grupoDeUsuario;
+    }
+    
+    public String getTipoMusicaDeUsuario() {
+        return tipoMusicaDeUsuario;
+    }
 
-	//TODO Hash de la contraseña
-	public void setPasswordDeUsuario(String passwordDeUsuario) {
-		this.passwordDeUsuario = passwordDeUsuario;
-	}
+    public void setTipoMusicaDeUsuario(String tipoMusicaDeUsuario) {
+        this.tipoMusicaDeUsuario = tipoMusicaDeUsuario;
+    }
 
-	//TODO Generador aleatorio de una cadena
-	public void setSaltPassword(String saltPassword) {
-		this.saltPassword = saltPassword;
-	}
+    public String getWebDeUsuario() {
+        return webDeUsuario;
+    }
+
+    public void setWebDeUsuario(String webUsuario) {
+        this.webDeUsuario = webUsuario;
+    }
+
+    public byte[] getImagenDeUsuario() {
+        return imagenDeUsuario;
+    }
+
+    public void setImagenDeUsuario(byte[] imagenDeUsuario) {
+        this.imagenDeUsuario = imagenDeUsuario;
+    }
+
+    public void setPasswordDeUsuario(String passwordDeUsuario) {
+        this.passwordDeUsuario = Util.hashPasswordSHA(passwordDeUsuario);
+    }
+
+    public String getPasswordDeUsuario() {
+        return passwordDeUsuario;
+    }
+    
+    public void setSaltPassword(String saltPassword){
+        
+        this.saltPassword = saltPassword;
+        
+    }
+
+    public void setSaltPassword() {
+        this.saltPassword = Util.saltGenerator();
+    }
+
+    public String getSaltPassword() {
+        return saltPassword;
+    }
 
 }

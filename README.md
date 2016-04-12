@@ -16,7 +16,6 @@ Una vez subidos, avisamos al resto de que se han hecho cambios en master, y el r
 
 En la rama master hacemos un **pull** de los cambios, cambiamos a nuestra rama y hacemos un **merge** con la rama master y seguimos haciendo nuestro commits y push de nuestra rama.
 
-
 # Requisitos necesarios
 Eclipse versión JEE Mars 2:
 http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/mars2
@@ -30,6 +29,8 @@ Añadir nuevo servidor a Eclipse con *Botón derecho -> New -> Server -> Apache 
 Seleccionas las ruta donde esté instalado Tomcat y finalizar
 
 Una base de datos MySQL versión 5.7 a descargar https://dev.mysql.com/downloads/mysql/
+
+Gestor de Base de datos MYSQL Workbench a descargar https://dev.mysql.com/downloads/workbench/
 
 **Cuidado y no descargar la versión test**
 
@@ -57,7 +58,7 @@ Una vez hecho, nos creará el proyecto.
 
 **Whatsapp Web** para poder enviar capturas de pantalla a través de un chat
 
-**Skype** o **TS** para mantener contacto y resolver dudas en grupo
+**Skype** , **TS** o **Discord** para mantener contacto y resolver dudas en grupo
 
 ***
 

@@ -1,128 +1,204 @@
 package app.beans.test;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import static org.junit.Assert.*;
+
+import org.junit.*;
 
 import app.beans.imp.UsuarioImp;
-
-import static org.mockito.Mockito.*;
+import app.controller.Util;
 
 public class UsuarioTest {
 
-	@Mock
-	UsuarioImp sut;
+    Long idTest = 1L;
+    String nombreTest = "testingNombre";
+    String apellidoTest = "testingApellido";
+    String nickTest = "testingNick";
+    String correoTest = "testingCorreo";
+    boolean esUsuarioMusicoTestFalse = false;
+    String tipoMusicaTest = "testingTipoMusica";
+    String grupoTest = "testingGrupo";
+    String webTest = "testingWeb";
+    String passwordTest = "testingPass";
+    char[] arrayTestSalt = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLOMNOPQRSTUVWXYZ$%&()".toCharArray();
+    UsuarioImp sut;
 
-	String nombreTest = "testingNombre";
-	String apellidoTest = "testingApellido";
-	String nickTest = "testingNick";
-	String correoTest = "testingCorreo";
-	String webTest = "testingWeb";
-	boolean esUsuarioMusicoTestFalse = false;
-	boolean esUsuarioMusicoTestTrue = true;
-	String passwordTest = "testingPass";
-	String saltPasswordTest = "testingSalt";
+    @Before
+    public void setUp() throws Exception {
 
-	@Before
-	public void setUp() throws Exception {
+        try {
+            sut = new UsuarioImp(nombreTest, apellidoTest, nickTest, correoTest, esUsuarioMusicoTestFalse, tipoMusicaTest,
+                    grupoTest, webTest, passwordTest);
+            sut.setId(idTest);
+        }
 
-		MockitoAnnotations.initMocks(this);
-	}
+        catch (ExceptionInInitializerError e) {
 
-	@After
-	public void tearDown() throws Exception {
+            throw new ExceptionInInitializerError("No se ha podido inicializar el SUT" + e);
 
-		sut = null;
+        }
+    }
 
-	}
+    @After
+    public void tearDown() throws Exception {
 
-	@Test
-	public void testGetNombreDeUsuario() {
+        try {
 
-		sut.getNombreDeUsuario();
+            sut = null;
+        }
 
-		when(sut.getNombreDeUsuario()).thenReturn(nombreTest);
+        catch (Exception e) {
 
-		verify(sut).getNombreDeUsuario();
+            throw new ExceptionInInitializerError("No se ha podido destruir el SUT" + e);
 
-	}
+        }
+    }
 
-	@Test
-	public void testSetNombreDeUsuario() {
+    @Test
+    public void shouldReturnTheUserId() {
 
-		sut.setNombreDeUsuario(apellidoTest);
+        Long actual = sut.getId();
+        assertEquals(idTest, actual);
+    }
 
-		verify(sut).setNombreDeUsuario(apellidoTest);
+    @Test
+    public void shouldEstablishTheUserID() {
 
-	}
+        Long nuevo = 2L;
+        sut.setId(nuevo);
+        assertEquals(nuevo, sut.getId());
+    }
 
-	@Test
-	public void testGetApellidoDeUsuario() {
+    @Test
+    public void shouldReturnTheUserName() {
 
-		sut.getApellidoDeUsuario();
+        String actual = sut.getNombreDeUsuario();
+        assertEquals(nombreTest, actual);
+    }
 
-		when(sut.getApellidoDeUsuario()).thenReturn(apellidoTest);
+    @Test
+    public void shouldEstablishTheUserName() {
 
-		verify(sut).getApellidoDeUsuario();
-	}
-	
-	/*
+        String nuevo = "nuevoNombre";
+        sut.setNombreDeUsuario(nuevo);
+        assertEquals(nuevo, sut.getNombreDeUsuario());
+    }
 
-	@Test
-	public void testSetApellidoDeUsuario() {
-		fail("Not yet implemented");
-	}
+    @Test
+    public void shouldReturnTheUserSurname() {
 
-	@Test
-	public void testGetNickDeUsuario() {
-		fail("Not yet implemented");
-	}
+        String actual = sut.getApellidoDeUsuario();
+        assertEquals(apellidoTest, actual);
+    }
 
-	@Test
-	public void testSetNickDeUsuario() {
-		fail("Not yet implemented");
-	}
+    @Test
+    public void shouldEstablishTheUserSurname() {
+        String nuevo = "nuevoApellido";
+        sut.setApellidoDeUsuario(nuevo);
+        assertEquals(nuevo, sut.getApellidoDeUsuario());
+    }
 
-	@Test
-	public void testGetCorreoDeUsuario() {
-		fail("Not yet implemented");
-	}
+    @Test
+    public void shouldReturnTheUserNickname() {
+        String actual = sut.getNickDeUsuario();
+        assertEquals(nickTest, actual);
+    }
 
-	@Test
-	public void testSetCorreoDeUsuario() {
-		fail("Not yet implemented");
-	}
-	
-	@Test
-	public void testGetWebDeUsuario() {
-		fail("Not yet implemented");
-	}
+    @Test
+    public void shouldEstablishTheUserNickname() {
+        String nuevo = "nuevoNick";
+        sut.setNickDeUsuario(nuevo);
+        assertEquals(nuevo, sut.getNickDeUsuario());
+    }
 
-	@Test
-	public void testSetWebDeUsuario() {
-		fail("Not yet implemented");
-	}
+    @Test
+    public void shouldReturnTheUserEmail() {
+        String actual = sut.getCorreoDeUsuario();
+        assertEquals(correoTest, actual);
+    }
 
-	@Test
-	public void testSetPasswordDeUsuario() {
-		fail("Not yet implemented");
-	}
+    @Test
+    public void shouldEstablishTheUserEmail() {
+        String nuevo = "nuevoCorreo";
+        sut.setCorreoDeUsuario(nuevo);
+        assertEquals(nuevo, sut.getCorreoDeUsuario());
+    }
 
-	@Test
-	public void testSetSaltPassword() {
-		fail("Not yet implemented");
-	}
+    @Test
+    public void shouldReturnTheUserMusicianVerification() {
+        boolean actual = sut.getEsUsuarioMusico();
+        assertEquals(esUsuarioMusicoTestFalse, actual);
+    }
 
-	@Test
-	public void testGetEsUsuarioMusico() {
-		fail("Not yet implemented");
-	}
+    @Test
+    public void shouldEstablishTheUserMusicianVerification() {
+        boolean nuevo = true;
+        sut.setEsUsuarioMusico(nuevo);
+        assertEquals(nuevo, sut.getEsUsuarioMusico());
+    }
+    
+    @Test
+    public void shouldReturnTheUserMusicType() {
+        String actual = sut.getTipoMusicaDeUsuario();
+        assertEquals(tipoMusicaTest, actual);
+    }
 
-	@Test
-	public void testSetEsUsuarioMusico() {
-		fail("Not yet implemented");
-	}
-*/
+    @Test
+    public void shouldEstablishTheUserMusicType() {
+        String nuevo = "nuevoTipoMusica";
+        sut.setTipoMusicaDeUsuario(nuevo);
+        assertEquals(nuevo, sut.getTipoMusicaDeUsuario());
+    }
+
+    @Test
+    public void shouldReturnTheUserGroup() {
+        String actual = sut.getGrupoDeUsuario();
+        assertEquals(grupoTest, actual);
+    }
+
+    @Test
+    public void shouldEstablishTheUserGroup() {
+        String nuevo = "nuevoGrupo";
+        sut.setGrupoDeUsuario(nuevo);
+        assertEquals(nuevo, sut.getGrupoDeUsuario());
+    }
+
+    @Test
+    public void shouldReturnTheUserWeb() {
+        String actual = sut.getWebDeUsuario();
+        assertEquals(webTest, actual);
+    }
+
+    @Test
+    public void shouldEstablishTheUserWeb() {
+        String nuevo = "nuevaWeb";
+        sut.setWebDeUsuario(nuevo);
+        assertEquals(nuevo, sut.getWebDeUsuario());
+    }
+
+    @Test
+    public void shouldReturnTheUserPasswordHashed() {
+        String hash = Util.hashPasswordSHA(passwordTest);
+        assertEquals(hash, sut.getPasswordDeUsuario());
+    }
+
+    @Test
+    public void shouldEstablishTheUserPasswordHashed() {
+        String hash = Util.hashPasswordSHA(passwordTest);
+        sut.setPasswordDeUsuario(passwordTest);
+        assertEquals(hash, sut.getPasswordDeUsuario());
+    }
+
+    @Test
+    public void shouldReturnTrueWhenSaltLenghtIsTwenty() {
+        String salt = sut.getSaltPassword();
+        assertTrue(salt.length() == 20);
+    }
+
+    @Test
+    public void shouldEstablishANewUserSalt() {
+
+        String anterior = sut.getSaltPassword();
+        sut.setSaltPassword();
+        assertNotEquals(anterior, sut.getSaltPassword());
+    }
 }
