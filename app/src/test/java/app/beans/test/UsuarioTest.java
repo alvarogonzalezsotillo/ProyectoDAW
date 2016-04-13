@@ -19,6 +19,7 @@ public class UsuarioTest {
     String grupoTest = "testingGrupo";
     String webTest = "testingWeb";
     String passwordTest = "testingPass";
+    String salt = Util.getSalt();
  
     UsuarioImp sut;
 
@@ -177,14 +178,14 @@ public class UsuarioTest {
 
     @Test
     public void shouldReturnTheUserPasswordHashed() {
-        String hash = Util.hashPasswordSHA(passwordTest);
+        String hash = Util.hashPasswordSHA(passwordTest+salt);
         assertEquals(hash, sut.getPasswordDeUsuario());
     }
 
     @Test
     public void shouldEstablishTheUserPasswordHashed() {
-        String hash = Util.hashPasswordSHA(passwordTest);
-        sut.setPasswordDeUsuario(passwordTest);
+        String hash = Util.hashPasswordSHA(passwordTest+salt);
+        sut.setPasswordDeUsuario(passwordTest+salt);
         assertEquals(hash, sut.getPasswordDeUsuario());
     }
 }
