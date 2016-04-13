@@ -14,12 +14,12 @@
 		<h:form>
 			<p:panel header="Inicia sesión en NOMBREAPP">
 	      		<h:panelGrid columns="2" cellpadding="5">
-	        		<h:outputLabel for="id_nickDeUsuario" value="Músico o melómano:" />
-	        		<p:inputText value="#{usuarioImp.nickDeUsuario}" id="id_nickDeUsuario" required="true" placeholder="Músico o melómano" label="id_nickDeUsuario" />
-	        		<h:outputLabel for="id_passwordDeUsuario" value="Contraseña:" />
-	        		<p:password value="#{usuarioImp.passwordDeUsuario}" id="id_passwordDeUsuario" required="true" placeholder="Contraseña" label="id_passwordDeUsuario" />
+	        		<h:outputLabel for="nickDeUsuario" value="Músico o melómano:" />
+	        		<p:inputText value="#{usuarioController.usuario.nickDeUsuario}" id="nickDeUsuario" required="true" placeholder="Músico o melómano" label="nickDeUsuario" />
+	        		<h:outputLabel for="passwordDeUsuario" value="Contraseña:" />
+	        		<p:password value="#{usuarioController.usuario.passwordDeUsuario}" id="passwordDeUsuario" required="true" placeholder="Contraseña" label="passwordDeUsuario" />
 		        	<f:facet name="footer">
-		          		<p:commandButton id="id_loginButton" value="Iniciar sesión" />
+		          		<p:commandButton id="loginButton" value="Iniciar sesión" />
 		        	</f:facet>
 	      		</h:panelGrid>
 	      		<f:facet name="footer">
