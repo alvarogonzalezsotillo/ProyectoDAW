@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import app.beans.Usuario;
 import app.controller.Util;
 
-@ManagedBean(name = "usuario")
+@ManagedBean(name="usuario")
 @ViewScoped
 @Entity
 @Table(name = "usuarios")
@@ -50,13 +50,8 @@ public class UsuarioImp implements Usuario, Serializable {
     @Column(name = "tipoMusicaDeUsuario")
     private String tipoMusicaDeUsuario;
     
-    // Password -> Hash | Salt -> Cadena aleatoria
-    
-    @Column(name = "saltPassword")
-    private String saltPassword;
-    
     public UsuarioImp(){
-        
+        //Constructor por defecto
     }
 
     public UsuarioImp(String nombreDeUsuario, String apellidoDeUsuario, String nickDeUsuario, String correoDeUsuario,
@@ -70,8 +65,9 @@ public class UsuarioImp implements Usuario, Serializable {
         this.tipoMusicaDeUsuario = tipoMusicaDeUsuario;
         this.grupoDeUsuario = grupoDeUsuario;
         this.webDeUsuario = webDeUsuario;
-        this.passwordDeUsuario = Util.hashPasswordSHA(passwordDeUsuario);
-        this.saltPassword = Util.saltGenerator();
+        String saltPassword = Util.getSalt();
+        this.passwordDeUsuario = Util.hashPasswordSHA(passwordDeUsuario+saltPassword);
+        
     }
 
     @Id
@@ -162,20 +158,6 @@ public class UsuarioImp implements Usuario, Serializable {
 
     public String getPasswordDeUsuario() {
         return passwordDeUsuario;
-    }
-    
-    public void setSaltPassword(String saltPassword){
-        
-        this.saltPassword = saltPassword;
-        
-    }
-
-    public void setSaltPassword() {
-        this.saltPassword = Util.saltGenerator();
-    }
-
-    public String getSaltPassword() {
-        return saltPassword;
     }
 
 }

@@ -2,7 +2,6 @@ package app.controller;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Random;
 
 import org.mockito.internal.creation.instance.InstantationException;
 
@@ -14,24 +13,10 @@ public final class Util {
 
     }
 
-    public static String saltGenerator() {
+    public static String getSalt() {
 
-        char[] arrayLetras = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLOMNOPQRSTUVWXYZ$%&()".toCharArray();
-
-        StringBuilder temporalString = new StringBuilder();
-
-        Random random = new Random();
-
-        for (int i = 0; i < 20; i++) {
-
-            char c = arrayLetras[random.nextInt(arrayLetras.length)];
-
-            temporalString.append(c);
-
-        }
-
-        String salt = temporalString.toString();
-
+        String salt = "S%J(G</DAW";
+        
         return salt;
 
     }

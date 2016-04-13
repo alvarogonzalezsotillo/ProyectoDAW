@@ -23,6 +23,8 @@ public class UsuarioController implements Serializable{
     public void insert() {
 
         dao.insertUsuario(usuario);
+        
+        dao.session.close();
 
     }
 
