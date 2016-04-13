@@ -7,7 +7,7 @@ import org.mockito.internal.creation.instance.InstantationException;
 
 public final class Util {
     
-    private static  final String salt = "S%J(G</DAW";
+    private static final String salt = "S%J(G</DAW";
 
     private Util() throws InstantiationError {
 

@@ -2,8 +2,6 @@ package app.beans.imp;
 
 import java.io.Serializable;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,8 +12,6 @@ import javax.persistence.Table;
 import app.beans.Usuario;
 import app.controller.Util;
 
-@ManagedBean(name="usuario")
-@ViewScoped
 @Entity
 @Table(name = "usuarios")
 public class UsuarioImp implements Usuario, Serializable {

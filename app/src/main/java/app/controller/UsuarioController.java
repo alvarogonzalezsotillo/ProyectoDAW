@@ -15,16 +15,16 @@ public class UsuarioController implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
-    @ManagedProperty(value="#{usuario}")
     private UsuarioImp usuario;
 
-    private UsuarioDAO dao = new UsuarioDAO();
+    @ManagedProperty(value="#{UsuarioDao}")
+    private UsuarioDAO usuarioDao;
 
     public void insert() {
 
-        dao.insertUsuario(usuario);
+        usuarioDao.insertUsuario(usuario);
         
-        dao.session.close();
+        usuarioDao.session.close();
 
     }
 
@@ -36,12 +36,12 @@ public class UsuarioController implements Serializable{
         this.usuario = usuario;
     }
 
-    public UsuarioDAO getDao() {
-        return dao;
+    public UsuarioDAO getUsuarioDao() {
+        return usuarioDao;
     }
 
-    public void setDao(UsuarioDAO dao) {
-        this.dao = dao;
+    public void setUsuarioDao(UsuarioDAO usuarioDao) {
+        this.usuarioDao = usuarioDao;
     }
 
 }
