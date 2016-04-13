@@ -14,6 +14,7 @@ public class UsuarioDAO extends BaseDaoHibernate implements Serializable {
 
     public void insertUsuario(UsuarioImp usuario) {
 
+        transaction = session.beginTransaction();
         session.save(usuario);
         transaction.commit();
 

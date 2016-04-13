@@ -7,8 +7,8 @@ import org.hibernate.cfg.Configuration;
 
 public class BaseDaoHibernate {
 
-    public static final SessionFactory factory = new Configuration().configure().buildSessionFactory();
-    public static final Session session = factory.openSession();
-    public static final Transaction transaction = session.beginTransaction();
+    public SessionFactory factory = new Configuration().configure().buildSessionFactory();
+    public Session session = factory.openSession();
+    public Transaction transaction = null;
 
 }

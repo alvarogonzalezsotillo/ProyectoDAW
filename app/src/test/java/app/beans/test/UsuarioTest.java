@@ -19,7 +19,7 @@ public class UsuarioTest {
     String grupoTest = "testingGrupo";
     String webTest = "testingWeb";
     String passwordTest = "testingPass";
-    char[] arrayTestSalt = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLOMNOPQRSTUVWXYZ$%&()".toCharArray();
+ 
     UsuarioImp sut;
 
     @Before
@@ -186,19 +186,5 @@ public class UsuarioTest {
         String hash = Util.hashPasswordSHA(passwordTest);
         sut.setPasswordDeUsuario(passwordTest);
         assertEquals(hash, sut.getPasswordDeUsuario());
-    }
-
-    @Test
-    public void shouldReturnTrueWhenSaltLenghtIsTwenty() {
-        String salt = sut.getSaltPassword();
-        assertTrue(salt.length() == 20);
-    }
-
-    @Test
-    public void shouldEstablishANewUserSalt() {
-
-        String anterior = sut.getSaltPassword();
-        sut.setSaltPassword();
-        assertNotEquals(anterior, sut.getSaltPassword());
     }
 }
