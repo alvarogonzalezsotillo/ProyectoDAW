@@ -20,7 +20,7 @@ public class UsuarioImp implements Usuario, Serializable {
 
     @Column(name = "id")
     private Long id;
-    
+
     @Column(name = "nombreDeUsuario")
     private String nombreDeUsuario;
     @Column(name = "apellidoDeUsuario")
@@ -29,16 +29,16 @@ public class UsuarioImp implements Usuario, Serializable {
     private String nickDeUsuario;
     @Column(name = "passwordDeUsuario")
     private String passwordDeUsuario;
-    
+
     @Column(name = "imagenDeUsuario")
     @Lob
     private byte[] imagenDeUsuario;
-    
+
     @Column(name = "correoDeUsuario")
     private String correoDeUsuario;
     @Column(name = "webDeUsuario")
     private String webDeUsuario;
-    
+
     @Column(name = "esUsuarioMusico")
     private boolean esUsuarioMusico;
     @Column(name = "grupoDeUsuario")
@@ -46,10 +46,6 @@ public class UsuarioImp implements Usuario, Serializable {
     @Column(name = "tipoMusicaDeUsuario")
     private String tipoMusicaDeUsuario;
     
-    public UsuarioImp(){
-        //Constructor por defecto
-    }
-
     public UsuarioImp(String nombreDeUsuario, String apellidoDeUsuario, String nickDeUsuario, String correoDeUsuario,
             boolean esUsuarioMusico, String tipoMusicaDeUsuario, String grupoDeUsuario, String webDeUsuario, String passwordDeUsuario) {
 
@@ -123,7 +119,7 @@ public class UsuarioImp implements Usuario, Serializable {
     public void setGrupoDeUsuario(String grupoDeUsuario) {
         this.grupoDeUsuario = grupoDeUsuario;
     }
-    
+
     public String getTipoMusicaDeUsuario() {
         return tipoMusicaDeUsuario;
     }
@@ -149,7 +145,8 @@ public class UsuarioImp implements Usuario, Serializable {
     }
 
     public void setPasswordDeUsuario(String passwordDeUsuario) {
-        this.passwordDeUsuario = Util.hashPasswordSHA(passwordDeUsuario);
+        String salt = Util.getSalt();
+        this.passwordDeUsuario = Util.hashPasswordSHA(passwordDeUsuario + salt);
     }
 
     public String getPasswordDeUsuario() {
