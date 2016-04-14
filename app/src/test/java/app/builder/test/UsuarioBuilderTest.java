@@ -1,4 +1,4 @@
-package app.beans.test;
+package app.builder.test;
 
 import static org.junit.Assert.*;
 
