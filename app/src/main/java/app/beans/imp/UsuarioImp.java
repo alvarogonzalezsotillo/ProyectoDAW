@@ -46,6 +46,10 @@ public class UsuarioImp implements Usuario, Serializable {
     @Column(name = "tipoMusicaDeUsuario")
     private String tipoMusicaDeUsuario;
     
+    public UsuarioImp(){
+        //Constructor por defecto
+    }
+    
     public UsuarioImp(String nombreDeUsuario, String apellidoDeUsuario, String nickDeUsuario, String correoDeUsuario,
             boolean esUsuarioMusico, String tipoMusicaDeUsuario, String grupoDeUsuario, String webDeUsuario, String passwordDeUsuario) {
 

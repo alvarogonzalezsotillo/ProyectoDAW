@@ -7,8 +7,8 @@ import org.hibernate.cfg.Configuration;
 
 public class BaseDaoHibernate {
 
-    public SessionFactory factory = new Configuration().configure().buildSessionFactory();
-    public Session session = factory.openSession();
-    public Transaction transaction = null;
+    protected SessionFactory factory = new Configuration().configure().buildSessionFactory();
+    protected Session session = null;
+    protected Transaction transaction = null;
 
 }

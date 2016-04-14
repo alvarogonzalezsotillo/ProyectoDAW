@@ -15,15 +15,26 @@
 
 		<h:outputText value="Formulario de registro de prueba" />
 
-		<h:panelGrid columns="2">
+		<h:panelGrid columns="3">
 
 			<p:outputLabel value="Nombre " for="nombre" />
-			<p:inputText value="#{usuarioController.nombre}" id="nombre" title="nombre" required="true"/>
+			<p:inputText value="#{usuarioController.nombre}" id="nombre" title="nombre" required="true"> 
 			
+			     <f:validateLength maximum="30"/>
+			     <p:ajax update="validaNombre" event="keyup"/>
+			
+			</p:inputText>
+			<p:message id="validaNombre" for="nombre" display="text" />
 			
 			<p:outputLabel value="Apellido " for="apellido" />
-			<p:inputText value="#{usuarioController.apellido}" id="apellido" title="apellido" required="true"/>
+			<p:inputText value="#{usuarioController.apellido}" id="apellido" title="apellido" required="true">
 			
+			     <f:validateLength maximum="40"/>
+			     <p:ajax update="validaApellido" event="keyup"/>
+			</p:inputText>
+			<p:message id="validaApellido" for="apellido" display="text" />
+		</h:panelGrid>
+		<h:panelGrid columns="2">
 			<p:outputLabel value="Nick/Apodo " for="nick" />
 			<p:inputText value="#{usuarioController.nick}" id="nick" title="nick" required="true"/>
 			

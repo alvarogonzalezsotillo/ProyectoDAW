@@ -42,8 +42,6 @@ public class UsuarioController implements Serializable {
 
         usuarioDao.insertUsuario(usuario);
 
-        usuarioDao.session.close();
-
     }
 
     public UsuarioBuilder getUsuarioBuilder() {
