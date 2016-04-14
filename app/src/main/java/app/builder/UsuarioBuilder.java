@@ -17,6 +17,12 @@ public class UsuarioBuilder implements Serializable {
     private String grupo;
     private String tipoMusica;
     
+    public UsuarioBuilder(){
+        
+        //Constructor por defecto para los test
+        
+    }
+    
     public UsuarioBuilder(String nombre, String apellido, String nick, String password){
         
         this.nombre = nombre;
