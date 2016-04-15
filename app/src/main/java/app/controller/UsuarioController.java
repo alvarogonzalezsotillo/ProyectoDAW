@@ -27,7 +27,7 @@ public class UsuarioController implements Serializable {
     private String grupo;
     private String tipoMusica;
 
-    @ManagedProperty(value = "#{UsuarioDao}")
+    @ManagedProperty(value = "#{usuarioDao}")
     private UsuarioDAO usuarioDao;
 
     public void insert() {

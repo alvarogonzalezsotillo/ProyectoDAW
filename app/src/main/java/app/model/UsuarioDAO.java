@@ -10,7 +10,7 @@ import org.hibernate.Query;
 
 import app.beans.imp.UsuarioImp;
 
-@ManagedBean(name = "UsuarioDao")
+@ManagedBean(name = "usuarioDao")
 @ApplicationScoped
 public class UsuarioDAO extends BaseDaoHibernate implements Serializable {
 
