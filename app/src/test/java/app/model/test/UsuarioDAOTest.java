@@ -12,7 +12,6 @@ import app.model.UsuarioDAO;
 public class UsuarioDAOTest{
 
     private UsuarioDAO sut;
-    
     private UsuarioImp usuarioTest = new UsuarioImp();
     
     @Before
