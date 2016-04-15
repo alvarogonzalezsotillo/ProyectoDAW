@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+	<h:head>
+		<title>Inicia sesión en NOMBREAPP</title>
+	</h:head> 
+		
+	<h:body> 
+		<p:growl id="mensajeInicial" showDetail="true" life="3000" />
+		<h:form>
+			<p:panel header="Inicia sesión en NOMBREAPP">
+	      		<h:panelGrid columns="2" cellpadding="5">
+	        		<h:outputLabel for="nickDeUsuario" value="Músico o melómano:" />
+	        		<p:inputText value="#{usuarioController.usuario.nickDeUsuario}" id="nickDeUsuario" required="true" placeholder="Músico o melómano" label="nickDeUsuario" />
+	        		<h:outputLabel for="passwordDeUsuario" value="Contraseña:" />
+	        		<p:password value="#{usuarioController.usuario.passwordDeUsuario}" id="passwordDeUsuario" required="true" placeholder="Contraseña" label="passwordDeUsuario" />
+		        	<f:facet name="footer">
+		          		<p:commandButton id="loginButton" value="Iniciar sesión" />
+		        	</f:facet>
+	      		</h:panelGrid>
+	      		<f:facet name="footer">
+	          		<h:outputText value="¿No puedes rockear? " />
+	          		<p:commandLink value="Regístrate" />
+	        	</f:facet>
+    		</p:panel>
+		</h:form>
+	</h:body> 
+</html>

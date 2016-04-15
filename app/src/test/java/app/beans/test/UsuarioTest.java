@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.*;
 
 import app.beans.imp.UsuarioImp;
+import app.builder.UsuarioBuilder;
 import app.controller.Util;
 
 public class UsuarioTest {
@@ -19,15 +20,20 @@ public class UsuarioTest {
     String grupoTest = "testingGrupo";
     String webTest = "testingWeb";
     String passwordTest = "testingPass";
-    char[] arrayTestSalt = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLOMNOPQRSTUVWXYZ$%&()".toCharArray();
+    String salt = Util.getSalt();
     UsuarioImp sut;
+
+    UsuarioBuilder usuarioBuilder;
 
     @Before
     public void setUp() throws Exception {
 
         try {
+
             sut = new UsuarioImp(nombreTest, apellidoTest, nickTest, correoTest, esUsuarioMusicoTestFalse, tipoMusicaTest,
                     grupoTest, webTest, passwordTest);
+            sut.setId(idTest);
+
             sut.setId(idTest);
         }
 
@@ -135,7 +141,7 @@ public class UsuarioTest {
         sut.setEsUsuarioMusico(nuevo);
         assertEquals(nuevo, sut.getEsUsuarioMusico());
     }
-    
+
     @Test
     public void shouldReturnTheUserMusicType() {
         String actual = sut.getTipoMusicaDeUsuario();
@@ -177,28 +183,14 @@ public class UsuarioTest {
 
     @Test
     public void shouldReturnTheUserPasswordHashed() {
-        String hash = Util.hashPasswordSHA(passwordTest);
+        String hash = Util.hashPasswordSHA(passwordTest + salt);
         assertEquals(hash, sut.getPasswordDeUsuario());
     }
 
     @Test
     public void shouldEstablishTheUserPasswordHashed() {
-        String hash = Util.hashPasswordSHA(passwordTest);
+        String hash = Util.hashPasswordSHA(passwordTest + salt);
         sut.setPasswordDeUsuario(passwordTest);
         assertEquals(hash, sut.getPasswordDeUsuario());
-    }
-
-    @Test
-    public void shouldReturnTrueWhenSaltLenghtIsTwenty() {
-        String salt = sut.getSaltPassword();
-        assertTrue(salt.length() == 20);
-    }
-
-    @Test
-    public void shouldEstablishANewUserSalt() {
-
-        String anterior = sut.getSaltPassword();
-        sut.setSaltPassword();
-        assertNotEquals(anterior, sut.getSaltPassword());
     }
 }

@@ -2,8 +2,6 @@ package app.beans.imp;
 
 import java.io.Serializable;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,8 +12,6 @@ import javax.persistence.Table;
 import app.beans.Usuario;
 import app.controller.Util;
 
-@ManagedBean(name = "usuario")
-@ViewScoped
 @Entity
 @Table(name = "usuarios")
 public class UsuarioImp implements Usuario, Serializable {
@@ -24,7 +20,7 @@ public class UsuarioImp implements Usuario, Serializable {
 
     @Column(name = "id")
     private Long id;
-    
+
     @Column(name = "nombreDeUsuario")
     private String nombreDeUsuario;
     @Column(name = "apellidoDeUsuario")
@@ -33,16 +29,16 @@ public class UsuarioImp implements Usuario, Serializable {
     private String nickDeUsuario;
     @Column(name = "passwordDeUsuario")
     private String passwordDeUsuario;
-    
+
     @Column(name = "imagenDeUsuario")
     @Lob
     private byte[] imagenDeUsuario;
-    
+
     @Column(name = "correoDeUsuario")
     private String correoDeUsuario;
     @Column(name = "webDeUsuario")
     private String webDeUsuario;
-    
+
     @Column(name = "esUsuarioMusico")
     private boolean esUsuarioMusico;
     @Column(name = "grupoDeUsuario")
@@ -50,15 +46,10 @@ public class UsuarioImp implements Usuario, Serializable {
     @Column(name = "tipoMusicaDeUsuario")
     private String tipoMusicaDeUsuario;
     
-    // Password -> Hash | Salt -> Cadena aleatoria
-    
-    @Column(name = "saltPassword")
-    private String saltPassword;
-    
     public UsuarioImp(){
-        
+        //Constructor por defecto
     }
-
+    
     public UsuarioImp(String nombreDeUsuario, String apellidoDeUsuario, String nickDeUsuario, String correoDeUsuario,
             boolean esUsuarioMusico, String tipoMusicaDeUsuario, String grupoDeUsuario, String webDeUsuario, String passwordDeUsuario) {
 
@@ -70,8 +61,9 @@ public class UsuarioImp implements Usuario, Serializable {
         this.tipoMusicaDeUsuario = tipoMusicaDeUsuario;
         this.grupoDeUsuario = grupoDeUsuario;
         this.webDeUsuario = webDeUsuario;
-        this.passwordDeUsuario = Util.hashPasswordSHA(passwordDeUsuario);
-        this.saltPassword = Util.saltGenerator();
+        String saltPassword = Util.getSalt();
+        this.passwordDeUsuario = Util.hashPasswordSHA(passwordDeUsuario+saltPassword);
+        
     }
 
     @Id
@@ -131,7 +123,7 @@ public class UsuarioImp implements Usuario, Serializable {
     public void setGrupoDeUsuario(String grupoDeUsuario) {
         this.grupoDeUsuario = grupoDeUsuario;
     }
-    
+
     public String getTipoMusicaDeUsuario() {
         return tipoMusicaDeUsuario;
     }
@@ -157,25 +149,12 @@ public class UsuarioImp implements Usuario, Serializable {
     }
 
     public void setPasswordDeUsuario(String passwordDeUsuario) {
-        this.passwordDeUsuario = Util.hashPasswordSHA(passwordDeUsuario);
+        String salt = Util.getSalt();
+        this.passwordDeUsuario = Util.hashPasswordSHA(passwordDeUsuario + salt);
     }
 
     public String getPasswordDeUsuario() {
         return passwordDeUsuario;
-    }
-    
-    public void setSaltPassword(String saltPassword){
-        
-        this.saltPassword = saltPassword;
-        
-    }
-
-    public void setSaltPassword() {
-        this.saltPassword = Util.saltGenerator();
-    }
-
-    public String getSaltPassword() {
-        return saltPassword;
     }
 
 }
