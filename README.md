@@ -43,6 +43,16 @@ Nos vamos a la carpeta donde tengamos el **workspace** y creamos otra carpeta ll
 cd /git/proyecto (ruta elegida antes)
 git clone https://github.com/Gmuela/ProyectoDAW.git
 ```
+
+En el caso de querer bajar solo las ramas de master y la rama personal, realizaríamos lo siguiente.
+
+```
+cd /git/proyecto (ruta elegida antes)
+git clone -b master https://github.com/Gmuela/ProyectoDAW.git
+git checkout nombreRamaPersonal
+```
+Donde nombreRamaPersonal en nuestro caso sería sara,jordc o Guillermo. Cuidado con poner el nombre de la rama igual, mayúsculas y minúsculas incluidas.
+
 Una vez hecho lo anterior ya tendremos el projecto con todos los fuentes en la carpeta *C:/git/proyecto*
 
 Ahora en Eclipse hacemos un proyecto desde *Import -> Maven -> Existing Maven Project* y seleccionamos la carpeta **app** dentro de proyecto, es decir, los fuentes que hemos clonado del repositorio.
