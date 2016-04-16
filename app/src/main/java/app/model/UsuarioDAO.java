@@ -29,18 +29,51 @@ public class UsuarioDAO extends BaseDaoHibernate implements Serializable {
         session.close();
 
     }
-    
+
     @SuppressWarnings("unchecked")
-    public List<UsuarioImp> getAll(){
-        
+    public List<UsuarioImp> getAll() {
+
         List<UsuarioImp> listUsuarios;
-        
+
         session = factory.openSession();
         transaction = session.beginTransaction();
         Query query = session.createQuery("from UsuarioImp");
         listUsuarios = query.list();
         transaction.commit();
         return listUsuarios;
+    }
+
+    @SuppressWarnings("unchecked")
+    public UsuarioImp getUsuarioById(Long id) {
+
+        List<UsuarioImp> listUsuarios;
+
+        session = factory.openSession();
+        transaction = session.beginTransaction();
+        Query query = session.createQuery("from UsuarioImp usuario where usuario.id = :id");
+        query.setParameter("id", id);
+        listUsuarios = query.list();
+        transaction.commit();
+        return listUsuarios.get(0);
+    }
+
+    public void deleteUsuarioById(Long id) {
+
+        session = factory.openSession();
+        transaction = session.beginTransaction();
+        UsuarioImp usuarioToDelete = session.load(UsuarioImp.class, id);
+        session.delete(usuarioToDelete);
+        transaction.commit();
+
+    }
+
+    public void updateUsuario(UsuarioImp usuarioToUpdate) {
+
+        session = factory.openSession();
+        transaction = session.beginTransaction();
+        session.update(usuarioToUpdate);
+        transaction.commit();
+
     }
 
 }
