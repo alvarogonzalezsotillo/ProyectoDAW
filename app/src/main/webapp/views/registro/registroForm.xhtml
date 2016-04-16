@@ -13,9 +13,9 @@
 
 	<h:form>
 
-		<h:outputText value="Formulario de registro de prueba" />
+		<h:outputText value="Formulario de registro de usuarios" />
 
-		<h:panelGrid columns="2">
+		<h:panelGrid columns="3">
 
 			<p:outputLabel value="Nombre " for="nombre" />
 			<p:inputText value="#{usuarioController.nombre}" id="nombre" title="nombre" required="true">
@@ -26,30 +26,48 @@
 			
 			
 			<p:outputLabel value="Apellido " for="apellido" />
-			<p:inputText value="#{usuarioController.usuario.apellidoDeUsuario}" id="apellido" title="apellido" required="true"/>
+			<p:inputText value="#{usuarioController.apellido}" id="apellido" title="apellido" required="true">
+				<!-- Validaciones desde el lado cliente -->
+				<f:validateLength maximum="45"/>
+				<p:ajax update="apellidoOK" event="keyup"/>
+			</p:inputText>
+			<p:message id="apellidoOK" for="apellido" display="text"/>
+			
 			
 			<p:outputLabel value="Nick/Apodo " for="nick" />
-			<p:inputText value="#{usuarioController.usuario.nickDeUsuario}" id="nick" title="nick" required="true"/>
+			<p:inputText value="#{usuarioController.nick}" id="nick" title="nick" required="true">
+			<!-- Validaciones desde el lado cliente -->
+				<f:validateLength maximum="65"/>
+				<p:ajax update="nickOK" event="keyup"/>
+			</p:inputText>
+			<p:message id="nickOK" for="nick" display="text"/>
 			
 			<p:outputLabel value="Password " for="password" />
-            <p:password value="#{usuarioController.usuario.passwordDeUsuario}" id="password" title="password" required="true"/>
-			
+            <p:password value="#{usuarioController.password}" id="password" title="password" required="true">
+            	<f:validateLength minimum="8" maximum="254" />
+            	<p:ajax update="passwordOK" event="keyup"/>
+            </p:password>
+            <p:message id="passwordOK" for="password" display="text"/>
+            
 			<p:outputLabel value="Correo " for="correo" />
-			<p:inputText value="#{usuarioController.usuario.correoDeUsuario}" id="correo" title="correo" required="false">
+			<p:inputText value="#{usuarioController.correo}" id="correo" title="correo" required="false">
 				<!-- Validaciones desde el lado cliente -->
 				<f:validateRegex pattern="^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$"/>
 			</p:inputText>
 			
+			</h:panelGrid>
+			<h:panelGrid columns="2">
 			<p:outputLabel value="Grupo " for="grupo" />
-            <p:inputText value="#{usuarioController.usuario.grupoDeUsuario}" id="grupo" title="grupo" required="false"/>
+            <p:inputText value="#{usuarioController.grupo}" id="grupo" title="grupo" required="false"/>
 			
 			<p:outputLabel value="Tipo de Música " for="tipoMusica" />
-            <p:inputText value="#{usuarioController.usuario.tipoMusicaDeUsuario}" id="tipoMusica" title="tipoMusica" required="false"/>
+            <p:inputText value="#{usuarioController.tipoMusica}" id="tipoMusica" title="tipoMusica" required="false"/>
             
             <p:outputLabel value="Página Web " for="web" />
-            <p:inputText value="#{usuarioController.usuario.webDeUsuario}" id="web" title="web" required="false"/>
+            <p:inputText value="#{usuarioController.web}" id="web" title="web" required="false"/>
 			
-
+			<p:outputLabel value="Sube tu logo!"/>
+			<p:fileUpload  id="logo" mode="simple" skinSimple="true"/>
 		</h:panelGrid>
 		<p:commandButton value="Empieza el show!">
 			<f:ajax execute="@all" listener="#{usuarioController.insert}" />
