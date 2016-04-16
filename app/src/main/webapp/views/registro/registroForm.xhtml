@@ -18,7 +18,11 @@
 		<h:panelGrid columns="2">
 
 			<p:outputLabel value="Nombre " for="nombre" />
-			<p:inputText value="#{usuarioController.nombre}" id="nombre" title="nombre" required="true"/>
+			<p:inputText value="#{usuarioController.nombre}" id="nombre" title="nombre" required="true">
+				 <f:validateLength maximum="45"/>
+			     <p:ajax update="nombreOK" event="keyup"/>
+			</p:inputText>
+			<p:message id="nombreOK" for="nombre" display="text" />
 			
 			
 			<p:outputLabel value="Apellido " for="apellido" />
