@@ -2,35 +2,80 @@ package app.model.test;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import app.beans.imp.UsuarioImp;
+import app.builder.UsuarioBuilder;
 import app.model.UsuarioDAO;
 
-public class UsuarioDAOTest{
+public class UsuarioDAOTest {
 
-    private UsuarioDAO sut;
-    private UsuarioImp usuarioTest = new UsuarioImp();
+    private static UsuarioDAO sut;
+    private  static UsuarioImp usuarioTest = new UsuarioImp();
+
     
-    @Before
-    public void setUp() throws Exception{
+    @BeforeClass
+    public static void tearUp(){
         
-        sut = new UsuarioDAO();
+        try {
+
+            sut = new UsuarioDAO();
+            usuarioTest.setNombreDeUsuario("NombreTest");
+            sut.insertUsuario(usuarioTest);
+            
+            
+        }
+
+        catch (ExceptionInInitializerError e) {
+
+            throw new ExceptionInInitializerError("No se ha podido inicializar el SUT" + e);
+
+        }
         
-        sut.insertUsuario(usuarioTest);
- 
     }
 
-    @After
-    public void tearDown() throws Exception {
+    @AfterClass
+    public static void tearDown() throws Exception {
+        
+        sut = null;
+        usuarioTest = null;
+        
     }
 
     @Test
-    public void test1() {
+    public void shouldReturnAllUsuariosInserted() {
+        
         assertEquals(1, sut.getAll().size());
+        
     }
 
-   
+    @Test
+    public void shouldReturnTheUsuarioIdentifiedById() {
+        
+        UsuarioImp usuarioReturned = sut.getUsuarioById(1L);
+        assertEquals("NombreTest", usuarioReturned.getNombreDeUsuario());
+        
+    }
+    
+    @Test
+    public void shouldDeleteTheUsuarioIdentifiedById(){
+        
+        sut.deleteUsuarioById(1L);
+        assertEquals(0, sut.getAll().size());
+        
+    }
+    
+    @Test
+    public void shouldUpdateTheUsuario() {
+        
+        UsuarioImp usuarioReturned = sut.getUsuarioById(1L);
+        usuarioReturned.setNombreDeUsuario("NuevoNombre");
+        sut.updateUsuario(usuarioReturned);
+        assertNotEquals("NombreTest", usuarioReturned.getNombreDeUsuario());
+        assertEquals("NuevoNombre", usuarioReturned.getNombreDeUsuario());
+        
+    }
+
 }
