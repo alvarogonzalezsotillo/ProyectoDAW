@@ -7,7 +7,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import app.beans.imp.UsuarioImp;
-import app.builder.UsuarioBuilder;
 import app.model.UsuarioDAO;
 
 public class UsuarioDAOTest {
