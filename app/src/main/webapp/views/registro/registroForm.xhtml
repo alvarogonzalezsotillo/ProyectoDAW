@@ -19,7 +19,7 @@
 
 			<p:outputLabel value="Nombre " for="nombre" />
 			<p:inputText value="#{usuarioController.nombre}" id="nombre" title="nombre" required="true">
-				 <f:validateLength maximum="45"/>
+				 <f:validateLength minimum="3" maximum="45"/>
 			     <p:ajax update="nombreOK" event="keyup"/>
 			</p:inputText>
 			<p:message id="nombreOK" for="nombre" display="text" />
@@ -28,7 +28,7 @@
 			<p:outputLabel value="Apellido " for="apellido" />
 			<p:inputText value="#{usuarioController.apellido}" id="apellido" title="apellido" required="true">
 				<!-- Validaciones desde el lado cliente -->
-				<f:validateLength maximum="45"/>
+				<f:validateLength minimum="5" maximum="45"/>
 				<p:ajax update="apellidoOK" event="keyup"/>
 			</p:inputText>
 			<p:message id="apellidoOK" for="apellido" display="text"/>
@@ -37,7 +37,7 @@
 			<p:outputLabel value="Nick/Apodo " for="nick" />
 			<p:inputText value="#{usuarioController.nick}" id="nick" title="nick" required="true">
 			<!-- Validaciones desde el lado cliente -->
-				<f:validateLength maximum="65"/>
+				<f:validateLength minimum="3" maximum="65"/>
 				<p:ajax update="nickOK" event="keyup"/>
 			</p:inputText>
 			<p:message id="nickOK" for="nick" display="text"/>
