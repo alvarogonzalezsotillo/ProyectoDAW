@@ -76,4 +76,28 @@ public class UsuarioDAO extends BaseDaoHibernate implements Serializable {
 
     }
 
+    public boolean loginUsuario(String nick,String passwordHashed){
+
+        boolean checked=false;
+
+        List<UsuarioImp> listUsuarios;
+
+        session = factory.openSession();
+        transaction = session.beginTransaction();
+        Query query = session.createQuery("from UsuarioImp usuario where usuario.nickDeUsuario = :nick and usuario.passwordDeUsuario = :passwordHashed");
+        query.setParameter("nick", nick);
+        query.setParameter("passwordHashed", passwordHashed);
+
+        listUsuarios = query.list();
+
+        if(listUsuarios.size() == 1){
+
+            checked = true;
+
+        }
+
+        return checked;
+
+    }
+
 }

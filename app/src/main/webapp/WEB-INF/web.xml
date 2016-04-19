@@ -7,7 +7,7 @@
 	
 	<!-- El archivo que se comporta como /home -->
 	<welcome-file-list>
-		<welcome-file>index.xhtml</welcome-file>
+		<welcome-file>views/index/login.xhtml</welcome-file>
 	</welcome-file-list>
 	
 	<!-- No tocar nunca bajo ningún concepto ni el sevlet ni el mapeo o dejará de funcionar todo -->
