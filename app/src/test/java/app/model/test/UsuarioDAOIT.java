@@ -2,6 +2,7 @@ package app.model.test;
 
 import static org.junit.Assert.*;
 
+import app.controller.Util;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -9,7 +10,7 @@ import org.junit.Test;
 import app.beans.imp.UsuarioImp;
 import app.model.UsuarioDAO;
 
-public class UsuarioDAOTest {
+public class UsuarioDAOIT {
 
     private static UsuarioDAO sut;
     private  static UsuarioImp usuarioTest = new UsuarioImp();
@@ -22,6 +23,8 @@ public class UsuarioDAOTest {
 
             sut = new UsuarioDAO();
             usuarioTest.setNombreDeUsuario("NombreTest");
+            usuarioTest.setNickDeUsuario("NickTest");
+            usuarioTest.setPasswordDeUsuario("pass");
             sut.insertUsuario(usuarioTest);
             
             
@@ -44,14 +47,14 @@ public class UsuarioDAOTest {
     }
 
     @Test
-    public void shouldReturnAllUsuariosInserted() {
+    public void shouldReturnAllUsuariosInsertedWhenCallingGetAll() {
         
         assertEquals(1, sut.getAll().size());
         
     }
 
     @Test
-    public void shouldReturnTheUsuarioIdentifiedById() {
+    public void shouldReturnTheUsuarioIdentifiedByIdWhenCallingGetUsuarioById() {
         
         UsuarioImp usuarioReturned = sut.getUsuarioById(1L);
         assertEquals("NombreTest", usuarioReturned.getNombreDeUsuario());
@@ -59,7 +62,7 @@ public class UsuarioDAOTest {
     }
     
     @Test
-    public void shouldDeleteTheUsuarioIdentifiedById(){
+    public void shouldDeleteTheUsuarioIdentifiedByIdWhenCallingDeleteUsuarioById(){
         
         sut.deleteUsuarioById(1L);
         assertEquals(0, sut.getAll().size());
@@ -67,7 +70,7 @@ public class UsuarioDAOTest {
     }
     
     @Test
-    public void shouldUpdateTheUsuario() {
+    public void shouldUpdateTheUsuarioWhenCallingUpdateUsuario() {
         
         UsuarioImp usuarioReturned = sut.getUsuarioById(1L);
         usuarioReturned.setNombreDeUsuario("NuevoNombre");
@@ -75,6 +78,15 @@ public class UsuarioDAOTest {
         assertNotEquals("NombreTest", usuarioReturned.getNombreDeUsuario());
         assertEquals("NuevoNombre", usuarioReturned.getNombreDeUsuario());
         
+    }
+
+    @Test
+    public void shouldReturnTrueWhenNickAndPasswordAreFindInDBWhenCallingLoginUsuario() {
+
+        String salt = Util.getSalt();
+        String passwordHashed = Util.hashPasswordSHA("pass"+salt);
+        assertTrue(sut.loginUsuario("NickTest",passwordHashed));
+
     }
 
 }
