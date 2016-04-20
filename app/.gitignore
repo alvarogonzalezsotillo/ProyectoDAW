@@ -1,0 +1,14 @@
+/target/
+*.idea
+.settings/
+*.iml
+.metadata
+
+#Eclipse Core
+.project
+
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+
+# Tern plugin
+.tern-project
