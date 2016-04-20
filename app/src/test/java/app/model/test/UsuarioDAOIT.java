@@ -14,6 +14,7 @@ public class UsuarioDAOIT {
 
     private static UsuarioDAO sut;
     private  static UsuarioImp usuarioTest = new UsuarioImp();
+    private static UsuarioImp usuarioParaLog = new UsuarioImp();
 
     
     @BeforeClass
@@ -22,11 +23,15 @@ public class UsuarioDAOIT {
         try {
 
             sut = new UsuarioDAO();
+
             usuarioTest.setNombreDeUsuario("NombreTest");
-            usuarioTest.setNickDeUsuario("NickTest");
             usuarioTest.setPasswordDeUsuario("pass");
             sut.insertUsuario(usuarioTest);
-            
+
+            usuarioParaLog.setNickDeUsuario("nickTest");
+            usuarioParaLog.setPasswordDeUsuario("passTest");
+            sut.insertUsuario(usuarioParaLog);
+
             
         }
 
@@ -48,44 +53,45 @@ public class UsuarioDAOIT {
 
     @Test
     public void shouldReturnAllUsuariosInsertedWhenCallingGetAll() {
-        
-        assertEquals(1, sut.getAll().size());
-        
+
+        assertEquals(2, sut.getAll().size());
+
     }
 
     @Test
     public void shouldReturnTheUsuarioIdentifiedByIdWhenCallingGetUsuarioById() {
-        
+
         UsuarioImp usuarioReturned = sut.getUsuarioById(1L);
         assertEquals("NombreTest", usuarioReturned.getNombreDeUsuario());
-        
-    }
-    
-    @Test
-    public void shouldDeleteTheUsuarioIdentifiedByIdWhenCallingDeleteUsuarioById(){
-        
-        sut.deleteUsuarioById(1L);
-        assertEquals(0, sut.getAll().size());
-        
-    }
-    
-    @Test
-    public void shouldUpdateTheUsuarioWhenCallingUpdateUsuario() {
-        
-        UsuarioImp usuarioReturned = sut.getUsuarioById(1L);
-        usuarioReturned.setNombreDeUsuario("NuevoNombre");
-        sut.updateUsuario(usuarioReturned);
-        assertNotEquals("NombreTest", usuarioReturned.getNombreDeUsuario());
-        assertEquals("NuevoNombre", usuarioReturned.getNombreDeUsuario());
-        
+
     }
 
     @Test
     public void shouldReturnTrueWhenNickAndPasswordAreFindInDBWhenCallingLoginUsuario() {
 
         String salt = Util.getSalt();
-        String passwordHashed = Util.hashPasswordSHA("pass"+salt);
-        assertTrue(sut.loginUsuario("NickTest",passwordHashed));
+        String passwordHashed = Util.hashPasswordSHA("passTest"+salt);
+        assertTrue(sut.loginUsuario("nickTest",passwordHashed));
+
+    }
+
+    @Test
+    public void shouldDeleteTheUsuarioIdentifiedByIdWhenCallingDeleteUsuarioById(){
+
+        sut.deleteUsuarioById(1L);
+        sut.deleteUsuarioById(2L);
+        assertEquals(0, sut.getAll().size());
+
+    }
+
+    @Test
+    public void shouldUpdateTheUsuarioWhenCallingUpdateUsuario() {
+
+        UsuarioImp usuarioReturned = sut.getUsuarioById(1L);
+        usuarioReturned.setCorreoDeUsuario("CorreoTest");
+        assertNotNull(usuarioReturned.getCorreoDeUsuario());
+        sut.updateUsuario(usuarioReturned);
+        assertEquals("CorreoTest", sut.getUsuarioById(1L).getCorreoDeUsuario());
 
     }
 
