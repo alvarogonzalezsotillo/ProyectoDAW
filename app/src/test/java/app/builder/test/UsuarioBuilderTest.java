@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import app.beans.imp.UsuarioImp;
+import app.beans.implementations.UsuarioBean;
 import app.builder.UsuarioBuilder;
 import app.controller.Util;
 
@@ -14,7 +14,7 @@ public class UsuarioBuilderTest {
     
     UsuarioBuilder sut;
     UsuarioBuilder returned;
-    UsuarioImp usuarioTest;
+    UsuarioBean usuarioTest;
     
     String nombreTest = "nombreTest";
     String apellidoTest = "apellidoTest";

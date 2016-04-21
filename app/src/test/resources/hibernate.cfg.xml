@@ -17,6 +17,6 @@
 		<property name="hbm2ddl.auto">update</property>
 		<property name="dialect">org.hibernate.dialect.HSQLDialect</property>
 
-		<mapping class="app.beans.imp.UsuarioImp" />
+		<mapping class="app.beans.implementations.UsuarioBean" />
 	</session-factory>
 </hibernate-configuration>

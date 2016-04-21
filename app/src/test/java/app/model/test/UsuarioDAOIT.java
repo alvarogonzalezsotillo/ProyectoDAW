@@ -7,14 +7,14 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import app.beans.imp.UsuarioImp;
+import app.beans.implementations.UsuarioBean;
 import app.model.UsuarioDAO;
 
 public class UsuarioDAOIT {
 
     private static UsuarioDAO sut;
-    private  static UsuarioImp usuarioTest = new UsuarioImp();
-    private static UsuarioImp usuarioParaLog = new UsuarioImp();
+    private  static UsuarioBean usuarioTest = new UsuarioBean();
+    private static UsuarioBean usuarioParaLog = new UsuarioBean();
 
     
     @BeforeClass
@@ -61,7 +61,7 @@ public class UsuarioDAOIT {
     @Test
     public void shouldReturnTheUsuarioIdentifiedByIdWhenCallingGetUsuarioById() {
 
-        UsuarioImp usuarioReturned = sut.getUsuarioById(1L);
+        UsuarioBean usuarioReturned = sut.getUsuarioById(1L);
         assertEquals("NombreTest", usuarioReturned.getNombreDeUsuario());
 
     }
@@ -87,7 +87,7 @@ public class UsuarioDAOIT {
     @Test
     public void shouldUpdateTheUsuarioWhenCallingUpdateUsuario() {
 
-        UsuarioImp usuarioReturned = sut.getUsuarioById(1L);
+        UsuarioBean usuarioReturned = sut.getUsuarioById(1L);
         usuarioReturned.setCorreoDeUsuario("CorreoTest");
         assertNotNull(usuarioReturned.getCorreoDeUsuario());
         sut.updateUsuario(usuarioReturned);
