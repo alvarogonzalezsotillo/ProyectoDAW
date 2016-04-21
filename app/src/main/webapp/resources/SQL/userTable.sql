@@ -12,4 +12,4 @@ CREATE TABLE `iesrey`.`usuarios` (
   `tipoMusicaDeUsuario` VARCHAR(20) NULL,
   `esAdmin` TINYINT(1) NOT NULL DEFAULT 0,
   `fechaRegistro` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`idUsuario`));
+  PRIMARY KEY (`id`));

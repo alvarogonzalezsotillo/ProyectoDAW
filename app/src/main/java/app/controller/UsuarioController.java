@@ -3,6 +3,7 @@ package app.controller;
 import app.beans.imp.UsuarioImp;
 import app.builder.UsuarioBuilder;
 import app.model.UsuarioDAO;
+import org.primefaces.model.UploadedFile;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -25,6 +26,7 @@ public class UsuarioController implements Serializable {
     private String web;
     private String grupo;
     private String tipoMusica;
+    private UploadedFile imagen;
 
     @ManagedProperty(value = "#{usuarioDao}")
     private UsuarioDAO usuarioDao;
@@ -37,6 +39,7 @@ public class UsuarioController implements Serializable {
                 .web(web)
                 .grupo(grupo)
                 .tipoMusica(tipoMusica)
+                .imagen(imagen)
                 .build();
 
         usuarioDao.insertUsuario(usuario);
@@ -143,4 +146,11 @@ public class UsuarioController implements Serializable {
         this.tipoMusica = tipoMusica;
     }
 
+    public UploadedFile getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(UploadedFile imagen) {
+        this.imagen = imagen;
+    }
 }

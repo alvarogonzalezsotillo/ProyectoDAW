@@ -33,8 +33,7 @@ public class UsuarioImp implements Usuario, Serializable {
     private String passwordDeUsuario;
 
     @Column(name = "imagenDeUsuario")
-    @Lob
-    private UploadedFile imagenDeUsuario;
+    private byte[] imagenDeUsuario;
 
     @Column(name = "correoDeUsuario")
     private String correoDeUsuario;
@@ -53,7 +52,7 @@ public class UsuarioImp implements Usuario, Serializable {
     }
     
     public UsuarioImp(String nombreDeUsuario, String apellidoDeUsuario, String nickDeUsuario, String correoDeUsuario,
-            boolean esUsuarioMusico, String tipoMusicaDeUsuario, String grupoDeUsuario, String webDeUsuario, String passwordDeUsuario) {
+            boolean esUsuarioMusico, String tipoMusicaDeUsuario, String grupoDeUsuario, String webDeUsuario, String passwordDeUsuario, byte[] imagenDeUsuario) {
 
         this.nombreDeUsuario = nombreDeUsuario;
         this.apellidoDeUsuario = apellidoDeUsuario;
@@ -65,6 +64,7 @@ public class UsuarioImp implements Usuario, Serializable {
         this.webDeUsuario = webDeUsuario;
         String saltPassword = Util.getSalt();
         this.passwordDeUsuario = Util.hashPasswordSHA(passwordDeUsuario+saltPassword);
+        this.imagenDeUsuario = null ;
     }
 
     @Id
@@ -150,4 +150,11 @@ public class UsuarioImp implements Usuario, Serializable {
         return passwordDeUsuario;
     }
 
+    public byte[] getImagenDeUsuario() {
+        return imagenDeUsuario;
+    }
+
+    public void setImagenDeUsuario(byte[] imagenDeUsuario) {
+        this.imagenDeUsuario = imagenDeUsuario;
+    }
 }
