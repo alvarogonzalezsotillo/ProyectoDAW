@@ -1,22 +1,19 @@
-package app.beans.imp;
+package app.beans.implementations;
 
 import java.io.Serializable;
-import java.sql.Blob;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 
-import app.beans.Usuario;
+import app.beans.interfaces.Usuario;
 import app.controller.Util;
-import org.primefaces.model.UploadedFile;
 
 @Entity
 @Table(name = "usuarios")
-public class UsuarioImp implements Usuario, Serializable {
+public class UsuarioBean implements Usuario, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -47,12 +44,12 @@ public class UsuarioImp implements Usuario, Serializable {
     @Column(name = "tipoMusicaDeUsuario")
     private String tipoMusicaDeUsuario;
     
-    public UsuarioImp(){
+    public UsuarioBean(){
         //Constructor por defecto
     }
     
-    public UsuarioImp(String nombreDeUsuario, String apellidoDeUsuario, String nickDeUsuario, String correoDeUsuario,
-            boolean esUsuarioMusico, String tipoMusicaDeUsuario, String grupoDeUsuario, String webDeUsuario, String passwordDeUsuario, byte[] imagenDeUsuario) {
+    public UsuarioBean(String nombreDeUsuario, String apellidoDeUsuario, String nickDeUsuario, String correoDeUsuario,
+                       boolean esUsuarioMusico, String tipoMusicaDeUsuario, String grupoDeUsuario, String webDeUsuario, String passwordDeUsuario, byte[] imagenDeUsuario) {
 
         this.nombreDeUsuario = nombreDeUsuario;
         this.apellidoDeUsuario = apellidoDeUsuario;

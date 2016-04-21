@@ -1,4 +1,4 @@
-package app.beans;
+package app.beans.interfaces;
 
 public interface Usuario {
 

@@ -1,6 +1,6 @@
 package app.builder;
 
-import app.beans.imp.UsuarioImp;
+import app.beans.implementations.UsuarioBean;
 import app.controller.Util;
 import org.primefaces.model.UploadedFile;
 
@@ -35,9 +35,9 @@ public class UsuarioBuilder implements Serializable {
         
     }
 
-    public UsuarioImp build() {
+    public UsuarioBean build() {
 
-        return new UsuarioImp(nombre,apellido,nick,correo,true,tipoMusica,grupo,web,password,imagen);
+        return new UsuarioBean(nombre,apellido,nick,correo,true,tipoMusica,grupo,web,password,imagen);
 
     }
 
