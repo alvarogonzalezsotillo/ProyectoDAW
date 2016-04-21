@@ -1,8 +1,8 @@
 package app.builder;
 
-import java.io.Serializable;
-
 import app.beans.imp.UsuarioImp;
+
+import java.io.Serializable;
 
 public class UsuarioBuilder implements Serializable {
 
@@ -16,7 +16,7 @@ public class UsuarioBuilder implements Serializable {
     private String web;
     private String grupo;
     private String tipoMusica;
-    
+
     public UsuarioBuilder(){
         
         //Constructor por defecto para los test
