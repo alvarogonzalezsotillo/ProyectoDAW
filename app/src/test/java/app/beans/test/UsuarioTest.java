@@ -31,7 +31,7 @@ public class UsuarioTest {
         try {
 
             sut = new UsuarioImp(nombreTest, apellidoTest, nickTest, correoTest, esUsuarioMusicoTestFalse, tipoMusicaTest,
-                    grupoTest, webTest, passwordTest);
+                    grupoTest, webTest, passwordTest,null);
             sut.setId(idTest);
 
             sut.setId(idTest);

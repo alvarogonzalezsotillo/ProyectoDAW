@@ -1,13 +1,10 @@
 package app.controller;
 
+import org.mockito.internal.creation.instance.InstantationException;
+import org.primefaces.model.UploadedFile;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Blob;
-import java.sql.SQLException;
-
-import org.mockito.internal.creation.instance.InstantationException;
-
-import javax.sql.rowset.serial.SerialBlob;
 
 public final class Util {
 
@@ -52,21 +49,9 @@ public final class Util {
         return generatedPassword;
     }
 
-    public static Blob transformImage(byte[] imagen){
+    public static byte[] transformImage(UploadedFile imagen){
 
-        Blob imagenTransformada = null;
-
-        try {
-
-            imagenTransformada = new SerialBlob(imagen);
-        }
-
-        catch (SQLException e) {
-
-            e.printStackTrace();
-        }
-
-        return imagenTransformada;
+        return imagen.getContents();
 
     }
 
