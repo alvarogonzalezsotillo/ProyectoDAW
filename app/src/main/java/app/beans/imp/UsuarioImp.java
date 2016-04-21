@@ -1,6 +1,7 @@
 package app.beans.imp;
 
 import java.io.Serializable;
+import java.sql.Blob;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.Table;
 
 import app.beans.Usuario;
 import app.controller.Util;
+import org.primefaces.model.UploadedFile;
 
 @Entity
 @Table(name = "usuarios")
@@ -32,7 +34,7 @@ public class UsuarioImp implements Usuario, Serializable {
 
     @Column(name = "imagenDeUsuario")
     @Lob
-    private byte[] imagenDeUsuario;
+    private UploadedFile imagenDeUsuario;
 
     @Column(name = "correoDeUsuario")
     private String correoDeUsuario;
@@ -63,7 +65,6 @@ public class UsuarioImp implements Usuario, Serializable {
         this.webDeUsuario = webDeUsuario;
         String saltPassword = Util.getSalt();
         this.passwordDeUsuario = Util.hashPasswordSHA(passwordDeUsuario+saltPassword);
-        
     }
 
     @Id
@@ -138,14 +139,6 @@ public class UsuarioImp implements Usuario, Serializable {
 
     public void setWebDeUsuario(String webUsuario) {
         this.webDeUsuario = webUsuario;
-    }
-
-    public byte[] getImagenDeUsuario() {
-        return imagenDeUsuario;
-    }
-
-    public void setImagenDeUsuario(byte[] imagenDeUsuario) {
-        this.imagenDeUsuario = imagenDeUsuario;
     }
 
     public void setPasswordDeUsuario(String passwordDeUsuario) {
