@@ -49,9 +49,9 @@ public final class Util {
         return generatedPassword;
     }
 
-    public static byte[] transformImage(UploadedFile imagen){
+    public static byte[] transformFile(UploadedFile file){
 
-        return imagen.getContents();
+        return file.getContents();
 
     }
 

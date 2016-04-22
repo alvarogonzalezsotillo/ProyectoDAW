@@ -106,7 +106,7 @@ public class UsuarioBuilder implements Serializable {
 
     public UsuarioBuilder imagen(UploadedFile imagen){
 
-        this.imagen = Util.transformImage(imagen);
+        this.imagen = Util.transformFile(imagen);
 
         return this;
 
