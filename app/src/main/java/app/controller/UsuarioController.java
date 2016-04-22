@@ -30,7 +30,7 @@ public class UsuarioController implements Serializable {
     private String web;
     private String grupo;
     private String tipoMusica;
-    private UploadedFile imagen;
+    private transient UploadedFile imagen;
 
     @ManagedProperty(value = "#{usuarioDao}")
     private UsuarioDAO usuarioDao;
@@ -74,7 +74,7 @@ public class UsuarioController implements Serializable {
 
             catch (IOException e) {
 
-                e.printStackTrace();
+                throw new RuntimeException("Fallo en UsuarioController: no se pudo redirigir" + e);
 
             }
 

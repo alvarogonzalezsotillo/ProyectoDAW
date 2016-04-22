@@ -38,7 +38,7 @@ public class LoginController implements Serializable {
 
             catch (IOException e) {
 
-                e.printStackTrace();
+                throw new RuntimeException("Fallo en LoginController: no se pudo redirigir" + e);
             }
 
         }
