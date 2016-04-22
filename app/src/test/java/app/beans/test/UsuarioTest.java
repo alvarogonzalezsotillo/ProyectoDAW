@@ -34,7 +34,6 @@ public class UsuarioTest {
                     grupoTest, webTest, passwordTest,null);
             sut.setId(idTest);
 
-            sut.setId(idTest);
         }
 
         catch (ExceptionInInitializerError e) {
