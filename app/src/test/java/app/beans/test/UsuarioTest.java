@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 
-import app.beans.imp.UsuarioImp;
+import app.beans.implementations.UsuarioBean;
 import app.builder.UsuarioBuilder;
 import app.controller.Util;
 
@@ -21,7 +21,7 @@ public class UsuarioTest {
     String webTest = "testingWeb";
     String passwordTest = "testingPass";
     String salt = Util.getSalt();
-    UsuarioImp sut;
+    UsuarioBean sut;
 
     UsuarioBuilder usuarioBuilder;
 
@@ -30,8 +30,8 @@ public class UsuarioTest {
 
         try {
 
-            sut = new UsuarioImp(nombreTest, apellidoTest, nickTest, correoTest, esUsuarioMusicoTestFalse, tipoMusicaTest,
-                    grupoTest, webTest, passwordTest);
+            sut = new UsuarioBean(nombreTest, apellidoTest, nickTest, correoTest, esUsuarioMusicoTestFalse, tipoMusicaTest,
+                    grupoTest, webTest, passwordTest,null);
             sut.setId(idTest);
 
             sut.setId(idTest);

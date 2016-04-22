@@ -1,8 +1,10 @@
 package app.builder;
 
-import java.io.Serializable;
+import app.beans.implementations.UsuarioBean;
+import app.controller.Util;
+import org.primefaces.model.UploadedFile;
 
-import app.beans.imp.UsuarioImp;
+import java.io.Serializable;
 
 public class UsuarioBuilder implements Serializable {
 
@@ -16,7 +18,8 @@ public class UsuarioBuilder implements Serializable {
     private String web;
     private String grupo;
     private String tipoMusica;
-    
+    private byte[] imagen;
+
     public UsuarioBuilder(){
         
         //Constructor por defecto para los test
@@ -32,9 +35,9 @@ public class UsuarioBuilder implements Serializable {
         
     }
 
-    public UsuarioImp build() {
+    public UsuarioBean build() {
 
-        return new UsuarioImp(nombre,apellido,nick,correo,true,tipoMusica,grupo,web,password);
+        return new UsuarioBean(nombre,apellido,nick,correo,true,tipoMusica,grupo,web,password,imagen);
 
     }
 
@@ -96,6 +99,14 @@ public class UsuarioBuilder implements Serializable {
     public UsuarioBuilder password(String password) {
 
         this.password= password;
+
+        return this;
+
+    }
+
+    public UsuarioBuilder imagen(UploadedFile imagen){
+
+        this.imagen = Util.transformFile(imagen);
 
         return this;
 

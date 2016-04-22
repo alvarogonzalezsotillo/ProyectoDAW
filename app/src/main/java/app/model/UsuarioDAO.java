@@ -8,7 +8,7 @@ import javax.faces.bean.ManagedBean;
 
 import org.hibernate.Query;
 
-import app.beans.imp.UsuarioImp;
+import app.beans.implementations.UsuarioBean;
 
 @ManagedBean(name = "usuarioDao")
 @ApplicationScoped
@@ -20,37 +20,49 @@ public class UsuarioDAO extends BaseDaoHibernate implements Serializable {
         super();
     }
 
-    public void insertUsuario(UsuarioImp usuario) {
+    public void insertUsuario(UsuarioBean usuario) {
 
         session = factory.openSession();
         transaction = session.beginTransaction();
         session.save(usuario);
         transaction.commit();
-        session.close();
 
     }
 
     @SuppressWarnings("unchecked")
-    public List<UsuarioImp> getAll() {
+    public List<UsuarioBean> getAll() {
 
-        List<UsuarioImp> listUsuarios;
+        List<UsuarioBean> listUsuarios;
 
         session = factory.openSession();
         transaction = session.beginTransaction();
-        Query query = session.createQuery("from UsuarioImp");
+        Query query = session.createQuery("from UsuarioBean");
         listUsuarios = query.list();
         transaction.commit();
         return listUsuarios;
     }
 
     @SuppressWarnings("unchecked")
-    public UsuarioImp getUsuarioById(Long id) {
+    public List<String> getAllNicks() {
 
-        List<UsuarioImp> listUsuarios;
+        List<String> listNicks;
 
         session = factory.openSession();
         transaction = session.beginTransaction();
-        Query query = session.createQuery("from UsuarioImp usuario where usuario.id = :id");
+        Query query = session.createQuery("select nickDeUsuario from UsuarioBean");
+        listNicks = query.list();
+        transaction.commit();
+        return listNicks;
+    }
+
+    @SuppressWarnings("unchecked")
+    public UsuarioBean getUsuarioById(Long id) {
+
+        List<UsuarioBean> listUsuarios;
+
+        session = factory.openSession();
+        transaction = session.beginTransaction();
+        Query query = session.createQuery("from UsuarioBean usuario where usuario.id = :id");
         query.setParameter("id", id);
         listUsuarios = query.list();
         transaction.commit();
@@ -61,13 +73,13 @@ public class UsuarioDAO extends BaseDaoHibernate implements Serializable {
 
         session = factory.openSession();
         transaction = session.beginTransaction();
-        UsuarioImp usuarioToDelete = session.load(UsuarioImp.class, id);
+        UsuarioBean usuarioToDelete = session.load(UsuarioBean.class, id);
         session.delete(usuarioToDelete);
         transaction.commit();
 
     }
 
-    public void updateUsuario(UsuarioImp usuarioToUpdate) {
+    public void updateUsuario(UsuarioBean usuarioToUpdate) {
 
         session = factory.openSession();
         transaction = session.beginTransaction();
@@ -80,11 +92,11 @@ public class UsuarioDAO extends BaseDaoHibernate implements Serializable {
 
         boolean checked=false;
 
-        List<UsuarioImp> listUsuarios;
+        List<UsuarioBean> listUsuarios;
 
         session = factory.openSession();
         transaction = session.beginTransaction();
-        Query query = session.createQuery("from UsuarioImp usuario where usuario.nickDeUsuario = :nick and usuario.passwordDeUsuario = :passwordHashed");
+        Query query = session.createQuery("from UsuarioBean usuario where usuario.nickDeUsuario = :nick and usuario.passwordDeUsuario = :passwordHashed");
         query.setParameter("nick", nick);
         query.setParameter("passwordHashed", passwordHashed);
 
@@ -97,6 +109,12 @@ public class UsuarioDAO extends BaseDaoHibernate implements Serializable {
         }
 
         return checked;
+
+    }
+
+    public void closeSession(){
+
+        this.session.close();
 
     }
 

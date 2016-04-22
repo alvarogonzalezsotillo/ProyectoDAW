@@ -1,4 +1,4 @@
-package app.beans.imp;
+package app.beans.implementations;
 
 import java.io.Serializable;
 
@@ -6,15 +6,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 
-import app.beans.Usuario;
+import app.beans.interfaces.Usuario;
 import app.controller.Util;
 
 @Entity
 @Table(name = "usuarios")
-public class UsuarioImp implements Usuario, Serializable {
+public class UsuarioBean implements Usuario, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -30,8 +29,7 @@ public class UsuarioImp implements Usuario, Serializable {
     @Column(name = "passwordDeUsuario")
     private String passwordDeUsuario;
 
-    @Column(name = "imagenDeUsuario")
-    @Lob
+    @Column(name = "imagenDeUsuario", columnDefinition = "LONGBLOB")
     private byte[] imagenDeUsuario;
 
     @Column(name = "correoDeUsuario")
@@ -46,12 +44,12 @@ public class UsuarioImp implements Usuario, Serializable {
     @Column(name = "tipoMusicaDeUsuario")
     private String tipoMusicaDeUsuario;
     
-    public UsuarioImp(){
+    public UsuarioBean(){
         //Constructor por defecto
     }
     
-    public UsuarioImp(String nombreDeUsuario, String apellidoDeUsuario, String nickDeUsuario, String correoDeUsuario,
-            boolean esUsuarioMusico, String tipoMusicaDeUsuario, String grupoDeUsuario, String webDeUsuario, String passwordDeUsuario) {
+    public UsuarioBean(String nombreDeUsuario, String apellidoDeUsuario, String nickDeUsuario, String correoDeUsuario,
+                       boolean esUsuarioMusico, String tipoMusicaDeUsuario, String grupoDeUsuario, String webDeUsuario, String passwordDeUsuario, byte[] imagenDeUsuario) {
 
         this.nombreDeUsuario = nombreDeUsuario;
         this.apellidoDeUsuario = apellidoDeUsuario;
@@ -63,7 +61,7 @@ public class UsuarioImp implements Usuario, Serializable {
         this.webDeUsuario = webDeUsuario;
         String saltPassword = Util.getSalt();
         this.passwordDeUsuario = Util.hashPasswordSHA(passwordDeUsuario+saltPassword);
-        
+        this.imagenDeUsuario = imagenDeUsuario ;
     }
 
     @Id
@@ -140,14 +138,6 @@ public class UsuarioImp implements Usuario, Serializable {
         this.webDeUsuario = webUsuario;
     }
 
-    public byte[] getImagenDeUsuario() {
-        return imagenDeUsuario;
-    }
-
-    public void setImagenDeUsuario(byte[] imagenDeUsuario) {
-        this.imagenDeUsuario = imagenDeUsuario;
-    }
-
     public void setPasswordDeUsuario(String passwordDeUsuario) {
         String salt = Util.getSalt();
         this.passwordDeUsuario = Util.hashPasswordSHA(passwordDeUsuario + salt);
@@ -157,4 +147,11 @@ public class UsuarioImp implements Usuario, Serializable {
         return passwordDeUsuario;
     }
 
+    public byte[] getImagenDeUsuario() {
+        return imagenDeUsuario;
+    }
+
+    public void setImagenDeUsuario(byte[] imagenDeUsuario) {
+        this.imagenDeUsuario = imagenDeUsuario;
+    }
 }

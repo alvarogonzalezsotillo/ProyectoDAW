@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee"	
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	id="SPI" version="2.5">
-	<display-name>iesrey-daw</display-name>
-	
-	<!-- El archivo que se comporta como /home -->
-	<welcome-file-list>
-		<welcome-file>views/index/login.xhtml</welcome-file>
-	</welcome-file-list>
-	
-	<!-- No tocar nunca bajo ningún concepto ni el sevlet ni el mapeo o dejará de funcionar todo -->
-	<servlet>
-		<servlet-name>Faces Servlet</servlet-name>
-		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>Faces Servlet</servlet-name>
-		<url-pattern>*.xhtml</url-pattern>
-	</servlet-mapping>
+    xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+    id="SPI" version="2.5">
+    <display-name>iesrey-daw</display-name>
+
+    <!-- El archivo que se comporta como /home -->
+    <welcome-file-list>
+        <welcome-file>views/registro/registroForm.xhtml</welcome-file>
+    </welcome-file-list>
+
+    <!-- No tocar nunca bajo ningún concepto ni el sevlet ni el mapeo o dejará de funcionar todo -->
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+
 </web-app>

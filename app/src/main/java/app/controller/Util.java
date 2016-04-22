@@ -1,9 +1,10 @@
 package app.controller;
 
+import org.mockito.internal.creation.instance.InstantationException;
+import org.primefaces.model.UploadedFile;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
-import org.mockito.internal.creation.instance.InstantationException;
 
 public final class Util {
 
@@ -46,6 +47,12 @@ public final class Util {
         }
 
         return generatedPassword;
+    }
+
+    public static byte[] transformFile(UploadedFile file){
+
+        return file.getContents();
+
     }
 
 }

@@ -10,9 +10,9 @@
 <ui:include src="/resources/templates/header.xhtml" />
 
 <h:body>
-	<h:form>
+	<h:form enctype="multipart/form-data">
 
-		<h:outputText value="Formulario de registro de usuarios" />
+		<p:messages id="messages" autoUpdate="true" showDetail="true" closable="true"/>
 
 		<h:panelGrid columns="3">
 
@@ -66,7 +66,7 @@
             <p:inputText value="#{usuarioController.web}" id="web" title="web" required="false"/>
 			
 			<p:outputLabel value="Elige tu avatar " for="logo"/>
-			<p:fileUpload  id="logo" mode="simple" skinSimple="true"/>
+			<p:fileUpload  id="logo" mode="simple" skinSimple="true" value="#{usuarioController.imagen}"/>
 		</h:panelGrid>
 		<p:commandButton value="Empieza el show!">
 			<f:ajax execute="@all" listener="#{usuarioController.insert}" />

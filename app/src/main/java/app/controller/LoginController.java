@@ -32,6 +32,7 @@ public class LoginController implements Serializable {
 
             try {
 
+                usuarioDao.closeSession();
                 FacesContext.getCurrentInstance().getExternalContext().redirect("/views/index/bienvenida.xhtml");
             }
 
@@ -40,8 +41,11 @@ public class LoginController implements Serializable {
                 e.printStackTrace();
             }
 
-        } else {
+        }
 
+        else {
+
+            usuarioDao.closeSession();
             FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Oops!", "El nick o password introducidos no coinciden,¿ya te registraste?");
             FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 
