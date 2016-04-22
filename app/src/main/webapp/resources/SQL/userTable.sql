@@ -5,7 +5,7 @@ CREATE TABLE `iesrey`.`usuarios` (
   `nickDeUsuario` VARCHAR(65) NOT NULL,
   `passwordDeUsuario` VARCHAR(254) NOT NULL,
   `correoDeUsuario` VARCHAR(85) NULL,
-  `imagenDeUsuario` BLOB NULL,
+  `imagenDeUsuario` LONGBLOB NULL,
   `esUsuarioMusico` TINYINT(1) NULL,
   `grupoDeUsuario` VARCHAR(35) NULL,
   `webDeUsuario` VARCHAR(100) NULL,
