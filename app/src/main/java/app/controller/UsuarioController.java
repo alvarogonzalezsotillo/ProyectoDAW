@@ -64,7 +64,6 @@ public class UsuarioController implements Serializable {
 
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.getExternalContext().getFlash().setKeepMessages(true);
-
                 FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "¡Bienvenid@ " + nombre +"!", "Tu usuario "+ nick +" ha sido registrado, ¡ahora a Rockear!");
                 context.getCurrentInstance().addMessage(null, facesMessage);
 
