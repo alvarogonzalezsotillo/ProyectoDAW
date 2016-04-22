@@ -95,4 +95,12 @@ public class UsuarioDAOIT {
 
     }
 
+    @Test
+    public void shouldReturnAListOfNicksWhenCallingGetAllNicks() {
+
+        assertNotNull(sut.getAllNicks());
+        assertTrue(sut.getAllNicks().contains("nickTest"));
+
+    }
+
 }

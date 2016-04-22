@@ -10,8 +10,7 @@
 	</h:head> 
 		
 	<h:body>
-		<p:messages id="messages" autoUpdate="true" showDetail="true" closable="true"/>
-		<p:growl id="mensajeInicial" showDetail="true" life="3000" />
+		<p:growl id="growl" showDetail="true" sticky="true"/>
 		<h:form>
 			<p:panel header="Inicia sesión en NOMBREAPP">
 	      		<h:panelGrid columns="2" cellpadding="5">
@@ -20,7 +19,7 @@
 	        		<h:outputLabel for="passwordDeUsuario" value="Contraseña:" />
 	        		<p:password value="#{loginController.password}" id="passwordDeUsuario" required="true" placeholder="Contraseña" label="passwordDeUsuario" />
 		        	<f:facet name="footer">
-		          		<p:commandButton id="loginButton" value="Iniciar sesión" actionListener="#{loginController.login}" update=":messages"/>
+		          		<p:commandButton id="loginButton" value="Iniciar sesión" actionListener="#{loginController.login}" update="growl"/>
 		        	</f:facet>
 	      		</h:panelGrid>
 	      		<f:facet name="footer">

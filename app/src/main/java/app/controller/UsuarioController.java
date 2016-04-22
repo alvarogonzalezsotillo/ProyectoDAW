@@ -5,10 +5,14 @@ import app.builder.UsuarioBuilder;
 import app.model.UsuarioDAO;
 import org.primefaces.model.UploadedFile;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
 
 @ManagedBean(name = "usuarioController")
 @ViewScoped
@@ -33,16 +37,51 @@ public class UsuarioController implements Serializable {
 
     public void insert() {
 
-        usuarioBuilder = new UsuarioBuilder(nombre, apellido, nick, password);
+        List<String> listNicks = usuarioDao.getAllNicks();
 
-        UsuarioBean usuario = usuarioBuilder.correo(correo)
-                .web(web)
-                .grupo(grupo)
-                .tipoMusica(tipoMusica)
-                .imagen(imagen)
-                .build();
+        if(listNicks.contains(nick)){
 
-        usuarioDao.insertUsuario(usuario);
+            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Has sido más lento", "Otro usuario ha registrado el nick " + nick + ", elige otro.");
+            FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+
+        }
+
+        else{
+
+            usuarioBuilder = new UsuarioBuilder(nombre, apellido, nick, password);
+
+            UsuarioBean usuario = usuarioBuilder.correo(correo)
+                    .web(web)
+                    .grupo(grupo)
+                    .tipoMusica(tipoMusica)
+                    .imagen(imagen)
+                    .build();
+
+            usuarioDao.insertUsuario(usuario);
+
+
+            try {
+
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getExternalContext().getFlash().setKeepMessages(true);
+
+                FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "¡Bienvenid@ " + nombre +"!", "Tu usuario "+ nick +" ha sido registrado, ¡ahora a Rockear!");
+                context.getCurrentInstance().addMessage(null, facesMessage);
+
+                context.getExternalContext().redirect("/views/index/login.xhtml");
+                usuarioDao.closeSession();
+
+            }
+
+            catch (IOException e) {
+
+                e.printStackTrace();
+
+            }
+
+        }
+
+
 
     }
 

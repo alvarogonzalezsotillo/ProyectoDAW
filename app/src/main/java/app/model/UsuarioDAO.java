@@ -26,7 +26,6 @@ public class UsuarioDAO extends BaseDaoHibernate implements Serializable {
         transaction = session.beginTransaction();
         session.save(usuario);
         transaction.commit();
-        session.close();
 
     }
 
@@ -37,10 +36,23 @@ public class UsuarioDAO extends BaseDaoHibernate implements Serializable {
 
         session = factory.openSession();
         transaction = session.beginTransaction();
-        Query query = session.createQuery("from UsuarioImp");
+        Query query = session.createQuery("from UsuarioBean");
         listUsuarios = query.list();
         transaction.commit();
         return listUsuarios;
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<String> getAllNicks() {
+
+        List<String> listNicks;
+
+        session = factory.openSession();
+        transaction = session.beginTransaction();
+        Query query = session.createQuery("select nickDeUsuario from UsuarioBean");
+        listNicks = query.list();
+        transaction.commit();
+        return listNicks;
     }
 
     @SuppressWarnings("unchecked")
@@ -50,7 +62,7 @@ public class UsuarioDAO extends BaseDaoHibernate implements Serializable {
 
         session = factory.openSession();
         transaction = session.beginTransaction();
-        Query query = session.createQuery("from UsuarioImp usuario where usuario.id = :id");
+        Query query = session.createQuery("from UsuarioBean usuario where usuario.id = :id");
         query.setParameter("id", id);
         listUsuarios = query.list();
         transaction.commit();
@@ -84,7 +96,7 @@ public class UsuarioDAO extends BaseDaoHibernate implements Serializable {
 
         session = factory.openSession();
         transaction = session.beginTransaction();
-        Query query = session.createQuery("from UsuarioImp usuario where usuario.nickDeUsuario = :nick and usuario.passwordDeUsuario = :passwordHashed");
+        Query query = session.createQuery("from UsuarioBean usuario where usuario.nickDeUsuario = :nick and usuario.passwordDeUsuario = :passwordHashed");
         query.setParameter("nick", nick);
         query.setParameter("passwordHashed", passwordHashed);
 
@@ -97,6 +109,12 @@ public class UsuarioDAO extends BaseDaoHibernate implements Serializable {
         }
 
         return checked;
+
+    }
+
+    public void closeSession(){
+
+        this.session.close();
 
     }
 
