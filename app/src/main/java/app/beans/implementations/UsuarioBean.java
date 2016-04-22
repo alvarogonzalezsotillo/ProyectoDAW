@@ -29,7 +29,7 @@ public class UsuarioBean implements Usuario, Serializable {
     @Column(name = "passwordDeUsuario")
     private String passwordDeUsuario;
 
-    @Column(name = "imagenDeUsuario")
+    @Column(name = "imagenDeUsuario", columnDefinition = "LONGBLOB")
     private byte[] imagenDeUsuario;
 
     @Column(name = "correoDeUsuario")
@@ -61,7 +61,7 @@ public class UsuarioBean implements Usuario, Serializable {
         this.webDeUsuario = webDeUsuario;
         String saltPassword = Util.getSalt();
         this.passwordDeUsuario = Util.hashPasswordSHA(passwordDeUsuario+saltPassword);
-        this.imagenDeUsuario = null ;
+        this.imagenDeUsuario = imagenDeUsuario ;
     }
 
     @Id

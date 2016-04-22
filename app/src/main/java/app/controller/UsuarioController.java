@@ -51,11 +51,11 @@ public class UsuarioController implements Serializable {
             usuarioBuilder = new UsuarioBuilder(nombre, apellido, nick, password);
 
             UsuarioBean usuario = usuarioBuilder.correo(correo)
-                    .web(web)
-                    .grupo(grupo)
-                    .tipoMusica(tipoMusica)
-                    .imagen(imagen)
-                    .build();
+                                                .web(web)
+                                                .grupo(grupo)
+                                                .tipoMusica(tipoMusica)
+                                                .imagen(imagen)
+                                                .build();
 
             usuarioDao.insertUsuario(usuario);
 
