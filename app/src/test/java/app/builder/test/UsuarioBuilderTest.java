@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import app.beans.implementations.UsuarioBean;
 import app.builder.UsuarioBuilder;
-import app.controller.Util;
+import app.utils.Util;
 
 public class UsuarioBuilderTest {
     

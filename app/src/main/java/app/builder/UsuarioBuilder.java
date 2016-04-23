@@ -1,7 +1,7 @@
 package app.builder;
 
 import app.beans.implementations.UsuarioBean;
-import app.controller.Util;
+import app.utils.Util;
 import org.primefaces.model.UploadedFile;
 
 import java.io.Serializable;
