@@ -2,7 +2,7 @@ package app.model.test;
 
 import static org.junit.Assert.*;
 
-import app.controller.Util;
+import app.utils.Util;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;

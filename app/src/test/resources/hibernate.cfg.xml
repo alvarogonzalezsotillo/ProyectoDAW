@@ -18,5 +18,6 @@
 		<property name="dialect">org.hibernate.dialect.HSQLDialect</property>
 
 		<mapping class="app.beans.implementations.UsuarioBean" />
+		<mapping class="app.beans.implementations.ComentarioBean" />
 	</session-factory>
 </hibernate-configuration>

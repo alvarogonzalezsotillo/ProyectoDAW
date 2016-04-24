@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import app.beans.interfaces.Usuario;
-import app.controller.Util;
+import app.utils.Util;
 
 @Entity
 @Table(name = "usuarios")
