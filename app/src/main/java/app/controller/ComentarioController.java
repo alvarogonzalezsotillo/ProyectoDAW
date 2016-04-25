@@ -19,10 +19,10 @@ public class ComentarioController implements Serializable {
 	private ComentarioBuilder comentarioBuilder;
 
 	private String texto;
-    private Long idUsuario;
-    private Long idTweet;
+    private Long idUsuario = (long) 1;
+    private Long idTweet = (long) 1;
 	
-    @ManagedProperty(value = "#{ComentarioDAO}")
+    @ManagedProperty(value = "#{comentarioDao}")
     private ComentarioDAO comentarioDao;
     
     public void insertComentario() {
