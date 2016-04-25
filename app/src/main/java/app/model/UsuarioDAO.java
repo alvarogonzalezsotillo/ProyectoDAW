@@ -30,7 +30,7 @@ public class UsuarioDAO extends BaseDaoHibernate implements Serializable {
     }
 
     @SuppressWarnings("unchecked")
-    public List<UsuarioBean> getAll() {
+    public List<UsuarioBean> getAllUsuarios() {
 
         List<UsuarioBean> listUsuarios;
 

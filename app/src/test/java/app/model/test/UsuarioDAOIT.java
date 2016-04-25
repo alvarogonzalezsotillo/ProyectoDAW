@@ -54,7 +54,7 @@ public class UsuarioDAOIT {
     @Test
     public void shouldReturnAllUsuariosInsertedWhenCallingGetAll() {
 
-        assertEquals(2, sut.getAll().size());
+        assertEquals(2, sut.getAllUsuarios().size());
 
     }
 
@@ -80,7 +80,7 @@ public class UsuarioDAOIT {
 
         sut.deleteUsuarioById(1L);
         sut.deleteUsuarioById(2L);
-        assertEquals(0, sut.getAll().size());
+        assertEquals(0, sut.getAllUsuarios().size());
 
     }
 
