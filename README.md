@@ -60,7 +60,11 @@ Ahora en Eclipse hacemos un proyecto desde *Import -> Maven -> Existing Maven Pr
 Una vez hecho, nos creará el proyecto.
 
 #¿Cómo probar de momento la inserción de comentarios?
-Ya que aún no disponemos de una lógica completa, hay que hacer algún apaño para probar ciertas cosas. Entendamos un poco la lógica: Necesitamos un usuario que haya hecho un tweet para poder comentarlo. Es decir, debe existir un Usuario con un id(por ejemplo 1), para que pueda haber un tweet(cuyo id sea por ejemplo 2 y su idUsuario sea 1, es ecir, el usuario existente) para que alguien pueda comentar(el id comentario será 3, su idTweet será 2 y su idusuario será 1). Por lo tanto, esta jerarquía debe seguirse al pie de la letra o nos dará problemas a la hora de insertar.
+Ya que aún no disponemos de una lógica completa, hay que hacer algún apaño para probar ciertas cosas. Entendamos un poco la lógica: Necesitamos un usuario que haya hecho un tweet para poder comentarlo. 
+
+Es decir, debe existir un **Usuario con un id**(por ejemplo 1), para que pueda haber un **tweet**(cuyo id sea por ejemplo 2 y su idUsuario sea 1, es ecir, el usuario existente) para que alguien pueda **comentar**(el id comentario será 3, su idTweet será 2 y su idusuario será 1). 
+
+Por lo tanto, esta jerarquía debe seguirse **al pie de la letra o nos dará problemas a la hora de insertar**.
 
 Para ello he creado unos SQL que nos permita probar de momento la inserción del comentario. una vez tengamos la base de datos limpia, con todas las tablas vacías, ejecutamos el SQL llamado **insertFirstValueHibernateSequence** que nos permitirá crear un usuario nuevo, mediante el formulario de registro que ya funciona, con el *id = 1*.
 
