@@ -29,7 +29,7 @@ public class ComentarioController implements Serializable {
 	    comentarioBuilder = new ComentarioBuilder(texto, idUsuario, idTweet);
 	    	
 	    ComentarioBean comentario = comentarioBuilder.build();
-	    	
+
 	    comentarioDao.insertComentario(comentario);
     	
     }

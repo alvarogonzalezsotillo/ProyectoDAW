@@ -3,9 +3,13 @@ package app.model;
 import app.beans.implementations.ComentarioBean;
 import org.hibernate.Query;
 
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
 import java.io.Serializable;
 import java.util.List;
 
+@ManagedBean(name = "comentarioDao")
+@ApplicationScoped
 public class ComentarioDAO extends BaseDaoHibernate implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "comentarios")
+@Table(name = "BETAcomentarios")//NO OLVIDAR CAMBIAR CUANDO TERMINEMOS LA TABLA DE COMENTARIOS!!!!!!!!!!!!!!!!!!!
 public class ComentarioBean implements Comentario, Serializable {
 
     private static final long serialVersionUID = 1L;
