@@ -19,8 +19,8 @@ public class ComentarioController implements Serializable {
 	private ComentarioBuilder comentarioBuilder;
 
 	private String texto;
-    private Long idUsuario = (long) 1;
-    private Long idTweet = (long) 1;
+    private Long idUsuario = 1L;
+    private Long idTweet = 1L;
 	
     @ManagedProperty(value = "#{comentarioDao}")
     private ComentarioDAO comentarioDao;
