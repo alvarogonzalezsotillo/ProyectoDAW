@@ -8,38 +8,40 @@ import org.hibernate.cfg.Configuration;
 public class HibernateHelper {
 
     private final static SessionFactory factory = new Configuration().configure().buildSessionFactory();
-    private static Session session;
-    private static Transaction transaction;
 
-    public static Session getSession() {
+    public static Session initSession() {
 
-        session = factory.openSession();
+        return factory.openSession();
 
-        return session;
     }
 
-    public static void beginTransaction() {
+    public static Transaction initTransaction(Session session) {
 
-        transaction = session.beginTransaction();
+        return session.beginTransaction();
+
     }
 
-    public static void commit() {
+    public static void commit(Transaction transaction) {
 
         transaction.commit();
 
     }
 
-    public static void rollback() {
+    public static void rollback(Transaction transaction) {
 
         transaction.rollback();
 
     }
 
-    public static void closeSession() {
+    public static void closeSession(Session session) {
 
         session.close();
 
     }
 
+    public static void commitAndCloseSession(Session session){
+        session.getTransaction().commit();
+        session.close();
+    }
 
 }

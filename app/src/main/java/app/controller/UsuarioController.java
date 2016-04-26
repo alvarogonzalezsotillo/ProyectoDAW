@@ -2,7 +2,9 @@ package app.controller;
 
 import app.beans.implementations.UsuarioBean;
 import app.builder.UsuarioBuilder;
+import app.helpers.HibernateHelper;
 import app.model.UsuarioDAO;
+import org.hibernate.Session;
 import org.primefaces.model.UploadedFile;
 
 import javax.faces.application.FacesMessage;
@@ -37,7 +39,9 @@ public class UsuarioController implements Serializable {
 
     public void insert() {
 
+        initSessionForDao();
         List<String> listNicks = usuarioDao.getAllNicks();
+        closeSession();
 
         if(listNicks.contains(nick)){
 
@@ -57,7 +61,10 @@ public class UsuarioController implements Serializable {
                                                 .imagen(imagen)
                                                 .build();
 
+            initSessionForDao();
+            initTransactionForDao();
             usuarioDao.insertUsuario(usuario);
+            commitAndCloseSession();
 
 
             try {
@@ -68,7 +75,6 @@ public class UsuarioController implements Serializable {
                 context.getCurrentInstance().addMessage(null, facesMessage);
 
                 context.getExternalContext().redirect("/views/index/login.xhtml");
-                usuarioDao.closeSession();
 
             }
 
@@ -81,6 +87,28 @@ public class UsuarioController implements Serializable {
         }
 
 
+
+    }
+
+    private void initSessionForDao(){
+        Session session = HibernateHelper.initSession();
+        usuarioDao.setSession(session);
+    }
+
+    private void commitAndCloseSession(){
+        Session session = usuarioDao.getSession();
+        HibernateHelper.commitAndCloseSession(session);
+
+    }
+
+    private void closeSession(){
+        Session session = usuarioDao.getSession();
+        HibernateHelper.closeSession(session);
+    }
+
+    private void initTransactionForDao(){
+        Session session = usuarioDao.getSession();
+        HibernateHelper.initTransaction(session);
 
     }
 

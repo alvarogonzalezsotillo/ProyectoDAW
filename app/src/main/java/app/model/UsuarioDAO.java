@@ -9,10 +9,11 @@ import javax.faces.bean.ManagedBean;
 import org.hibernate.Query;
 
 import app.beans.implementations.UsuarioBean;
+import org.hibernate.Session;
 
 @ManagedBean(name = "usuarioDao")
 @ApplicationScoped
-public class UsuarioDAO extends BaseDaoHibernate implements Serializable {
+public class UsuarioDAO extends DAOImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -22,10 +23,7 @@ public class UsuarioDAO extends BaseDaoHibernate implements Serializable {
 
     public void insertUsuario(UsuarioBean usuario) {
 
-        session = factory.openSession();
-        transaction = session.beginTransaction();
         session.save(usuario);
-        transaction.commit();
 
     }
 
@@ -34,11 +32,8 @@ public class UsuarioDAO extends BaseDaoHibernate implements Serializable {
 
         List<UsuarioBean> listUsuarios;
 
-        session = factory.openSession();
-        transaction = session.beginTransaction();
         Query query = session.createQuery("from UsuarioBean");
         listUsuarios = query.list();
-        transaction.commit();
         return listUsuarios;
     }
 
@@ -47,11 +42,8 @@ public class UsuarioDAO extends BaseDaoHibernate implements Serializable {
 
         List<String> listNicks;
 
-        session = factory.openSession();
-        transaction = session.beginTransaction();
         Query query = session.createQuery("select nickDeUsuario from UsuarioBean");
         listNicks = query.list();
-        transaction.commit();
         return listNicks;
     }
 
@@ -60,31 +52,22 @@ public class UsuarioDAO extends BaseDaoHibernate implements Serializable {
 
         List<UsuarioBean> listUsuarios;
 
-        session = factory.openSession();
-        transaction = session.beginTransaction();
         Query query = session.createQuery("from UsuarioBean usuario where usuario.id = :id");
         query.setParameter("id", id);
         listUsuarios = query.list();
-        transaction.commit();
         return listUsuarios.get(0);
     }
 
     public void deleteUsuarioById(Long id) {
 
-        session = factory.openSession();
-        transaction = session.beginTransaction();
         UsuarioBean usuarioToDelete = session.load(UsuarioBean.class, id);
         session.delete(usuarioToDelete);
-        transaction.commit();
 
     }
 
     public void updateUsuario(UsuarioBean usuarioToUpdate) {
 
-        session = factory.openSession();
-        transaction = session.beginTransaction();
         session.update(usuarioToUpdate);
-        transaction.commit();
 
     }
 
@@ -94,8 +77,6 @@ public class UsuarioDAO extends BaseDaoHibernate implements Serializable {
 
         List<UsuarioBean> listUsuarios;
 
-        session = factory.openSession();
-        transaction = session.beginTransaction();
         Query query = session.createQuery("from UsuarioBean usuario where usuario.nickDeUsuario = :nick and usuario.passwordDeUsuario = :passwordHashed");
         query.setParameter("nick", nick);
         query.setParameter("passwordHashed", passwordHashed);
@@ -109,12 +90,6 @@ public class UsuarioDAO extends BaseDaoHibernate implements Serializable {
         }
 
         return checked;
-
-    }
-
-    public void closeSession(){
-
-        this.session.close();
 
     }
 
