@@ -63,7 +63,7 @@ public class UsuarioController implements Serializable {
 
             initSessionForDao();
             initTransactionForDao();
-            usuarioDao.insertUsuario(usuario);
+            usuarioDao.insert(usuario);
             commitAndCloseSession();
 
 

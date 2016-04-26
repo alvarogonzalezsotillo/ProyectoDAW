@@ -20,13 +20,36 @@ public class ComentarioDAO extends DAOImpl implements Serializable {
 
     }
 
-    public void insertComentario(ComentarioBean comentario){
+    public void insert(ComentarioBean comentario){
 
         session.save(comentario);
     }
 
+    public void update(ComentarioBean comentarioToUpdate){
+
+        session.update(comentarioToUpdate);
+    }
+
+    public void deleteById(Long id){
+
+        ComentarioBean comentarioToDelete = session.load(ComentarioBean.class, id);
+        session.delete(comentarioToDelete);
+    }
+
     @SuppressWarnings("unchecked")
-    public List<ComentarioBean> getAllComentarios(){
+    public ComentarioBean getById(Long id){
+
+        List<ComentarioBean> listaComentarios;
+
+        Query query = session.createQuery("from ComentarioBean comentario where comentario.id = :id");
+        query.setParameter("id",id);
+        listaComentarios = query.list();
+
+        return listaComentarios.get(0);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<ComentarioBean> getAll(){
 
         List<ComentarioBean> listaComentarios;
 
@@ -58,29 +81,6 @@ public class ComentarioDAO extends DAOImpl implements Serializable {
         listaComentarios = query.list();
 
         return listaComentarios;
-    }
-
-    @SuppressWarnings("unchecked")
-    public ComentarioBean getComentarioyId(Long id){
-
-        List<ComentarioBean> listaComentarios;
-
-        Query query = session.createQuery("from ComentarioBean comentario where comentario.id = :id");
-        query.setParameter("id",id);
-        listaComentarios = query.list();
-
-        return listaComentarios.get(0);
-    }
-
-    public void deleteComentarioById(Long id){
-
-        ComentarioBean comentarioToDelete = session.load(ComentarioBean.class, id);
-        session.delete(comentarioToDelete);
-    }
-
-    public void updateComentario(ComentarioBean comentarioToUpdate){
-
-        session.update(comentarioToUpdate);
     }
 
 }

@@ -20,7 +20,7 @@ public class ComentarioDAOIT extends BaseIT<ComentarioDAO>{
     @Test
     public void testShouldReturnAllComentariosInsertedWhenCallingGetAll() {
 
-        assertEquals(2, sut.getAllComentarios().size());
+        assertEquals(2, sut.getAll().size());
 
     }
 
@@ -28,7 +28,7 @@ public class ComentarioDAOIT extends BaseIT<ComentarioDAO>{
     @Test
     public void testShouldReturnTheComentarioIdentifiedByIdWhenCallingGetComentarioById() {
 
-        ComentarioBean comentarioReturned = sut.getComentarioyId(1L);
+        ComentarioBean comentarioReturned = sut.getById(1L);
         assertEquals("textoTest", comentarioReturned.getTexto());
 
     }
@@ -38,11 +38,11 @@ public class ComentarioDAOIT extends BaseIT<ComentarioDAO>{
     @Test
     public void testShouldUpdateTheUsuarioWhenCallingUpdateUsuario() {
 
-        ComentarioBean comentarioReturned = sut.getComentarioyId(1L);
+        ComentarioBean comentarioReturned = sut.getById(1L);
         comentarioReturned.setTexto("nuevoTexto");
         assertNotNull(comentarioReturned.getTexto());
-        sut.updateComentario(comentarioReturned);
-        assertEquals("nuevoTexto", sut.getComentarioyId(1L).getTexto());
+        sut.update(comentarioReturned);
+        assertEquals("nuevoTexto", sut.getById(1L).getTexto());
 
     }
 
@@ -64,8 +64,8 @@ public class ComentarioDAOIT extends BaseIT<ComentarioDAO>{
     @Test
     public void testZShouldDeleteTheComentarioIdentifiedByIdWhenCallingDeleteComentarioById(){
 
-        sut.deleteComentarioById(2L);
-        assertEquals(1, sut.getAllComentarios().size());
+        sut.deleteById(2L);
+        assertEquals(1, sut.getAll().size());
 
     }
 

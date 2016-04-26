@@ -33,7 +33,7 @@ public class ComentarioController implements Serializable {
 
 		initSessionForDao();
 		initTransactionForDao();
-	    comentarioDao.insertComentario(comentario);
+	    comentarioDao.insert(comentario);
 		commitAndCloseSession();
     	
     }

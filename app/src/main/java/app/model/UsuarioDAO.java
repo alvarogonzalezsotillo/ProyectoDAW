@@ -18,14 +18,38 @@ public class UsuarioDAO extends DAOImpl implements Serializable {
         super();
     }
 
-    public void insertUsuario(UsuarioBean usuario) {
+    public void insert(UsuarioBean usuario) {
 
         session.save(usuario);
 
     }
 
+    public void update(UsuarioBean usuarioToUpdate) {
+
+        session.update(usuarioToUpdate);
+
+    }
+
+    public void deleteById(Long id) {
+
+        UsuarioBean usuarioToDelete = session.load(UsuarioBean.class, id);
+        session.delete(usuarioToDelete);
+
+    }
+
     @SuppressWarnings("unchecked")
-    public List<UsuarioBean> getAllUsuarios() {
+    public UsuarioBean getById(Long id) {
+
+        List<UsuarioBean> listUsuarios;
+
+        Query query = session.createQuery("from UsuarioBean usuario where usuario.id = :id");
+        query.setParameter("id", id);
+        listUsuarios = query.list();
+        return listUsuarios.get(0);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<UsuarioBean> getAll() {
 
         List<UsuarioBean> listUsuarios;
 
@@ -44,33 +68,9 @@ public class UsuarioDAO extends DAOImpl implements Serializable {
         return listNicks;
     }
 
-    @SuppressWarnings("unchecked")
-    public UsuarioBean getUsuarioById(Long id) {
+    public boolean loginUsuario(String nick, String passwordHashed) {
 
-        List<UsuarioBean> listUsuarios;
-
-        Query query = session.createQuery("from UsuarioBean usuario where usuario.id = :id");
-        query.setParameter("id", id);
-        listUsuarios = query.list();
-        return listUsuarios.get(0);
-    }
-
-    public void deleteUsuarioById(Long id) {
-
-        UsuarioBean usuarioToDelete = session.load(UsuarioBean.class, id);
-        session.delete(usuarioToDelete);
-
-    }
-
-    public void updateUsuario(UsuarioBean usuarioToUpdate) {
-
-        session.update(usuarioToUpdate);
-
-    }
-
-    public boolean loginUsuario(String nick,String passwordHashed){
-
-        boolean checked=false;
+        boolean checked = false;
 
         List<UsuarioBean> listUsuarios;
 
@@ -80,7 +80,7 @@ public class UsuarioDAO extends DAOImpl implements Serializable {
 
         listUsuarios = query.list();
 
-        if(listUsuarios.size() == 1){
+        if (listUsuarios.size() == 1) {
 
             checked = true;
 

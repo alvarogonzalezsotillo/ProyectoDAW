@@ -18,14 +18,14 @@ public class UsuarioDAOIT extends BaseIT<UsuarioDAO> {
     @Test
     public void shouldReturnAllUsuariosInsertedWhenCallingGetAll() {
 
-        assertEquals(2, sut.getAllUsuarios().size());
+        assertEquals(2, sut.getAll().size());
 
     }
 
     @Test
     public void shouldReturnTheUsuarioIdentifiedByIdWhenCallingGetUsuarioById() {
 
-        UsuarioBean usuarioReturned = sut.getUsuarioById(1L);
+        UsuarioBean usuarioReturned = sut.getById(1L);
         assertEquals("nombreTest", usuarioReturned.getNombreDeUsuario());
 
     }
@@ -40,19 +40,19 @@ public class UsuarioDAOIT extends BaseIT<UsuarioDAO> {
     @Test
     public void shouldDeleteTheUsuarioIdentifiedByIdWhenCallingDeleteUsuarioById(){
 
-        sut.deleteUsuarioById(2L);
-        assertEquals(1, sut.getAllUsuarios().size());
+        sut.deleteById(2L);
+        assertEquals(1, sut.getAll().size());
 
     }
 
     @Test
     public void shouldUpdateTheUsuarioWhenCallingUpdateUsuario() {
 
-        UsuarioBean usuarioReturned = sut.getUsuarioById(1L);
+        UsuarioBean usuarioReturned = sut.getById(1L);
         usuarioReturned.setCorreoDeUsuario("correoTest");
         assertNotNull(usuarioReturned.getCorreoDeUsuario());
-        sut.updateUsuario(usuarioReturned);
-        assertEquals("correoTest", sut.getUsuarioById(1L).getCorreoDeUsuario());
+        sut.update(usuarioReturned);
+        assertEquals("correoTest", sut.getById(1L).getCorreoDeUsuario());
 
     }
 

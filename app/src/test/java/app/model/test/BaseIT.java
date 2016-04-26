@@ -20,11 +20,11 @@ public class BaseIT<C extends DAOImpl> {
 //
 ////          usuarioTest.setNombreDeUsuario("NombreTest");
 ////          usuarioTest.setPasswordDeUsuario("pass");
-////          sut.insertUsuario(usuarioTest);
+////          sut.insert(usuarioTest);
 ////
 ////            usuarioParaLog.setNickDeUsuario("nickTest");
 ////            usuarioParaLog.setPasswordDeUsuario("passTest");
-////            sut.insertUsuario(usuarioParaLog);
+////            sut.insert(usuarioParaLog);
 //
 //            UtilSessionHibernate.commit();
 //
