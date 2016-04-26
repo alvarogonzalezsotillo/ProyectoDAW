@@ -1,6 +1,6 @@
 package app.model.test;
 
-import app.helpers.HibernateHelper;
+import app.utils.UtilSessionHibernate;
 import app.model.DAOImpl;
 import org.hibernate.Session;
 import org.junit.After;
@@ -15,8 +15,8 @@ public class BaseIT<C extends DAOImpl> {
 //
 //        try {
 //
-//            sut.setSession(HibernateHelper.initSession());
-//            HibernateHelper.initTransaction();
+//            sut.setSession(UtilSessionHibernate.initSession());
+//            UtilSessionHibernate.initTransaction();
 //
 ////          usuarioTest.setNombreDeUsuario("NombreTest");
 ////          usuarioTest.setPasswordDeUsuario("pass");
@@ -26,7 +26,7 @@ public class BaseIT<C extends DAOImpl> {
 ////            usuarioParaLog.setPasswordDeUsuario("passTest");
 ////            sut.insertUsuario(usuarioParaLog);
 //
-//            HibernateHelper.commit();
+//            UtilSessionHibernate.commit();
 //
 //
 //        }
@@ -49,16 +49,16 @@ public class BaseIT<C extends DAOImpl> {
 
     public void open() {
 
-        session = HibernateHelper.initSession();
+        session = UtilSessionHibernate.initSession();
         sut.setSession(session);
-        HibernateHelper.initTransaction(session);
+        UtilSessionHibernate.initTransaction(session);
 
     }
 
     @After
     public void close() {
 
-        HibernateHelper.commitAndCloseSession(session);
+        UtilSessionHibernate.commitAndCloseSession(session);
 
     }
 

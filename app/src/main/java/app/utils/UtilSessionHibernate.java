@@ -1,11 +1,11 @@
-package app.helpers;
+package app.utils;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-public class HibernateHelper {
+public class UtilSessionHibernate {
 
     private final static SessionFactory factory = new Configuration().configure().buildSessionFactory();
 

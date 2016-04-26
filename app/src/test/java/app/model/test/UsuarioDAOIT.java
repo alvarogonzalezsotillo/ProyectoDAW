@@ -2,9 +2,6 @@ package app.model.test;
 
 import static org.junit.Assert.*;
 
-import app.helpers.HibernateHelper;
-import app.utils.Util;
-import org.hibernate.type.UUIDBinaryType;
 import org.junit.*;
 
 import app.beans.implementations.UsuarioBean;

@@ -2,8 +2,8 @@ package app.controller;
 
 import app.beans.implementations.UsuarioBean;
 import app.builder.UsuarioBuilder;
-import app.helpers.HibernateHelper;
 import app.model.UsuarioDAO;
+import app.utils.UtilSessionHibernate;
 import org.hibernate.Session;
 import org.primefaces.model.UploadedFile;
 
@@ -85,30 +85,27 @@ public class UsuarioController implements Serializable {
             }
 
         }
-
-
-
     }
 
     private void initSessionForDao(){
-        Session session = HibernateHelper.initSession();
+        Session session = UtilSessionHibernate.initSession();
         usuarioDao.setSession(session);
     }
 
     private void commitAndCloseSession(){
         Session session = usuarioDao.getSession();
-        HibernateHelper.commitAndCloseSession(session);
+        UtilSessionHibernate.commitAndCloseSession(session);
 
     }
 
     private void closeSession(){
         Session session = usuarioDao.getSession();
-        HibernateHelper.closeSession(session);
+        UtilSessionHibernate.closeSession(session);
     }
 
     private void initTransactionForDao(){
         Session session = usuarioDao.getSession();
-        HibernateHelper.initTransaction(session);
+        UtilSessionHibernate.initTransaction(session);
 
     }
 

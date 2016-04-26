@@ -2,10 +2,11 @@ package app.beans.test;
 
 
 import app.beans.implementations.ComentarioBean;
-import app.builder.ComentarioBuilder;
-import static org.junit.Assert.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-import org.junit.*;
+import static org.junit.Assert.assertEquals;
 
 public class ComentarioTest {
 
@@ -15,8 +16,6 @@ public class ComentarioTest {
     private Long idTweetTest = 1L;
 
     ComentarioBean sut;
-
-    ComentarioBuilder comentarioBuilder;
 
     @Before
     public void setUp() throws Exception {
