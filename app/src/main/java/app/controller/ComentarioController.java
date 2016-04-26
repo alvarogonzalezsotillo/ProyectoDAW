@@ -8,7 +8,9 @@ import javax.faces.bean.ViewScoped;
 
 import app.beans.implementations.ComentarioBean;
 import app.builder.ComentarioBuilder;
+import app.helpers.HibernateHelper;
 import app.model.ComentarioDAO;
+import org.hibernate.Session;
 
 @ManagedBean(name = "comentarioController")
 @ViewScoped
@@ -30,9 +32,34 @@ public class ComentarioController implements Serializable {
 	    	
 	    ComentarioBean comentario = comentarioBuilder.build();
 
+		initSessionForDao();
+		initTransactionForDao();
 	    comentarioDao.insertComentario(comentario);
+		commitAndCloseSession();
     	
     }
+
+	private void initSessionForDao(){
+		Session session = HibernateHelper.initSession();
+		comentarioDao.setSession(session);
+	}
+
+	private void commitAndCloseSession(){
+		Session session = comentarioDao.getSession();
+		HibernateHelper.commitAndCloseSession(session);
+
+	}
+
+	private void closeSession(){
+		Session session = comentarioDao.getSession();
+		HibernateHelper.closeSession(session);
+	}
+
+	private void initTransactionForDao(){
+		Session session = comentarioDao.getSession();
+		HibernateHelper.initTransaction(session);
+
+	}
     
 	public ComentarioBuilder getComentarioBuilder() {
 		return comentarioBuilder;

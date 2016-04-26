@@ -10,7 +10,7 @@ import java.util.List;
 
 @ManagedBean(name = "comentarioDao")
 @ApplicationScoped
-public class ComentarioDAO extends BaseDaoHibernate implements Serializable {
+public class ComentarioDAO extends DAOImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -22,11 +22,7 @@ public class ComentarioDAO extends BaseDaoHibernate implements Serializable {
 
     public void insertComentario(ComentarioBean comentario){
 
-        session = factory.openSession();
-        transaction = session.beginTransaction();
         session.save(comentario);
-        transaction.commit();
-
     }
 
     @SuppressWarnings("unchecked")
@@ -34,11 +30,8 @@ public class ComentarioDAO extends BaseDaoHibernate implements Serializable {
 
         List<ComentarioBean> listaComentarios;
 
-        session = factory.openSession();
-        transaction = session.beginTransaction();
         Query query = session.createQuery("from ComentarioBean");
         listaComentarios = query.list();
-        transaction.commit();
 
         return listaComentarios;
     }
@@ -48,12 +41,10 @@ public class ComentarioDAO extends BaseDaoHibernate implements Serializable {
 
         List<ComentarioBean> listaComentarios;
 
-        session = factory.openSession();
-        transaction = session.beginTransaction();
         Query query = session.createQuery("from ComentarioBean comentario where comentario.idUsuario = :idUsuario");
         query.setParameter("idUsuario",idUsuario);
         listaComentarios = query.list();
-        transaction.commit();
+
         return listaComentarios;
     }
 
@@ -62,12 +53,10 @@ public class ComentarioDAO extends BaseDaoHibernate implements Serializable {
 
         List<ComentarioBean> listaComentarios;
 
-        session = factory.openSession();
-        transaction = session.beginTransaction();
         Query query = session.createQuery("from ComentarioBean comentario where comentario.idTweet = :idTweet");
         query.setParameter("idTweet",idTweet);
         listaComentarios = query.list();
-        transaction.commit();
+
         return listaComentarios;
     }
 
@@ -76,30 +65,22 @@ public class ComentarioDAO extends BaseDaoHibernate implements Serializable {
 
         List<ComentarioBean> listaComentarios;
 
-        session = factory.openSession();
-        transaction = session.beginTransaction();
         Query query = session.createQuery("from ComentarioBean comentario where comentario.id = :id");
         query.setParameter("id",id);
         listaComentarios = query.list();
-        transaction.commit();
+
         return listaComentarios.get(0);
     }
 
     public void deleteComentarioById(Long id){
 
-        session = factory.openSession();
-        transaction = session.beginTransaction();
         ComentarioBean comentarioToDelete = session.load(ComentarioBean.class, id);
         session.delete(comentarioToDelete);
-        transaction.commit();
     }
 
     public void updateComentario(ComentarioBean comentarioToUpdate){
 
-        session = factory.openSession();
-        transaction = session.beginTransaction();
         session.update(comentarioToUpdate);
-        transaction.commit();
     }
 
 }

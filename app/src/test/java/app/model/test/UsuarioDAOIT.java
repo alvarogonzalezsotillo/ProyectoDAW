@@ -43,7 +43,7 @@ public class UsuarioDAOIT extends BaseIT<UsuarioDAO> {
     @Test
     public void shouldDeleteTheUsuarioIdentifiedByIdWhenCallingDeleteUsuarioById(){
 
-        sut.deleteUsuarioById(1L);
+        sut.deleteUsuarioById(2L);
         assertEquals(1, sut.getAllUsuarios().size());
 
     }

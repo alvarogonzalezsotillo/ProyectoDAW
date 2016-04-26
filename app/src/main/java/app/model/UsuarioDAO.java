@@ -1,15 +1,12 @@
 package app.model;
 
-import java.io.Serializable;
-import java.util.List;
+import app.beans.implementations.UsuarioBean;
+import org.hibernate.Query;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-
-import org.hibernate.Query;
-
-import app.beans.implementations.UsuarioBean;
-import org.hibernate.Session;
+import java.io.Serializable;
+import java.util.List;
 
 @ManagedBean(name = "usuarioDao")
 @ApplicationScoped
