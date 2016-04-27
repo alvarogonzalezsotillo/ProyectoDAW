@@ -37,7 +37,7 @@ public class LoginController implements Serializable {
 
             try {
 
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/views/index/bienvenida.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/views/timeline/timeline.xhtml");
             }
 
             catch (IOException e) {
