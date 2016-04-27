@@ -1,7 +1,10 @@
 package app.model;
 
-public interface DAO {
+public interface DAO <T extends SessionFactoryImpl> {
 
-    void insert();
+    void insert(T t);
+    void update(T t);
+    void deleteById(Long id);
+
 
 }
