@@ -2,6 +2,8 @@ package app.controller;
 
 import app.utils.Util;
 import app.model.UsuarioDAO;
+import app.utils.UtilSessionHibernate;
+import org.hibernate.Session;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -27,13 +29,15 @@ public class LoginController implements Serializable {
 
         String passwordHashed = Util.hashPasswordSHA(password + salt);
 
+        initSessionForDao();
         boolean checkLogin = usuarioDao.loginUsuario(nick, passwordHashed);
+        closeSession();
 
         if (checkLogin) {
 
             try {
 
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/views/timeline/timeline.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/views/index/bienvenida.xhtml");
             }
 
             catch (IOException e) {
@@ -50,6 +54,28 @@ public class LoginController implements Serializable {
 
         }
 
+
+    }
+
+    private void initSessionForDao(){
+        Session session = UtilSessionHibernate.initSession();
+        usuarioDao.setSession(session);
+    }
+
+    private void commitAndCloseSession(){
+        Session session = usuarioDao.getSession();
+        UtilSessionHibernate.commitAndCloseSession(session);
+
+    }
+
+    private void closeSession(){
+        Session session = usuarioDao.getSession();
+        UtilSessionHibernate.closeSession(session);
+    }
+
+    private void initTransactionForDao(){
+        Session session = usuarioDao.getSession();
+        UtilSessionHibernate.initTransaction(session);
 
     }
 

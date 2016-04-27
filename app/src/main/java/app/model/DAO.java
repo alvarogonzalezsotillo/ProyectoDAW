@@ -1,11 +1,14 @@
 package app.model;
 
-import org.hibernate.Session;
+import java.util.List;
 
-public interface DAO {
+public interface DAO <T> {
 
-     Session getSession();
+    void insert(T t);
+    void update(T t);
+    void deleteById(Long id);
+    T getById(Long id);
+    List<T> getAll();
 
-     void setSession(Session session);
 
 }

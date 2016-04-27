@@ -10,7 +10,7 @@ import java.util.List;
 
 @ManagedBean(name = "usuarioDao")
 @ApplicationScoped
-public class UsuarioDAO extends DAOImpl implements Serializable {
+public class UsuarioDAO extends SessionFactoryImpl implements Serializable,DAO<UsuarioBean> {
 
     private static final long serialVersionUID = 1L;
 
