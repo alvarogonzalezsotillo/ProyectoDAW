@@ -1,12 +1,11 @@
 package app.model;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class DAOImpl implements DAO {
+public class SessionFactoryImpl implements SessionFactory {
 
-    protected SessionFactory factory = new Configuration().configure().buildSessionFactory();
+    protected org.hibernate.SessionFactory factory = new Configuration().configure().buildSessionFactory();
     protected Session session;
 
     public Session getSession() {
@@ -16,4 +15,5 @@ public class DAOImpl implements DAO {
     public void setSession(Session session) {
         this.session = session;
     }
+
 }

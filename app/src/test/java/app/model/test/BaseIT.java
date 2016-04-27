@@ -1,51 +1,14 @@
 package app.model.test;
 
 import app.utils.UtilSessionHibernate;
-import app.model.DAOImpl;
+import app.model.SessionFactoryImpl;
 import org.hibernate.Session;
 import org.junit.After;
 
-public class BaseIT<C extends DAOImpl> {
+public class BaseIT<C extends SessionFactoryImpl> {
 
     protected C sut;
     private Session session;
-
-//    @BeforeClass
-//    public static void tearUp(){
-//
-//        try {
-//
-//            sut.setSession(UtilSessionHibernate.initSession());
-//            UtilSessionHibernate.initTransaction();
-//
-////          usuarioTest.setNombreDeUsuario("NombreTest");
-////          usuarioTest.setPasswordDeUsuario("pass");
-////          sut.insert(usuarioTest);
-////
-////            usuarioParaLog.setNickDeUsuario("nickTest");
-////            usuarioParaLog.setPasswordDeUsuario("passTest");
-////            sut.insert(usuarioParaLog);
-//
-//            UtilSessionHibernate.commit();
-//
-//
-//        }
-//
-//        catch (ExceptionInInitializerError e) {
-//
-//            throw new ExceptionInInitializerError("No se ha podido inicializar el SUT" + e);
-//
-//        }
-//
-//    }
-//
-//    @AfterClass
-//    public static void tearDown() throws Exception {
-//
-//        sut = null;
-//
-//
-//    }
 
     public void open() {
 
