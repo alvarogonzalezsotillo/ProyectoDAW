@@ -13,7 +13,6 @@ CREATE TABLE usuarios (
   passwordDeUsuario   VARCHAR(254) NOT NULL,
   correoDeUsuario     VARCHAR(85)  NULL,
   imagenDeUsuario LONGBLOB NULL,
-  esUsuarioMusico     TINYINT (1) NOT NULL DEFAULT 1,
   grupoDeUsuario      VARCHAR(35)  NULL,
   webDeUsuario        VARCHAR(100) NULL,
   tipoMusicaDeUsuario VARCHAR(20)  NULL,

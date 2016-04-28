@@ -37,8 +37,6 @@ public class UsuarioBean implements Usuario, Serializable {
     @Column(name = "webDeUsuario")
     private String webDeUsuario;
 
-    @Column(name = "esUsuarioMusico")
-    private boolean esUsuarioMusico;
     @Column(name = "grupoDeUsuario")
     private String grupoDeUsuario;
     @Column(name = "tipoMusicaDeUsuario")
@@ -48,14 +46,12 @@ public class UsuarioBean implements Usuario, Serializable {
         //Constructor por defecto
     }
     
-    public UsuarioBean(String nombreDeUsuario, String apellidoDeUsuario, String nickDeUsuario, String correoDeUsuario,
-                       boolean esUsuarioMusico, String tipoMusicaDeUsuario, String grupoDeUsuario, String webDeUsuario, String passwordDeUsuario, byte[] imagenDeUsuario) {
+    public UsuarioBean(String nombreDeUsuario, String apellidoDeUsuario, String nickDeUsuario, String correoDeUsuario, String tipoMusicaDeUsuario, String grupoDeUsuario, String webDeUsuario, String passwordDeUsuario, byte[] imagenDeUsuario) {
 
         this.nombreDeUsuario = nombreDeUsuario;
         this.apellidoDeUsuario = apellidoDeUsuario;
         this.nickDeUsuario = nickDeUsuario;
         this.correoDeUsuario = correoDeUsuario;
-        this.esUsuarioMusico = esUsuarioMusico;
         this.tipoMusicaDeUsuario = tipoMusicaDeUsuario;
         this.grupoDeUsuario = grupoDeUsuario;
         this.webDeUsuario = webDeUsuario;
@@ -104,14 +100,6 @@ public class UsuarioBean implements Usuario, Serializable {
 
     public void setCorreoDeUsuario(String correoDeUsuario) {
         this.correoDeUsuario = correoDeUsuario;
-    }
-
-    public boolean getEsUsuarioMusico() {
-        return esUsuarioMusico;
-    }
-
-    public void setEsUsuarioMusico(boolean esUsuarioMusico) {
-        this.esUsuarioMusico = esUsuarioMusico;
     }
 
     public String getGrupoDeUsuario() {

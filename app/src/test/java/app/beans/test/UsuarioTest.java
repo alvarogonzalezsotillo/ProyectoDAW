@@ -15,7 +15,6 @@ public class UsuarioTest {
     String apellidoTest = "testingApellido";
     String nickTest = "testingNick";
     String correoTest = "testingCorreo";
-    boolean esUsuarioMusicoTestFalse = false;
     String tipoMusicaTest = "testingTipoMusica";
     String grupoTest = "testingGrupo";
     String webTest = "testingWeb";
@@ -30,8 +29,7 @@ public class UsuarioTest {
 
         try {
 
-            sut = new UsuarioBean(nombreTest, apellidoTest, nickTest, correoTest, esUsuarioMusicoTestFalse, tipoMusicaTest,
-                    grupoTest, webTest, passwordTest,null);
+            sut = new UsuarioBean(nombreTest, apellidoTest, nickTest, correoTest, tipoMusicaTest, grupoTest, webTest, passwordTest, null);
             sut.setId(idTest);
 
         }
@@ -126,19 +124,6 @@ public class UsuarioTest {
         String nuevo = "nuevoCorreo";
         sut.setCorreoDeUsuario(nuevo);
         assertEquals(nuevo, sut.getCorreoDeUsuario());
-    }
-
-    @Test
-    public void shouldReturnTheUserMusicianVerification() {
-        boolean actual = sut.getEsUsuarioMusico();
-        assertEquals(esUsuarioMusicoTestFalse, actual);
-    }
-
-    @Test
-    public void shouldEstablishTheUserMusicianVerification() {
-        boolean nuevo = true;
-        sut.setEsUsuarioMusico(nuevo);
-        assertEquals(nuevo, sut.getEsUsuarioMusico());
     }
 
     @Test

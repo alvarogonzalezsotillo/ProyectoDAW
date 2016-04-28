@@ -37,7 +37,7 @@ public class UsuarioBuilder implements Serializable {
 
     public UsuarioBean build() {
 
-        return new UsuarioBean(nombre,apellido,nick,correo,true,tipoMusica,grupo,web,password,imagen);
+        return new UsuarioBean(nombre,apellido,nick,correo,tipoMusica,grupo,web,password,imagen);
 
     }
 
