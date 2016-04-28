@@ -21,13 +21,13 @@ public class ComentarioController implements Serializable {
 
 	private String texto;
     private Long idUsuario = 1L;
-    private Long idTweet = 1L;
+    private Long idMelom = 1L;
 	
     @ManagedProperty(value = "#{comentarioDao}")
     private ComentarioDAO comentarioDao;
     
     public void insertComentario() {
-	    comentarioBuilder = new ComentarioBuilder(texto, idUsuario, idTweet);
+	    comentarioBuilder = new ComentarioBuilder(texto, idUsuario, idMelom);
 	    	
 	    ComentarioBean comentario = comentarioBuilder.build();
 
@@ -84,12 +84,12 @@ public class ComentarioController implements Serializable {
 		this.idUsuario = idUsuario;
 	}
 
-	public Long getIdTweet() {
-		return idTweet;
+	public Long getIdMelom() {
+		return idMelom;
 	}
 
-	public void setIdTweet(Long idTweet) {
-		this.idTweet = idTweet;
+	public void setIdMelom(Long idMelom) {
+		this.idMelom = idMelom;
 	}
 
 	public ComentarioDAO getComentarioDao() {
