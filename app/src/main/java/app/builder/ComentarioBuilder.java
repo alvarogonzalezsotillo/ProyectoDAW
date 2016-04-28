@@ -10,22 +10,22 @@ public class ComentarioBuilder implements Serializable {
 
     private String texto;
     private Long idUsuario;
-    private Long idTweet;
+    private Long idMelom;
 
     public ComentarioBuilder() {
 
         //Constructor para test
     }
 
-    public ComentarioBuilder(String texto, Long idUsuario, Long idTweet) {
+    public ComentarioBuilder(String texto, Long idUsuario, Long idMelom) {
         this.texto = texto;
         this.idUsuario = idUsuario;
-        this.idTweet = idTweet;
+        this.idMelom = idMelom;
     }
 
     public ComentarioBean build(){
 
-        return new ComentarioBean(texto,idUsuario,idTweet);
+        return new ComentarioBean(texto,idUsuario,idMelom);
 
     }
 
@@ -40,9 +40,9 @@ public class ComentarioBuilder implements Serializable {
         return this;
     }
 
-    public ComentarioBuilder idTweet(Long idTweet){
+    public ComentarioBuilder idMelom(Long idMelom){
 
-        this.idTweet = idTweet;
+        this.idMelom = idMelom;
         return this;
     }
 

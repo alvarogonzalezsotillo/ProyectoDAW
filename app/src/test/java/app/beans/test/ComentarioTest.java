@@ -13,7 +13,7 @@ public class ComentarioTest {
     private Long idTest = 1l;
     private String textoTest = "textoTest";
     private Long idUsuarioTest = 1L;
-    private Long idTweetTest = 1L;
+    private Long idMelomTest = 1L;
 
     ComentarioBean sut;
 
@@ -22,7 +22,7 @@ public class ComentarioTest {
 
         try {
 
-            sut = new ComentarioBean(textoTest, idUsuarioTest, idTweetTest);
+            sut = new ComentarioBean(textoTest, idUsuarioTest, idMelomTest);
             sut.setId(idTest);
 
         }
@@ -61,8 +61,8 @@ public class ComentarioTest {
         Long idUsuarioActual = sut.getIdUsuario();
         assertEquals(idUsuarioTest,idUsuarioActual);
 
-        Long idTweetTest = sut.getIdTweet();
-        assertEquals(idTweetTest,idTweetTest);
+        Long idMelomTest = sut.getIdMelom();
+        assertEquals(idMelomTest,idMelomTest);
     }
 
     @Test
@@ -80,9 +80,9 @@ public class ComentarioTest {
         sut.setIdUsuario(nuevoIdUsuario);
         assertEquals(nuevoIdUsuario,sut.getIdUsuario());
 
-        Long nuevoIdTweet = 2L;
-        sut.setIdTweet(nuevoIdTweet);
-        assertEquals(nuevoIdTweet,sut.getIdTweet());
+        Long nuevoIdMelom = 2L;
+        sut.setIdMelom(nuevoIdMelom);
+        assertEquals(nuevoIdMelom,sut.getIdMelom());
     }
 
 }

@@ -19,17 +19,17 @@ public class ComentarioBean implements Comentario, Serializable {
 
     @Column(name = "idUsuario")
     private Long idUsuario;
-    @Column(name = "idTweet")
-    private Long idTweet;
+    @Column(name = "idMelom")
+    private Long idMelom;
 
     public ComentarioBean() {
         //Constructor por defecto
     }
 
-    public ComentarioBean(String texto, Long idUsuario, Long idTweet) {
+    public ComentarioBean(String texto, Long idUsuario, Long idMelom) {
         this.texto = texto;
         this.idUsuario = idUsuario;
-        this.idTweet = idTweet;
+        this.idMelom = idMelom;
     }
 
     @Id
@@ -58,11 +58,11 @@ public class ComentarioBean implements Comentario, Serializable {
         this.idUsuario = idUsuario;
     }
 
-    public Long getIdTweet() {
-        return idTweet;
+    public Long getIdMelom() {
+        return idMelom;
     }
 
-    public void setIdTweet(Long idTweet) {
-        this.idTweet = idTweet;
+    public void setIdMelom(Long idMelom) {
+        this.idMelom = idMelom;
     }
 }

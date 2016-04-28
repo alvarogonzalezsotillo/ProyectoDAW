@@ -72,12 +72,12 @@ public class ComentarioDAO extends SessionFactoryImpl implements Serializable,DA
     }
 
     @SuppressWarnings("unchecked")
-    public List<ComentarioBean> getAllByIdTweet(Long idTweet){
+    public List<ComentarioBean> getAllByIdMelom(Long idMelom){
 
         List<ComentarioBean> listaComentarios;
 
-        Query query = session.createQuery("from ComentarioBean comentario where comentario.idTweet = :idTweet");
-        query.setParameter("idTweet",idTweet);
+        Query query = session.createQuery("from ComentarioBean comentario where comentario.idMelom = :idMelom");
+        query.setParameter("idMelom",idMelom);
         listaComentarios = query.list();
 
         return listaComentarios;

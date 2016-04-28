@@ -26,7 +26,7 @@ public class ComentarioDAOIT extends BaseIT<ComentarioDAO>{
 
 
     @Test
-    public void testShouldReturnTheComentarioIdentifiedByIdWhenCallingGetComentarioById() {
+    public void testShouldReturnTheComentarioIdentifiedByIdWhenCallingGetById() {
 
         ComentarioBean comentarioReturned = sut.getById(1L);
         assertEquals("textoTest", comentarioReturned.getTexto());
@@ -54,15 +54,15 @@ public class ComentarioDAOIT extends BaseIT<ComentarioDAO>{
     }
 
     @Test
-    public void testShouldReturnAllComentariosFilterByIdTweetWhenCallingGetAllByIdTweet(){
+    public void testShouldReturnAllComentariosFilterByIdMelomWhenCallingGetAllByIdMelom(){
 
 
-        assertEquals(2,sut.getAllByIdTweet(1L).size());
+        assertEquals(2,sut.getAllByIdMelom(1L).size());
 
     }
 
     @Test
-    public void testZShouldDeleteTheComentarioIdentifiedByIdWhenCallingDeleteComentarioById(){
+    public void testZShouldDeleteTheComentarioIdentifiedByIdWhenCallingDeleteById(){
 
         sut.deleteById(2L);
         assertEquals(1, sut.getAll().size());

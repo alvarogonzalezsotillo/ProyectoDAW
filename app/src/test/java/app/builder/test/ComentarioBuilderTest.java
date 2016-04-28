@@ -15,7 +15,7 @@ public class ComentarioBuilderTest {
 
     private String textoTest = "textoTest";
     private Long idUsuarioTest = 1L;
-    private Long idTweetTest = 1L;
+    private Long idMelomTest = 1L;
 
     ComentarioBean comentario;
 
@@ -47,7 +47,7 @@ public class ComentarioBuilderTest {
     @Test
     public void shouldConstructANewComentarioBuilder(){
 
-        ComentarioBuilder comentarioBuilder = new ComentarioBuilder(textoTest,idUsuarioTest,idTweetTest);
+        ComentarioBuilder comentarioBuilder = new ComentarioBuilder(textoTest,idUsuarioTest,idMelomTest);
 
         assertNotNull(comentarioBuilder);
 
@@ -56,7 +56,7 @@ public class ComentarioBuilderTest {
     @Test
     public void shouldSetAllAttributesReturnComentarioBuilderOnEachOneAndBuildNewComentario(){
 
-        returned = sut.idTweet(idTweetTest);
+        returned = sut.idMelom(idMelomTest);
         assertSame(returned,sut);
 
         returned = sut.idUsuario(idUsuarioTest);
@@ -69,7 +69,7 @@ public class ComentarioBuilderTest {
 
         assertEquals(textoTest,comentario.getTexto());
         assertEquals(idUsuarioTest,comentario.getIdUsuario());
-        assertEquals(idTweetTest,comentario.getIdTweet());
+        assertEquals(idMelomTest,comentario.getIdMelom());
 
     }
 

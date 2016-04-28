@@ -2,7 +2,7 @@ DROP TABLE usuarios
 IF EXISTS;
 DROP TABLE BETAcomentarios
 IF EXISTS;
-DROP TABLE BETAtweets
+DROP TABLE BETAMeloms
 IF EXISTS;
 
 CREATE TABLE usuarios (
@@ -22,15 +22,16 @@ CREATE TABLE usuarios (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE BETAtweets (
+CREATE TABLE BETAmeloms (
   id               BIGINT (11) NOT NULL,
   titulo           VARCHAR(150) NOT NULL,
   album            VARCHAR(20)  NULL,
   tipoMusica       VARCHAR(45)  NULL,
-  comentarioMusico VARCHAR(60)  NULL,
-  cancion          BLOB         NULL DEFAULT NULL,
-  imagenAlbum      BLOB         NULL DEFAULT NULL,
+  comentarioMusico VARCHAR(100) NULL,
+  cancion LONGBLOB NULL DEFAULT NULL,
+  imagenAlbum LONGBLOB NULL DEFAULT NULL,
   idUsuario        BIGINT (11) NOT NULL,
+  fechaPublicación DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   CONSTRAINT idUsuario
   FOREIGN KEY (idUsuario)
@@ -43,11 +44,11 @@ CREATE TABLE BETAcomentarios (
   id        BIGINT (11) NOT NULL,
   texto     VARCHAR(45) NOT NULL,
   idUsuario BIGINT (11) NOT NULL,
-  idTweet   BIGINT (11) NOT NULL,
+  idMelom   BIGINT (11) NOT NULL,
   PRIMARY KEY (id),
-  CONSTRAINT idTweet
-  FOREIGN KEY (idTweet)
-  REFERENCES BETAtweets (id)
+  CONSTRAINT idMelom
+  FOREIGN KEY (idMelom)
+  REFERENCES BETAmeloms (id)
     ON DELETE CASCADE
     ON UPDATE NO ACTION
 );
@@ -61,18 +62,17 @@ INTO usuarios (id, nombreDeUsuario, apellidoDeUsuario, nickDeUsuario, passwordDe
 VALUES (2, 'nombreTest2', 'apellidoTest2', 'nickTest2', 'passwordTest2');
 
 INSERT
-INTO BETAtweets (id, titulo, album, tipoMusica, comentarioMusico, cancion, imagenAlbum, idUsuario)
+INTO BETAmeloms (id, titulo, album, tipoMusica, comentarioMusico, cancion, imagenAlbum, idUsuario)
 VALUES (1, 'tituloTest', NULL, NULL, NULL, NULL, NULL, 1);
 
 INSERT
-INTO BETAtweets (id, titulo, album, tipoMusica, comentarioMusico, cancion, imagenAlbum, idUsuario)
+INTO BETAmeloms (id, titulo, album, tipoMusica, comentarioMusico, cancion, imagenAlbum, idUsuario)
 VALUES (2, 'tituloTest2', NULL, NULL, NULL, NULL, NULL, 2);
 
-
 INSERT
-INTO BETAcomentarios (id, texto, idUsuario, idTweet)
+INTO BETAcomentarios (id, texto, idUsuario, idMelom)
 VALUES (1, 'textoTest', 1, 1);
 
 INSERT
-INTO BETAcomentarios (id, texto, idUsuario, idTweet)
+INTO BETAcomentarios (id, texto, idUsuario, idMelom)
 VALUES (2, 'textoTest', 1, 1);
