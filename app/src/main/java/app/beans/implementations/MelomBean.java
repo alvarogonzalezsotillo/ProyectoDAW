@@ -1,7 +1,6 @@
 package app.beans.implementations;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,14 +42,11 @@ public class MelomBean implements Melom, Serializable {
 	@Column(name ="idUsuario")
 	private Long idUsuario;
 	
-	@Column(name = "fechaPublicacion")
-	private Date fechaPublicacion;
-	
 	public MelomBean() {
         //Constructor por defecto
     }
 	
-	public MelomBean(String titulo, String album, String tipoMusica, String comentarioMusico, byte[] cancion, byte[] imagenAlbum, Long idUsuario, Date fechaPublicacion) {
+	public MelomBean(String titulo, String album, String tipoMusica, String comentarioMusico, byte[] cancion, byte[] imagenAlbum, Long idUsuario) {
 		this.titulo = titulo;
 		this.album = album;
 		this.tipoMusica = tipoMusica;
@@ -58,7 +54,6 @@ public class MelomBean implements Melom, Serializable {
 		this.cancion = cancion;
 		this.imagenAlbum = imagenAlbum;
 		this.idUsuario = idUsuario;
-		this.fechaPublicacion = fechaPublicacion;
 	}
 
 	public Long getId() {
@@ -93,10 +88,7 @@ public class MelomBean implements Melom, Serializable {
 		return idUsuario;
 	}
 
-	public Date getFechaPublicacion() {
-		return fechaPublicacion;
-	}
-
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -129,9 +121,6 @@ public class MelomBean implements Melom, Serializable {
 		this.idUsuario = idUsuario;
 	}
 
-	public void setFechaPublicacion(Date fechaPublicacion) {
-		this.fechaPublicacion = fechaPublicacion;
-	}
 	
 	
 }
