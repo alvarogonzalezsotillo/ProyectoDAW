@@ -66,7 +66,7 @@ VALUES (1, 'tituloTest', NULL, NULL, NULL, NULL, NULL, 1);
 
 INSERT
 INTO BETAmeloms (id, titulo, album, tipoMusica, comentarioMusico, cancion, imagenAlbum, idUsuario)
-VALUES (2, 'tituloTest2', NULL, NULL, NULL, NULL, NULL, 2);
+VALUES (2, 'tituloTest2', NULL, NULL, NULL, NULL, NULL, 1);
 
 INSERT
 INTO BETAcomentarios (id, texto, idUsuario, idMelom)

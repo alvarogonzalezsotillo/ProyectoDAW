@@ -54,13 +54,13 @@ public class MelomDAO extends SessionFactoryImpl implements Serializable, DAO<Me
     }
 
     @SuppressWarnings("unchecked")
-    public List<MelomBean> getAllByIdUsuario(Long usuarioId){
+    public List<MelomBean> getAllByIdUsuario(Long idUsuario){
 
         List<MelomBean> listaMelomsFilterByUsuarioId;
 
-        Query query = session.createQuery("from MelomBean meloms where meloms.usuarioId = :usuarioId");
+        Query query = session.createQuery("from MelomBean meloms where meloms.idUsuario = :idUsuario");
+        query.setParameter("idUsuario",idUsuario);
         listaMelomsFilterByUsuarioId = query.list();
-
         return listaMelomsFilterByUsuarioId;
 
     }

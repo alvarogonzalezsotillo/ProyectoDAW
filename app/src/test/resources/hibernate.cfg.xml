@@ -19,5 +19,6 @@
 
 		<mapping class="app.beans.implementations.UsuarioBean" />
 		<mapping class="app.beans.implementations.ComentarioBean" />
+		<mapping class="app.beans.implementations.MelomBean" />
 	</session-factory>
 </hibernate-configuration>
