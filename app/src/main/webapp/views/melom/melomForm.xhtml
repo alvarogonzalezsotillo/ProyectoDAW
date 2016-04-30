@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:include src="/resources/templates/header.xhtml" />
+
+<h:body>
+	<h:form>
+	<h:panelGrid columns="3">
+		<p:outputLabel value="Titulo de la cancion: " for="title" />
+		<p:inputText id="title" title="title"  required="true">
+			<f:validateLength minimum="4" maximum="150"/>
+			<p:ajax update="titleOK" event="keyup"/>
+		</p:inputText>
+		<p:message id="titleOK" for="title" display="text"/>
+		<p:outputLabel value="Album al que pertenece: " for="album"/>
+		<p:inputText id="album" title="album" required="true">
+			<f:validateLength minimum="4" maximum="20"/>
+			<p:ajax update="albumOK"  event="keyup"/>
+		</p:inputText>
+		<p:message id="albumOK" for="album" display="text"/>
+		<p:outputLabel value="Tipo de música: " for="tipoMusica"/>
+		<p:inputText id="tipoMusica" title="tipoMusica" required="true">
+			<f:validateLength minimum="5" maximum="45"/>
+			<p:ajax update="tipoOK" event="keyup"/>
+		</p:inputText>
+		<p:message id="tipoOK" for="tipoMusica" display="text"/>
+		<p:outputLabel value="Comentario de la cancion: " />
+		<p:inputTextarea rows="5" cols="30" counter="display" maxlength="100" counterTemplate="{0} caracteres permitidos." autoResize="false"  required="true" />
+   		 <h:outputText id="display" />
+	</h:panelGrid>
+	<h:panelGrid columns="2">
+		<p:outputLabel value="Imagen del album: " for="imagen"/>
+		<p:fileUpload id="imagen" mode="simple" skinSimple="true"/>
+		<p:outputLabel value="Cancion: " for="cancion"/>
+		<p:fileUpload id="cancion" mode="siple" skinSimple="true"/>
+	</h:panelGrid>
+	<p:commandButton icon="ui-icon-play" value="Dale al play!"/>
+	</h:form>
+</h:body>
+</html>
