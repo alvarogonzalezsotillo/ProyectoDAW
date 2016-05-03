@@ -2,6 +2,7 @@ package app.controller;
 
 import app.beans.implementations.ComentarioBean;
 import app.builder.ComentarioBuilder;
+import app.controller.interfaces.Controller;
 import app.model.ComentarioDAO;
 import app.utils.UtilSessionHibernate;
 import org.hibernate.Session;
@@ -13,7 +14,7 @@ import java.io.Serializable;
 
 @ManagedBean(name = "comentarioController")
 @ViewScoped
-public class ComentarioController implements Serializable {
+public class ComentarioController implements Serializable, Controller {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -38,23 +39,23 @@ public class ComentarioController implements Serializable {
     	
     }
 
-	private void initSessionForDao(){
+	public void initSessionForDao(){
 		Session session = UtilSessionHibernate.initSession();
 		comentarioDao.setSession(session);
 	}
 
-	private void commitAndCloseSession(){
+	public void commitAndCloseSession(){
 		Session session = comentarioDao.getSession();
 		UtilSessionHibernate.commitAndCloseSession(session);
 
 	}
 
-	private void closeSession(){
+	public void closeSession(){
 		Session session = comentarioDao.getSession();
 		UtilSessionHibernate.closeSession(session);
 	}
 
-	private void initTransactionForDao(){
+	public void initTransactionForDao(){
 		Session session = comentarioDao.getSession();
 		UtilSessionHibernate.initTransaction(session);
 
