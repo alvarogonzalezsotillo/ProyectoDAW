@@ -1,6 +1,7 @@
 package app.model;
 
 import app.beans.implementations.MelomBean;
+import app.model.interfaces.DAO;
 import org.hibernate.Query;
 
 import java.io.Serializable;

@@ -2,6 +2,7 @@ package app.controller;
 
 import app.beans.implementations.UsuarioBean;
 import app.builder.UsuarioBuilder;
+import app.controller.interfaces.Controller;
 import app.model.UsuarioDAO;
 import app.utils.UtilSessionHibernate;
 import org.hibernate.Session;
@@ -18,7 +19,7 @@ import java.util.List;
 
 @ManagedBean(name = "usuarioController")
 @ViewScoped
-public class UsuarioController implements Serializable {
+public class UsuarioController implements Serializable, Controller {
 
     private static final long serialVersionUID = 1L;
 
@@ -87,23 +88,23 @@ public class UsuarioController implements Serializable {
         }
     }
 
-    private void initSessionForDao(){
+    public void initSessionForDao(){
         Session session = UtilSessionHibernate.initSession();
         usuarioDao.setSession(session);
     }
 
-    private void commitAndCloseSession(){
+    public void commitAndCloseSession(){
         Session session = usuarioDao.getSession();
         UtilSessionHibernate.commitAndCloseSession(session);
 
     }
 
-    private void closeSession(){
+    public void closeSession(){
         Session session = usuarioDao.getSession();
         UtilSessionHibernate.closeSession(session);
     }
 
-    private void initTransactionForDao(){
+    public void initTransactionForDao(){
         Session session = usuarioDao.getSession();
         UtilSessionHibernate.initTransaction(session);
 

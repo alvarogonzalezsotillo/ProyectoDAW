@@ -1,5 +1,6 @@
 package app.controller;
 
+import app.controller.interfaces.Controller;
 import app.utils.Util;
 import app.model.UsuarioDAO;
 import app.utils.UtilSessionHibernate;
@@ -15,7 +16,7 @@ import java.io.Serializable;
 
 @ManagedBean(name = "loginController")
 @ViewScoped
-public class LoginController implements Serializable {
+public class LoginController implements Serializable, Controller {
 
     private String nick;
     private String password;
@@ -57,23 +58,23 @@ public class LoginController implements Serializable {
 
     }
 
-    private void initSessionForDao(){
+    public void initSessionForDao(){
         Session session = UtilSessionHibernate.initSession();
         usuarioDao.setSession(session);
     }
 
-    private void commitAndCloseSession(){
+    public void commitAndCloseSession(){
         Session session = usuarioDao.getSession();
         UtilSessionHibernate.commitAndCloseSession(session);
 
     }
 
-    private void closeSession(){
+    public void closeSession(){
         Session session = usuarioDao.getSession();
         UtilSessionHibernate.closeSession(session);
     }
 
-    private void initTransactionForDao(){
+    public void initTransactionForDao(){
         Session session = usuarioDao.getSession();
         UtilSessionHibernate.initTransaction(session);
 
