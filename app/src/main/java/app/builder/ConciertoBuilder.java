@@ -29,4 +29,24 @@ public class ConciertoBuilder implements Serializable{
         return new ConciertoBean(pais,ciudad,lugar,idUsuario);
 
     }
+
+    public ConciertoBuilder pais(String pais) {
+        this.pais = pais;
+        return this;
+    }
+
+    public ConciertoBuilder ciudad(String ciudad) {
+        this.ciudad = ciudad;
+        return this;
+    }
+
+    public ConciertoBuilder lugar(String lugar) {
+        this.lugar = lugar;
+        return this;
+    }
+
+    public ConciertoBuilder idUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+        return this;
+    }
 }

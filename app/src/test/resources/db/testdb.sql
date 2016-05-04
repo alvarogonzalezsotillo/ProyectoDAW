@@ -4,6 +4,8 @@ DROP TABLE BETAcomentarios
 IF EXISTS;
 DROP TABLE BETAMeloms
 IF EXISTS;
+DROP TABLE BETAconciertos
+IF EXISTS;
 
 CREATE TABLE usuarios (
   id                  BIGINT (11) NOT NULL,
@@ -30,7 +32,7 @@ CREATE TABLE BETAmeloms (
   cancion LONGBLOB NULL DEFAULT NULL,
   imagenAlbum LONGBLOB NULL DEFAULT NULL,
   idUsuario        BIGINT (11) NOT NULL,
-  fechaPublicación DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  fechaPublicacion DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   CONSTRAINT idUsuario
   FOREIGN KEY (idUsuario)
@@ -50,6 +52,16 @@ CREATE TABLE BETAcomentarios (
   REFERENCES BETAmeloms (id)
     ON DELETE CASCADE
     ON UPDATE NO ACTION
+);
+
+CREATE TABLE BETAconciertos (
+  id        BIGINT (11) NOT NULL,
+  fecha     DATETIME    NOT NULL,
+  pais      VARCHAR(50) NOT NULL,
+  ciudad    VARCHAR(60) NOT NULL,
+  lugar     VARCHAR(80) NOT NULL,
+  idUsuario BIGINT (11) NOT NULL,
+  PRIMARY KEY (id)
 );
 
 INSERT
