@@ -37,10 +37,10 @@
 	</h:panelGrid>
 	<h:panelGrid columns="2">
 		<p:outputLabel value="Imagen del album: " for="imagen"/>
-		<p:fileUpload id="imagen" mode="simple" skinSimple="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" value="#{melomController.imagenAlbum}"/>
+		<p:fileUpload id="imagen" mode="simple" skinSimple="true"  value="#{melomController.imagenAlbum}"/>
 		
 		<p:outputLabel value="Cancion: " for="cancion"/>
-		<p:fileUpload id="cancion" mode="siple" skinSimple="true" allowTypes="mp3,mp4" value="#{melomController.cancion}"/>
+		<p:fileUpload id="cancion" mode="siple" skinSimple="true" value="#{melomController.cancion}"/>
 	
 	</h:panelGrid>
 	<p:commandButton icon="ui-icon-play" value="Dale al play!">

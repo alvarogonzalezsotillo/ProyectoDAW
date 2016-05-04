@@ -7,38 +7,38 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-
 import org.hibernate.Session;
 import org.primefaces.model.UploadedFile;
 
 import app.beans.implementations.MelomBean;
 import app.builder.MelomBuilder;
+import app.controller.interfaces.Controller;
 import app.model.MelomDAO;
 import app.utils.UtilSessionHibernate;
 
 @ManagedBean (name="melomController")
 @ViewScoped
-public class MelomController implements Serializable {
+public class MelomController implements Serializable,Controller {
 	private static final long serialVersionUID = 1L;
 
-	private MelomBuilder melomB;
+	private MelomBuilder melomBuilder;
 	private String titulo,album,tipoMusica,comentario;
 	private transient UploadedFile imagenAlbum,cancion;
 	private Long idUsuario=1L;
 	
-	@ManagedProperty(value="#{MelomDAO}")
-	private MelomDAO melomD;
+	@ManagedProperty(value="#{MelomDao}")
+	private MelomDAO melomDao;
 
 	//MelomController's methods
 	public void insert(){
-		if(comentario==""){
+		if(comentario.equals("")||comentario==null){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso!", 
 					"Comprueba si has insertado un comentario antes de subir tu melom."));	
 		}
 		else{
-			//melomB=new MelomBuilder(titulo,album,tipoMusica,comentario,cancion,imagenAlbum,idUsuario);
-			//MelomBean mb=melomB.build();
-			MelomBean mb=melomB
+			/*melomBuilder=new MelomBuilder(titulo,album,tipoMusica,comentario,cancion,imagenAlbum,idUsuario);
+			MelomBean mb=melomBuilder.build();*/
+			MelomBean mb=melomBuilder
 					.titulo(titulo)
 					.album(album)
 					.tipoMusica(tipoMusica)
@@ -46,32 +46,31 @@ public class MelomController implements Serializable {
 					.cancion(cancion)
 					.imagenAlbum(imagenAlbum)
 					.idUsuario(idUsuario).build();
-			initSessionForDAO();
-			initTransactionForDAO();
-			melomD.insert(mb);
+			initSessionForDao();
+			initTransactionForDao();
+			melomDao.insert(mb);
 			commitAndCloseSession();
 		}
 	}//insertMelom
 
-	private void initSessionForDAO(){
+	public void initSessionForDao() {
 		Session session=UtilSessionHibernate.initSession();
-		melomD.setSession(session);
+		melomDao.setSession(session);
 	}//initSessionForDAO
+	public void initTransactionForDao() {
+		 Session session = melomDao.getSession();
+	     UtilSessionHibernate.initTransaction(session);
+	}//initTransactionForDAO
 	
-	private void commitAndCloseSession(){
-		 Session session = melomD.getSession();
+	public void commitAndCloseSession(){
+		 Session session = melomDao.getSession();
 	     UtilSessionHibernate.commitAndCloseSession(session);
 	}//commitAndCloseSession
 	
-	private void closeSession(){
-		Session session = melomD.getSession();
+	public void closeSession(){
+		Session session = melomDao.getSession();
         UtilSessionHibernate.closeSession(session);
 	}//closeSession
-	
-	private void initTransactionForDAO(){
-	     Session session = melomD.getSession();
-	     UtilSessionHibernate.initTransaction(session);
-	}//initTransactionForDAO
 	
 	//Getters & Setters
 	public String getTitulo() {
@@ -106,12 +105,12 @@ public class MelomController implements Serializable {
 		this.comentario = comentario;
 	}
 
-	public MelomBuilder getMelomB() {
-		return melomB;
+	public MelomBuilder getMelomBuilder() {
+		return melomBuilder;
 	}
 
-	public void setMelomB(MelomBuilder melomB) {
-		this.melomB = melomB;
+	public void setMelomBuilder(MelomBuilder melomBuilder) {
+		this.melomBuilder = melomBuilder;
 	}
 
 	public UploadedFile getImagenAlbum() {
@@ -138,11 +137,11 @@ public class MelomController implements Serializable {
 		this.idUsuario = idUsuario;
 	}
 
-	public MelomDAO getMelomD() {
-		return melomD;
+	public MelomDAO getMelomDao() {
+		return melomDao;
 	}
 
-	public void setMelomD(MelomDAO melomD) {
-		this.melomD = melomD;
+	public void setMelomDao(MelomDAO melomDao) {
+		this.melomDao = melomDao;
 	}
 }//class
