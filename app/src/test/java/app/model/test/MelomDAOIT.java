@@ -11,7 +11,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MelomDAOIT extends BaseIT<MelomDAO>{
 
     @Before
@@ -54,7 +53,7 @@ public class MelomDAOIT extends BaseIT<MelomDAO>{
     }
 
     @Test
-    public void shouldZDeleteTheMelomIdentifiedByIdWhenCallingDeleteById(){
+    public void shouldDeleteTheMelomIdentifiedByIdWhenCallingDeleteById(){
 
         sut.deleteById(2L);
         assertEquals(1, sut.getAll().size());

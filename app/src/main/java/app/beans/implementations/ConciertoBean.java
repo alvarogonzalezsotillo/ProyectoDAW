@@ -33,6 +33,10 @@ public class ConciertoBean implements Concierto, Serializable{
         this.idUsuario = idUsuario;
     }
 
+    public ConciertoBean() {
+        //Constructor por defecto
+    }
+
     @Id
     @GeneratedValue
     public Long getId() {
