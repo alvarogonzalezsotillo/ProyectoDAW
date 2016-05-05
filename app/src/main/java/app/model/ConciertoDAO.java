@@ -4,9 +4,13 @@ import app.beans.ConciertoBean;
 import app.model.interfaces.DAO;
 import org.hibernate.Query;
 
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
 import java.io.Serializable;
 import java.util.List;
 
+@ManagedBean(name = "conciertoDao")
+@ApplicationScoped
 public class ConciertoDAO extends SessionFactoryImpl implements Serializable, DAO<ConciertoBean> {
 
 
