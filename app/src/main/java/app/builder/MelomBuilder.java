@@ -10,32 +10,33 @@ import app.utils.Util;
 
 public class MelomBuilder implements Serializable, Builder<MelomBean> {
 
-	private static final long serialVersionUID = 1L;
-	
-	private String titulo;
-	private String album;
-	private String tipoMusica;
-	private String comentarioMusico;
-	private byte[] cancion;
-	private byte[] imagenAlbum;
-	private Long idUsuario;
-	
-	public MelomBuilder(){
+    private static final long serialVersionUID = 1L;
+
+    private String titulo;
+    private String album;
+    private String tipoMusica;
+    private String comentarioMusico;
+    private byte[] cancion;
+    private byte[] imagenAlbum;
+    private Long idUsuario;
+
+    public MelomBuilder(){
         
         //Constructor por defecto para los test
         
     }
-	
-	public MelomBuilder(String titulo, String album, String tipoMusica, String comentarioMusico, byte[] cancion, byte[] imagenAlbum, Long idUsuario){
-		this.titulo = titulo;
-		this.album = album;
-		this.tipoMusica = tipoMusica;
-		this.comentarioMusico = comentarioMusico;
-		this.cancion = cancion;
-		this.imagenAlbum = imagenAlbum;
-		this.idUsuario = idUsuario;
+
+    public MelomBuilder(String titulo, String album, String tipoMusica, String comentarioMusico, byte[] cancion, byte[] imagenAlbum, Long idUsuario){
+        this.titulo = titulo;
+        this.album = album;
+        this.tipoMusica = tipoMusica;
+        this.comentarioMusico = comentarioMusico;
+        this.cancion = cancion;
+        this.imagenAlbum = imagenAlbum;
+        this.idUsuario = idUsuario;
     }
 
+    @Override
     public MelomBean build() {
 
         return new MelomBean(titulo, album, tipoMusica, comentarioMusico, cancion, imagenAlbum, idUsuario);

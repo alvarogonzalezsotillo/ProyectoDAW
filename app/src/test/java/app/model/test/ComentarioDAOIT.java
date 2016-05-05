@@ -4,9 +4,11 @@ package app.model.test;
 import app.beans.ComentarioBean;
 import app.model.ComentarioDAO;
 import org.junit.*;
+import org.junit.runners.MethodSorters;
 
 import static org.junit.Assert.*;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ComentarioDAOIT extends BaseIT<ComentarioDAO>{
 
     @Before
@@ -60,7 +62,7 @@ public class ComentarioDAOIT extends BaseIT<ComentarioDAO>{
     }
 
     @Test
-    public void testShouldDeleteTheComentarioIdentifiedByIdWhenCallingDeleteById(){
+    public void testZShouldDeleteTheComentarioIdentifiedByIdWhenCallingDeleteById(){
 
         sut.deleteById(2L);
         assertEquals(1, sut.getAll().size());

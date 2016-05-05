@@ -58,22 +58,25 @@ public class LoginController implements Serializable, Controller {
 
     }
 
+    @Override
     public void initSessionForDao(){
         Session session = UtilSessionHibernate.initSession();
         usuarioDao.setSession(session);
     }
 
+    @Override
     public void commitAndCloseSession(){
         Session session = usuarioDao.getSession();
         UtilSessionHibernate.commitAndCloseSession(session);
 
     }
-
+    @Override
     public void closeSession(){
         Session session = usuarioDao.getSession();
         UtilSessionHibernate.closeSession(session);
     }
 
+    @Override
     public void initTransactionForDao(){
         Session session = usuarioDao.getSession();
         UtilSessionHibernate.initTransaction(session);

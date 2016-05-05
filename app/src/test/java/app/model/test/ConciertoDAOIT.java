@@ -3,11 +3,14 @@ package app.model.test;
 import app.beans.ConciertoBean;
 import app.model.ConciertoDAO;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ConciertoDAOIT extends BaseIT<ConciertoDAO>{
 
     @Before
@@ -43,7 +46,7 @@ public class ConciertoDAOIT extends BaseIT<ConciertoDAO>{
     }
 
     @Test
-    public void shouldDeleteTheMelomIdentifiedByIdWhenCallingDeleteById(){
+    public void shouldZDeleteTheMelomIdentifiedByIdWhenCallingDeleteById(){
 
         sut.deleteById(2L);
         assertEquals(1, sut.getAll().size());

@@ -6,7 +6,9 @@ import org.junit.*;
 
 import app.beans.UsuarioBean;
 import app.model.UsuarioDAO;
+import org.junit.runners.MethodSorters;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UsuarioDAOIT extends BaseIT<UsuarioDAO> {
 
     @Before
@@ -37,13 +39,6 @@ public class UsuarioDAOIT extends BaseIT<UsuarioDAO> {
 
     }
 
-    @Test
-    public void shouldDeleteTheUsuarioIdentifiedByIdWhenCallingDeleteById(){
-
-        sut.deleteById(2L);
-        assertEquals(1, sut.getAll().size());
-
-    }
 
     @Test
     public void shouldUpdateTheUsuarioWhenCallingUpdate() {
@@ -64,4 +59,11 @@ public class UsuarioDAOIT extends BaseIT<UsuarioDAO> {
 
     }
 
+    @Test
+    public void shouldZDeleteTheUsuarioIdentifiedByIdWhenCallingDeleteById(){
+
+        sut.deleteById(2L);
+        assertEquals(1, sut.getAll().size());
+
+    }
 }

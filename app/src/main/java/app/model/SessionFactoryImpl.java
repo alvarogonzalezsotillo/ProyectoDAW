@@ -6,13 +6,14 @@ import org.hibernate.cfg.Configuration;
 
 public class SessionFactoryImpl implements SessionFactory {
 
-    protected org.hibernate.SessionFactory factory = new Configuration().configure().buildSessionFactory();
     protected Session session;
 
+    @Override
     public Session getSession() {
         return session;
     }
 
+    @Override
     public void setSession(Session session) {
         this.session = session;
     }

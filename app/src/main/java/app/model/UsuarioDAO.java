@@ -19,18 +19,21 @@ public class UsuarioDAO extends SessionFactoryImpl implements Serializable,DAO<U
         super();
     }
 
+    @Override
     public void insert(UsuarioBean usuario) {
 
         session.save(usuario);
 
     }
 
+    @Override
     public void update(UsuarioBean usuarioToUpdate) {
 
         session.update(usuarioToUpdate);
 
     }
 
+    @Override
     public void deleteById(Long id) {
 
         UsuarioBean usuarioToDelete = session.load(UsuarioBean.class, id);
@@ -38,6 +41,7 @@ public class UsuarioDAO extends SessionFactoryImpl implements Serializable,DAO<U
 
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public UsuarioBean getById(Long id) {
 
@@ -49,6 +53,7 @@ public class UsuarioDAO extends SessionFactoryImpl implements Serializable,DAO<U
         return listUsuarios.get(0);
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public List<UsuarioBean> getAll() {
 

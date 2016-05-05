@@ -37,12 +37,14 @@ public class ConciertoBean implements Serializable, Bean {
         //Constructor por defecto
     }
 
+    @Override
     @Id
     @GeneratedValue
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }

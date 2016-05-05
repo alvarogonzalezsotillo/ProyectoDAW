@@ -24,6 +24,7 @@ public class ComentarioBuilder implements Serializable, Builder<ComentarioBean> 
         this.idMelom = idMelom;
     }
 
+    @Override
     public ComentarioBean build(){
 
         return new ComentarioBean(texto,idUsuario,idMelom);
