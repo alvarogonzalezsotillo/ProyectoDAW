@@ -1,6 +1,6 @@
 package app.model;
 
-import app.beans.implementations.ConciertoBean;
+import app.beans.ConciertoBean;
 import app.model.interfaces.DAO;
 import org.hibernate.Query;
 
@@ -15,15 +15,18 @@ public class ConciertoDAO extends SessionFactoryImpl implements Serializable, DA
         session.save(conciertoBean);
     }
 
+
     public void update(ConciertoBean conciertoBean) {
 
         session.update(conciertoBean);
     }
 
+
     public void deleteById(Long id) {
         ConciertoBean conciertoToDelete = session.load(ConciertoBean.class, id);
         session.delete(conciertoToDelete);
     }
+
 
     @SuppressWarnings("unchecked")
     public ConciertoBean getById(Long id) {
@@ -34,6 +37,7 @@ public class ConciertoDAO extends SessionFactoryImpl implements Serializable, DA
         listaConciertos = query.list();
         return listaConciertos.get(0);
     }
+
 
     public List<ConciertoBean> getAll() {
 

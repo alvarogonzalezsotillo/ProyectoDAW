@@ -1,10 +1,11 @@
 package app.builder;
 
-import app.beans.implementations.ConciertoBean;
+import app.beans.ConciertoBean;
+import app.builder.interfaces.Builder;
 
 import java.io.Serializable;
 
-public class ConciertoBuilder implements Serializable{
+public class ConciertoBuilder implements Serializable, Builder<ConciertoBean> {
 
     private static final long serialVersionUID = 1L;
 
@@ -23,6 +24,7 @@ public class ConciertoBuilder implements Serializable{
         this.ciudad = ciudad;
         this.pais = pais;
     }
+
 
     public ConciertoBean build(){
 

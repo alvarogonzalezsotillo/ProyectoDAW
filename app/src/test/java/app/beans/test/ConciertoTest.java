@@ -1,6 +1,6 @@
 package app.beans.test;
 
-import app.beans.implementations.ConciertoBean;
+import app.beans.ConciertoBean;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

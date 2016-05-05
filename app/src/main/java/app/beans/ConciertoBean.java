@@ -1,13 +1,13 @@
-package app.beans.implementations;
+package app.beans;
 
-import app.beans.interfaces.Concierto;
+import app.beans.interfaces.Bean;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "BETAconciertos")//NO OLVIDAR CAMBIAR CUANDO TERMINEMOS LA TABLA DE COMENTARIOS!!!!!!!!!!!!!!!!!!!
-public class ConciertoBean implements Concierto, Serializable{
+public class ConciertoBean implements Serializable, Bean {
 
     private static final long serialVersionUID = 1L;
 
@@ -33,11 +33,17 @@ public class ConciertoBean implements Concierto, Serializable{
         this.idUsuario = idUsuario;
     }
 
+    public ConciertoBean() {
+        //Constructor por defecto
+    }
+
+
     @Id
     @GeneratedValue
     public Long getId() {
         return id;
     }
+
 
     public void setId(Long id) {
         this.id = id;

@@ -1,6 +1,6 @@
 package app.model.test;
 
-import app.beans.implementations.MelomBean;
+import app.beans.MelomBean;
 import app.model.MelomDAO;
 import org.junit.Before;
 import org.junit.FixMethodOrder;

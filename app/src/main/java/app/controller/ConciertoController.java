@@ -1,6 +1,6 @@
 package app.controller;
 
-import app.beans.implementations.ConciertoBean;
+import app.beans.ConciertoBean;
 import app.builder.ConciertoBuilder;
 import app.controller.interfaces.Controller;
 import app.model.ConciertoDAO;
@@ -11,6 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
+import java.util.List;
 
 @ManagedBean(name = "conciertoController")
 @ViewScoped
@@ -42,10 +43,51 @@ public class ConciertoController implements Serializable, Controller{
 
     }
 
+    public void deleteConcierto(Long id){
+
+        initSessionForDao();
+        initTransactionForDao();
+        conciertoDao.deleteById(id);
+        commitAndCloseSession();
+
+    }
+
+    public void updateConcierto(){
+
+        conciertoBuilder = new ConciertoBuilder(idUsuario,lugar,ciudad,pais);
+
+        ConciertoBean comentario = conciertoBuilder.build();
+
+        initSessionForDao();
+        initTransactionForDao();
+        conciertoDao.update(comentario);
+        commitAndCloseSession();
+
+    }
+
+    public void listConcierto(){
+
+        initSessionForDao();
+        initTransactionForDao();
+        List<ConciertoBean> listaConciertos = conciertoDao.getAll();//Falta saber como enviarlo a la vista
+        commitAndCloseSession();
+
+    }
+
+    public void getConciertoById(Long id){
+
+        initSessionForDao();
+        initTransactionForDao();
+        ConciertoBean conciertoReturned = conciertoDao.getById(id);//Falta saber como enviarlo a la vista
+        commitAndCloseSession();
+    }
+
+
     public void initSessionForDao(){
         Session session = UtilSessionHibernate.initSession();
         conciertoDao.setSession(session);
     }
+
 
     public void commitAndCloseSession(){
         Session session = conciertoDao.getSession();
@@ -53,10 +95,12 @@ public class ConciertoController implements Serializable, Controller{
 
     }
 
+
     public void closeSession(){
         Session session = conciertoDao.getSession();
         UtilSessionHibernate.closeSession(session);
     }
+
 
     public void initTransactionForDao(){
         Session session = conciertoDao.getSession();

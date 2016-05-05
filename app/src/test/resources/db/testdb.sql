@@ -56,7 +56,7 @@ CREATE TABLE BETAcomentarios (
 
 CREATE TABLE BETAconciertos (
   id        BIGINT (11) NOT NULL,
-  fecha     DATETIME    NOT NULL,
+  fecha     DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
   pais      VARCHAR(50) NOT NULL,
   ciudad    VARCHAR(60) NOT NULL,
   lugar     VARCHAR(80) NOT NULL,
@@ -86,4 +86,12 @@ VALUES (1, 'textoTest', 1, 1);
 
 INSERT
 INTO BETAcomentarios (id, texto, idUsuario, idMelom)
-VALUES (2, 'textoTest', 1, 1);
+VALUES (2, 'textoTest2', 1, 1);
+
+INSERT
+INTO BETAconciertos (id, pais, ciudad, lugar, idUsuario)
+VALUES (1, 'paisTest', 'ciudadTest', 'lugarTest', 1);
+
+INSERT
+INTO BETAconciertos (id, pais, ciudad, lugar, idUsuario)
+VALUES (2, 'paisTest2', 'ciudadTest2', 'lugarTest2', 2);

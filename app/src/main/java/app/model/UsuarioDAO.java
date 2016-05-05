@@ -1,6 +1,6 @@
 package app.model;
 
-import app.beans.implementations.UsuarioBean;
+import app.beans.UsuarioBean;
 import app.model.interfaces.DAO;
 import org.hibernate.Query;
 
@@ -19,11 +19,13 @@ public class UsuarioDAO extends SessionFactoryImpl implements Serializable,DAO<U
         super();
     }
 
+
     public void insert(UsuarioBean usuario) {
 
         session.save(usuario);
 
     }
+
 
     public void update(UsuarioBean usuarioToUpdate) {
 
@@ -31,12 +33,14 @@ public class UsuarioDAO extends SessionFactoryImpl implements Serializable,DAO<U
 
     }
 
+
     public void deleteById(Long id) {
 
         UsuarioBean usuarioToDelete = session.load(UsuarioBean.class, id);
         session.delete(usuarioToDelete);
 
     }
+
 
     @SuppressWarnings("unchecked")
     public UsuarioBean getById(Long id) {
@@ -48,6 +52,7 @@ public class UsuarioDAO extends SessionFactoryImpl implements Serializable,DAO<U
         listUsuarios = query.list();
         return listUsuarios.get(0);
     }
+
 
     @SuppressWarnings("unchecked")
     public List<UsuarioBean> getAll() {

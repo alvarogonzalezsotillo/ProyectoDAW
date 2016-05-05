@@ -1,6 +1,6 @@
 package app.controller;
 
-import app.beans.implementations.ComentarioBean;
+import app.beans.ComentarioBean;
 import app.builder.ComentarioBuilder;
 import app.controller.interfaces.Controller;
 import app.model.ComentarioDAO;
@@ -11,95 +11,153 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
+import java.util.List;
 
 @ManagedBean(name = "comentarioController")
 @ViewScoped
 public class ComentarioController implements Serializable, Controller {
-	
-	private static final long serialVersionUID = 1L;
-	
-	private ComentarioBuilder comentarioBuilder;
 
-	private String texto;
+    private static final long serialVersionUID = 1L;
+
+    private ComentarioBuilder comentarioBuilder;
+
+    private String texto;
     private Long idUsuario = 1L;
     private Long idMelom = 1L;
-	
+
     @ManagedProperty(value = "#{comentarioDao}")
     private ComentarioDAO comentarioDao;
     
     public void insertComentario() {
-	    comentarioBuilder = new ComentarioBuilder(texto, idUsuario, idMelom);
-	    	
-	    ComentarioBean comentario = comentarioBuilder.build();
+        comentarioBuilder = new ComentarioBuilder(texto, idUsuario, idMelom);
 
-		initSessionForDao();
-		initTransactionForDao();
-	    comentarioDao.insert(comentario);
-		commitAndCloseSession();
-    	
+        ComentarioBean comentario = comentarioBuilder.build();
+
+        initSessionForDao();
+        initTransactionForDao();
+        comentarioDao.insert(comentario);
+        commitAndCloseSession();
+
     }
 
-	public void initSessionForDao(){
-		Session session = UtilSessionHibernate.initSession();
-		comentarioDao.setSession(session);
-	}
+    public void deleteComentario(Long id) {
 
-	public void commitAndCloseSession(){
-		Session session = comentarioDao.getSession();
-		UtilSessionHibernate.commitAndCloseSession(session);
+        initSessionForDao();
+        initTransactionForDao();
+        comentarioDao.deleteById(id);
+        commitAndCloseSession();
 
-	}
+    }
 
-	public void closeSession(){
-		Session session = comentarioDao.getSession();
-		UtilSessionHibernate.closeSession(session);
-	}
+    public void listComentario() {
 
-	public void initTransactionForDao(){
-		Session session = comentarioDao.getSession();
-		UtilSessionHibernate.initTransaction(session);
+        initSessionForDao();
+        List<ComentarioBean> listaComentarios = comentarioDao.getAll();//Falta saber como pasar este dato a la vista
+        closeSession();
 
-	}
+    }
+
+    public void getComentario(Long id) {
+
+        initSessionForDao();
+        ComentarioBean comentarioReturned = comentarioDao.getById(id);//Falta saber como pasar este dato a la vista
+        closeSession();
+
+    }
+
+    public void listComentarioByIdUsuario(Long idusuario) {
+
+        initSessionForDao();
+        List<ComentarioBean> listaComentariosFilterByIdUsuario = comentarioDao.getAllByIdUsuario(idusuario);//Falta saber como pasar este dato a la vista
+        closeSession();
+
+    }
+
+    public void listComentarioByIdMelom(Long idMelom) {
+
+        initSessionForDao();
+        List<ComentarioBean> listaComentariosFilterByIdMelom = comentarioDao.getAllByIdMelom(idMelom);//Falta saber como pasar este dato a la vista
+        closeSession();
+
+    }
+
+    public void updateComentario() {
+        comentarioBuilder = new ComentarioBuilder(texto, idUsuario, idMelom);
+
+        ComentarioBean comentario = comentarioBuilder.build();
+
+        initSessionForDao();
+        initTransactionForDao();
+        comentarioDao.update(comentario);
+        commitAndCloseSession();
+
+    }
+
+
+    public void initSessionForDao(){
+        Session session = UtilSessionHibernate.initSession();
+        comentarioDao.setSession(session);
+    }
+
+
+    public void commitAndCloseSession(){
+        Session session = comentarioDao.getSession();
+        UtilSessionHibernate.commitAndCloseSession(session);
+
+    }
+
+
+    public void closeSession(){
+        Session session = comentarioDao.getSession();
+        UtilSessionHibernate.closeSession(session);
+    }
+
+
+    public void initTransactionForDao(){
+        Session session = comentarioDao.getSession();
+        UtilSessionHibernate.initTransaction(session);
+
+    }
     
-	public ComentarioBuilder getComentarioBuilder() {
-		return comentarioBuilder;
-	}
+    public ComentarioBuilder getComentarioBuilder() {
+        return comentarioBuilder;
+    }
 
-	public void setComentarioBuilder(ComentarioBuilder comentarioBuilder) {
-		this.comentarioBuilder = comentarioBuilder;
-	}
+    public void setComentarioBuilder(ComentarioBuilder comentarioBuilder) {
+        this.comentarioBuilder = comentarioBuilder;
+    }
 
-	public String getTexto() {
-		return texto;
-	}
+    public String getTexto() {
+        return texto;
+    }
 
-	public void setTexto(String texto) {
-		this.texto = texto;
-	}
+    public void setTexto(String texto) {
+        this.texto = texto;
+    }
 
-	public Long getIdUsuario() {
-		return idUsuario;
-	}
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
 
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
-	}
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
-	public Long getIdMelom() {
-		return idMelom;
-	}
+    public Long getIdMelom() {
+        return idMelom;
+    }
 
-	public void setIdMelom(Long idMelom) {
-		this.idMelom = idMelom;
-	}
+    public void setIdMelom(Long idMelom) {
+        this.idMelom = idMelom;
+    }
 
-	public ComentarioDAO getComentarioDao() {
-		return comentarioDao;
-	}
+    public ComentarioDAO getComentarioDao() {
+        return comentarioDao;
+    }
 
-	public void setComentarioDao(ComentarioDAO comentarioDao) {
-		this.comentarioDao = comentarioDao;
-	}
-	
-	
+    public void setComentarioDao(ComentarioDAO comentarioDao) {
+        this.comentarioDao = comentarioDao;
+    }
+
+
 }

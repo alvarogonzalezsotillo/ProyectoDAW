@@ -1,7 +1,7 @@
 package app.beans.test;
 
 
-import app.beans.implementations.ComentarioBean;
+import app.beans.ComentarioBean;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

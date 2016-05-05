@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 
-import app.beans.implementations.UsuarioBean;
+import app.beans.UsuarioBean;
 import app.builder.UsuarioBuilder;
 import app.utils.Util;
 

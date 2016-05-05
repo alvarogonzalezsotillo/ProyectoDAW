@@ -1,6 +1,6 @@
 package app.builder.test;
 
-import app.beans.implementations.MelomBean;
+import app.beans.MelomBean;
 import app.builder.MelomBuilder;
 import org.junit.After;
 import org.junit.Before;

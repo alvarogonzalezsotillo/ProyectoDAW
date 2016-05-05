@@ -1,6 +1,6 @@
 package app.model;
 
-import app.beans.implementations.ComentarioBean;
+import app.beans.ComentarioBean;
 import app.model.interfaces.DAO;
 import org.hibernate.Query;
 
@@ -21,21 +21,25 @@ public class ComentarioDAO extends SessionFactoryImpl implements Serializable,DA
 
     }
 
+
     public void insert(ComentarioBean comentario){
 
         session.save(comentario);
     }
+
 
     public void update(ComentarioBean comentarioToUpdate){
 
         session.update(comentarioToUpdate);
     }
 
+
     public void deleteById(Long id){
 
         ComentarioBean comentarioToDelete = session.load(ComentarioBean.class, id);
         session.delete(comentarioToDelete);
     }
+
 
     @SuppressWarnings("unchecked")
     public ComentarioBean getById(Long id){
@@ -48,6 +52,7 @@ public class ComentarioDAO extends SessionFactoryImpl implements Serializable,DA
 
         return listaComentarios.get(0);
     }
+
 
     @SuppressWarnings("unchecked")
     public List<ComentarioBean> getAll(){

@@ -1,6 +1,6 @@
 package app.model;
 
-import app.beans.implementations.MelomBean;
+import app.beans.MelomBean;
 import app.model.interfaces.DAO;
 import org.hibernate.Query;
 
@@ -16,21 +16,25 @@ public class MelomDAO extends SessionFactoryImpl implements Serializable, DAO<Me
         super();
     }
 
+
     public void insert(MelomBean melomBean) {
 
         session.save(melomBean);
 
     }
 
+
     public void update(MelomBean melomBean) {
 
         session.update(melomBean);
     }
 
+
     public void deleteById(Long id) {
         MelomBean melomToDelete = session.load(MelomBean.class, id);
         session.delete(melomToDelete);
     }
+
 
     @SuppressWarnings("unchecked")
     public MelomBean getById(Long id) {
@@ -42,6 +46,7 @@ public class MelomDAO extends SessionFactoryImpl implements Serializable, DAO<Me
 
         return listaMeloms.get(0);
     }
+
 
     @SuppressWarnings("unchecked")
     public List<MelomBean> getAll() {

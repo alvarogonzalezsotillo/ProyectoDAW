@@ -1,13 +1,13 @@
-package app.beans.implementations;
+package app.beans;
 
-import app.beans.interfaces.Comentario;
+import app.beans.interfaces.Bean;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "BETAcomentarios")//NO OLVIDAR CAMBIAR CUANDO TERMINEMOS LA TABLA DE COMENTARIOS!!!!!!!!!!!!!!!!!!!
-public class ComentarioBean implements Comentario, Serializable {
+public class ComentarioBean implements Serializable, Bean {
 
     private static final long serialVersionUID = 1L;
 
@@ -32,11 +32,13 @@ public class ComentarioBean implements Comentario, Serializable {
         this.idMelom = idMelom;
     }
 
+
     @Id
     @GeneratedValue
     public Long getId() {
         return id;
     }
+
 
     public void setId(Long id) {
         this.id = id;

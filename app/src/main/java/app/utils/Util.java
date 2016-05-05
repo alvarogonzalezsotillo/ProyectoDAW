@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 
 public final class Util {
 
-    private static final String salt = "S%J(G</DAW";
+    private static final String SALT = "S%J(G</DAW";
 
     private Util() throws InstantiationError {
 
@@ -18,7 +18,7 @@ public final class Util {
 
     public static String getSalt() {
 
-        return salt;
+        return SALT;
 
     }
 
