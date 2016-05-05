@@ -1,6 +1,6 @@
 package app.model;
 
-import app.beans.implementations.MelomBean;
+import app.beans.MelomBean;
 import app.model.interfaces.DAO;
 import org.hibernate.Query;
 

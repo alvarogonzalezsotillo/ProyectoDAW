@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import app.beans.implementations.UsuarioBean;
+import app.beans.UsuarioBean;
 import app.builder.UsuarioBuilder;
 import app.utils.Util;
 

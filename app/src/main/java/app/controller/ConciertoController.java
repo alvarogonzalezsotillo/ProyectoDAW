@@ -1,6 +1,6 @@
 package app.controller;
 
-import app.beans.implementations.ConciertoBean;
+import app.beans.ConciertoBean;
 import app.builder.ConciertoBuilder;
 import app.controller.interfaces.Controller;
 import app.model.ConciertoDAO;

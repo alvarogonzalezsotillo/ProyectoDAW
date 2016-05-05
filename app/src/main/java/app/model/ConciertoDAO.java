@@ -1,6 +1,6 @@
 package app.model;
 
-import app.beans.implementations.ConciertoBean;
+import app.beans.ConciertoBean;
 import app.model.interfaces.DAO;
 import org.hibernate.Query;
 

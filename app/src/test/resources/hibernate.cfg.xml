@@ -17,9 +17,9 @@
 		<property name="show_sql">true</property>
 		<!--<property name="hbm2ddl.auto">validate</property>-->
 
-		<mapping class="app.beans.implementations.UsuarioBean" />
-		<mapping class="app.beans.implementations.ComentarioBean" />
-		<mapping class="app.beans.implementations.MelomBean" />
-		<mapping class="app.beans.implementations.ConciertoBean" />
+		<mapping class="app.beans.UsuarioBean" />
+		<mapping class="app.beans.ComentarioBean" />
+		<mapping class="app.beans.MelomBean" />
+		<mapping class="app.beans.ConciertoBean" />
 	</session-factory>
 </hibernate-configuration>

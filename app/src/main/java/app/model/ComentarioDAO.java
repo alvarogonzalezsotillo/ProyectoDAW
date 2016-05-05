@@ -1,6 +1,6 @@
 package app.model;
 
-import app.beans.implementations.ComentarioBean;
+import app.beans.ComentarioBean;
 import app.model.interfaces.DAO;
 import org.hibernate.Query;
 

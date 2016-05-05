@@ -1,10 +1,11 @@
 package app.builder;
 
-import app.beans.implementations.ComentarioBean;
+import app.beans.ComentarioBean;
+import app.builder.interfaces.Builder;
 
 import java.io.Serializable;
 
-public class ComentarioBuilder implements Serializable {
+public class ComentarioBuilder implements Serializable, Builder<ComentarioBean> {
 
     private static final long serialVersionUID = 1L;
 

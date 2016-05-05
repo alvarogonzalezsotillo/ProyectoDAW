@@ -1,8 +1,7 @@
 package app.builder.test;
 
-import app.beans.implementations.ComentarioBean;
+import app.beans.ComentarioBean;
 import app.builder.ComentarioBuilder;
-import app.builder.UsuarioBuilder;
 
 import static org.junit.Assert.*;
 

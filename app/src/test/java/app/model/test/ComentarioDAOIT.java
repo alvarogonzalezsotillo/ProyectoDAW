@@ -1,10 +1,9 @@
 package app.model.test;
 
 
-import app.beans.implementations.ComentarioBean;
+import app.beans.ComentarioBean;
 import app.model.ComentarioDAO;
 import org.junit.*;
-import org.junit.runners.MethodSorters;
 
 import static org.junit.Assert.*;
 

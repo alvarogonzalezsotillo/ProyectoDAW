@@ -2,12 +2,13 @@ package app.builder;
 
 import java.io.Serializable;
 
+import app.builder.interfaces.Builder;
 import org.primefaces.model.UploadedFile;
 
-import app.beans.implementations.MelomBean;
+import app.beans.MelomBean;
 import app.utils.Util;
 
-public class MelomBuilder implements Serializable {
+public class MelomBuilder implements Serializable, Builder<MelomBean> {
 
 	private static final long serialVersionUID = 1L;
 	

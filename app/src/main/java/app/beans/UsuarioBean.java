@@ -1,4 +1,4 @@
-package app.beans.implementations;
+package app.beans;
 
 import java.io.Serializable;
 
@@ -8,12 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import app.beans.interfaces.Usuario;
+import app.beans.interfaces.Bean;
 import app.utils.Util;
 
 @Entity
 @Table(name = "usuarios")
-public class UsuarioBean implements Usuario, Serializable {
+public class UsuarioBean implements Serializable, Bean {
 
     private static final long serialVersionUID = 1L;
 

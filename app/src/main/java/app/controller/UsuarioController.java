@@ -1,6 +1,6 @@
 package app.controller;
 
-import app.beans.implementations.UsuarioBean;
+import app.beans.UsuarioBean;
 import app.builder.UsuarioBuilder;
 import app.controller.interfaces.Controller;
 import app.model.UsuarioDAO;

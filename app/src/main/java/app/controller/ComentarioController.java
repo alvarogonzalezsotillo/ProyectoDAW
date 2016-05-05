@@ -1,6 +1,6 @@
 package app.controller;
 
-import app.beans.implementations.ComentarioBean;
+import app.beans.ComentarioBean;
 import app.builder.ComentarioBuilder;
 import app.controller.interfaces.Controller;
 import app.model.ComentarioDAO;

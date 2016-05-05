@@ -1,6 +1,6 @@
 package app.model;
 
-import app.beans.implementations.UsuarioBean;
+import app.beans.UsuarioBean;
 import app.model.interfaces.DAO;
 import org.hibernate.Query;
 

@@ -1,4 +1,6 @@
-package app.beans.implementations;
+package app.beans;
+
+import app.beans.interfaces.Bean;
 
 import java.io.Serializable;
 
@@ -8,11 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import app.beans.interfaces.Melom;
-
 @Entity
 @Table(name = "BETAmeloms")//NO OLVIDAR CAMBIAR CUANDO TERMINEMOS LA TABLA DE MELOMS!!!!!!!!!!!!!!!!!!!
-public class MelomBean implements Melom, Serializable {
+public class MelomBean implements Serializable, Bean {
 
 	private static final long serialVersionUID = 1L;
 	

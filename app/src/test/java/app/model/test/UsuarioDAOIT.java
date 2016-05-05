@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 
-import app.beans.implementations.UsuarioBean;
+import app.beans.UsuarioBean;
 import app.model.UsuarioDAO;
 
 public class UsuarioDAOIT extends BaseIT<UsuarioDAO> {

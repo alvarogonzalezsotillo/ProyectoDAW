@@ -1,12 +1,13 @@
 package app.builder;
 
-import app.beans.implementations.UsuarioBean;
+import app.beans.UsuarioBean;
+import app.builder.interfaces.Builder;
 import app.utils.Util;
 import org.primefaces.model.UploadedFile;
 
 import java.io.Serializable;
 
-public class UsuarioBuilder implements Serializable {
+public class UsuarioBuilder implements Serializable, Builder<UsuarioBean> {
 
     private static final long serialVersionUID = 1L;
     
