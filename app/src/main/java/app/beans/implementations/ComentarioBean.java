@@ -33,7 +33,8 @@ public class ComentarioBean implements Comentario, Serializable {
     }
 
     @Id
-    @GeneratedValue
+    @SequenceGenerator(name="com_seq", sequenceName="comentario_sequence")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="com_seq")
     public Long getId() {
         return id;
     }

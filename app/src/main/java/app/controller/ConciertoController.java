@@ -11,6 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
+import java.util.List;
 
 @ManagedBean(name = "conciertoController")
 @ViewScoped
@@ -40,6 +41,45 @@ public class ConciertoController implements Serializable, Controller{
         conciertoDao.insert(comentario);
         commitAndCloseSession();
 
+    }
+
+    public void deleteConcierto(Long id){
+
+        initSessionForDao();
+        initTransactionForDao();
+        conciertoDao.deleteById(id);
+        commitAndCloseSession();
+
+    }
+
+    public void updateConcierto(){
+
+        conciertoBuilder = new ConciertoBuilder(idUsuario,lugar,ciudad,pais);
+
+        ConciertoBean comentario = conciertoBuilder.build();
+
+        initSessionForDao();
+        initTransactionForDao();
+        conciertoDao.update(comentario);
+        commitAndCloseSession();
+
+    }
+
+    public void listConcierto(){
+
+        initSessionForDao();
+        initTransactionForDao();
+        List<ConciertoBean> listaConciertos = conciertoDao.getAll();//Falta saber como enviarlo a la vista
+        commitAndCloseSession();
+
+    }
+
+    public void getConciertoById(Long id){
+
+        initSessionForDao();
+        initTransactionForDao();
+        ConciertoBean conciertoReturned = conciertoDao.getById(id);//Falta saber como enviarlo a la vista
+        commitAndCloseSession();
     }
 
     public void initSessionForDao(){

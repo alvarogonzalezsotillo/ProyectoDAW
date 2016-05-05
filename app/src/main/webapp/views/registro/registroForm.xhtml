@@ -69,7 +69,7 @@
 			<p:fileUpload  id="logo" mode="simple" skinSimple="true" value="#{usuarioController.imagen}"/>
 		</h:panelGrid>
 		<p:commandButton value="Empieza el show!">
-			<f:ajax execute="@all" listener="#{usuarioController.insert}" />
+			<f:ajax execute="@all" listener="#{usuarioController.insertUsuario}" />
 		</p:commandButton>
 
 	</h:form>

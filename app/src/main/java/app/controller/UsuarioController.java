@@ -38,54 +38,86 @@ public class UsuarioController implements Serializable, Controller {
     @ManagedProperty(value = "#{usuarioDao}")
     private UsuarioDAO usuarioDao;
 
-    public void insert() {
-
+    public void insertUsuario() {
         initSessionForDao();
         List<String> listNicks = usuarioDao.getAllNicks();
         closeSession();
 
         if(listNicks.contains(nick)){
-
             FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Has sido más lento", "Otro usuario ha registrado el nick " + nick + ", elige otro.");
             FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-
         }
 
         else{
-
             usuarioBuilder = new UsuarioBuilder(nombre, apellido, nick, password);
-
             UsuarioBean usuario = usuarioBuilder.correo(correo)
                                                 .web(web)
                                                 .grupo(grupo)
                                                 .tipoMusica(tipoMusica)
                                                 .imagen(imagen)
                                                 .build();
-
             initSessionForDao();
             initTransactionForDao();
             usuarioDao.insert(usuario);
             commitAndCloseSession();
 
-
             try {
-
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.getExternalContext().getFlash().setKeepMessages(true);
                 FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "¡Bienvenid@ " + nombre +"!", "Tu usuario "+ nick +" ha sido registrado, ¡ahora a Rockear!");
                 context.getCurrentInstance().addMessage(null, facesMessage);
-
                 context.getExternalContext().redirect("/views/index/login.xhtml");
-
             }
 
             catch (IOException e) {
-
                 throw new RuntimeException("Fallo en UsuarioController: no se pudo redirigir" + e);
-
             }
 
         }
+    }
+
+    public void deleteUsuarioById(Long id){
+
+        initSessionForDao();
+        initTransactionForDao();
+        usuarioDao.deleteById(id);
+        commitAndCloseSession();
+
+    }
+
+    public void updateUsuario(){
+
+        usuarioBuilder = new UsuarioBuilder(nombre, apellido, nick, password);
+        UsuarioBean usuario = usuarioBuilder.correo(correo)
+                                            .web(web)
+                                            .grupo(grupo)
+                                            .tipoMusica(tipoMusica)
+                                            .imagen(imagen)
+                                            .build();
+
+        initSessionForDao();
+        initTransactionForDao();
+        usuarioDao.update(usuario);
+        commitAndCloseSession();
+
+    }
+
+    public void listUsuario(){
+
+        initSessionForDao();
+        initTransactionForDao();
+        List<UsuarioBean> listaUsuarios = usuarioDao.getAll();//Falta saber como enviarlo a la vista
+        commitAndCloseSession();
+
+    }
+
+    public void getUsuarioById(Long id){
+
+        initSessionForDao();
+        initTransactionForDao();
+        UsuarioBean usuarioReturned = usuarioDao.getById(id);//Falta saber como enviarlo a la vista
+        commitAndCloseSession();
+
     }
 
     public void initSessionForDao(){
