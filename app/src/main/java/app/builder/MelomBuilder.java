@@ -26,13 +26,8 @@ public class MelomBuilder implements Serializable, Builder<MelomBean> {
         
     }
 
-    public MelomBuilder(String titulo, String album, String tipoMusica, String comentarioMusico, byte[] cancion, byte[] imagenAlbum, Long idUsuario){
+    public MelomBuilder(String titulo, Long idUsuario){
         this.titulo = titulo;
-        this.album = album;
-        this.tipoMusica = tipoMusica;
-        this.comentarioMusico = comentarioMusico;
-        this.cancion = cancion;
-        this.imagenAlbum = imagenAlbum;
         this.idUsuario = idUsuario;
     }
 
