@@ -36,7 +36,7 @@ public class MelomBuilder implements Serializable, Builder<MelomBean> {
         this.idUsuario = idUsuario;
     }
 
-    @Override
+
     public MelomBean build() {
 
         return new MelomBean(titulo, album, tipoMusica, comentarioMusico, cancion, imagenAlbum, idUsuario);

@@ -9,25 +9,25 @@ import java.util.List;
 
 public class ConciertoDAO extends SessionFactoryImpl implements Serializable, DAO<ConciertoBean> {
 
-    @Override
+
     public void insert(ConciertoBean conciertoBean) {
 
         session.save(conciertoBean);
     }
 
-    @Override
+
     public void update(ConciertoBean conciertoBean) {
 
         session.update(conciertoBean);
     }
 
-    @Override
+
     public void deleteById(Long id) {
         ConciertoBean conciertoToDelete = session.load(ConciertoBean.class, id);
         session.delete(conciertoToDelete);
     }
 
-    @Override
+
     @SuppressWarnings("unchecked")
     public ConciertoBean getById(Long id) {
 
@@ -38,7 +38,7 @@ public class ConciertoDAO extends SessionFactoryImpl implements Serializable, DA
         return listaConciertos.get(0);
     }
 
-    @Override
+
     public List<ConciertoBean> getAll() {
 
         List<ConciertoBean> listaConciertos;

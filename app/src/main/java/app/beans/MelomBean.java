@@ -56,12 +56,12 @@ public class MelomBean implements Serializable, Bean {
         this.idUsuario = idUsuario;
     }
 
-    @Override
+
     public Long getId() {
         return id;
     }
 
-    @Override
+
     public void setId(Long id) {
         this.id = id;
     }

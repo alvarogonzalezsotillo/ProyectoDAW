@@ -8,12 +8,12 @@ public class SessionFactoryImpl implements SessionFactory {
 
     protected Session session;
 
-    @Override
+
     public Session getSession() {
         return session;
     }
 
-    @Override
+
     public void setSession(Session session) {
         this.session = session;
     }

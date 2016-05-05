@@ -21,26 +21,26 @@ public class ComentarioDAO extends SessionFactoryImpl implements Serializable,DA
 
     }
 
-    @Override
+
     public void insert(ComentarioBean comentario){
 
         session.save(comentario);
     }
 
-    @Override
+
     public void update(ComentarioBean comentarioToUpdate){
 
         session.update(comentarioToUpdate);
     }
 
-    @Override
+
     public void deleteById(Long id){
 
         ComentarioBean comentarioToDelete = session.load(ComentarioBean.class, id);
         session.delete(comentarioToDelete);
     }
 
-    @Override
+
     @SuppressWarnings("unchecked")
     public ComentarioBean getById(Long id){
 
@@ -53,7 +53,7 @@ public class ComentarioDAO extends SessionFactoryImpl implements Serializable,DA
         return listaComentarios.get(0);
     }
 
-    @Override
+
     @SuppressWarnings("unchecked")
     public List<ComentarioBean> getAll(){
 

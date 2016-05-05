@@ -93,26 +93,26 @@ public class ComentarioController implements Serializable, Controller {
 
     }
 
-    @Override
+
     public void initSessionForDao(){
         Session session = UtilSessionHibernate.initSession();
         comentarioDao.setSession(session);
     }
 
-    @Override
+
     public void commitAndCloseSession(){
         Session session = comentarioDao.getSession();
         UtilSessionHibernate.commitAndCloseSession(session);
 
     }
 
-    @Override
+
     public void closeSession(){
         Session session = comentarioDao.getSession();
         UtilSessionHibernate.closeSession(session);
     }
 
-    @Override
+
     public void initTransactionForDao(){
         Session session = comentarioDao.getSession();
         UtilSessionHibernate.initTransaction(session);

@@ -16,26 +16,26 @@ public class MelomDAO extends SessionFactoryImpl implements Serializable, DAO<Me
         super();
     }
 
-    @Override
+
     public void insert(MelomBean melomBean) {
 
         session.save(melomBean);
 
     }
 
-    @Override
+
     public void update(MelomBean melomBean) {
 
         session.update(melomBean);
     }
 
-    @Override
+
     public void deleteById(Long id) {
         MelomBean melomToDelete = session.load(MelomBean.class, id);
         session.delete(melomToDelete);
     }
 
-    @Override
+
     @SuppressWarnings("unchecked")
     public MelomBean getById(Long id) {
 
@@ -47,7 +47,7 @@ public class MelomDAO extends SessionFactoryImpl implements Serializable, DAO<Me
         return listaMeloms.get(0);
     }
 
-    @Override
+
     @SuppressWarnings("unchecked")
     public List<MelomBean> getAll() {
 

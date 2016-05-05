@@ -32,14 +32,14 @@ public class ComentarioBean implements Serializable, Bean {
         this.idMelom = idMelom;
     }
 
-    @Override
+
     @Id
     @GeneratedValue
     public Long getId() {
         return id;
     }
 
-    @Override
+
     public void setId(Long id) {
         this.id = id;
     }

@@ -60,14 +60,14 @@ public class UsuarioBean implements Serializable, Bean {
         this.imagenDeUsuario = imagenDeUsuario ;
     }
 
-    @Override
+
     @Id
     @GeneratedValue
     public Long getId() {
         return id;
     }
 
-    @Override
+
     public void setId(Long id) {
         this.id = id;
     }
