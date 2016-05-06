@@ -37,9 +37,11 @@ public class MelomController implements Serializable, Controller {
         MelomBean melom = melomBuilder.album(album)
                                       .tipoMusica(tipoMusica)
                                       .comentarioMusico(comentario)
-                                      //.cancion(cancion)
-                                      //.imagenAlbum(imagenAlbum)
+                                      .cancion(cancion)
+                                      .imagenAlbum(imagenAlbum)
                                       .build();
+        System.out.println(imagenAlbum);
+        System.out.println(cancion);
         initSessionForDao();
         initTransactionForDao();
         melomDao.insert(melom);
