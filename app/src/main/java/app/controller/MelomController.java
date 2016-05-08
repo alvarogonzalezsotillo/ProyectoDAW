@@ -12,6 +12,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
+import java.util.List;
 
 @ManagedBean(name = "melomController")
 @ViewScoped
@@ -32,7 +33,7 @@ public class MelomController implements Serializable, Controller {
     @ManagedProperty(value = "#{melomDao}")
     private MelomDAO melomDao;
 
-    public void insert() {
+    public void insertMelom() {
         melomBuilder = new MelomBuilder(titulo, idUsuario);
         MelomBean melom = melomBuilder.album(album)
                                       .tipoMusica(tipoMusica)
@@ -45,6 +46,49 @@ public class MelomController implements Serializable, Controller {
         initSessionForDao();
         initTransactionForDao();
         melomDao.insert(melom);
+        commitAndCloseSession();
+    }
+
+    public void deleteMelom(Long id){
+
+        initSessionForDao();
+        initTransactionForDao();
+        melomDao.deleteById(id);
+        commitAndCloseSession();
+
+    }
+
+    public void updateMelom(){
+
+        melomBuilder = new MelomBuilder(titulo,idUsuario);
+
+        MelomBean melom = melomBuilder.album(album)
+                                      .tipoMusica(tipoMusica)
+                                      .comentarioMusico(comentario)
+                                      .cancion(cancion)
+                                      .imagenAlbum(imagenAlbum)
+                                      .build();
+        initSessionForDao();
+        initTransactionForDao();
+        melomDao.update(melom);
+        commitAndCloseSession();
+
+    }
+
+    public void listMelom(){
+
+        initSessionForDao();
+        initTransactionForDao();
+        List<MelomBean> listaMeloms = melomDao.getAll();//Falta saber como enviarlo a la vista
+        commitAndCloseSession();
+
+    }
+
+    public void getMelomById(Long id){
+
+        initSessionForDao();
+        initTransactionForDao();
+        MelomBean melomReturned = melomDao.getById(id);//Falta saber como enviarlo a la vista
         commitAndCloseSession();
     }
 
