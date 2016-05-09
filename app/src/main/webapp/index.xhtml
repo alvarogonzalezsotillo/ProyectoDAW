@@ -2,26 +2,28 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
 
 <ui:include src="/resources/templates/header.xhtml" />
 
 <h:body>
 
-	<h:form enctype="multipart/form-data">
+    <h:form enctype="multipart/form-data">
 
-		<h:outputText value="Prueba de redirecciones" />
+        <h:outputText value="Prueba de redirecciones" />
 
 
 
-		<p:commandLink id="Link1" value="Login" action="#{navigationController.redirect('/views/index/login.xhtml')}" />
-		<br/>
-		<p:commandLink id="Link2" value="Login con mensaje" action="#{navigationController.redirectWithInfoMessage('/views/index/login.xhtml', 'Redirigido', 'Has sido redirigido a la pantalla de login')}" />
+        <p:commandLink id="Link1" action="#{navigationController.redirect('/views/index/login.xhtml')}">
+            <img src="resources/images/nota.png" alt="Nota musical" width="400"/>
+        </p:commandLink>
+        <br/>
+        <p:commandLink id="Link2" value="Login con mensaje" action="#{navigationController.redirectWithInfoMessage('/views/index/login.xhtml', 'Redirigido', 'Has sido redirigido a la pantalla de login')}" />
 
-	</h:form>
+    </h:form>
 
 </h:body>
 </html>
