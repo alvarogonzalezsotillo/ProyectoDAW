@@ -32,9 +32,7 @@ public class ConciertoController implements Serializable, Controller{
 
     public void insertConcierto(){
 
-        conciertoBuilder = new ConciertoBuilder(idUsuario,lugar,ciudad,pais);
-
-        ConciertoBean comentario = conciertoBuilder.build();
+        ConciertoBean comentario = createConciertoBean();
 
         initSessionForDao();
         initTransactionForDao();
@@ -54,9 +52,7 @@ public class ConciertoController implements Serializable, Controller{
 
     public void updateConcierto(){
 
-        conciertoBuilder = new ConciertoBuilder(idUsuario,lugar,ciudad,pais);
-
-        ConciertoBean comentario = conciertoBuilder.build();
+        ConciertoBean comentario = createConciertoBean();
 
         initSessionForDao();
         initTransactionForDao();
@@ -106,6 +102,12 @@ public class ConciertoController implements Serializable, Controller{
         Session session = conciertoDao.getSession();
         UtilSessionHibernate.initTransaction(session);
 
+    }
+
+    private ConciertoBean createConciertoBean() {
+        conciertoBuilder = new ConciertoBuilder(idUsuario,lugar,ciudad,pais);
+
+        return conciertoBuilder.build();
     }
 
     public ConciertoBuilder getConciertoBuilder() {

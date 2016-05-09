@@ -4,16 +4,14 @@ import app.beans.UsuarioBean;
 import app.builder.UsuarioBuilder;
 import app.controller.interfaces.Controller;
 import app.model.UsuarioDAO;
+import app.utils.Util;
 import app.utils.UtilSessionHibernate;
 import org.hibernate.Session;
 import org.primefaces.model.UploadedFile;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -39,39 +37,29 @@ public class UsuarioController implements Serializable, Controller {
     private UsuarioDAO usuarioDao;
 
     public void insertUsuario() {
-        initSessionForDao();
-        List<String> listNicks = usuarioDao.getAllNicks();
-        closeSession();
 
-        if(listNicks.contains(nick)){
-            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Has sido más lento", "Otro usuario ha registrado el nick " + nick + ", elige otro.");
-            FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+        if(nickAlreadyExists()){
+
+            String summary = "Has sido más lento";
+            String detail = "Otro usuario ha registrado el nick " + nick + ", elige otro.";
+
+            Util.sendErrorMessage(summary,detail);
+
         }
 
         else{
-            usuarioBuilder = new UsuarioBuilder(nombre, apellido, nick, password);
-            UsuarioBean usuario = usuarioBuilder.correo(correo)
-                                                .web(web)
-                                                .grupo(grupo)
-                                                .tipoMusica(tipoMusica)
-                                                .imagen(imagen)
-                                                .build();
+
+            UsuarioBean usuario = createUsuarioBean();
             initSessionForDao();
             initTransactionForDao();
             usuarioDao.insert(usuario);
             commitAndCloseSession();
 
-            try {
-                FacesContext context = FacesContext.getCurrentInstance();
-                context.getExternalContext().getFlash().setKeepMessages(true);
-                FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "¡Bienvenid@ " + nombre +"!", "Tu usuario "+ nick +" ha sido registrado, ¡ahora a Rockear!");
-                context.getCurrentInstance().addMessage(null, facesMessage);
-                context.getExternalContext().redirect("/views/index/login.xhtml");
-            }
+            String route = "/views/index/login.xhtml";
+            String summary = "¡Bienvenid@ " + nombre + "!";
+            String detail = "Tu usuario " + nick + " ha sido registrado, ¡ahora a Rockear!";
 
-            catch (IOException e) {
-                throw new RuntimeException("Fallo en UsuarioController: no se pudo redirigir" + e);
-            }
+            Util.redirectWithInfoMessage(route, summary, detail);
 
         }
     }
@@ -87,13 +75,7 @@ public class UsuarioController implements Serializable, Controller {
 
     public void updateUsuario(){
 
-        usuarioBuilder = new UsuarioBuilder(nombre, apellido, nick, password);
-        UsuarioBean usuario = usuarioBuilder.correo(correo)
-                                            .web(web)
-                                            .grupo(grupo)
-                                            .tipoMusica(tipoMusica)
-                                            .imagen(imagen)
-                                            .build();
+        UsuarioBean usuario = createUsuarioBean();
 
         initSessionForDao();
         initTransactionForDao();
@@ -144,6 +126,23 @@ public class UsuarioController implements Serializable, Controller {
     public void closeSession(){
         Session session = usuarioDao.getSession();
         UtilSessionHibernate.closeSession(session);
+    }
+
+    private UsuarioBean createUsuarioBean() {
+        usuarioBuilder = new UsuarioBuilder(nombre, apellido, nick, password);
+        return usuarioBuilder.correo(correo)
+                                .web(web)
+                                .grupo(grupo)
+                                .tipoMusica(tipoMusica)
+                                .imagen(imagen)
+                                .build();
+    }
+
+    private boolean nickAlreadyExists() {
+        initSessionForDao();
+        List<String> listNicks = usuarioDao.getAllNicks();
+        closeSession();
+        return listNicks.contains(nick);
     }
 
     public UsuarioBuilder getUsuarioBuilder() {

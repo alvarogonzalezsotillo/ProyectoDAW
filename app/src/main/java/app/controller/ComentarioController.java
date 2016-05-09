@@ -29,13 +29,21 @@ public class ComentarioController implements Serializable, Controller {
     private ComentarioDAO comentarioDao;
     
     public void insertComentario() {
-        comentarioBuilder = new ComentarioBuilder(texto, idUsuario, idMelom);
-
-        ComentarioBean comentario = comentarioBuilder.build();
+        ComentarioBean comentario = createComentarioBean();
 
         initSessionForDao();
         initTransactionForDao();
         comentarioDao.insert(comentario);
+        commitAndCloseSession();
+
+    }
+
+    public void updateComentario() {
+        ComentarioBean comentario = createComentarioBean();
+
+        initSessionForDao();
+        initTransactionForDao();
+        comentarioDao.update(comentario);
         commitAndCloseSession();
 
     }
@@ -81,17 +89,6 @@ public class ComentarioController implements Serializable, Controller {
 
     }
 
-    public void updateComentario() {
-        comentarioBuilder = new ComentarioBuilder(texto, idUsuario, idMelom);
-
-        ComentarioBean comentario = comentarioBuilder.build();
-
-        initSessionForDao();
-        initTransactionForDao();
-        comentarioDao.update(comentario);
-        commitAndCloseSession();
-
-    }
 
 
     public void initSessionForDao(){
@@ -117,6 +114,12 @@ public class ComentarioController implements Serializable, Controller {
         Session session = comentarioDao.getSession();
         UtilSessionHibernate.initTransaction(session);
 
+    }
+
+    private ComentarioBean createComentarioBean() {
+        comentarioBuilder = new ComentarioBuilder(texto, idUsuario, idMelom);
+
+        return comentarioBuilder.build();
     }
     
     public ComentarioBuilder getComentarioBuilder() {

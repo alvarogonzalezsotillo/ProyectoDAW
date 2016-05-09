@@ -34,15 +34,8 @@ public class MelomController implements Serializable, Controller {
     private MelomDAO melomDao;
 
     public void insertMelom() {
-        melomBuilder = new MelomBuilder(titulo, idUsuario);
-        MelomBean melom = melomBuilder.album(album)
-                                      .tipoMusica(tipoMusica)
-                                      .comentarioMusico(comentario)
-                                      .cancion(cancion)
-                                      .imagenAlbum(imagenAlbum)
-                                      .build();
-        System.out.println(imagenAlbum);
-        System.out.println(cancion);
+
+        MelomBean melom = createMelomBean();
         initSessionForDao();
         initTransactionForDao();
         melomDao.insert(melom);
@@ -60,14 +53,7 @@ public class MelomController implements Serializable, Controller {
 
     public void updateMelom(){
 
-        melomBuilder = new MelomBuilder(titulo,idUsuario);
-
-        MelomBean melom = melomBuilder.album(album)
-                                      .tipoMusica(tipoMusica)
-                                      .comentarioMusico(comentario)
-                                      .cancion(cancion)
-                                      .imagenAlbum(imagenAlbum)
-                                      .build();
+        MelomBean melom = createMelomBean();
         initSessionForDao();
         initTransactionForDao();
         melomDao.update(melom);
@@ -110,6 +96,16 @@ public class MelomController implements Serializable, Controller {
     public void closeSession() {
         Session session = melomDao.getSession();
         UtilSessionHibernate.closeSession(session);
+    }
+
+    private MelomBean createMelomBean() {
+        melomBuilder = new MelomBuilder(titulo, idUsuario);
+        return melomBuilder.album(album)
+                            .tipoMusica(tipoMusica)
+                            .comentarioMusico(comentario)
+                            .cancion(cancion)
+                            .imagenAlbum(imagenAlbum)
+                            .build();
     }
 
     public String getTitulo() {
