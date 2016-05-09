@@ -1,0 +1,72 @@
+@CHARSET "ISO-8859-1";
+
+video#bgvid { 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    background: url(#{request.contextPath}/resources/images/videoBienvenida.jpg) no-repeat;
+    background-size: cover; 
+}
+
+video { display: block; }
+
+/*
+@media screen and (max-device-width: 800px) {
+    html {
+         background: url(#{request.contextPath}/resources/images/videoBienvenida.jpg) #000 no-repeat center center fixed;
+    }
+    #bgvid {
+        display: none;
+    }
+}
+*/
+
+.logoCompleto {
+	width: 1000px;
+	height: 480px;
+	cursor: pointer;
+
+}
+
+.logoReducido {
+	cursor: pointer;
+	display: none;
+}
+
+@media (max-width: 1000px) and (min-width: 200px){
+  .logoCompleto {
+   display:none;
+  }
+
+  .logoReducido {
+   display:block;
+   position: absolute;
+   top: 0; bottom:0; left: 0; right:0;
+    margin: auto;
+  }
+}
+
+.container-fluid{
+  height:100%;
+  display:table;
+  width: 100%;
+  padding: 0;
+}
+
+.row-fluid {height: 100%; display:table-cell; vertical-align: middle;}
+
+.centering {
+  float:none;
+  margin:0 auto;
+}
+
+html, body{height:100%; margin:0;padding:0}
