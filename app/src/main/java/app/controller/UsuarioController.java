@@ -4,7 +4,7 @@ import app.beans.UsuarioBean;
 import app.builder.UsuarioBuilder;
 import app.controller.interfaces.Controller;
 import app.model.UsuarioDAO;
-import app.utils.Util;
+import app.utils.UtilViews;
 import app.utils.UtilSessionHibernate;
 import org.hibernate.Session;
 import org.primefaces.model.UploadedFile;
@@ -43,7 +43,7 @@ public class UsuarioController implements Serializable, Controller {
             String summary = "Has sido más lento";
             String detail = "Otro usuario ha registrado el nick " + nick + ", elige otro.";
 
-            Util.sendErrorMessage(summary,detail);
+            UtilViews.sendErrorMessage(summary,detail);
 
         }
 
@@ -59,7 +59,7 @@ public class UsuarioController implements Serializable, Controller {
             String summary = "¡Bienvenid@ " + nombre + "!";
             String detail = "Tu usuario " + nick + " ha sido registrado, ¡ahora a Rockear!";
 
-            Util.redirectWithInfoMessage(route, summary, detail);
+            UtilViews.redirectWithInfoMessage(route, summary, detail);
 
         }
     }

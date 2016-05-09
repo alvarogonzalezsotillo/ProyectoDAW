@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import app.beans.interfaces.Bean;
-import app.utils.Util;
+import app.utils.UtilPasswords;
 
 @Entity
 @Table(name = "usuarios")
@@ -55,8 +55,8 @@ public class UsuarioBean implements Serializable, Bean {
         this.tipoMusicaDeUsuario = tipoMusicaDeUsuario;
         this.grupoDeUsuario = grupoDeUsuario;
         this.webDeUsuario = webDeUsuario;
-        String saltPassword = Util.getSalt();
-        this.passwordDeUsuario = Util.hashPasswordSHA(passwordDeUsuario+saltPassword);
+        String saltPassword = UtilPasswords.getSalt();
+        this.passwordDeUsuario = UtilPasswords.hashPasswordSHA(passwordDeUsuario+saltPassword);
         this.imagenDeUsuario = imagenDeUsuario ;
     }
 
@@ -129,8 +129,8 @@ public class UsuarioBean implements Serializable, Bean {
     }
 
     public void setPasswordDeUsuario(String passwordDeUsuario) {
-        String salt = Util.getSalt();
-        this.passwordDeUsuario = Util.hashPasswordSHA(passwordDeUsuario + salt);
+        String salt = UtilPasswords.getSalt();
+        this.passwordDeUsuario = UtilPasswords.hashPasswordSHA(passwordDeUsuario + salt);
     }
 
     public String getPasswordDeUsuario() {

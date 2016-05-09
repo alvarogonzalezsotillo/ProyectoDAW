@@ -3,10 +3,10 @@ package app.builder;
 import java.io.Serializable;
 
 import app.builder.interfaces.Builder;
+import app.utils.UtilFiles;
 import org.primefaces.model.UploadedFile;
 
 import app.beans.MelomBean;
-import app.utils.Util;
 
 public class MelomBuilder implements Serializable, Builder<MelomBean> {
 
@@ -72,7 +72,7 @@ public class MelomBuilder implements Serializable, Builder<MelomBean> {
     
     public MelomBuilder cancion(UploadedFile cancion) {
 
-        this.cancion = Util.transformFile(cancion);
+        this.cancion = UtilFiles.transformFile(cancion);
 
         return this;
 
@@ -80,7 +80,7 @@ public class MelomBuilder implements Serializable, Builder<MelomBean> {
     
     public MelomBuilder imagenAlbum(UploadedFile imagenAlbum) {
 
-        this.imagenAlbum = Util.transformFile(imagenAlbum);
+        this.imagenAlbum = UtilFiles.transformFile(imagenAlbum);
 
         return this;
 

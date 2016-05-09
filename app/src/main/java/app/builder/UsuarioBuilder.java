@@ -2,7 +2,7 @@ package app.builder;
 
 import app.beans.UsuarioBean;
 import app.builder.interfaces.Builder;
-import app.utils.Util;
+import app.utils.UtilFiles;
 import org.primefaces.model.UploadedFile;
 
 import java.io.Serializable;
@@ -108,7 +108,7 @@ public class UsuarioBuilder implements Serializable, Builder<UsuarioBean> {
 
     public UsuarioBuilder imagen(UploadedFile imagen){
 
-        this.imagen = Util.transformFile(imagen);
+        this.imagen = UtilFiles.transformFile(imagen);
 
         return this;
 

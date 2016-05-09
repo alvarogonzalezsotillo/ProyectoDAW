@@ -2,13 +2,13 @@ package app.builder.test;
 
 import static org.junit.Assert.*;
 
+import app.utils.UtilPasswords;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import app.beans.UsuarioBean;
 import app.builder.UsuarioBuilder;
-import app.utils.Util;
 
 public class UsuarioBuilderTest {
     
@@ -24,7 +24,7 @@ public class UsuarioBuilderTest {
     String grupoTest;
     String webTest;
     String passwordTest = "passwordTest";
-    String salt = Util.getSalt();
+    String salt = UtilPasswords.getSalt();
 
 
     @Before
@@ -99,9 +99,9 @@ public class UsuarioBuilderTest {
         assertEquals(tipoMusicaTest,usuarioTest.getTipoMusicaDeUsuario());
         assertEquals(webTest,usuarioTest.getWebDeUsuario());
         
-        String salt = Util.getSalt();
+        String salt = UtilPasswords.getSalt();
         
-        assertEquals(Util.hashPasswordSHA(passwordTest + salt),usuarioTest.getPasswordDeUsuario());
+        assertEquals(UtilPasswords.hashPasswordSHA(passwordTest + salt),usuarioTest.getPasswordDeUsuario());
         
     }
 }

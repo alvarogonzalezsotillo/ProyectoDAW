@@ -2,11 +2,11 @@ package app.beans.test;
 
 import static org.junit.Assert.*;
 
+import app.utils.UtilPasswords;
 import org.junit.*;
 
 import app.beans.UsuarioBean;
 import app.builder.UsuarioBuilder;
-import app.utils.Util;
 
 public class UsuarioTest {
 
@@ -19,7 +19,7 @@ public class UsuarioTest {
     String grupoTest = "testingGrupo";
     String webTest = "testingWeb";
     String passwordTest = "testingPass";
-    String salt = Util.getSalt();
+    String salt = UtilPasswords.getSalt();
     UsuarioBean sut;
 
     UsuarioBuilder usuarioBuilder;
@@ -167,13 +167,13 @@ public class UsuarioTest {
 
     @Test
     public void shouldReturnTheUserPasswordHashed() {
-        String hash = Util.hashPasswordSHA(passwordTest + salt);
+        String hash = UtilPasswords.hashPasswordSHA(passwordTest + salt);
         assertEquals(hash, sut.getPasswordDeUsuario());
     }
 
     @Test
     public void shouldEstablishTheUserPasswordHashed() {
-        String hash = Util.hashPasswordSHA(passwordTest + salt);
+        String hash = UtilPasswords.hashPasswordSHA(passwordTest + salt);
         sut.setPasswordDeUsuario(passwordTest);
         assertEquals(hash, sut.getPasswordDeUsuario());
     }

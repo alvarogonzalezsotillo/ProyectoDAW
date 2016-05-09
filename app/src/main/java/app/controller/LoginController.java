@@ -1,9 +1,10 @@
 package app.controller;
 
 import app.controller.interfaces.Controller;
-import app.utils.Util;
 import app.model.UsuarioDAO;
+import app.utils.UtilPasswords;
 import app.utils.UtilSessionHibernate;
+import app.utils.UtilViews;
 import org.hibernate.Session;
 
 import javax.faces.application.FacesMessage;
@@ -26,36 +27,29 @@ public class LoginController implements Serializable, Controller {
 
     public void login() {
 
-        String salt = Util.getSalt();
+        if (userIsRegistered()) {
 
-        String passwordHashed = Util.hashPasswordSHA(password + salt);
-
-        initSessionForDao();
-        boolean checkLogin = usuarioDao.loginUsuario(nick, passwordHashed);
-        closeSession();
-
-        if (checkLogin) {
-
-            try {
-
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/views/timeline/timeline.xhtml");
-            }
-
-            catch (IOException e) {
-
-                throw new RuntimeException("Fallo en LoginController: no se pudo redirigir" + e);
-            }
-
+            String route = "/views/timeline/timeline.xhtml";
+            UtilViews.redirect(route);
         }
 
         else {
+            String summary = "Oops!";
+            String detail = "El nick o password introducidos no coinciden, ¿ya te registraste?";
 
-            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Oops!", "El nick o password introducidos no coinciden,¿ya te registraste?");
-            FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-
+            UtilViews.sendErrorMessage(summary,detail);
         }
+    }
 
+    private boolean userIsRegistered() {
 
+        String salt = UtilPasswords.getSalt();
+        String passwordHashed = UtilPasswords.hashPasswordSHA(password + salt);
+
+        initSessionForDao();
+        boolean isRegistered = usuarioDao.loginUsuario(nick, passwordHashed);
+        closeSession();
+        return isRegistered;
     }
 
 
