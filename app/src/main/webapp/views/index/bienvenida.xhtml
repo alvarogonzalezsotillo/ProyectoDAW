@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<h:html xmlns="http://www.w3.org/1999/xhtml"
-      	xmlns:ui="http://java.sun.com/jsf/facelets"
-      	xmlns:f="http://java.sun.com/jsf/core"
-     	xmlns:h="http://java.sun.com/jsf/html"
-      	xmlns:ps="http://xmlns.jcp.org/jsf/passthrough"
-      	xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ps="http://xmlns.jcp.org/jsf/passthrough"
+		xmlns:p="http://primefaces.org/ui">
 
 	<h:head>
 	    <meta charset="UTF-8" />
@@ -49,14 +47,14 @@
 				  <h:form>
 				  	<h:graphicImage ps:id="logoReducidoLogin" name="Mnegro.png" library="images"></h:graphicImage>
 					<h:outputLabel for="nickDeUsuario" />
-		        	<p:inputText value="#{loginController.nick}" ps:id="nickDeUsuario" required="required" autofocus="autofocus" placeholder="Melóman@" label="nickDeUsuario" />
+		        	<p:inputText value="#{loginController.nick}" id="nickDeUsuario" required="required" autofocus="autofocus" placeholder="Melóman@" label="nickDeUsuario" />
 		        
 		        	<h:outputLabel for="passwordDeUsuario" />
-		        	<p:password value="#{loginController.password}" ps:id="passwordDeUsuario" required="required" placeholder="Contraseña" label="passwordDeUsuario" />
+		        	<p:password value="#{loginController.password}" id="passwordDeUsuario" required="required" placeholder="Contraseña" label="passwordDeUsuario" />
 					
 					<h:commandButton styleClass="login loginmodal-submit" actionListener="#{loginController.login}" value="Iniciar sesión"></h:commandButton>
+
 				  </h:form>
-					
 				  	<div class="modal-footer">
 				  		Empieza a marcar el ritmo<h:link action="#{navigationController.redirect('/views/formulario/registro.xhtml')}" >¡Regístrate!</h:link>
 				  	</div>
@@ -67,4 +65,4 @@
 	<h:outputScript library="js" name="jquery-1.12.3.js" />
 	<h:outputScript library="js" name="bootstrap.min.js" />
 	</h:body>
-</h:html>
+</html>
