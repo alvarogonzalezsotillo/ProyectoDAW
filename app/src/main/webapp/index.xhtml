@@ -11,17 +11,18 @@
 
 <h:body>
 
+    <f:event type="preRenderView" listener="#{perfilUsuarioController.init()}" />
+
     <h:form enctype="multipart/form-data">
-
-        <h:outputText value="Prueba de redirecciones" />
-
-
-
-        <p:commandLink id="Link1" action="#{navigationController.redirect('/views/index/login.xhtml')}">
-            <img src="resources/images/nota.png" alt="Nota musical" width="400"/>
-        </p:commandLink>
-        <br/>
-        <p:commandLink id="Link2" value="Login con mensaje" action="#{navigationController.redirectWithInfoMessage('/views/index/login.xhtml', 'Redirigido', 'Has sido redirigido a la pantalla de login')}" />
+        <h:panelGrid columns="1">
+        <h:outputText value="#{perfilUsuarioController.nombre}" />
+        <h:outputText value="#{perfilUsuarioController.apellido}" />
+        <h:outputText value="#{perfilUsuarioController.nick}" />
+        <h:outputText value="#{perfilUsuarioController.correo}" />
+        <h:outputText value="#{perfilUsuarioController.grupo}" />
+        <h:outputText value="#{perfilUsuarioController.web}" />
+        <h:outputText value="#{perfilUsuarioController.tipoMusica}" />
+        </h:panelGrid>
 
     </h:form>
 
