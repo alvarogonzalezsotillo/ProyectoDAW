@@ -5,6 +5,7 @@ import app.builder.ComentarioBuilder;
 import app.controller.interfaces.Controller;
 import app.model.ComentarioDAO;
 import app.utils.UtilSessionHibernate;
+import app.utils.UtilUserSession;
 import org.hibernate.Session;
 
 import javax.faces.bean.ManagedBean;
@@ -22,7 +23,7 @@ public class ComentarioController implements Serializable, Controller {
     private ComentarioBuilder comentarioBuilder;
 
     private String texto;
-    private Long idUsuario = 1L;
+    private Long idUsuario = UtilUserSession.getUserId();
     private Long idMelom = 1L;
 
     @ManagedProperty(value = "#{comentarioDao}")
