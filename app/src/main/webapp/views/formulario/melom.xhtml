@@ -27,7 +27,7 @@
 		<p:message id="albumOK" for="album" display="text"/>
 		<p:outputLabel value="Tipo de música: " for="tipoMusica"/>
 		<p:inputText id="tipoMusica" title="tipoMusica" required="false" value="#{melomController.tipoMusica}">
-			<f:validateLength minimum="5" maximum="45"/>
+			<f:validateLength minimum="3" maximum="45"/>
 			<p:ajax update="tipoOK" event="keyup"/>
 		</p:inputText>
 		<p:message id="tipoOK" for="tipoMusica" display="text"/>
@@ -37,10 +37,22 @@
 	</h:panelGrid>
 	<h:panelGrid columns="2">
 		<p:outputLabel value="Imagen del album: " for="imagen"/>
-		<p:fileUpload id="imagen" mode="simple" skinSimple="true"  value="#{melomController.imagenAlbum}"/>
+		<p:fileUpload id="imagen" mode="simple" skinSimple="true"  value="#{melomController.imagenAlbum}"
+					 update="messages"
+		  			 allowTypes="/(\.|\/)(png)$/"
+					 sizeLimit="4000000"
+					 validatorMessage="Comprueba si la imagen tiene el formato y dimensiones y peso adecuados e intentalo de nuevo"
+					 oncomplete="La imagen ha sido sublida correctamente"
+		/>
 
 		<p:outputLabel value="Cancion: " for="cancion"/>
-		<p:fileUpload id="cancion" mode="simple" skinSimple="true" value="#{melomController.cancion}"/>
+		<p:fileUpload id="cancion" mode="simple" skinSimple="true" value="#{melomController.cancion}"
+				update="messages"
+				sizeLimit="8000000"
+				allowTypes="/(\.|\/)(mp3|wav|ogg)$/" 
+				validatorMessage="Comprueba si el fichero de musica cumple con el formato y el peso e intentalo de nuevo"
+				oncomplete="Fichero de audio subido correctamente"
+		/>
 
 	</h:panelGrid>
 	<p:commandButton icon="ui-icon-play" value="Dale al play!">
