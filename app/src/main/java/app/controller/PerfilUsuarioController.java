@@ -4,6 +4,7 @@ import app.beans.UsuarioBean;
 import app.controller.interfaces.Controller;
 import app.model.UsuarioDAO;
 import app.utils.UtilSessionHibernate;
+import app.utils.UtilUserSession;
 import org.hibernate.Session;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -34,7 +35,7 @@ public class PerfilUsuarioController implements Controller, Serializable {
     public void init(){
 
         initSessionForDao();
-        UsuarioBean usuarioActual = usuarioDao.getById(1L);
+        UsuarioBean usuarioActual = usuarioDao.getById(UtilUserSession.getUserId());
         closeSession();
 
         this.nombre = usuarioActual.getNombreDeUsuario();

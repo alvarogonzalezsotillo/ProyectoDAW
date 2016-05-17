@@ -1,5 +1,6 @@
 package app.controller;
 
+import app.utils.UtilUserSession;
 import app.controller.interfaces.Controller;
 import app.model.UsuarioDAO;
 import app.utils.UtilPasswords;
@@ -7,20 +8,21 @@ import app.utils.UtilSessionHibernate;
 import app.utils.UtilViews;
 import org.hibernate.Session;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import java.io.IOException;
+import javax.faces.bean.SessionScoped;
+import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 
 @ManagedBean(name = "loginController")
-@ViewScoped
+@SessionScoped
 public class LoginController implements Serializable, Controller {
 
     private String nick;
     private String password;
+
+    private Long userId;
+
 
     @ManagedProperty(value = "#{usuarioDao}")
     UsuarioDAO usuarioDao;
@@ -28,7 +30,9 @@ public class LoginController implements Serializable, Controller {
     public void login() {
 
         if (userIsRegistered()) {
-
+            HttpSession userSession = UtilUserSession.getSession();
+            recoverUserId(nick);
+            userSession.setAttribute("userId", userId);
             String route = "/views/timeline/timeline.xhtml";
             UtilViews.redirect(route);
         }
@@ -39,6 +43,20 @@ public class LoginController implements Serializable, Controller {
 
             UtilViews.sendErrorMessage(summary,detail);
         }
+    }
+
+    private void recoverUserId(String userNick) {
+        initSessionForDao();
+        this.userId = usuarioDao.getUserId(userNick);
+        closeSession();
+    }
+
+    public void logout(){
+
+        UtilUserSession.getSession().invalidate();
+        String route = "/views/index/bienvenida.xhtml";
+        UtilViews.redirect(route);
+
     }
 
     private boolean userIsRegistered() {
@@ -91,6 +109,14 @@ public class LoginController implements Serializable, Controller {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public UsuarioDAO getUsuarioDao() {

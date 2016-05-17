@@ -33,6 +33,14 @@ public class UsuarioDAOIT extends BaseIT<UsuarioDAO> {
     }
 
     @Test
+    public void shouldReturnTheUsuarioIdWhenCallingGetUserId() {
+
+        Long userId = sut.getUserId("nickTest");
+        assertEquals((Long)1L,userId);
+
+    }
+
+    @Test
     public void shouldReturnTrueWhenNickAndPasswordAreFindInDBWhenCallingLoginUsuario() {
 
         assertTrue(sut.loginUsuario("nickTest2","passwordTest2"));

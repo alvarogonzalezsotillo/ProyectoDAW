@@ -5,6 +5,7 @@ import app.builder.MelomBuilder;
 import app.controller.interfaces.Controller;
 import app.model.MelomDAO;
 import app.utils.UtilSessionHibernate;
+import app.utils.UtilUserSession;
 import org.hibernate.Session;
 import org.primefaces.model.UploadedFile;
 
@@ -28,7 +29,7 @@ public class MelomController implements Serializable, Controller {
     private String comentario;
     private transient UploadedFile imagenAlbum;
     private transient UploadedFile cancion;
-    private Long idUsuario = 1L;
+    private Long idUsuario = UtilUserSession.getUserId();
 
     @ManagedProperty(value = "#{melomDao}")
     private MelomDAO melomDao;
