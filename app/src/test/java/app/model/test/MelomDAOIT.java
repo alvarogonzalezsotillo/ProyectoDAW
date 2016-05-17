@@ -7,6 +7,10 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -47,9 +51,11 @@ public class MelomDAOIT extends BaseIT<MelomDAO>{
     }
 
     @Test
-    public void shoulReturnAllMelomsFilterByIdUsuarioWhenCallingGetAllByIdUsuario(){
+    public void shoulReturnAllMelomsFilterByListIdUsuarioWhenCallingGetAllByIdUsuario(){
 
-        assertEquals(2,sut.getAllByIdUsuario(1L).size());
+        Collection<Long> listaId = new ArrayList<Long>();
+        listaId.add(1L);
+        assertEquals(2,sut.getAllByIdUsuario(listaId).size());
 
     }
 

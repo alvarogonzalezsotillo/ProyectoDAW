@@ -7,6 +7,7 @@ import org.hibernate.Query;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 @ManagedBean(name = "melomDao")
@@ -64,12 +65,12 @@ public class MelomDAO extends SessionFactoryImpl implements Serializable, DAO<Me
     }
 
     @SuppressWarnings("unchecked")
-    public List<MelomBean> getAllByIdUsuario(Long idUsuario){
+    public List<MelomBean> getAllByIdUsuario(Collection<Long> listaIdUsuario){
 
         List<MelomBean> listaMelomsFilterByUsuarioId;
 
-        Query query = session.createQuery("from MelomBean meloms where meloms.idUsuario = :idUsuario");
-        query.setParameter("idUsuario",idUsuario);
+        Query query = session.createQuery("from MelomBean meloms where meloms.idUsuario in (:listaIdUsuario) order by fechaPublicacion");
+        query.setParameterList("listaIdUsuario",listaIdUsuario);
         listaMelomsFilterByUsuarioId = query.list();
         return listaMelomsFilterByUsuarioId;
 

@@ -1,30 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 
-<ui:include src="/resources/templates/header.xhtml" />
+<ui:include src="/resources/templates/header.xhtml"/>
 
 <h:body>
 
-    <f:event type="preRenderView" listener="#{perfilUsuarioController.init()}" />
+    <f:event type="preRenderView" listener="#{perfilUsuarioController.init()}"/>
+    <f:event type="preRenderView" listener="#{timelineController.init()}"/>
 
     <h:form enctype="multipart/form-data">
         <h:panelGrid columns="1">
-            <h:outputText value="#{perfilUsuarioController.nombre}" />
-            <h:outputText value="#{perfilUsuarioController.apellido}" />
-            <h:outputText value="#{perfilUsuarioController.nick}" />
-            <h:outputText value="#{perfilUsuarioController.correo}" />
-            <h:outputText value="#{perfilUsuarioController.grupo}" />
-            <h:outputText value="#{perfilUsuarioController.web}" />
-            <h:outputText value="#{perfilUsuarioController.tipoMusica}" />
-            <p:commandButton value="Logout" id="logout" actionListener="#{loginController.logout}" styleClass="ui-priority-primary" />
+            <h:outputText value="#{perfilUsuarioController.nombre}"/>
+            <h:outputText value="#{perfilUsuarioController.apellido}"/>
+            <h:outputText value="#{perfilUsuarioController.nick}"/>
+            <h:outputText value="#{perfilUsuarioController.correo}"/>
+            <h:outputText value="#{perfilUsuarioController.grupo}"/>
+            <h:outputText value="#{perfilUsuarioController.web}"/>
+            <h:outputText value="#{perfilUsuarioController.tipoMusica}"/>
+            <h:graphicImage value="data:image/jpeg;base64,#{perfilUsuarioController.imagen}"/>
+            <p:commandButton value="Logout" id="logout" actionListener="#{loginController.logout}"
+                             styleClass="ui-priority-primary"/>
         </h:panelGrid>
 
+    </h:form>
+
+
+    <h:form enctype="multipart/form-data">
+
+        <ui:repeat var="melom" value="#{timelineController.listaMeloms}">
+            <h:panelGrid columns="6">
+
+                <h:outputText value="#{melom.titulo}"/>
+                <h:outputText value="#{melom.album}"/>
+                <h:outputText value="#{melom.tipoMusica}"/>
+                <h:outputText value="#{melom.comentarioMusico}"/>
+
+                <audio controls="controls">
+                    <source src="data:audio/mpeg3;base64,#{melom.cancion}" type="audio/mpeg"/>
+                </audio>
+                <h:graphicImage value="data:image/jpeg;base64,#{melom.imagenAlbum}" height="10%"/>
+            </h:panelGrid>
+        </ui:repeat>
     </h:form>
 
 </h:body>

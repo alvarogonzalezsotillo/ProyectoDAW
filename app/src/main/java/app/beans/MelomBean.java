@@ -1,6 +1,7 @@
 package app.beans;
 
 import app.beans.interfaces.Bean;
+import app.utils.UtilFiles;
 
 import java.io.Serializable;
 
@@ -82,12 +83,12 @@ public class MelomBean implements Serializable, Bean {
         return comentarioMusico;
     }
 
-    public byte[] getCancion() {
-        return cancion;
+    public String getCancion() {
+        return UtilFiles.transformFileToBase64(cancion);
     }
 
-    public byte[] getImagenAlbum() {
-        return imagenAlbum;
+    public String getImagenAlbum() {
+        return UtilFiles.transformFileToBase64(imagenAlbum);
     }
 
     public Long getIdUsuario() {

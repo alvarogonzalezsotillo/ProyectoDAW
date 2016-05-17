@@ -3,16 +3,14 @@ package app.controller;
 import app.beans.UsuarioBean;
 import app.controller.interfaces.Controller;
 import app.model.UsuarioDAO;
+import app.utils.UtilFiles;
 import app.utils.UtilSessionHibernate;
 import app.utils.UtilUserSession;
 import org.hibernate.Session;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 
 @ManagedBean(name = "perfilUsuarioController")
@@ -30,9 +28,9 @@ public class PerfilUsuarioController implements Controller, Serializable {
     private String web;
     private String tipoMusica;
     private String fechaRegistro;
-    private StreamedContent imagen;
+    private String imagen;
 
-    public void init(){
+    public void init() {
 
         initSessionForDao();
         UsuarioBean usuarioActual = usuarioDao.getById(UtilUserSession.getUserId());
@@ -45,30 +43,30 @@ public class PerfilUsuarioController implements Controller, Serializable {
         this.grupo = usuarioActual.getGrupoDeUsuario();
         this.web = usuarioActual.getWebDeUsuario();
         this.tipoMusica = usuarioActual.getTipoMusicaDeUsuario();
-        this.imagen = new DefaultStreamedContent(new ByteArrayInputStream(usuarioActual.getImagenDeUsuario()));
+        this.imagen = UtilFiles.transformFileToBase64(usuarioActual.getImagenDeUsuario());
 
     }
 
-    public void initSessionForDao(){
+    public void initSessionForDao() {
         Session session = UtilSessionHibernate.initSession();
         usuarioDao.setSession(session);
     }
 
-    public void commitAndCloseSession(){
+    public void commitAndCloseSession() {
         Session session = usuarioDao.getSession();
         UtilSessionHibernate.commitAndCloseSession(session);
 
     }
 
 
-    public void initTransactionForDao(){
+    public void initTransactionForDao() {
         Session session = usuarioDao.getSession();
         UtilSessionHibernate.initTransaction(session);
 
     }
 
 
-    public void closeSession(){
+    public void closeSession() {
         Session session = usuarioDao.getSession();
         UtilSessionHibernate.closeSession(session);
     }
@@ -145,7 +143,7 @@ public class PerfilUsuarioController implements Controller, Serializable {
         this.fechaRegistro = fechaRegistro;
     }
 
-    public StreamedContent getImagen() {
+    public String getImagen() {
 
         return imagen;
 
