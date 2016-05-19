@@ -19,5 +19,6 @@
 		<mapping class="app.beans.ComentarioBean" />
 		<mapping class="app.beans.MelomBean" />
 		<mapping class="app.beans.ConciertoBean" />
+		<mapping class="app.beans.FollowerBean" />
 	</session-factory>
 </hibernate-configuration>

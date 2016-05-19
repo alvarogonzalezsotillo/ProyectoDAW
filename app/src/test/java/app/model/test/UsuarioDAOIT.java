@@ -43,7 +43,7 @@ public class UsuarioDAOIT extends BaseIT<UsuarioDAO> {
     @Test
     public void shouldReturnTrueWhenNickAndPasswordAreFindInDBWhenCallingLoginUsuario() {
 
-        assertTrue(sut.loginUsuario("nickTest2","passwordTest2"));
+        assertTrue(sut.loginUsuario("nickTest","passwordTest"));
 
     }
 

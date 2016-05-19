@@ -27,6 +27,8 @@ public class TimelineController implements Controller, Serializable {
 
         List<Long> listId = new ArrayList<Long>();
 
+
+
         listId.add(1L);
         initSessionForDao();
         this.listaMeloms = melomDao.getAllByIdUsuario(listId);

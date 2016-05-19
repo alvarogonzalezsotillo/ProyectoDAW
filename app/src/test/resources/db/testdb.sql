@@ -56,12 +56,18 @@ CREATE TABLE BETAcomentarios (
 
 CREATE TABLE BETAconciertos (
   id        BIGINT (11) NOT NULL,
-  fecha     DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  fecha     DATETIME    NOT NULL DEFAULT CURRENT_TIMESTAMP,
   pais      VARCHAR(50) NOT NULL,
   ciudad    VARCHAR(60) NOT NULL,
   lugar     VARCHAR(80) NOT NULL,
   idUsuario BIGINT (11) NOT NULL,
   PRIMARY KEY (id)
+);
+
+CREATE TABLE BETAfollowers (
+  idUsuario  BIGINT (11) NOT NULL,
+  idFollower BIGINT (11) NOT NULL,
+  PRIMARY KEY (idUsuario, idFollower)
 );
 
 INSERT
@@ -95,3 +101,7 @@ VALUES (1, 'paisTest', 'ciudadTest', 'lugarTest', 1);
 INSERT
 INTO BETAconciertos (id, pais, ciudad, lugar, idUsuario)
 VALUES (2, 'paisTest2', 'ciudadTest2', 'lugarTest2', 2);
+
+INSERT
+INTO BETAfollowers (idUsuario, idFollower)
+VALUES (1, 2);
