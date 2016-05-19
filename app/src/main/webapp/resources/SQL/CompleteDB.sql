@@ -64,4 +64,4 @@ CREATE TABLE `iesrey`.`BETAfollowers` (
 CREATE TABLE `iesrey`.`hibernate_sequence` (`next_val` bigint);
 
 INSERT INTO `iesrey`.`hibernate_sequence`(`next_val`)
-VALUE (1);
+VALUE (0);

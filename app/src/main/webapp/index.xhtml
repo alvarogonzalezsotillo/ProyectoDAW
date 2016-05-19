@@ -32,9 +32,10 @@
 
     <h:form enctype="multipart/form-data">
 
-        <ui:repeat var="melom" value="#{timelineController.listaMeloms}">
+        <ui:repeat var="melom" value="#{timelineController.listaMeloms}" varStatus="status">
             <h:panelGrid columns="6">
 
+                <h:outputText value="#{melom.nombreDeUsuario}" />
                 <h:outputText value="#{melom.titulo}"/>
                 <h:outputText value="#{melom.album}"/>
                 <h:outputText value="#{melom.tipoMusica}"/>

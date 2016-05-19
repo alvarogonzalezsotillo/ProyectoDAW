@@ -76,7 +76,7 @@ public class MelomDAO extends SessionFactoryImpl implements Serializable, DAO<Me
 
     }
 
-    public List<MelomBean> getAllMelomsByFollower(Long idFollower){
+    public List<MelomBean> getAllMelomsByIdFollower(Long idFollower){
 
         List listUserWhoFollow;
         List<MelomBean> listMelomsFilterByidUsuario;
@@ -88,6 +88,14 @@ public class MelomDAO extends SessionFactoryImpl implements Serializable, DAO<Me
         Query query2 = session.createQuery("from MelomBean where idUsuario in :listId");
         query2.setParameterList("listId",listUserWhoFollow);
         listMelomsFilterByidUsuario = query2.list();
+
+//        Query subQuery = session.createQuery("select idUsuario from FollowerBean where idFollower = :idFollower");
+//        subQuery.setParameter("idFollower", idFollower);
+//        List subQueryResult = subQuery.list();
+//
+//        Query query = session.createQuery("select usuarios.nombreDeUsuario AS nombreDeUsuario, meloms from MelomBean meloms inner join UsuarioBean usuarios on usuarios.id = meloms.idUsuario where usuarios.id in (:subQueryResult)");
+//        query.setParameterList("subQueryResult", subQueryResult);
+//        listMelomsFilterByidUsuario = query.list();
 
         return listMelomsFilterByidUsuario;
 
