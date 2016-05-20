@@ -93,6 +93,15 @@ public class PerfilUsuarioController implements Controller, Serializable {
 
     }
 
+    public void refreshProfile(){
+
+        userIsFollowed();
+        String route = "/views/perfil/usuario.xhtml";
+        UtilViews.redirect(route);
+
+
+    }
+
     private void userIsFollowed() {
 
         if (this.idAjeno == UtilUserSession.getUserId()) {
@@ -117,6 +126,7 @@ public class PerfilUsuarioController implements Controller, Serializable {
         initTransactionForDao();
         usuarioDao.followNewUser(this.idAjeno, UtilUserSession.getUserId());
         commitAndCloseSession();
+        refreshProfile();
 
     }
 
@@ -126,7 +136,7 @@ public class PerfilUsuarioController implements Controller, Serializable {
         initTransactionForDao();
         usuarioDao.unfollowUser(this.idAjeno, UtilUserSession.getUserId());
         commitAndCloseSession();
-
+        refreshProfile();
     }
 
     public void initSessionForDao() {
