@@ -117,6 +117,15 @@ public class PerfilUsuarioController implements Controller, Serializable {
 
     }
 
+    public void dejarSeguir() {
+
+        initSessionForDao();
+        initTransactionForDao();
+        usuarioDao.dejarSeguirUsuario(this.idAjeno, UtilUserSession.getUserId());
+        commitAndCloseSession();
+
+    }
+
     public void initSessionForDao() {
         Session session = UtilSessionHibernate.initSession();
         usuarioDao.setSession(session);
