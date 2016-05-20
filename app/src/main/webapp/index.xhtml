@@ -15,14 +15,14 @@
 
     <h:form enctype="multipart/form-data">
         <h:panelGrid columns="1">
-            <h:outputText value="#{perfilUsuarioController.nombre}"/>
-            <h:outputText value="#{perfilUsuarioController.apellido}"/>
-            <h:outputText value="#{perfilUsuarioController.nick}"/>
-            <h:outputText value="#{perfilUsuarioController.correo}"/>
-            <h:outputText value="#{perfilUsuarioController.grupo}"/>
-            <h:outputText value="#{perfilUsuarioController.web}"/>
-            <h:outputText value="#{perfilUsuarioController.tipoMusica}"/>
-            <h:graphicImage value="data:image/jpeg;base64,#{perfilUsuarioController.imagen}"/>
+            <h:outputText value="#{perfilUsuarioController.nombrePersonal}"/>
+            <h:outputText value="#{perfilUsuarioController.apellidoPersonal}"/>
+            <h:outputText value="#{perfilUsuarioController.nickPersonal}"/>
+            <h:outputText value="#{perfilUsuarioController.correoPersonal}"/>
+            <h:outputText value="#{perfilUsuarioController.grupoPersonal}"/>
+            <h:outputText value="#{perfilUsuarioController.webPersonal}"/>
+            <h:outputText value="#{perfilUsuarioController.tipoMusicaPersonal}"/>
+            <h:graphicImage value="data:image/jpeg;base64,#{perfilUsuarioController.imagenPersonal}"/>
             <p:commandButton value="Logout" id="logout" actionListener="#{loginController.logout}"
                              styleClass="ui-priority-primary"/>
         </h:panelGrid>
@@ -30,9 +30,8 @@
     </h:form>
 
 
-    <h:form enctype="multipart/form-data">
-
-        <ui:repeat var="melom" value="#{timelineController.listaMeloms}" varStatus="status">
+    <h:form>
+        <ui:repeat var="melom" value="#{timelineController.listaMeloms}">
             <h:panelGrid columns="6">
 
                 <h:outputText value="#{melom.titulo}"/>
@@ -44,6 +43,14 @@
                     <source src="data:audio/mpeg3;base64,#{melom.cancion}" type="audio/mpeg"/>
                 </audio>
                 <h:graphicImage value="data:image/jpeg;base64,#{melom.imagenAlbum}" height="10%"/>
+            </h:panelGrid>
+        </ui:repeat>
+    </h:form>
+
+    <h:form>
+        <ui:repeat var="nick" value="#{perfilUsuarioController.listaNicks}">
+            <h:panelGrid columns="1">
+                <h:commandLink value="#{nick}" actionListener="#{perfilUsuarioController.verPerfil(nick)}" />
             </h:panelGrid>
         </ui:repeat>
     </h:form>

@@ -107,4 +107,14 @@ public class UsuarioDAO extends SessionFactoryImpl implements Serializable,DAO<U
 
     }
 
+    public UsuarioBean getByNick(String nick) {
+
+        Query query = session.createQuery("from UsuarioBean usuario where usuario.nickDeUsuario = :nick");
+        query.setParameter("nick", nick);
+
+        List<UsuarioBean> list = query.list();
+
+        return list.get(0);
+
+    }
 }

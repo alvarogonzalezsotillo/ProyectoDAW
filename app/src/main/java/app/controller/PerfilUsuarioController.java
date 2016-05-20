@@ -6,44 +6,86 @@ import app.model.UsuarioDAO;
 import app.utils.UtilFiles;
 import app.utils.UtilSessionHibernate;
 import app.utils.UtilUserSession;
+import app.utils.UtilViews;
 import org.hibernate.Session;
 
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
+import java.util.List;
 
 @ManagedBean(name = "perfilUsuarioController")
-@ViewScoped
+@ApplicationScoped
 public class PerfilUsuarioController implements Controller, Serializable {
 
     @ManagedProperty(value = "#{usuarioDao}")
     private UsuarioDAO usuarioDao;
 
-    private String nombre;
-    private String apellido;
-    private String nick;
-    private String correo;
-    private String grupo;
-    private String web;
-    private String tipoMusica;
-    private String fechaRegistro;
-    private String imagen;
+    private Long idPersonal;
+
+    private String nombrePersonal;
+    private String apellidoPersonal;
+    private String nickPersonal;
+    private String correoPersonal;
+    private String grupoPersonal;
+    private String webPersonal;
+    private String tipoMusicaPersonal;
+    private String imagenPersonal;
+
+    private Long idAjeno;
+
+    private String nombreAjeno;
+    private String apellidoAjeno;
+    private String nickAjeno;
+    private String correoAjeno;
+    private String grupoAjeno;
+    private String webAjeno;
+    private String tipoMusicaAjeno;
+    private String imagenAjeno;
+
+    private List<String> listaNicks;
 
     public void init() {
 
         initSessionForDao();
         UsuarioBean usuarioActual = usuarioDao.getById(UtilUserSession.getUserId());
+        this.listaNicks = usuarioDao.getAllNicks();
         closeSession();
 
-        this.nombre = usuarioActual.getNombreDeUsuario();
-        this.apellido = usuarioActual.getApellidoDeUsuario();
-        this.nick = usuarioActual.getNickDeUsuario();
-        this.correo = usuarioActual.getCorreoDeUsuario();
-        this.grupo = usuarioActual.getGrupoDeUsuario();
-        this.web = usuarioActual.getWebDeUsuario();
-        this.tipoMusica = usuarioActual.getTipoMusicaDeUsuario();
-        this.imagen = UtilFiles.transformFileToBase64(usuarioActual.getImagenDeUsuario());
+        this.idPersonal = usuarioActual.getId();
+
+        this.nombrePersonal = usuarioActual.getNombreDeUsuario();
+        this.apellidoPersonal = usuarioActual.getApellidoDeUsuario();
+        this.nickPersonal = usuarioActual.getNickDeUsuario();
+        this.correoPersonal = usuarioActual.getCorreoDeUsuario();
+        this.grupoPersonal = usuarioActual.getGrupoDeUsuario();
+        this.webPersonal = usuarioActual.getWebDeUsuario();
+        this.tipoMusicaPersonal = usuarioActual.getTipoMusicaDeUsuario();
+        this.imagenPersonal = UtilFiles.transformFileToBase64(usuarioActual.getImagenDeUsuario());
+
+    }
+
+    public void verPerfil(String nickAjeno){
+
+        initSessionForDao();
+        UsuarioBean usuarioActual = usuarioDao.getByNick(nickAjeno);
+        closeSession();
+
+        this.idAjeno = usuarioActual.getId();
+
+        this.nombreAjeno = usuarioActual.getNombreDeUsuario();
+        this.apellidoAjeno = usuarioActual.getApellidoDeUsuario();
+        this.nickAjeno = usuarioActual.getNickDeUsuario();
+        this.correoAjeno = usuarioActual.getCorreoDeUsuario();
+        this.grupoAjeno = usuarioActual.getGrupoDeUsuario();
+        this.webAjeno = usuarioActual.getWebDeUsuario();
+        this.tipoMusicaAjeno = usuarioActual.getTipoMusicaDeUsuario();
+        this.imagenAjeno = UtilFiles.transformFileToBase64(usuarioActual.getImagenDeUsuario());
+
+        String route = "/views/perfil/usuario.xhtml";
+        UtilViews.redirect(route);
 
     }
 
@@ -71,12 +113,20 @@ public class PerfilUsuarioController implements Controller, Serializable {
         UtilSessionHibernate.closeSession(session);
     }
 
-    public String getNombre() {
-        return nombre;
+    public Long getIdPersonal() {
+        return idPersonal;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setIdPersonal(Long idPersonal) {
+        this.idPersonal = idPersonal;
+    }
+
+    public String getNombrePersonal() {
+        return nombrePersonal;
+    }
+
+    public void setNombrePersonal(String nombrePersonal) {
+        this.nombrePersonal = nombrePersonal;
     }
 
     public UsuarioDAO getUsuarioDao() {
@@ -87,65 +137,137 @@ public class PerfilUsuarioController implements Controller, Serializable {
         this.usuarioDao = usuarioDao;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getApellidoPersonal() {
+        return apellidoPersonal;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setApellidoPersonal(String apellidoPersonal) {
+        this.apellidoPersonal = apellidoPersonal;
     }
 
-    public String getNick() {
-        return nick;
+    public String getNickPersonal() {
+        return nickPersonal;
     }
 
-    public void setNick(String nick) {
-        this.nick = nick;
+    public void setNickPersonal(String nickPersonal) {
+        this.nickPersonal = nickPersonal;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getCorreoPersonal() {
+        return correoPersonal;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setCorreoPersonal(String correoPersonal) {
+        this.correoPersonal = correoPersonal;
     }
 
-    public String getGrupo() {
-        return grupo;
+    public String getGrupoPersonal() {
+        return grupoPersonal;
     }
 
-    public void setGrupo(String grupo) {
-        this.grupo = grupo;
+    public void setGrupoPersonal(String grupoPersonal) {
+        this.grupoPersonal = grupoPersonal;
     }
 
-    public String getWeb() {
-        return web;
+    public String getWebPersonal() {
+        return webPersonal;
     }
 
-    public void setWeb(String web) {
-        this.web = web;
+    public void setWebPersonal(String webPersonal) {
+        this.webPersonal = webPersonal;
     }
 
-    public String getTipoMusica() {
-        return tipoMusica;
+    public String getTipoMusicaPersonal() {
+        return tipoMusicaPersonal;
     }
 
-    public void setTipoMusica(String tipoMusica) {
-        this.tipoMusica = tipoMusica;
+    public void setTipoMusicaPersonal(String tipoMusicaPersonal) {
+        this.tipoMusicaPersonal = tipoMusicaPersonal;
     }
 
-    public String getFechaRegistro() {
-        return fechaRegistro;
+    public String getImagenPersonal() {
+
+        return imagenPersonal;
+
     }
 
-    public void setFechaRegistro(String fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
+    public Long getIdAjeno() {
+        return idAjeno;
     }
 
-    public String getImagen() {
+    public void setIdAjeno(Long idAjeno) {
+        this.idAjeno = idAjeno;
+    }
 
-        return imagen;
+    public String getNombreAjeno() {
+        return nombreAjeno;
+    }
 
+    public void setNombreAjeno(String nombreAjeno) {
+        this.nombreAjeno = nombreAjeno;
+    }
+
+    public String getApellidoAjeno() {
+        return apellidoAjeno;
+    }
+
+    public void setApellidoAjeno(String apellidoAjeno) {
+        this.apellidoAjeno = apellidoAjeno;
+    }
+
+    public String getNickAjeno() {
+        return nickAjeno;
+    }
+
+    public void setNickAjeno(String nickAjeno) {
+        this.nickAjeno = nickAjeno;
+    }
+
+    public String getCorreoAjeno() {
+        return correoAjeno;
+    }
+
+    public void setCorreoAjeno(String correoAjeno) {
+        this.correoAjeno = correoAjeno;
+    }
+
+    public String getGrupoAjeno() {
+        return grupoAjeno;
+    }
+
+    public void setGrupoAjeno(String grupoAjeno) {
+        this.grupoAjeno = grupoAjeno;
+    }
+
+    public String getWebAjeno() {
+        return webAjeno;
+    }
+
+    public void setWebAjeno(String webAjeno) {
+        this.webAjeno = webAjeno;
+    }
+
+    public String getTipoMusicaAjeno() {
+        return tipoMusicaAjeno;
+    }
+
+    public void setTipoMusicaAjeno(String tipoMusicaAjeno) {
+        this.tipoMusicaAjeno = tipoMusicaAjeno;
+    }
+
+    public String getImagenAjeno() {
+        return imagenAjeno;
+    }
+
+    public void setImagenAjeno(String imagenAjeno) {
+        this.imagenAjeno = imagenAjeno;
+    }
+
+    public List<String> getListaNicks() {
+        return listaNicks;
+    }
+
+    public void setListaNicks(List<String> listaNicks) {
+        this.listaNicks = listaNicks;
     }
 }

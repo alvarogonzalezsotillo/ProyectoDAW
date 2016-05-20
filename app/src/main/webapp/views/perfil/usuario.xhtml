@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:include src="/resources/templates/header.xhtml"/>
+
+<h:body>
+
+    <h:form>
+        <h:panelGrid columns="1">
+            <h:outputText value="#{perfilUsuarioController.nombreAjeno}"/>
+            <h:outputText value="#{perfilUsuarioController.apellidoAjeno}"/>
+            <h:outputText value="#{perfilUsuarioController.nickAjeno}"/>
+            <h:outputText value="#{perfilUsuarioController.correoAjeno}"/>
+            <h:outputText value="#{perfilUsuarioController.grupoAjeno}"/>
+            <h:outputText value="#{perfilUsuarioController.webAjeno}"/>
+            <h:outputText value="#{perfilUsuarioController.tipoMusicaAjeno}"/>
+            <h:graphicImage value="data:image/jpeg;base64,#{perfilUsuarioController.imagenAjeno}"/>
+            <p:commandButton value="Logout" id="logout" actionListener="#{loginController.logout}"
+                             styleClass="ui-priority-primary"/>
+        </h:panelGrid>
+
+    </h:form>
+
+</h:body>
+</html>
