@@ -44,15 +44,16 @@ public class PerfilUsuarioController implements Controller, Serializable {
     private String tipoMusicaAjeno;
     private String imagenAjeno;
 
-    private List<String> listaNicks;
+    private List<String> listNicks;
 
     private boolean isFollowed;
+    private boolean ItsaMeMario;
 
     public void init() {
 
         initSessionForDao();
         UsuarioBean usuarioActual = usuarioDao.getById(UtilUserSession.getUserId());
-        this.listaNicks = usuarioDao.getAllNicks();
+        this.listNicks = usuarioDao.getAllNicks();
         closeSession();
 
         this.idPersonal = usuarioActual.getId();
@@ -68,7 +69,7 @@ public class PerfilUsuarioController implements Controller, Serializable {
 
     }
 
-    public void verPerfil(String nickAjeno) {
+    public void viewProfile(String nickAjeno) {
 
         initSessionForDao();
         UsuarioBean usuarioActual = usuarioDao.getByNick(nickAjeno);
@@ -96,7 +97,8 @@ public class PerfilUsuarioController implements Controller, Serializable {
 
         if (this.idAjeno == UtilUserSession.getUserId()) {
 
-            this.isFollowed = true;
+            this.isFollowed = false;
+            this.ItsaMeMario = true;
 
         }
 
@@ -105,23 +107,24 @@ public class PerfilUsuarioController implements Controller, Serializable {
             List<Long> listaUsuariosSeguidos = usuarioDao.getFollowedUsers(UtilUserSession.getUserId());
             closeSession();
             this.isFollowed = listaUsuariosSeguidos.contains(idAjeno);
+            this.ItsaMeMario = false;
         }
     }
 
-    public void seguir() {
+    public void follow() {
 
         initSessionForDao();
         initTransactionForDao();
-        usuarioDao.seguirNuevoUsuario(this.idAjeno, UtilUserSession.getUserId());
+        usuarioDao.followNewUser(this.idAjeno, UtilUserSession.getUserId());
         commitAndCloseSession();
 
     }
 
-    public void dejarSeguir() {
+    public void unfollow() {
 
         initSessionForDao();
         initTransactionForDao();
-        usuarioDao.dejarSeguirUsuario(this.idAjeno, UtilUserSession.getUserId());
+        usuarioDao.unfollowUser(this.idAjeno, UtilUserSession.getUserId());
         commitAndCloseSession();
 
     }
@@ -300,12 +303,12 @@ public class PerfilUsuarioController implements Controller, Serializable {
         this.imagenAjeno = imagenAjeno;
     }
 
-    public List<String> getListaNicks() {
-        return listaNicks;
+    public List<String> getListNicks() {
+        return listNicks;
     }
 
-    public void setListaNicks(List<String> listaNicks) {
-        this.listaNicks = listaNicks;
+    public void setListNicks(List<String> listNicks) {
+        this.listNicks = listNicks;
     }
 
     public boolean getIsFollowed() {
@@ -314,5 +317,13 @@ public class PerfilUsuarioController implements Controller, Serializable {
 
     public void setFollowed(boolean followed) {
         isFollowed = followed;
+    }
+
+    public boolean getItsaMeMario() {
+        return ItsaMeMario;
+    }
+
+    public void setItsaMeMario(boolean itsaMeMario) {
+        this.ItsaMeMario = itsaMeMario;
     }
 }

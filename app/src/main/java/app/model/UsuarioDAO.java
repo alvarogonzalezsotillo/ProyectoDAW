@@ -129,7 +129,7 @@ public class UsuarioDAO extends SessionFactoryImpl implements Serializable,DAO<U
 
     }
 
-    public void seguirNuevoUsuario(Long idToFollow, Long idFollower){
+    public void followNewUser(Long idToFollow, Long idFollower){
 
         Query query = session.createSQLQuery("insert into BETAfollowers (idUsuario,idFollower) values (:idToFollow, :idFollower)");
         query.setParameter("idToFollow", idToFollow);
@@ -138,7 +138,7 @@ public class UsuarioDAO extends SessionFactoryImpl implements Serializable,DAO<U
     }
 
 
-    public void dejarSeguirUsuario(Long idUsuario, Long idFollower) {
+    public void unfollowUser(Long idUsuario, Long idFollower) {
 
         Query query = session.createQuery("delete from FollowerBean followers where followers.idFollower = :idFollower and followers.idUsuario = :idUsuario");
         query.setParameter("idFollower", idFollower);

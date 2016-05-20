@@ -48,9 +48,9 @@
     </h:form>
 
     <h:form>
-        <ui:repeat var="nick" value="#{perfilUsuarioController.listaNicks}">
+        <ui:repeat var="nick" value="#{perfilUsuarioController.listNicks}">
             <h:panelGrid columns="1">
-                <h:commandLink value="#{nick}" actionListener="#{perfilUsuarioController.verPerfil(nick)}" />
+                <h:commandLink value="#{nick}" actionListener="#{perfilUsuarioController.viewProfile(nick)}" />
             </h:panelGrid>
         </ui:repeat>
     </h:form>
