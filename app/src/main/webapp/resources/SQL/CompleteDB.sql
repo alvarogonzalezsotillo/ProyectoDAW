@@ -24,7 +24,7 @@ CREATE TABLE `iesrey`.`BETAmeloms` (
   `cancion` LONGBLOB NULL DEFAULT NULL,
   `imagenAlbum` LONGBLOB NULL DEFAULT NULL,
   `idUsuario` BIGINT(11) NOT NULL,
-  `fechaPublicación` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `fechaPublicacion` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   INDEX `idUsuario_idx` (`idUsuario` ASC),
   CONSTRAINT `idUsuario`

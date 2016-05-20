@@ -24,9 +24,8 @@ public class TimelineController implements Controller, Serializable {
 
     public void init() {
         initSessionForDao();
-        List<MelomBean> list = melomDao.getAllMelomsByIdFollower(UtilUserSession.getUserId());
+        this.listaMeloms = melomDao.getAllMelomsByIdFollower(UtilUserSession.getUserId());;
         closeSession();
-        this.listaMeloms = null;
     }
 
     public void initSessionForDao() {

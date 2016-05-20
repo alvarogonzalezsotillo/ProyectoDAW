@@ -86,8 +86,9 @@ public class MelomDAO extends SessionFactoryImpl implements Serializable, DAO<Me
         query.setParameter("idFollower", idFollower);
         listUserWhoFollow = query.list();
 
-        Query query2 = session.createQuery("from MelomBean where idUsuario in :listId");
+        Query query2 = session.createQuery("from MelomBean where idUsuario in (:listId, :idFollower) order by fechaPublicacion desc");
         query2.setParameterList("listId",listUserWhoFollow);
+        query2.setParameter("idFollower",idFollower);
         listMelomsFilterByidUsuario = query2.list();
 
 //        Query subQuery = session.createQuery("select idUsuario from FollowerBean where idFollower = :idFollower");
