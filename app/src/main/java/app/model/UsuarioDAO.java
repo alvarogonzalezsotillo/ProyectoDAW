@@ -117,4 +117,23 @@ public class UsuarioDAO extends SessionFactoryImpl implements Serializable,DAO<U
         return list.get(0);
 
     }
+
+    public void seguirNuevoUsuario(Long idToFollow, Long idFollower){
+
+        Query query = session.createSQLQuery("insert into BETAfollowers (idUsuario,idFollower) values (:idToFollow, :idFollower)");
+        query.setParameter("idToFollow", idToFollow);
+        query.setParameter("idFollower", idFollower);
+        query.executeUpdate();
+    }
+
+    public List<Long> getFollowedUsers(Long idFollower) {
+
+        Query query = session.createQuery("select followers.idUsuario from FollowerBean followers where followers.idFollower = :idFollower");
+        query.setParameter("idFollower", idFollower);
+
+        List<Long> list = query.list();
+
+        return list;
+
+    }
 }

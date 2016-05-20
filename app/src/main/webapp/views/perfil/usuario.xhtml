@@ -22,6 +22,8 @@
             <h:graphicImage value="data:image/jpeg;base64,#{perfilUsuarioController.imagenAjeno}"/>
             <p:commandButton value="Logout" id="logout" actionListener="#{loginController.logout}"
                              styleClass="ui-priority-primary"/>
+            <p:commandButton value="Seguir" id="seguir" actionListener="#{perfilUsuarioController.seguir}"
+                             styleClass="ui-priority-primary" disabled="#{perfilUsuarioController.isFollowed}"/>
         </h:panelGrid>
 
     </h:form>

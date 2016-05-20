@@ -12,7 +12,6 @@ import org.hibernate.Session;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
 import java.util.List;
 
@@ -47,6 +46,8 @@ public class PerfilUsuarioController implements Controller, Serializable {
 
     private List<String> listaNicks;
 
+    private boolean isFollowed;
+
     public void init() {
 
         initSessionForDao();
@@ -67,11 +68,12 @@ public class PerfilUsuarioController implements Controller, Serializable {
 
     }
 
-    public void verPerfil(String nickAjeno){
+    public void verPerfil(String nickAjeno) {
 
         initSessionForDao();
         UsuarioBean usuarioActual = usuarioDao.getByNick(nickAjeno);
         closeSession();
+
 
         this.idAjeno = usuarioActual.getId();
 
@@ -83,9 +85,35 @@ public class PerfilUsuarioController implements Controller, Serializable {
         this.webAjeno = usuarioActual.getWebDeUsuario();
         this.tipoMusicaAjeno = usuarioActual.getTipoMusicaDeUsuario();
         this.imagenAjeno = UtilFiles.transformFileToBase64(usuarioActual.getImagenDeUsuario());
+        userIsFollowed();
 
         String route = "/views/perfil/usuario.xhtml";
         UtilViews.redirect(route);
+
+    }
+
+    private void userIsFollowed() {
+
+        if (this.idAjeno == UtilUserSession.getUserId()) {
+
+            this.isFollowed = true;
+
+        }
+
+        else {
+            initSessionForDao();
+            List<Long> listaUsuariosSeguidos = usuarioDao.getFollowedUsers(UtilUserSession.getUserId());
+            closeSession();
+            this.isFollowed = listaUsuariosSeguidos.contains(idAjeno);
+        }
+    }
+
+    public void seguir() {
+
+        initSessionForDao();
+        initTransactionForDao();
+        usuarioDao.seguirNuevoUsuario(this.idAjeno, UtilUserSession.getUserId());
+        commitAndCloseSession();
 
     }
 
@@ -269,5 +297,13 @@ public class PerfilUsuarioController implements Controller, Serializable {
 
     public void setListaNicks(List<String> listaNicks) {
         this.listaNicks = listaNicks;
+    }
+
+    public boolean getIsFollowed() {
+        return isFollowed;
+    }
+
+    public void setFollowed(boolean followed) {
+        isFollowed = followed;
     }
 }
