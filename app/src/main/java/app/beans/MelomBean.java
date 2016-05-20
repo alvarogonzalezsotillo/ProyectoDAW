@@ -118,5 +118,4 @@ public class MelomBean implements Serializable, Bean {
     public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
     }
-
 }

@@ -58,7 +58,7 @@ public class MelomDAOIT extends BaseIT<MelomDAO>{
 
     }
 
-    @Test
+    /*@Test
     public void shouldReturnAllMelomsFilterByIdUsuarioWhenCallingGetAllMelomsByIdFollower(){
 
         Collection<MelomBean> listMelomFilterByIdFollower;
@@ -66,7 +66,7 @@ public class MelomDAOIT extends BaseIT<MelomDAO>{
         MelomBean melomReturned = sut.getById(1L);
         MelomBean melomReturned2 = sut.getById(2L);
         assertNotNull(listMelomFilterByIdFollower);
-    }
+    }*/
 
     @Test
     public void shouldZDeleteTheMelomIdentifiedByIdWhenCallingDeleteById(){
