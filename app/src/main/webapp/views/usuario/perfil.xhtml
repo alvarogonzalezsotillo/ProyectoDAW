@@ -27,15 +27,18 @@
 
                 <f:facet name="then">
 
-                    <p:commandButton value="Dejar de seguir" id="dejarSeguir" actionListener="#{perfilUsuarioController.unfollow}"
-                                     styleClass="ui-priority-primary" disabled="#{perfilUsuarioController.itsaMeMario}"/>
+                    <p:commandButton value="Dejar de seguir" id="dejarSeguir"
+                                     actionListener="#{perfilUsuarioController.unfollow}"
+                                     styleClass="ui-priority-primary"
+                                     disabled="#{perfilUsuarioController.itsaMeMario}"/>
 
                 </f:facet>
 
                 <f:facet name="else">
 
                     <p:commandButton value="Seguir" id="seguir" actionListener="#{perfilUsuarioController.follow}"
-                                     styleClass="ui-priority-primary" disabled="#{perfilUsuarioController.itsaMeMario}"/>
+                                     styleClass="ui-priority-primary"
+                                     disabled="#{perfilUsuarioController.itsaMeMario}"/>
 
                 </f:facet>
 
@@ -55,6 +58,8 @@
     </h:form>
 
     <h:form>
+
+
         <ui:repeat var="melom" value="#{perfilUsuarioController.listaMelomsAjenos}">
             <h:panelGrid columns="6">
 
@@ -71,6 +76,7 @@
 
             </h:panelGrid>
         </ui:repeat>
+
     </h:form>
 
 </h:body>
