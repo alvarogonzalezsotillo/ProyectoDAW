@@ -1,5 +1,6 @@
 package app.controller;
 
+import app.beans.MelomBean;
 import app.beans.UsuarioBean;
 import app.controller.interfaces.Controller;
 import app.model.UsuarioDAO;
@@ -44,28 +45,58 @@ public class PerfilUsuarioController implements Controller, Serializable {
     private String tipoMusicaAjeno;
     private String imagenAjeno;
 
+    private List<MelomBean> listaMelomsAjenos;
+
     private List<String> listNicks;
 
     private boolean isFollowed;
     private boolean ItsaMeMario;
 
+    private boolean isAnonymous;
+
     public void init() {
 
-        initSessionForDao();
-        UsuarioBean usuarioActual = usuarioDao.getById(UtilUserSession.getUserId());
-        this.listNicks = usuarioDao.getAllNicks();
-        closeSession();
+        checkUserIsAnonymous();
 
-        this.idPersonal = usuarioActual.getId();
+        if(!isAnonymous){
+            initSessionForDao();
+            UsuarioBean usuarioActual = usuarioDao.getById(UtilUserSession.getUserId());
+            this.listNicks = usuarioDao.getAllNicks();
+            closeSession();
 
-        this.nombrePersonal = usuarioActual.getNombreDeUsuario();
-        this.apellidoPersonal = usuarioActual.getApellidoDeUsuario();
-        this.nickPersonal = usuarioActual.getNickDeUsuario();
-        this.correoPersonal = usuarioActual.getCorreoDeUsuario();
-        this.grupoPersonal = usuarioActual.getGrupoDeUsuario();
-        this.webPersonal = usuarioActual.getWebDeUsuario();
-        this.tipoMusicaPersonal = usuarioActual.getTipoMusicaDeUsuario();
-        this.imagenPersonal = UtilFiles.transformFileToBase64(usuarioActual.getImagenDeUsuario());
+            this.idPersonal = usuarioActual.getId();
+
+            this.nombrePersonal = usuarioActual.getNombreDeUsuario();
+            this.apellidoPersonal = usuarioActual.getApellidoDeUsuario();
+            this.nickPersonal = usuarioActual.getNickDeUsuario();
+            this.correoPersonal = usuarioActual.getCorreoDeUsuario();
+            this.grupoPersonal = usuarioActual.getGrupoDeUsuario();
+            this.webPersonal = usuarioActual.getWebDeUsuario();
+            this.tipoMusicaPersonal = usuarioActual.getTipoMusicaDeUsuario();
+            this.imagenPersonal = UtilFiles.transformFileToBase64(usuarioActual.getImagenDeUsuario());
+        }
+
+        else{
+
+            initSessionForDao();
+            this.listNicks = usuarioDao.getAllNicks();
+            closeSession();
+
+        }
+    }
+
+
+    private void checkUserIsAnonymous() {
+
+        if(UtilUserSession.getUserId() == null){
+
+            isAnonymous = true;
+        }
+
+        else{
+
+            isAnonymous = false;
+        }
 
     }
 
@@ -86,6 +117,11 @@ public class PerfilUsuarioController implements Controller, Serializable {
         this.webAjeno = usuarioActual.getWebDeUsuario();
         this.tipoMusicaAjeno = usuarioActual.getTipoMusicaDeUsuario();
         this.imagenAjeno = UtilFiles.transformFileToBase64(usuarioActual.getImagenDeUsuario());
+
+        initSessionForDao();
+        this.listaMelomsAjenos = usuarioDao.getListMelomsByUser(idAjeno);
+        closeSession();
+
         userIsFollowed();
 
         String route = "/views/usuario/perfil.xhtml";
@@ -335,5 +371,21 @@ public class PerfilUsuarioController implements Controller, Serializable {
 
     public void setItsaMeMario(boolean itsaMeMario) {
         this.ItsaMeMario = itsaMeMario;
+    }
+
+    public boolean getIsAnonymous() {
+        return isAnonymous;
+    }
+
+    public void setAnonymous(boolean anonymous) {
+        isAnonymous = anonymous;
+    }
+
+    public List<MelomBean> getListaMelomsAjenos() {
+        return listaMelomsAjenos;
+    }
+
+    public void setListaMelomsAjenos(List<MelomBean> listaMelomsAjenos) {
+        this.listaMelomsAjenos = listaMelomsAjenos;
     }
 }

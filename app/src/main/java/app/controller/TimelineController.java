@@ -12,7 +12,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @ManagedBean(name = "timelineController")
@@ -24,10 +23,32 @@ public class TimelineController implements Controller, Serializable {
 
     private List<MelomBean> listaMeloms;
 
+    private boolean isAnonymous;
+
     public void init() {
-        initSessionForDao();
-        this.listaMeloms = melomDao.getAllMelomsByIdFollower(UtilUserSession.getUserId());
-        closeSession();
+
+        checkUserIsAnonymous();
+
+        if(!isAnonymous){
+
+            initSessionForDao();
+            this.listaMeloms = melomDao.getAllMelomsByIdFollower(UtilUserSession.getUserId());
+            closeSession();
+        }
+    }
+
+    private void checkUserIsAnonymous() {
+
+        if(UtilUserSession.getUserId() == null){
+
+            isAnonymous = true;
+        }
+
+        else{
+
+            isAnonymous = false;
+        }
+
     }
 
     public void viewAllProfiles(){
@@ -72,4 +93,13 @@ public class TimelineController implements Controller, Serializable {
     public void setListaMeloms(List<MelomBean> listaMeloms) {
         this.listaMeloms = listaMeloms;
     }
+
+    public boolean getIsAnonymous() {
+        return isAnonymous;
+    }
+
+    public void setAnonymous(boolean anonymous) {
+        isAnonymous = anonymous;
+    }
+
 }

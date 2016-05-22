@@ -4,6 +4,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:my="http://java.sun.com/jsf/composite/melomify"
       xmlns:p="http://primefaces.org/ui">
 
 <ui:include src="/resources/templates/header.xhtml"/>
@@ -13,42 +14,72 @@
     <f:event type="preRenderView" listener="#{perfilUsuarioController.init()}"/>
     <f:event type="preRenderView" listener="#{timelineController.init()}"/>
 
-    <h:form enctype="multipart/form-data">
-        <h:panelGrid columns="1">
-            <h:outputText value="#{perfilUsuarioController.nombrePersonal}"/>
-            <h:outputText value="#{perfilUsuarioController.apellidoPersonal}"/>
-            <h:outputText value="#{perfilUsuarioController.nickPersonal}"/>
-            <h:outputText value="#{perfilUsuarioController.correoPersonal}"/>
-            <h:outputText value="#{perfilUsuarioController.grupoPersonal}"/>
-            <h:outputText value="#{perfilUsuarioController.webPersonal}"/>
-            <h:outputText value="#{perfilUsuarioController.tipoMusicaPersonal}"/>
-            <h:graphicImage value="data:image/jpeg;base64,#{perfilUsuarioController.imagenPersonal}"/>
-            <p:commandButton value="Logout" id="logout" actionListener="#{loginController.logout}"
-                             styleClass="ui-priority-primary"/>
-        </h:panelGrid>
+    <my:condition condition="#{perfilUsuarioController.isAnonymous == false}">
 
-    </h:form>
+        <f:facet name="then">
 
+            <h:form enctype="multipart/form-data">
+                <h:panelGrid columns="1">
+                    <h:outputText value="#{perfilUsuarioController.nombrePersonal}"/>
+                    <h:outputText value="#{perfilUsuarioController.apellidoPersonal}"/>
+                    <h:outputText value="#{perfilUsuarioController.nickPersonal}"/>
+                    <h:outputText value="#{perfilUsuarioController.correoPersonal}"/>
+                    <h:outputText value="#{perfilUsuarioController.grupoPersonal}"/>
+                    <h:outputText value="#{perfilUsuarioController.webPersonal}"/>
+                    <h:outputText value="#{perfilUsuarioController.tipoMusicaPersonal}"/>
+                    <h:graphicImage value="data:image/jpeg;base64,#{perfilUsuarioController.imagenPersonal}"/>
+                    <p:commandButton value="Logout" id="logout" actionListener="#{loginController.logout}"
+                                     styleClass="ui-priority-primary"/>
+                </h:panelGrid>
 
-    <h:form>
-        <ui:repeat var="melom" value="#{timelineController.listaMeloms}">
-            <h:panelGrid columns="7">
+            </h:form>
 
-                <h:commandLink value="#{melom.autor}" actionListener="#{perfilUsuarioController.viewProfile(melom.autor)}" />
-                <h:outputText value="#{melom.titulo}"/>
-                <h:outputText value="#{melom.album}"/>
-                <h:outputText value="#{melom.tipoMusica}"/>
-                <h:outputText value="#{melom.comentarioMusico}"/>
+        </f:facet>
 
-                <audio controls="controls">
-                    <source src="data:audio/mpeg3;base64,#{melom.cancion}" type="audio/mpeg"/>
-                </audio>
-
-                <h:graphicImage value="data:image/jpeg;base64,#{melom.imagenAlbum}" height="10%"/>
-
+        <f:facet name="else">
+            <h:panelGrid columns="1">
+                <h:outputText value="Debes estar registrado para ver tu perfil"/>
             </h:panelGrid>
-        </ui:repeat>
-    </h:form>
+        </f:facet>
+
+
+    </my:condition>
+
+
+    <my:condition condition="#{perfilUsuarioController.isAnonymous == false}">
+
+        <f:facet name="then">
+
+            <h:form>
+                <ui:repeat var="melom" value="#{timelineController.listaMeloms}">
+                    <h:panelGrid columns="7">
+
+                        <h:commandLink value="#{melom.autor}"
+                                       actionListener="#{perfilUsuarioController.viewProfile(melom.autor)}"/>
+                        <h:outputText value="#{melom.titulo}"/>
+                        <h:outputText value="#{melom.album}"/>
+                        <h:outputText value="#{melom.tipoMusica}"/>
+                        <h:outputText value="#{melom.comentarioMusico}"/>
+
+                        <audio controls="controls">
+                            <source src="data:audio/mpeg3;base64,#{melom.cancion}" type="audio/mpeg"/>
+                        </audio>
+
+                        <h:graphicImage value="data:image/jpeg;base64,#{melom.imagenAlbum}" height="10%"/>
+
+                    </h:panelGrid>
+                </ui:repeat>
+            </h:form>
+        </f:facet>
+
+        <f:facet name="else">
+
+            <h:panelGrid columns="1">
+                <h:outputText value="Debes estar registrado para ver tu perfil"/>
+            </h:panelGrid>
+
+        </f:facet>
+    </my:condition>
 
     <p:commandButton value="Ver usuarios" id="viewProfiles" actionListener="#{timelineController.viewAllProfiles}"
                      styleClass="ui-priority-primary"/>

@@ -53,5 +53,25 @@
 
         </h:panelGrid>
     </h:form>
+
+    <h:form>
+        <ui:repeat var="melom" value="#{perfilUsuarioController.listaMelomsAjenos}">
+            <h:panelGrid columns="6">
+
+                <h:outputText value="#{melom.titulo}"/>
+                <h:outputText value="#{melom.album}"/>
+                <h:outputText value="#{melom.tipoMusica}"/>
+                <h:outputText value="#{melom.comentarioMusico}"/>
+
+                <audio controls="controls">
+                    <source src="data:audio/mpeg3;base64,#{melom.cancion}" type="audio/mpeg"/>
+                </audio>
+
+                <h:graphicImage value="data:image/jpeg;base64,#{melom.imagenAlbum}" height="10%"/>
+
+            </h:panelGrid>
+        </ui:repeat>
+    </h:form>
+
 </h:body>
 </html>
