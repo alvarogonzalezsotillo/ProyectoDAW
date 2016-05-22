@@ -17,6 +17,7 @@ CREATE TABLE `iesrey`.`usuarios` (
 
 CREATE TABLE `iesrey`.`BETAmeloms` (
   `id` BIGINT(11) NOT NULL,
+  `autor` VARCHAR(60) NOT NULL,
   `titulo` VARCHAR(150) NOT NULL,
   `album` VARCHAR(20) NULL,
   `tipoMusica` VARCHAR(45) NULL,

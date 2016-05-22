@@ -23,9 +23,6 @@
 
             <h:graphicImage value="data:image/jpeg;base64,#{perfilUsuarioController.imagenAjeno}"/>
 
-            <p:commandButton value="Logout" id="logout" actionListener="#{loginController.logout}"
-                             styleClass="ui-priority-primary"/>
-
             <my:condition condition="#{perfilUsuarioController.isFollowed == true}">
 
                 <f:facet name="then">
@@ -43,9 +40,18 @@
                 </f:facet>
 
             </my:condition>
+
+            <my:condition condition="#{perfilUsuarioController.itsaMeMario == true}">
+
+                <f:facet name="then">
+
+                    <p:commandButton value="Logout" id="logout" actionListener="#{loginController.logout}"
+                                     styleClass="ui-priority-primary"/>
+
+                </f:facet>
+            </my:condition>
+
         </h:panelGrid>
-
     </h:form>
-
 </h:body>
 </html>

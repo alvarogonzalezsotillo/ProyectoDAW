@@ -19,6 +19,7 @@ public class MelomBuilder implements Serializable, Builder<MelomBean> {
     private byte[] cancion;
     private byte[] imagenAlbum;
     private Long idUsuario;
+    private String autor;
 
     public MelomBuilder(){
         
@@ -34,7 +35,7 @@ public class MelomBuilder implements Serializable, Builder<MelomBean> {
 
     public MelomBean build() {
 
-        return new MelomBean(titulo, album, tipoMusica, comentarioMusico, cancion, imagenAlbum, idUsuario);
+        return new MelomBean(titulo, album, tipoMusica, comentarioMusico, cancion, imagenAlbum, idUsuario, autor);
 
     }
     
@@ -89,6 +90,14 @@ public class MelomBuilder implements Serializable, Builder<MelomBean> {
     public MelomBuilder idUsuario(Long idUsuario) {
 
         this.idUsuario = idUsuario;
+
+        return this;
+
+    }
+
+    public MelomBuilder autor(String autor){
+
+        this.autor = autor;
 
         return this;
 

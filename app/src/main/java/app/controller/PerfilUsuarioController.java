@@ -88,7 +88,7 @@ public class PerfilUsuarioController implements Controller, Serializable {
         this.imagenAjeno = UtilFiles.transformFileToBase64(usuarioActual.getImagenDeUsuario());
         userIsFollowed();
 
-        String route = "/views/perfil/usuario.xhtml";
+        String route = "/views/usuario/perfil.xhtml";
         UtilViews.redirect(route);
 
     }
@@ -96,7 +96,7 @@ public class PerfilUsuarioController implements Controller, Serializable {
     public void refreshProfile(){
 
         userIsFollowed();
-        String route = "/views/perfil/usuario.xhtml";
+        String route = "/views/usuario/perfil.xhtml";
         UtilViews.redirect(route);
 
 

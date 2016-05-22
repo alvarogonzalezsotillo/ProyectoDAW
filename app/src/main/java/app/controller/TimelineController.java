@@ -5,12 +5,14 @@ import app.controller.interfaces.Controller;
 import app.model.MelomDAO;
 import app.utils.UtilSessionHibernate;
 import app.utils.UtilUserSession;
+import app.utils.UtilViews;
 import org.hibernate.Session;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @ManagedBean(name = "timelineController")
@@ -24,8 +26,15 @@ public class TimelineController implements Controller, Serializable {
 
     public void init() {
         initSessionForDao();
-        this.listaMeloms = melomDao.getAllMelomsByIdFollower(UtilUserSession.getUserId());;
+        this.listaMeloms = melomDao.getAllMelomsByIdFollower(UtilUserSession.getUserId());
         closeSession();
+    }
+
+    public void viewAllProfiles(){
+
+        String route = "/views/usuario/listaUsuarios.xhtml";
+        UtilViews.redirect(route);
+
     }
 
     public void initSessionForDao() {

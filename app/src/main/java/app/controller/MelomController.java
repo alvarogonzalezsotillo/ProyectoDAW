@@ -23,6 +23,9 @@ public class MelomController implements Serializable, Controller {
 
     private MelomBuilder melomBuilder;
 
+    @ManagedProperty(value = "#{melomDao}")
+    private MelomDAO melomDao;
+
     private String titulo;
     private String album;
     private String tipoMusica;
@@ -30,9 +33,8 @@ public class MelomController implements Serializable, Controller {
     private transient UploadedFile imagenAlbum;
     private transient UploadedFile cancion;
     private Long idUsuario = UtilUserSession.getUserId();
+    private String autor = UtilUserSession.getUserName();
 
-    @ManagedProperty(value = "#{melomDao}")
-    private MelomDAO melomDao;
 
     public void insertMelom() {
 
@@ -106,6 +108,7 @@ public class MelomController implements Serializable, Controller {
                             .comentarioMusico(comentario)
                             .cancion(cancion)
                             .imagenAlbum(imagenAlbum)
+                            .autor(autor)
                             .build();
     }
 
@@ -179,5 +182,13 @@ public class MelomController implements Serializable, Controller {
 
     public void setMelomDao(MelomDAO melomDao) {
         this.melomDao = melomDao;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
     }
 }

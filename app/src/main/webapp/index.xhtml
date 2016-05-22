@@ -32,8 +32,9 @@
 
     <h:form>
         <ui:repeat var="melom" value="#{timelineController.listaMeloms}">
-            <h:panelGrid columns="6">
+            <h:panelGrid columns="7">
 
+                <h:commandLink value="#{melom.autor}" actionListener="#{perfilUsuarioController.viewProfile(melom.autor)}" />
                 <h:outputText value="#{melom.titulo}"/>
                 <h:outputText value="#{melom.album}"/>
                 <h:outputText value="#{melom.tipoMusica}"/>
@@ -42,18 +43,15 @@
                 <audio controls="controls">
                     <source src="data:audio/mpeg3;base64,#{melom.cancion}" type="audio/mpeg"/>
                 </audio>
+
                 <h:graphicImage value="data:image/jpeg;base64,#{melom.imagenAlbum}" height="10%"/>
+
             </h:panelGrid>
         </ui:repeat>
     </h:form>
 
-    <h:form>
-        <ui:repeat var="nick" value="#{perfilUsuarioController.listNicks}">
-            <h:panelGrid columns="1">
-                <h:commandLink value="#{nick}" actionListener="#{perfilUsuarioController.viewProfile(nick)}" />
-            </h:panelGrid>
-        </ui:repeat>
-    </h:form>
+    <p:commandButton value="Ver usuarios" id="viewProfiles" actionListener="#{timelineController.viewAllProfiles}"
+                     styleClass="ui-priority-primary"/>
 
 </h:body>
 </html>
