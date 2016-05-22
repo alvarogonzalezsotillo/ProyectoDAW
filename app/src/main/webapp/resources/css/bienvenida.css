@@ -51,6 +51,14 @@ video {
 	margin-bottom: 30px;
 }
 
+a {
+   	outline: 0;
+}
+
+input::-moz-focus-inner { 
+  	border: 0; 
+}
+
 @media (max-width: 1000px) and (min-width: 100px) {
   	#logoCompleto {
    		display:none;
@@ -165,7 +173,8 @@ html, body {
   /* border: 1px solid #2f5bb7; */
   	border: 0px;
   	text-shadow: 0 1px rgba(0,0,0,0.3);
-  	background-color: #1e1d1c;
+  	background-color: #68b6a1;
+  	outline: 0;
   /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
 }
 
