@@ -24,7 +24,7 @@ CREATE TABLE `iesrey`.`BETAmeloms` (
   `cancion` LONGBLOB NULL DEFAULT NULL,
   `imagenAlbum` LONGBLOB NULL DEFAULT NULL,
   `idUsuario` BIGINT(11) NOT NULL,
-  `fechaPublicación` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `fechaPublicacion` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   INDEX `idUsuario_idx` (`idUsuario` ASC),
   CONSTRAINT `idUsuario`
@@ -55,7 +55,13 @@ CREATE TABLE `iesrey`.`BETAconciertos` (
   `idUsuario` BIGINT(11) NOT NULL,
   PRIMARY KEY (`id`));
 
-CREATE TABLE hibernate_sequence (next_val bigint);
+CREATE TABLE `iesrey`.`BETAfollowers` (
+  `idUsuario`  BIGINT (11) NOT NULL,
+  `idFollower` BIGINT (11) NOT NULL,
+  PRIMARY KEY (`idUsuario`, `idFollower`)
+);
 
-INSERT INTO hibernate_sequence(next_val)
-VALUE (1);
+CREATE TABLE `iesrey`.`hibernate_sequence` (`next_val` bigint);
+
+INSERT INTO `iesrey`.`hibernate_sequence`(`next_val`)
+VALUE (0);

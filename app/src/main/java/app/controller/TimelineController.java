@@ -3,15 +3,14 @@ package app.controller;
 import app.beans.MelomBean;
 import app.controller.interfaces.Controller;
 import app.model.MelomDAO;
-import app.model.UsuarioDAO;
 import app.utils.UtilSessionHibernate;
+import app.utils.UtilUserSession;
 import org.hibernate.Session;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @ManagedBean(name = "timelineController")
@@ -24,13 +23,9 @@ public class TimelineController implements Controller, Serializable {
     private List<MelomBean> listaMeloms;
 
     public void init() {
-
-        List<Long> listId = new ArrayList<Long>();
-
-        listId.add(1L);
         initSessionForDao();
-        this.listaMeloms = melomDao.getAllByIdUsuario(listId);
-
+        this.listaMeloms = melomDao.getAllMelomsByIdFollower(UtilUserSession.getUserId());;
+        closeSession();
     }
 
     public void initSessionForDao() {

@@ -107,4 +107,44 @@ public class UsuarioDAO extends SessionFactoryImpl implements Serializable,DAO<U
 
     }
 
+    public UsuarioBean getByNick(String nick) {
+
+        Query query = session.createQuery("from UsuarioBean usuario where usuario.nickDeUsuario = :nick");
+        query.setParameter("nick", nick);
+
+        List<UsuarioBean> list = query.list();
+
+        return list.get(0);
+
+    }
+
+    public List<Long> getFollowedUsers(Long idFollower) {
+
+        Query query = session.createQuery("select followers.idUsuario from FollowerBean followers where followers.idFollower = :idFollower");
+        query.setParameter("idFollower", idFollower);
+
+        List<Long> list = query.list();
+
+        return list;
+
+    }
+
+    public void followNewUser(Long idToFollow, Long idFollower){
+
+        Query query = session.createSQLQuery("insert into BETAfollowers (idUsuario,idFollower) values (:idToFollow, :idFollower)");
+        query.setParameter("idToFollow", idToFollow);
+        query.setParameter("idFollower", idFollower);
+        query.executeUpdate();
+    }
+
+
+    public void unfollowUser(Long idUsuario, Long idFollower) {
+
+        Query query = session.createQuery("delete from FollowerBean followers where followers.idFollower = :idFollower and followers.idUsuario = :idUsuario");
+        query.setParameter("idFollower", idFollower);
+        query.setParameter("idUsuario", idUsuario);
+
+        query.executeUpdate();
+
+    }
 }

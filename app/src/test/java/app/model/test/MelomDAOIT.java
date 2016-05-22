@@ -9,7 +9,6 @@ import org.junit.runners.MethodSorters;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -58,6 +57,16 @@ public class MelomDAOIT extends BaseIT<MelomDAO>{
         assertEquals(2,sut.getAllByIdUsuario(listaId).size());
 
     }
+
+    /*@Test
+    public void shouldReturnAllMelomsFilterByIdUsuarioWhenCallingGetAllMelomsByIdFollower(){
+
+        Collection<MelomBean> listMelomFilterByIdFollower;
+        listMelomFilterByIdFollower = sut.getAllMelomsByIdFollower(2L);
+        MelomBean melomReturned = sut.getById(1L);
+        MelomBean melomReturned2 = sut.getById(2L);
+        assertNotNull(listMelomFilterByIdFollower);
+    }*/
 
     @Test
     public void shouldZDeleteTheMelomIdentifiedByIdWhenCallingDeleteById(){
