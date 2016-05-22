@@ -15,26 +15,33 @@
 	<h:panelGrid columns="3">
 		<p:outputLabel value="Titulo de la cancion: " for="title" />
 		<p:inputText value="#{melomController.titulo}" id="title" title="title"  required="true">
-			<f:validateLength minimum="4" maximum="150"/>
+			<!-- Validaciones desde el lado cliente -->
+			<f:validateLength minimum="4" maximum="50"/>
 			<p:ajax update="titleOK" event="keyup"/>
 		</p:inputText>
 		<p:message id="titleOK" for="title" display="text"/>
+		
 		<p:outputLabel value="Album al que pertenece: " for="album"/>
 		<p:inputText id="album" value="#{melomController.album}" title="album" required="false">
+			<!-- Validaciones desde el lado cliente -->
 			<f:validateLength minimum="4" maximum="20"/>
 			<p:ajax update="albumOK"  event="keyup"/>
 		</p:inputText>
 		<p:message id="albumOK" for="album" display="text"/>
+		
 		<p:outputLabel value="Tipo de música: " for="tipoMusica"/>
 		<p:inputText id="tipoMusica" title="tipoMusica" required="false" value="#{melomController.tipoMusica}">
+			<!-- Validaciones desde el lado cliente -->
 			<f:validateLength minimum="3" maximum="45"/>
 			<p:ajax update="tipoOK" event="keyup"/>
 		</p:inputText>
 		<p:message id="tipoOK" for="tipoMusica" display="text"/>
+		
 		<p:outputLabel value="Comentario de la cancion: " />
 		<p:inputTextarea rows="5" value="#{melomController.comentario}" cols="30" counter="display" maxlength="100" counterTemplate="{0} caracteres permitidos." autoResize="false"  required="true" />
    		 <h:outputText id="display" />
 	</h:panelGrid>
+	
 	<h:panelGrid columns="2">
 		<p:outputLabel value="Imagen del album: " for="imagen"/>
 		<p:fileUpload id="imagen" mode="simple" skinSimple="true"  value="#{melomController.imagenAlbum}"

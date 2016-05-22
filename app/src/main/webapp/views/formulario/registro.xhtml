@@ -52,19 +52,38 @@
 			<p:inputText value="#{usuarioController.correo}" id="correo" title="correo" required="false">
 				<!-- Validaciones desde el lado cliente -->
 				<f:validateRegex pattern="^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$"/>
+				<p:ajax id="correoOK" event="keyup"/>
 			</p:inputText>
+			<p:message id="correoOK" for="correo" display="text"/>
 			
-			</h:panelGrid>
-			<h:panelGrid columns="2">
 			<p:outputLabel value="Grupo " for="grupo" />
-            <p:inputText value="#{usuarioController.grupo}" id="grupo" title="grupo" required="false"/>
+            <p:inputText value="#{usuarioController.grupo}" id="grupo" title="grupo" required="false">
+            	<!-- Validaciones desde el lado cliente -->
+            	<f:validateLength minimum="2" maximum="35"/>
+            	<p:ajax update="grupoOK" event="keyup"/>
+            </p:inputText>
+			<p:message id="grupoOK" for="grupo" display="text"/>
+			
 			
 			<p:outputLabel value="Tipo de Música " for="tipoMusica" />
-            <p:inputText value="#{usuarioController.tipoMusica}" id="tipoMusica" title="tipoMusica" required="false"/>
+            <p:inputText value="#{usuarioController.tipoMusica}" id="tipoMusica" title="tipoMusica" required="false">
+            	<!-- Validaciones desde el lado cliente -->
+            	<f:validateLength minimum="3" maximum="20"/>
+            	<p:ajax update="tipoOK" event="keyup"/>
+            </p:inputText>
+            <p:message id="tipoOK" for="tipoMusica" display="text"/>
             
             <p:outputLabel value="Página Web " for="web" />
-            <p:inputText value="#{usuarioController.web}" id="web" title="web" required="false"/>
+            <p:inputText value="#{usuarioController.web}" id="web" title="web" required="false">
+            	<!-- Validaciones desde el lado cliente  -->
+            	 <f:validateRegex pattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \?=.-]*)*\/?$"/>
+            	 <p:ajax update="webOK" for="web" event="keyup" />
+            </p:inputText>
+			<p:message id="webOK" for="web" display="text"/>
 			
+			</h:panelGrid>
+			
+			<h:panelGrid columns="2">
 			<p:outputLabel value="Elige tu avatar " for="logo"/>
 			<p:fileUpload  id="logo" mode="simple" skinSimple="true" value="#{usuarioController.imagen}"
 				update="messages"
