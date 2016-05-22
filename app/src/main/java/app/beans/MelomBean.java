@@ -38,11 +38,14 @@ public class MelomBean implements Serializable, Bean {
     @Column(name ="idUsuario")
     private Long idUsuario;
 
+    @Column(name = "autor")
+    private String autor;
+
     public MelomBean() {
         //Constructor por defecto
     }
 
-    public MelomBean(String titulo, String album, String tipoMusica, String comentarioMusico, byte[] cancion, byte[] imagenAlbum, Long idUsuario) {
+    public MelomBean(String titulo, String album, String tipoMusica, String comentarioMusico, byte[] cancion, byte[] imagenAlbum, Long idUsuario, String autor) {
         this.titulo = titulo;
         this.album = album;
         this.tipoMusica = tipoMusica;
@@ -50,13 +53,12 @@ public class MelomBean implements Serializable, Bean {
         this.cancion = cancion;
         this.imagenAlbum = imagenAlbum;
         this.idUsuario = idUsuario;
+        this.autor = autor;
     }
-
 
     public Long getId() {
         return id;
     }
-
 
     public void setId(Long id) {
         this.id = id;
@@ -90,7 +92,6 @@ public class MelomBean implements Serializable, Bean {
         return idUsuario;
     }
 
-
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
@@ -117,5 +118,13 @@ public class MelomBean implements Serializable, Bean {
 
     public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
     }
 }

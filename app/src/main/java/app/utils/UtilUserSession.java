@@ -38,4 +38,20 @@ public class UtilUserSession {
             return null;
         }
     }
+
+
+    public static String getUserName() {
+
+        HttpSession session = getSession();
+
+        if (session != null) {
+
+            return (String) session.getAttribute("userName");
+        }
+
+        else {
+
+            return null;
+        }
+    }
 }

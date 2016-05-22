@@ -1,5 +1,6 @@
 package app.model;
 
+import app.beans.MelomBean;
 import app.beans.UsuarioBean;
 import app.model.interfaces.DAO;
 import org.hibernate.Query;
@@ -145,6 +146,17 @@ public class UsuarioDAO extends SessionFactoryImpl implements Serializable,DAO<U
         query.setParameter("idUsuario", idUsuario);
 
         query.executeUpdate();
+
+    }
+
+    public List<MelomBean> getListMelomsByUser(Long idUsuario){
+
+        Query query = session.createQuery("from MelomBean meloms where idUsuario = :idUsuario");
+        query.setParameter("idUsuario", idUsuario);
+
+        List<MelomBean> list = query.list();
+
+        return list;
 
     }
 }

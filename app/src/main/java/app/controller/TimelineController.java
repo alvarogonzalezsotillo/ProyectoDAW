@@ -5,6 +5,7 @@ import app.controller.interfaces.Controller;
 import app.model.MelomDAO;
 import app.utils.UtilSessionHibernate;
 import app.utils.UtilUserSession;
+import app.utils.UtilViews;
 import org.hibernate.Session;
 
 import javax.faces.bean.ManagedBean;
@@ -22,10 +23,39 @@ public class TimelineController implements Controller, Serializable {
 
     private List<MelomBean> listaMeloms;
 
+    private boolean isAnonymous;
+
     public void init() {
-        initSessionForDao();
-        this.listaMeloms = melomDao.getAllMelomsByIdFollower(UtilUserSession.getUserId());;
-        closeSession();
+
+        checkUserIsAnonymous();
+
+        if(!isAnonymous){
+
+            initSessionForDao();
+            this.listaMeloms = melomDao.getAllMelomsByIdFollower(UtilUserSession.getUserId());
+            closeSession();
+        }
+    }
+
+    private void checkUserIsAnonymous() {
+
+        if(UtilUserSession.getUserId() == null){
+
+            isAnonymous = true;
+        }
+
+        else{
+
+            isAnonymous = false;
+        }
+
+    }
+
+    public void viewAllProfiles(){
+
+        String route = "/views/usuario/listaUsuarios.xhtml";
+        UtilViews.redirect(route);
+
     }
 
     public void initSessionForDao() {
@@ -63,4 +93,13 @@ public class TimelineController implements Controller, Serializable {
     public void setListaMeloms(List<MelomBean> listaMeloms) {
         this.listaMeloms = listaMeloms;
     }
+
+    public boolean getIsAnonymous() {
+        return isAnonymous;
+    }
+
+    public void setAnonymous(boolean anonymous) {
+        isAnonymous = anonymous;
+    }
+
 }

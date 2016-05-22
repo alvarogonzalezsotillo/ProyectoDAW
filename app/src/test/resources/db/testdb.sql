@@ -25,6 +25,7 @@ CREATE TABLE usuarios (
 
 CREATE TABLE BETAmeloms (
   id               BIGINT (11) NOT NULL,
+  autor            VARCHAR(60) NOT NULL,
   titulo           VARCHAR(150) NOT NULL,
   album            VARCHAR(20)  NULL,
   tipoMusica       VARCHAR(45)  NULL,
@@ -79,12 +80,12 @@ INTO usuarios (id, nombreDeUsuario, apellidoDeUsuario, nickDeUsuario, passwordDe
 VALUES (2, 'nombreTest2', 'apellidoTest2', 'nickTest2', 'passwordTest2');
 
 INSERT
-INTO BETAmeloms (id, titulo, album, tipoMusica, comentarioMusico, cancion, imagenAlbum, idUsuario)
-VALUES (1, 'tituloTest', NULL, NULL, NULL, NULL, NULL, 1);
+INTO BETAmeloms (id, autor, titulo, album, tipoMusica, comentarioMusico, cancion, imagenAlbum, idUsuario)
+VALUES (1, 'autorTest', 'tituloTest', NULL, NULL, NULL, NULL, NULL, 1);
 
 INSERT
-INTO BETAmeloms (id, titulo, album, tipoMusica, comentarioMusico, cancion, imagenAlbum, idUsuario)
-VALUES (2, 'tituloTest2', NULL, NULL, NULL, NULL, NULL, 1);
+INTO BETAmeloms (id, autor, titulo, album, tipoMusica, comentarioMusico, cancion, imagenAlbum, idUsuario)
+VALUES (2, 'autorTest', 'tituloTest2', NULL, NULL, NULL, NULL, NULL, 1);
 
 INSERT
 INTO BETAcomentarios (id, texto, idUsuario, idMelom)

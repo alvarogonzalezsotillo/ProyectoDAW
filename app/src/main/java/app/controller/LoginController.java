@@ -33,6 +33,7 @@ public class LoginController implements Serializable, Controller {
             HttpSession userSession = UtilUserSession.getSession();
             recoverUserId(nick);
             userSession.setAttribute("userId", userId);
+            userSession.setAttribute("userName", nick);
             String route = "/views/timeline/timeline.xhtml";
             UtilViews.redirect(route);
         }

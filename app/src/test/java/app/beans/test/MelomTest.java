@@ -15,6 +15,7 @@ public class MelomTest {
     String albumTest = "albumTest";
     String tipoMusicaTest = "tipoMusicaTest";
     String comentarioTest= "comentarioTest";
+    String autorTest= "autorTest";
 
     MelomBean sut;
 
@@ -23,7 +24,7 @@ public class MelomTest {
 
         try {
 
-            sut = new MelomBean(tituloTest, albumTest, tipoMusicaTest,comentarioTest,null,null,idUsuarioTest);
+            sut = new MelomBean(tituloTest, albumTest, tipoMusicaTest,comentarioTest,null,null,idUsuarioTest, autorTest);
             sut.setId(idTest);
 
         }
@@ -67,6 +68,9 @@ public class MelomTest {
 
         String comentarioActual = sut.getComentarioMusico();
         assertEquals(comentarioTest,comentarioActual);
+
+        String autorActual = sut.getAutor();
+        assertEquals(autorTest,autorActual);
 
         Long idUsuarioActual = sut.getIdUsuario();
         assertEquals(idUsuarioTest,idUsuarioActual);
