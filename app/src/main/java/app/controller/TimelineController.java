@@ -51,13 +51,6 @@ public class TimelineController implements Controller, Serializable {
 
     }
 
-    public void viewAllProfiles(){
-
-        String route = "/views/usuario/listaUsuarios.xhtml";
-        UtilViews.redirect(route);
-
-    }
-
     public void initSessionForDao() {
         Session session = UtilSessionHibernate.initSession();
         melomDao.setSession(session);

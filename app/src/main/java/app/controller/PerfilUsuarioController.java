@@ -129,6 +129,13 @@ public class PerfilUsuarioController implements Controller, Serializable {
 
     }
 
+    public void viewAllProfiles(){
+
+        String route = "/views/usuario/listaUsuarios.xhtml";
+        UtilViews.redirect(route);
+
+    }
+
     public void refreshProfile(){
 
         userIsFollowed();

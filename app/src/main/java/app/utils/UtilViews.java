@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public final class UtilViews {
+public class UtilViews {
 
     private UtilViews() throws InstantiationError {
 

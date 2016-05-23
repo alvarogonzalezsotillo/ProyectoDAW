@@ -7,7 +7,7 @@
       xmlns:my="http://java.sun.com/jsf/composite/melomify"
       xmlns:p="http://primefaces.org/ui">
 
-<ui:include src="/resources/templates/header.xhtml"/>
+<ui:include src="/resources/templates/navBar.xhtml"/>
 
 <h:body>
 
@@ -81,7 +81,7 @@
         </f:facet>
     </my:condition>
 
-    <p:commandButton value="Ver usuarios" id="viewProfiles" actionListener="#{timelineController.viewAllProfiles}"
+    <p:commandButton value="Ver usuarios" id="viewProfiles" actionListener="#{perfilUsuarioController.viewAllProfiles}"
                      styleClass="ui-priority-primary"/>
 
 </h:body>

@@ -49,11 +49,12 @@
                     	<li class="dropdown">
                     		<h:graphicImage ps:role="button" ps:data-toggle="dropdown" styleClass="dropdown-toggle" ps:id="imagenDePerfil" value="data:image/jpeg;base64,#{perfilUsuarioController.imagenPersonal}"></h:graphicImage>
 							<ul class="dropdown-menu" role="menu" aria-labelledby="drop">
-								<li><a tabindex="-1" href="#"><h:outputText value="#{perfilUsuarioController.nickPersonal}"/></a></li>
-								<li><h:link value="Ver perfil" action="#{perfilUsuarioController.viewProfile}" ps:tabindex="-1"></h:link></li>
-								<li><h:outputLink value="/views/perfil/usuario.xhtml" ps:tabindex="-1">Ver perfil</h:outputLink></li>
+								<h:form>
+									<li><h:commandLink value="#{perfilUsuarioController.nickPersonal}" actionListener="#{perfilUsuarioController.viewProfile(perfilUsuarioController.nickPersonal)}" ps:tabindex="-1"></h:commandLink></li>
+									<li><h:commandLink value="Ver usuarios" actionListener="#{perfilUsuarioController.viewAllProfiles}" ps:tabindex="-1"></h:commandLink></li>
+								</h:form>
 								<li class="divider"></li>
-								<li><h:link value="Salir" action="#{loginController.logout}" ps:tabindex="-1"></h:link></li>
+								<li><h:form><h:commandLink value="Salir" actionListener="#{loginController.logout}" ps:tabindex="-1"></h:commandLink></h:form></li>
 							</ul>
 							<h:commandButton ps:id="btnInsertarMelom" styleClass="btn btn-default" actionListener="#{melomController.insertMelom}" value="Melom!"></h:commandButton>
 						</li>	
