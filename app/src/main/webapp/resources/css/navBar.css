@@ -1,0 +1,173 @@
+@CHARSET "ISO-8859-1";
+
+.navbar-fixed-top .navbar-toggle .icon-bar {
+    background-color: #79beac;
+}
+
+#logoNavBar {
+	width: 120px;
+	height: 58px;
+	margin-top: -8px;
+	margin-left: 60px;
+}
+
+.container-fluid {
+	height: 70px;
+}
+
+.navbar-header {
+	height: 70px;
+}
+
+.navbar-toggle {
+	margin-top: 19px;
+}
+
+a {
+   	outline: 0;
+}
+
+input::-moz-focus-inner { 
+  	border: 0; 
+}
+
+.navbar-nav > li > a {
+	padding-top: 28px;
+	padding-bottom: 22px;
+}
+
+.navbar-inverse .navbar-nav > li > a{
+	color: white !important;
+}
+.navbar-inverse .navbar-nav > li > a:focus, .navbar-inverse .navbar-nav > li > a:hover {
+    color: #79beac !important;
+}
+
+#imagenDePerfil {
+	width: 55px;
+	height: 55px;
+	background-size: contain;
+	cursor: pointer;
+	margin-top: 8px;
+	margin-right: 25px;
+	border-radius: 4px;
+	border: 1px solid #3f3f3f;
+}
+
+#btnInsertarMelom {
+	margin-top: 8px;
+	margin-right: 80px;
+	border: 0px;
+  	border-radius: 10px;
+  	color: #fff;
+  	text-shadow: 0 1px rgba(0,0,0,0.1); 
+  	background-color: #79beac;
+  	font-size: 19px;
+  	font-weight: 600;
+  	outline: 0;
+}
+
+#btnInsertarMelom:hover {
+  	border: 0px;
+  	text-shadow: 0 1px rgba(0,0,0,0.3);
+  	background-color: #68b6a1;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+	text-size: 19px;
+	font-weight: 600;
+}
+
+@media (max-width: 767px) and (min-width: 100px) {
+  	.navbar-nav {
+  		margin-top: -8px;
+  		padding: 10px 15px;
+  	}
+}
+
+/********* DROPDOWN *********/
+
+
+.dropdown-menu>form>li>a  {
+	outline: 0;
+	text-decoration: none !important;
+	display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
+
+.dropdown-menu>li>form>a {
+	outline: 0;
+	text-decoration: none !important;
+	display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
+
+
+.dropdown-menu>form>li>a:hover {
+	background-color: #79beac;
+	color: white;
+}
+
+.dropdown-menu>li>form>a:hover {
+	background-color: #79beac;
+	color: white;
+}
+
+.navbar-nav>li>.dropdown-menu {
+	margin-top: 8px;
+}
+
+ul.dropdown-menu {
+	border-radius: 4px;
+	right: auto !important;
+}
+
+.navbar .nav > li > .dropdown-menu::before {
+  position: absolute;
+  top: -7px;
+  left: 9px;
+  display: inline-block;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #CCC;
+  border-left: 7px solid transparent;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  content: '';
+}
+
+.navbar .nav > li > .dropdown-menu::after {
+  position: absolute;
+  top: -6px;
+  left: 10px;
+  display: inline-block;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid white;
+  border-left: 6px solid transparent;
+  content: '';
+}
+
+@media (max-width: 767px) {
+	.navbar-inverse .navbar-nav .open .dropdown-menu>form>li>a {
+    	color: white;
+	}
+	.navbar-inverse .navbar-nav .open .dropdown-menu>li>form>a {
+    	color: white;
+	}
+	.navbar-inverse .navbar-nav .open .dropdown-menu>form>li>a:hover {
+    	color: #79beac;
+    	background-color: #222222 !important;
+	}
+	.navbar-inverse .navbar-nav .open .dropdown-menu>li>form>a:hover {
+    	color: #79beac;
+    	background-color: #222222 !important;
+	}
+}

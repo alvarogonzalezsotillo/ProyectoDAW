@@ -7,7 +7,7 @@
       xmlns:my="http://java.sun.com/jsf/composite/melomify"
       xmlns:p="http://primefaces.org/ui">
 
-<ui:include src="/resources/templates/header.xhtml"/>
+<ui:include src="/resources/templates/navBar.xhtml"/>
 
 <h:body>
 
@@ -27,7 +27,9 @@
                     <h:outputText value="#{perfilUsuarioController.grupoPersonal}"/>
                     <h:outputText value="#{perfilUsuarioController.webPersonal}"/>
                     <h:outputText value="#{perfilUsuarioController.tipoMusicaPersonal}"/>
+
                     <h:graphicImage value="data:image/jpeg;base64,#{perfilUsuarioController.imagenPersonal}"/>
+
                     <p:commandButton value="Logout" id="logout" actionListener="#{loginController.logout}"
                                      styleClass="ui-priority-primary"/>
                 </h:panelGrid>
@@ -81,7 +83,7 @@
         </f:facet>
     </my:condition>
 
-    <p:commandButton value="Ver usuarios" id="viewProfiles" actionListener="#{timelineController.viewAllProfiles}"
+    <p:commandButton value="Ver usuarios" id="viewProfiles" actionListener="#{perfilUsuarioController.viewAllProfiles}"
                      styleClass="ui-priority-primary"/>
 
 </h:body>

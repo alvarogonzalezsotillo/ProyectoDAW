@@ -1,0 +1,70 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ps="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"> 
+
+	<h:head>
+		<meta charset="UTF-8" />
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	    <title>Melomify</title>
+	    <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+	    <h:outputStylesheet library="css" name="navBar.css"></h:outputStylesheet>
+	    <!--  <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/bootstrap.css" />
+	    <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/bienvenida.css" />-->
+	    <!--[if lt IE 9]>
+	        <script>document.createElement('video');</script>
+	        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	    <![endif]-->
+	    
+	</h:head>
+	 
+	<h:body> 
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mynavbar-content">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                    	<h:graphicImage ps:id="logoNavBar" name="logoB.png" library="images"></h:graphicImage>
+                    </a>
+                </div>
+                    
+                <div class="collapse navbar-collapse" id="mynavbar-content" aria-expanded="true">
+                   	<ul class="nav navbar-inverse navbar-nav navbar-left">
+                    	<li><h:outputLink value="/views/timeline/timeline.xhtml">Inicio</h:outputLink></li>
+                    	<li><h:outputLink value="/views/index/meetUs.xhtml">Integrantes de la banda</h:outputLink></li>	
+                    </ul>
+                    <ul class="nav navbar-inverse navbar-nav navbar-right">
+                    	
+                    	<li class="dropdown">
+                    		<h:graphicImage ps:role="button" ps:data-toggle="dropdown" styleClass="dropdown-toggle" ps:id="imagenDePerfil" value="data:image/jpeg;base64,#{perfilUsuarioController.imagenPersonal}"></h:graphicImage>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="drop">
+								<h:form>
+									<li><h:commandLink value="#{perfilUsuarioController.nickPersonal}" actionListener="#{perfilUsuarioController.viewProfile(perfilUsuarioController.nickPersonal)}" ps:tabindex="-1"></h:commandLink></li>
+									<li><h:commandLink value="Ver usuarios" actionListener="#{perfilUsuarioController.viewAllProfiles}" ps:tabindex="-1"></h:commandLink></li>
+								</h:form>
+								<li class="divider"></li>
+								<li><h:form><h:commandLink value="Salir" actionListener="#{loginController.logout}" ps:tabindex="-1"></h:commandLink></h:form></li>
+							</ul>
+							<h:commandButton ps:id="btnInsertarMelom" styleClass="btn btn-default" actionListener="#{melomController.insertMelom}" value="Melom!"></h:commandButton>
+						</li>	
+                    </ul>
+                </div>
+                
+            </div>
+        </nav>
+
+		<h:outputScript library="js" name="jquery-1.12.3.min.js" />
+		<h:outputScript library="js" name="bootstrap.min.js" />
+	</h:body> 
+</html>
