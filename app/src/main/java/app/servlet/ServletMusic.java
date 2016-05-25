@@ -2,6 +2,7 @@ package app.servlet;
 
 import app.beans.MelomBean;
 import app.model.MelomDAO;
+import app.servlet.interfaces.Servlet;
 import app.utils.UtilSessionHibernate;
 import org.hibernate.Session;
 
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name = "servletMusica")
-public class ServletMusic extends HttpServlet implements Servlet<MelomDAO>{
+public class ServletMusic extends HttpServlet implements Servlet<MelomDAO> {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request,response);
