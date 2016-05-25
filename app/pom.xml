@@ -89,16 +89,19 @@
 			<version>1.4.191</version>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>2.5</version>
 		</dependency>
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.0-b01</version>
 		</dependency>
+
 
 
 	</dependencies>

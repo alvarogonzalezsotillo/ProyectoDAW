@@ -80,12 +80,20 @@ public class MelomBean implements Serializable, Bean {
         return comentarioMusico;
     }
 
-    public String getCancion() {
-        return UtilFiles.transformFileToBase64(cancion);
+    public byte[] getCancion(){
+
+        return this.cancion;
+
     }
 
     public String getImagenAlbum() {
         return UtilFiles.transformFileToBase64(imagenAlbum);
+    }
+
+    public byte[] getImagenAlbumBytes(){
+
+        return this.imagenAlbum;
+
     }
 
     public Long getIdUsuario() {
