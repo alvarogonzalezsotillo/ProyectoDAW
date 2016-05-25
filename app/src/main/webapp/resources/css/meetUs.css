@@ -1,0 +1,55 @@
+@CHARSET "ISO-8859-1";
+
+.row-centered {
+    text-align:center;
+    margin-top: 150px;
+}
+
+.col-centered {
+    display:inline-block;
+    float:none;
+    text-align:left;
+    margin-right:-4px;
+}
+
+.col-fixed {
+    width: 270px;
+}
+
+.perfil p::first-letter {
+	color: #79beac;
+	float: left;
+	font-size: 280%;
+	line-height: 0.7em;
+	margin-top: 8px;
+	padding-left: -5px;
+	padding-right: 2px;
+	text-transform: uppercase;
+}
+
+.perfil .divider {
+	border-bottom: 10px solid #79beac;
+	margin-bottom: 10px;
+	width: 25%;
+	margin-top: -5px;
+}
+
+.vertical-divider {
+	background: #DDDDDD;
+	bottom: 0;
+	content: " ";
+	margin-left: -16px;
+	position: absolute;
+	top: 0;
+	width: 1px;
+}
+
+span {
+	font-weight: 600;
+}
+
+.perfil img {
+	width: 240px;
+	height: 240px;
+	cursor: pointer;
+}

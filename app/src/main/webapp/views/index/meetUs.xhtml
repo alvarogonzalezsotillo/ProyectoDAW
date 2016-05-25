@@ -1,13 +1,55 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ps="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui">
 
-<h:head></h:head> 
-<body> 
+	<ui:include src="/resources/templates/navBar.xhtml"/>
+	<h:outputStylesheet library="css" name="meetUs.css"></h:outputStylesheet>
 
-sara + jorge + guille
-
-</body> 
+	<h:body>
+		<div class="container">
+			<div class="row row-centered">
+			
+				<div class="col-xs-3 col-centered col-fixed">
+					<div class="perfil">
+						<img src="" />
+						<h2>Jorge Del Campo</h2>
+						<div class="divider"></div>
+						<p>Jugón de la vieja escuela desde los tiempos del <span>486</span>. Sueña con desarrollar aplicaciones que cambien la 
+						<span>vida</span> de las <span>personas</span>. Atención por los pequeños <span>detalles</span>. Fábrica de <span>ideas</span>. 
+						Le gusta <span>interactuar</span> y <span>empatizar</span> con los demás. Gran <span>sensibilidad</span> artística. 
+						<span>Melómano</span> confeso, pica código a ritmo de <span>120 bpm</span>.</p>
+					</div>
+				</div>
+				
+				<div class="col-xs-3 col-centered col-fixed">
+					<div class="perfil">
+						<img src="" />
+						<h2>Sara M. Gómez</h2>
+						<div class="divider"></div>
+						<p>Es una persona <span>constante</span> que afronta los problemas con calma y <span>serenidad</span>. Nunca se desanima. 
+						Emplea el tiempo que sea necesario hasta dar con una <span>solución</span>. Programa para romper los cánones establecidos 
+						y crear aplicaciones <span>funcionales</span>. No para de escuchar música <span>electrónica</span> y el <span>rock</span> más cañero en inglés.</p>
+						<div class="vertical-divider"></div>				
+					</div>
+				</div>
+				
+				<div class="col-xs-3 col-centered col-fixed">
+					<div class="perfil">
+						<img src="" />
+						<h2>Guillermo Muela</h2>
+						<div class="divider"></div>
+						<p>Empezó a utilizar un <span>ordenador</span> con tan solo <span>4</span> años. Y es que le viene de <span>familia</span>. 
+						De padre <span>informático</span>, descubrió la programación en <span>PHP</span> durante sus prácticas. Apasionado de la <span>tecnología</span>. 
+						Siempre ha crecido rodeado de música y de ahí su marcado gusto <span>ecléctico</span>: escucha de todo.</p>
+						<div class="vertical-divider"></div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</h:body>
 </html>
