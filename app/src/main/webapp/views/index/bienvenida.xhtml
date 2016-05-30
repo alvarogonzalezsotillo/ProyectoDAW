@@ -48,10 +48,10 @@
 				  <h:form>
 				  	<h:graphicImage ps:id="logoReducidoLogin" name="Mnegro.png" library="images"></h:graphicImage>
 					<h:outputLabel for="nickDeUsuario" />
-		        	<p:inputText value="#{loginController.nick}" id="nickDeUsuario" required="required" autofocus="autofocus" placeholder="Melóman@" label="nickDeUsuario" />
+		        	<h:inputText value="#{loginController.nick}" id="nickDeUsuario" required="required" autofocus="autofocus" styleClass="input-lg" ps:placeholder="Melóman@" label="nickDeUsuario" />
 		        
 		        	<h:outputLabel for="passwordDeUsuario" />
-		        	<p:password value="#{loginController.password}" id="passwordDeUsuario" required="required" placeholder="Contraseña" label="passwordDeUsuario" />
+		        	<h:inputSecret value="#{loginController.password}" id="passwordDeUsuario" required="required" styleClass="input-lg" ps:placeholder="Contraseña" label="passwordDeUsuario" />
 					
 					<h:commandButton styleClass="login loginmodal-submit" actionListener="#{loginController.login}" value="Iniciar sesión"></h:commandButton>
 
