@@ -1,103 +1,148 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ps="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui">
 
-<ui:include src="/resources/templates/header.xhtml" />
-
-<h:body>
-	<h:form enctype="multipart/form-data">
-
-		<p:messages id="messages" autoUpdate="true" showDetail="true" closable="true"/>
-
-		<h:panelGrid columns="3">
-
-			<p:outputLabel value="Nombre " for="nombre" />
-			<p:inputText value="#{usuarioController.nombre}" id="nombre" title="nombre" required="true">
-				 <f:validateLength minimum="3" maximum="45"/>
-			     <p:ajax update="nombreOK" event="keyup"/>
-			</p:inputText>
-			<p:message id="nombreOK" for="nombre" display="text" />
-			
-			
-			<p:outputLabel value="Apellido " for="apellido" />
-			<p:inputText value="#{usuarioController.apellido}" id="apellido" title="apellido" required="true">
-				<!-- Validaciones desde el lado cliente -->
-				<f:validateLength minimum="5" maximum="45"/>
-				<p:ajax update="apellidoOK" event="keyup"/>
-			</p:inputText>
-			<p:message id="apellidoOK" for="apellido" display="text"/>
-			
-			
-			<p:outputLabel value="Nick/Apodo " for="nick" />
-			<p:inputText value="#{usuarioController.nick}" id="nick" title="nick" required="true">
-			<!-- Validaciones desde el lado cliente -->
-				<f:validateLength minimum="3" maximum="65"/>
-				<p:ajax update="nickOK" event="keyup"/>
-			</p:inputText>
-			<p:message id="nickOK" for="nick" display="text"/>
-			
-			<p:outputLabel value="Password " for="password" />
-            <p:password value="#{usuarioController.password}" id="password" title="password" required="true">
-            	<f:validateLength minimum="8" maximum="254" />
-            	<p:ajax update="passwordOK" event="keyup"/>
-            </p:password>
-            <p:message id="passwordOK" for="password" display="text"/>
-            
-			<p:outputLabel value="Correo " for="correo" />
-			<p:inputText value="#{usuarioController.correo}" id="correo" title="correo" required="false">
-				<!-- Validaciones desde el lado cliente -->
-				<f:validateRegex pattern="^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$"/>
-				<p:ajax id="correoOK" event="keyup"/>
-			</p:inputText>
-			<p:message id="correoOK" for="correo" display="text"/>
-			
-			<p:outputLabel value="Grupo " for="grupo" />
-            <p:inputText value="#{usuarioController.grupo}" id="grupo" title="grupo" required="false">
-            	<!-- Validaciones desde el lado cliente -->
-            	<f:validateLength minimum="2" maximum="35"/>
-            	<p:ajax update="grupoOK" event="keyup"/>
-            </p:inputText>
-			<p:message id="grupoOK" for="grupo" display="text"/>
-			
-			
-			<p:outputLabel value="Tipo de Música " for="tipoMusica" />
-            <p:inputText value="#{usuarioController.tipoMusica}" id="tipoMusica" title="tipoMusica" required="false">
-            	<!-- Validaciones desde el lado cliente -->
-            	<f:validateLength minimum="3" maximum="20"/>
-            	<p:ajax update="tipoOK" event="keyup"/>
-            </p:inputText>
-            <p:message id="tipoOK" for="tipoMusica" display="text"/>
-            
-            <p:outputLabel value="Página Web " for="web" />
-            <p:inputText value="#{usuarioController.web}" id="web" title="web" required="false">
-            	<!-- Validaciones desde el lado cliente  -->
-            	 <f:validateRegex pattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \?=.-]*)*\/?$"/>
-            	 <p:ajax update="webOK" for="web" event="keyup" />
-            </p:inputText>
-			<p:message id="webOK" for="web" display="text"/>
-			
-			</h:panelGrid>
-			
-			<h:panelGrid columns="2">
-			<p:outputLabel value="Elige tu avatar " for="logo"/>
-			<p:fileUpload  id="logo" mode="simple" skinSimple="true" value="#{usuarioController.imagen}"
-				update="messages"
-				allowTypes="/(\.|\/)(png)$/"
-				sizeLimit="4000000"
-				validatorMessage="Comprueba si la imagen tiene el formato y dimensiones y peso adecuados e intentalo de nuevo"
-			    oncomplete="La imagen ha sido sublida correctamente"
-			/>
-		</h:panelGrid>
-		<p:commandButton value="Empieza el show!">
-			<f:ajax execute="@all" listener="#{usuarioController.insertUsuario}" />
-		</p:commandButton>
-
-	</h:form>
-
-</h:body>
+	<ui:include src="/resources/templates/navBar.xhtml" />
+	<h:outputStylesheet library="css" name="registro.css"></h:outputStylesheet>
+	
+	<h:body>
+		
+		<div class="container">
+			<div class="row row-centered">
+		
+				<h:form class="form-horizontal col-md-6 col-md-offset-3" enctype="multipart/form-data">
+				
+					<legend>Empieza a marcar el ritmo.</legend>
+					
+					<div class="form-group">
+			    		<label for="nick" class="col-sm-4 control-label">Nombre de usuario</label>
+			    		<div class="col-sm-8">
+			      			<p:inputText styleClass="form-control" value="#{usuarioController.nick}" id="nick" title="nick" required="true">
+								<!-- Validaciones desde el lado cliente -->
+								<f:validateLength minimum="3" maximum="65"/>
+								<p:ajax update="nickOK" event="keyup"/>
+							</p:inputText>
+							<p:message styleClass="help-block" id="nickOK" for="nick" display="text"/>
+			    		</div>
+			  		</div>
+			  		
+			  		<div class="form-group">
+			    		<label for="password" class="col-sm-4 control-label">Contraseña</label>
+			    		<div class="col-sm-8">
+			      			<p:password styleClass="form-control" value="#{usuarioController.password}" id="password" title="password" required="true">
+				            	<!-- Validaciones desde el lado cliente -->
+				            	<f:validateLength minimum="8" maximum="254" />
+				            	<p:ajax update="passwordOK" event="keyup"/>
+	            			</p:password>
+	            			<p:message styleClass="help-block" id="passwordOK" for="password" display="text"/>
+			    		</div>
+			  		</div>
+			  		
+			  		<div class="form-group">
+					    <label for="nombre" class="col-sm-4 control-label">Nombre</label>
+					    <div class="col-sm-8">
+					      	<p:inputText styleClass="form-control" value="#{usuarioController.nombre}" id="nombre" title="nombre" required="true" ps:aria-describedby="nombreOK">
+						 		<!-- Validaciones desde el lado cliente -->
+						 		<f:validateLength minimum="3" maximum="45"/>
+					     		<p:ajax update="nombreOK" event="keyup"/>
+							</p:inputText>
+							<p:message styleClass="help-block" id="nombreOK" for="nombre" display="text" />
+					    </div>
+			 		 </div>
+			 		 
+			  		<div class="form-group">
+			    		<label for="apellido" class="col-sm-4 control-label">Apellido</label>
+			    		<div class="col-sm-8">
+			      			<p:inputText styleClass="form-control" value="#{usuarioController.apellido}" id="apellido" title="apellido" required="true">
+								<!-- Validaciones desde el lado cliente -->
+								<f:validateLength minimum="5" maximum="45"/>
+								<p:ajax update="apellidoOK" event="keyup"/>
+							</p:inputText>
+							<p:message styleClass="help-block" id="apellidoOK" for="apellido" display="text"/>
+			    		</div>
+			  		</div>
+			  		
+			  		<div class="form-group">
+			    		<label for="correo" class="col-sm-4 control-label">Correo electrónico</label>
+			    		<div class="col-sm-8">
+			      			<p:inputText styleClass="form-control" value="#{usuarioController.correo}" id="correo" title="correo" required="false">
+								<!-- Validaciones desde el lado cliente -->
+								<f:validateRegex pattern="^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$"/>
+								<p:ajax id="correoOK" event="keyup"/>
+							</p:inputText>
+							<p:message styleClass="help-block" id="correoOK" for="correo" display="text"/>
+			    		</div>
+			  		</div>
+			  		
+			  		<div class="form-group">
+			    		<label for="grupo" class="col-sm-4 control-label">Nombre del grupo</label>
+			    		<div class="col-sm-8">
+			      			<p:inputText styleClass="form-control" value="#{usuarioController.grupo}" id="grupo" title="grupo" required="false">
+				            	<!-- Validaciones desde el lado cliente -->
+				            	<f:validateLength minimum="2" maximum="35"/>
+				            	<p:ajax update="grupoOK" event="keyup"/>
+				            </p:inputText>
+							<p:message styleClass="help-block" id="grupoOK" for="grupo" display="text"/>
+			    		</div>
+			  		</div>
+			  		
+			  		<div class="form-group">
+			    		<label for="tipoMusica" class="col-sm-4 control-label">Género musical</label>
+			    		<div class="col-sm-8">
+			      			<p:inputText styleClass="form-control" value="#{usuarioController.tipoMusica}" id="tipoMusica" title="tipoMusica" required="false">
+				            	<!-- Validaciones desde el lado cliente -->
+				            	<f:validateLength minimum="3" maximum="20"/>
+				            	<p:ajax update="tipoOK" event="keyup"/>
+				            </p:inputText>
+				            <p:message styleClass="help-block" id="tipoOK" for="tipoMusica" display="text"/>
+			    		</div>
+			  		</div>
+			  		
+			  		<div class="form-group">
+			    		<label for="web" class="col-sm-4 control-label">Página web</label>
+			    		<div class="col-sm-8">
+			      			<p:inputText styleClass="form-control" value="#{usuarioController.web}" id="web" title="web" required="false">
+				            	<!-- Validaciones desde el lado cliente  -->
+				            	 <f:validateRegex pattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \?=.-]*)*\/?$"/>
+				            	 <p:ajax update="webOK" for="web" event="keyup" />
+				            </p:inputText>
+							<p:message styleClass="help-block" id="webOK" for="web" display="text"/>
+			    		</div>
+			  		</div>
+			  		
+			  		<div class="form-group">
+			    		<label for="logo" class="col-sm-4 control-label sr-only">Foto de perfil</label>
+			    		<div class="col-sm-8">
+			      			<p:fileUpload id="logo" mode="simple" skinSimple="true" value="#{usuarioController.imagen}"
+								update="messages"
+								fileLimit="1"
+								allowTypes="/(\.|\/)(png)$/"
+								sizeLimit="4000000"
+								validatorMessage="Comprueba si la imagen tiene el formato y dimensiones y peso adecuados e inténtalo de nuevo"
+							    label="Foto de perfil"
+							/>
+			    		</div>
+			  		</div>
+			  		
+			  		<div class="form-group">
+			    		<div class="col-sm-offset-4 col-sm-8">
+				    		<h:commandButton styleClass="pull-right" ps:id="btnRegistro" value="Regístrate">
+								<f:ajax execute="@all" listener="#{usuarioController.insertUsuario}" />
+							</h:commandButton>
+			    		</div>
+			  		</div>
+			  		
+				</h:form>
+	
+	
+			</div>
+		</div>
+		
+		<h:outputScript library="js" name="jquery-1.12.3.min.js" />
+		<h:outputScript library="js" name="bootstrap.min.js" />
+	</h:body>
 </html>
