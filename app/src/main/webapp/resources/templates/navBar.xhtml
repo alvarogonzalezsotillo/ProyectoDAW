@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
@@ -56,13 +56,118 @@
 								<li class="divider"></li>
 								<li><h:form><h:commandLink value="Salir" actionListener="#{loginController.logout}" ps:tabindex="-1"></h:commandLink></h:form></li>
 							</ul>
-							<h:commandButton ps:id="btnInsertarMelom" styleClass="btn btn-default" actionListener="#{melomController.insertMelom}" value="Melom!"></h:commandButton>
+							<h:commandButton  ps:data-toggle="modal" ps:data-target="#myModal" ps:id="btnInsertarMelom" styleClass="btn btn-default" actionListener="#{melomController.insertMelom}" value="Melom!"></h:commandButton>
 						</li>	
                     </ul>
                 </div>
                 
             </div>
         </nav>
+        
+        <!-- Modal -->
+               
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				      
+				      <div class="modal-body">
+				       
+
+						<h:form class="form-horizontal col-md-6 col-md-offset-3" enctype="multipart/form-data">
+						
+						<p:growl id="messages" showDetail="true"/> 
+							
+							<legend>Pon a sonar un Melom!</legend>
+							
+							<div class="form-group">
+								<label for="title" class="col-sm-3 control-label">Título</label>
+					    		<div class="col-sm-9">
+						    		<p:inputText styleClass="form-control" value="#{melomController.titulo}" id="title" required="true">
+										<!-- Validaciones desde el lado cliente -->
+										<f:validateLength minimum="4" maximum="50"/>
+										<p:ajax update="titleOK" event="blur"/>
+									</p:inputText>
+									<p:message id="titleOK" for="title" display="text"/>
+								</div>
+							</div>
+						
+							<div class="form-group">
+								<label for="album" class="col-sm-3 control-label">Álbum</label>
+								<div class="col-sm-9">
+									<p:inputText styleClass="form-control" id="album" value="#{melomController.album}" required="false">
+										<!-- Validaciones desde el lado cliente -->
+										<f:validateLength minimum="4" maximum="20"/>
+										<p:ajax update="albumOK"  event="blur"/>
+									</p:inputText>
+									<p:message id="albumOK" for="album" display="text"/>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for="tipoMusica" class="col-sm-3 control-label">Género</label>
+								<div class="col-sm-9">
+									<p:inputText styleClass="form-control" id="tipoMusica" required="false" value="#{melomController.tipoMusica}">
+										<!-- Validaciones desde el lado cliente -->
+										<f:validateLength minimum="3" maximum="45"/>
+										<p:ajax update="tipoOK" event="blur"/>
+									</p:inputText>
+									<p:message id="tipoOK" for="tipoMusica" display="text"/>
+								</div>
+							</div>
+							
+							<div class="form-group comentario">
+								<label for="display" class="col-sm-3 control-label">Comentario</label>
+								<div class="col-sm-9">
+									<p:inputTextarea styleClass="form-control" rows="3" value="#{melomController.comentario}" counter="display" maxlength="100" counterTemplate="{0}" autoResize="true"  required="true" />
+						   		 	<h:outputText id="display" />
+					   		 	</div>
+							</div>
+							
+							<div class="form-group">
+					    		<label for="imagen" class="col-sm-3 control-label sr-only">Imagen del álbum</label>
+					    		<div class="col-sm-9">
+					      			<p:fileUpload id="imagen" mode="simple" skinSimple="true" value="#{melomController.imagenAlbum}"
+										update="messages"
+										fileLimit="1"
+										allowTypes="/(\.|\/)(png)$/"
+										sizeLimit="4000000"
+										validatorMessage="Comprueba si la imagen tiene el formato y dimensiones y peso adecuados e inténtalo de nuevo"
+									    label="Imagen del álbum"
+									/>
+					    		</div>
+					  		</div>
+						
+							<div class="form-group">
+					    		<label for="cancion" class="col-sm-3 control-label sr-only">Canción</label>
+					    		<div class="col-sm-9">
+					      			<p:fileUpload id="cancion" mode="simple" skinSimple="true" value="#{melomController.cancion}"
+										update="messages"
+										fileLimit="1"
+										allowTypes="/(\.|\/)(mp3|wav|ogg)$/" 
+										sizeLimit="8000000"
+										validatorMessage="Asegúrate de que tu canción cumple "
+									    label="Canción"
+									/>
+					    		</div>
+					  		</div>
+							
+							<div class="form-group">
+					    		<div class="col-sm-offset-3 col-sm-9">
+					    			<button type="button" id="btnCerrarMelom" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+						    		<h:commandButton styleClass="pull-right" ps:id="btnMelom" value="Melom!">
+										<f:ajax execute="@all" listener="#{melomController.insertMelom}" />
+									</h:commandButton>
+					    		</div>
+					  		</div>
+					
+						</h:form>
+	
+			
+				      </div>
+				      
+				</div>
+			</div>
+		</div>
 
 		<h:outputScript library="js" name="jquery-1.12.3.min.js" />
 		<h:outputScript library="js" name="bootstrap.min.js" />
