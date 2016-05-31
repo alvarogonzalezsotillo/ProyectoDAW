@@ -15,6 +15,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class TimelineController implements Controller, Serializable {
         return FacesContext.getCurrentInstance();
     }
 
-    public void writeFile(byte[] file) throws IOException {
+    public OutputStream writeFile(byte[] file) throws IOException {
         FacesContext facesContext = getFacesContext();
         ExternalContext externalContext = facesContext.getExternalContext();
 
@@ -55,6 +56,8 @@ public class TimelineController implements Controller, Serializable {
         externalContext.getResponseOutputStream().write(file);
         externalContext.getResponseOutputStream().flush();
         facesContext.responseComplete();
+
+        return externalContext.getResponseOutputStream();
     }
 
     private void checkUserIsAnonymous() {
