@@ -3,6 +3,7 @@ package app.controller;
 import app.beans.MelomBean;
 import app.controller.interfaces.Controller;
 import app.model.MelomDAO;
+import app.utils.UtilFacesContext;
 import app.utils.UtilSessionHibernate;
 import app.utils.UtilUserSession;
 import app.utils.UtilViews;
@@ -11,6 +12,9 @@ import org.hibernate.Session;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -35,6 +39,22 @@ public class TimelineController implements Controller, Serializable {
             this.listaMeloms = melomDao.getAllMelomsByIdFollower(UtilUserSession.getUserId());
             closeSession();
         }
+    }
+
+    private FacesContext getFacesContext() {
+
+        return FacesContext.getCurrentInstance();
+    }
+
+    public void writeFile(byte[] file) throws IOException {
+        FacesContext facesContext = getFacesContext();
+        ExternalContext externalContext = facesContext.getExternalContext();
+
+        externalContext.setResponseContentType("audio/mpeg");
+        externalContext.setResponseContentLength(file.length);
+        externalContext.getResponseOutputStream().write(file);
+        externalContext.getResponseOutputStream().flush();
+        facesContext.responseComplete();
     }
 
     private void checkUserIsAnonymous() {

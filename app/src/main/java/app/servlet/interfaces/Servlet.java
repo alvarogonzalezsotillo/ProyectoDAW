@@ -1,6 +1,4 @@
-package app.servlet;
-
-import app.model.MelomDAO;
+package app.servlet.interfaces;
 
 import javax.servlet.http.HttpServletRequest;
 

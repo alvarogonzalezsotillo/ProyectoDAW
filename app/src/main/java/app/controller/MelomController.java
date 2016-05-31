@@ -6,6 +6,7 @@ import app.controller.interfaces.Controller;
 import app.model.MelomDAO;
 import app.utils.UtilSessionHibernate;
 import app.utils.UtilUserSession;
+import app.utils.UtilViews;
 import org.hibernate.Session;
 import org.primefaces.model.UploadedFile;
 
@@ -43,6 +44,10 @@ public class MelomController implements Serializable, Controller {
         initTransactionForDao();
         melomDao.insert(melom);
         commitAndCloseSession();
+
+        String route = "/views/index/login.xhtml";
+
+        UtilViews.redirect(route);
     }
 
     public void deleteMelom(Long id){
