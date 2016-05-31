@@ -182,6 +182,34 @@ public class PerfilUsuarioController implements Controller, Serializable {
         refreshProfile();
     }
 
+    public void modifyProfile(Long id){
+
+        initSessionForDao();
+        UsuarioBean usuario = usuarioDao.getById(id);
+
+        updateUserProfile(usuario);
+
+        initTransactionForDao();
+        usuarioDao.update(usuario);
+        commitAndCloseSession();
+
+        String route = "views/usuario/perfil.xhtml";
+
+        UtilViews.redirect(route);
+    }
+
+    private void updateUserProfile(UsuarioBean usuario) {
+
+        usuario.setNombreDeUsuario(this.nombrePersonal);
+        usuario.setApellidoDeUsuario(this.apellidoPersonal);
+        usuario.setNickDeUsuario(this.nickPersonal);
+        usuario.setGrupoDeUsuario(this.grupoPersonal);
+        usuario.setCorreoDeUsuario(this.correoPersonal);
+        usuario.setTipoMusicaDeUsuario(this.tipoMusicaPersonal);
+        usuario.setWebDeUsuario(this.webPersonal);
+
+    }
+
     public void initSessionForDao() {
         Session session = UtilSessionHibernate.initSession();
         usuarioDao.setSession(session);

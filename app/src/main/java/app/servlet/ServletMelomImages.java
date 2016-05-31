@@ -2,6 +2,7 @@ package app.servlet;
 
 import app.beans.MelomBean;
 import app.model.MelomDAO;
+import app.servlet.interfaces.Servlet;
 import app.utils.UtilSessionHibernate;
 import org.hibernate.Session;
 

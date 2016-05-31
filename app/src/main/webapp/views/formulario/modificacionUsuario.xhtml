@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+
+    <f:event type="preRenderView" listener="#{perfilUsuarioController.init()}"/>
+    
+    <h:form enctype="multipart/form-data">
+
+        <p:messages id="messages" autoUpdate="true" showDetail="true" closable="true"/>
+
+        <h:panelGrid columns="3">
+
+            <p:outputLabel value="Nombre " for="nombre" />
+            <p:inputText value="#{perfilUsuarioController.nombrePersonal}" id="nombre" title="nombre" >
+                <f:validateLength minimum="3" maximum="45"/>
+                <p:ajax update="nombreOK" event="keyup"/>
+            </p:inputText>
+            <p:message id="nombreOK" for="nombre" display="text" />
+
+
+            <p:outputLabel value="Apellido " for="apellido" />
+            <p:inputText value="#{perfilUsuarioController.apellidoPersonal}" id="apellido" title="apellido">
+                <f:validateLength minimum="5" maximum="45"/>
+                <p:ajax update="apellidoOK" event="keyup"/>
+            </p:inputText>
+            <p:message id="apellidoOK" for="apellido" display="text"/>
+
+
+            <p:outputLabel value="Nick/Apodo " for="nick" />
+            <p:inputText value="#{perfilUsuarioController.nickPersonal}" id="nick" title="nick">
+                <f:validateLength minimum="3" maximum="65"/>
+                <p:ajax update="nickOK" event="keyup"/>
+            </p:inputText>
+            <p:message id="nickOK" for="nick" display="text"/>
+
+            <!--<p:outputLabel value="Nueva password " for="newPassword" />-->
+            <!--<p:password value="" id="newPassword" title="newPassword">-->
+                <!--<f:validateLength minimum="8" maximum="254" />-->
+                <!--<p:ajax update="newPasswordOK" event="keyup"/>-->
+            <!--</p:password>-->
+            <!--<p:message id="newPasswordOK" for="newPassword" display="text"/>-->
+
+            <!--<p:outputLabel value="Repite la nueva password " for="newPassRepeat" />-->
+            <!--<p:password value="" id="newPassRepeat" title="newPassRepeat" >-->
+                <!--<f:validateLength minimum="8" maximum="254" />-->
+                <!--<p:ajax update="newPassRepeatOK" event="keyup"/>-->
+            <!--</p:password>-->
+            <!--<p:message id="newPassRepeatOK" for="newPassRepeat" display="text"/>-->
+
+            <p:outputLabel value="Correo " for="correo" />
+            <p:inputText value="#{perfilUsuarioController.correoPersonal}" id="correo" title="correo" required="false">
+                <f:validateRegex pattern="^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$"/>
+                <p:ajax id="correoOK" event="keyup"/>
+            </p:inputText>
+            <p:message id="correoOK" for="correo" display="text"/>
+
+            <p:outputLabel value="Grupo " for="grupo" />
+            <p:inputText value="#{perfilUsuarioController.grupoPersonal}" id="grupo" title="grupo" required="false">
+                <f:validateLength minimum="2" maximum="35"/>
+                <p:ajax update="grupoOK" event="keyup"/>
+            </p:inputText>
+            <p:message id="grupoOK" for="grupo" display="text"/>
+
+
+            <p:outputLabel value="Tipo de Música " for="tipoMusica" />
+            <p:inputText value="#{perfilUsuarioController.tipoMusicaPersonal}" id="tipoMusica" title="tipoMusica" required="false">
+                <f:validateLength minimum="3" maximum="20"/>
+                <p:ajax update="tipoOK" event="keyup"/>
+            </p:inputText>
+            <p:message id="tipoOK" for="tipoMusica" display="text"/>
+
+            <p:outputLabel value="Página Web " for="web" />
+            <p:inputText value="#{perfilUsuarioController.webPersonal}" id="web" title="web" required="false">
+                <f:validateRegex pattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \?=.-]*)*\/?$"/>
+                <p:ajax update="webOK" for="web" event="keyup" />
+            </p:inputText>
+            <p:message id="webOK" for="web" display="text"/>
+
+        </h:panelGrid>
+
+        <p:commandButton value="Empieza el show!">
+            <f:ajax execute="@all" listener="#{perfilUsuarioController.modifyProfile(perfilUsuarioController.idPersonal)}" />
+        </p:commandButton>
+
+    </h:form>
+
+</h:body>
+</html>
