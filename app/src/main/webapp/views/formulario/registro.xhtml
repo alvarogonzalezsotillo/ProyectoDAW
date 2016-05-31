@@ -24,7 +24,7 @@
 			      			<p:inputText styleClass="form-control" value="#{usuarioController.nick}" id="nick" title="nick" required="true">
 								<!-- Validaciones desde el lado cliente -->
 								<f:validateLength minimum="3" maximum="65"/>
-								<p:ajax update="nickOK" event="keyup"/>
+								<p:ajax update="nickOK" event="blur"/>
 							</p:inputText>
 							<p:message styleClass="help-block" id="nickOK" for="nick" display="text"/>
 			    		</div>
@@ -36,7 +36,7 @@
 			      			<p:password styleClass="form-control" value="#{usuarioController.password}" id="password" title="password" required="true">
 				            	<!-- Validaciones desde el lado cliente -->
 				            	<f:validateLength minimum="8" maximum="254" />
-				            	<p:ajax update="passwordOK" event="keyup"/>
+				            	<p:ajax update="passwordOK" event="blur"/>
 	            			</p:password>
 	            			<p:message styleClass="help-block" id="passwordOK" for="password" display="text"/>
 			    		</div>
@@ -48,7 +48,7 @@
 					      	<p:inputText styleClass="form-control" value="#{usuarioController.nombre}" id="nombre" title="nombre" required="true" ps:aria-describedby="nombreOK">
 						 		<!-- Validaciones desde el lado cliente -->
 						 		<f:validateLength minimum="3" maximum="45"/>
-					     		<p:ajax update="nombreOK" event="keyup"/>
+					     		<p:ajax update="nombreOK" event="blur"/>
 							</p:inputText>
 							<p:message styleClass="help-block" id="nombreOK" for="nombre" display="text" />
 					    </div>
@@ -60,7 +60,7 @@
 			      			<p:inputText styleClass="form-control" value="#{usuarioController.apellido}" id="apellido" title="apellido" required="true">
 								<!-- Validaciones desde el lado cliente -->
 								<f:validateLength minimum="5" maximum="45"/>
-								<p:ajax update="apellidoOK" event="keyup"/>
+								<p:ajax update="apellidoOK" event="blur"/>
 							</p:inputText>
 							<p:message styleClass="help-block" id="apellidoOK" for="apellido" display="text"/>
 			    		</div>
@@ -72,7 +72,7 @@
 			      			<p:inputText styleClass="form-control" value="#{usuarioController.correo}" id="correo" title="correo" required="false">
 								<!-- Validaciones desde el lado cliente -->
 								<f:validateRegex pattern="^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$"/>
-								<p:ajax id="correoOK" event="keyup"/>
+								<p:ajax id="correoOK" event="blur"/>
 							</p:inputText>
 							<p:message styleClass="help-block" id="correoOK" for="correo" display="text"/>
 			    		</div>
@@ -84,7 +84,7 @@
 			      			<p:inputText styleClass="form-control" value="#{usuarioController.grupo}" id="grupo" title="grupo" required="false">
 				            	<!-- Validaciones desde el lado cliente -->
 				            	<f:validateLength minimum="2" maximum="35"/>
-				            	<p:ajax update="grupoOK" event="keyup"/>
+				            	<p:ajax update="grupoOK" event="blur"/>
 				            </p:inputText>
 							<p:message styleClass="help-block" id="grupoOK" for="grupo" display="text"/>
 			    		</div>
@@ -96,7 +96,7 @@
 			      			<p:inputText styleClass="form-control" value="#{usuarioController.tipoMusica}" id="tipoMusica" title="tipoMusica" required="false">
 				            	<!-- Validaciones desde el lado cliente -->
 				            	<f:validateLength minimum="3" maximum="20"/>
-				            	<p:ajax update="tipoOK" event="keyup"/>
+				            	<p:ajax update="tipoOK" event="blur"/>
 				            </p:inputText>
 				            <p:message styleClass="help-block" id="tipoOK" for="tipoMusica" display="text"/>
 			    		</div>
@@ -108,7 +108,7 @@
 			      			<p:inputText styleClass="form-control" value="#{usuarioController.web}" id="web" title="web" required="false">
 				            	<!-- Validaciones desde el lado cliente  -->
 				            	 <f:validateRegex pattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \?=.-]*)*\/?$"/>
-				            	 <p:ajax update="webOK" for="web" event="keyup" />
+				            	 <p:ajax update="webOK" for="web" event="blur" />
 				            </p:inputText>
 							<p:message styleClass="help-block" id="webOK" for="web" display="text"/>
 			    		</div>

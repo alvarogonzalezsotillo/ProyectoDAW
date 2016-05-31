@@ -82,6 +82,12 @@ input::-moz-focus-inner {
   	.navbar-nav {
   		margin-top: -8px;
   		padding: 10px 15px;
+  	} 	
+}
+
+@media (min-width: 845px) {
+	#btnCerrarMelom {
+  		margin-left: 180px;
   	}
 }
 
@@ -169,5 +175,79 @@ ul.dropdown-menu {
 	.navbar-inverse .navbar-nav .open .dropdown-menu>li>form>a:hover {
     	color: #79beac;
     	background-color: #222222 !important;
+	}
+}
+
+/**** MODAL ******/
+
+.form-control:focus {
+  	border-color: #79beac;
+  	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(121, 190, 172, 0.6);
+  	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(121, 190, 172, 0.6);
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #e3f1ed inset !important;
+}
+
+.ui-fileupload-simple .ui-widget {
+	border-color: #e3f1ed;
+	border-radius: 10px;
+	background-color: #e3f1ed;
+}
+
+.ui-fileupload-simple:hover .ui-widget:hover {
+	border-color: #79beac;
+  	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(121, 190, 172, 0.6);
+  	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(121, 190, 172, 0.6);
+}
+
+legend {
+	font-size: 200%;
+}
+
+#btnMelom {
+	border: 0px;
+  	border-radius: 10px;
+  	color: #fff;
+  	text-shadow: 0 1px rgba(0,0,0,0.1); 
+  	background-color: #79beac;
+  	font-size: 19px;
+  	font-weight: 600;
+  	outline: 0;
+  	padding: 8px 14px;
+}
+
+
+#btnMelom:hover {
+  	border: 0px;
+  	text-shadow: 0 1px rgba(0,0,0,0.3);
+  	background-color: #68b6a1;
+}
+
+#btnCerrarMelom {
+	border: 2px solid #79beac;
+  	border-radius: 10px;
+  	color: #79beac; 
+  	background-color: #fff;
+  	font-size: 19px;
+  	font-weight: 600;
+  	outline: 0;
+  	width: 94.49px;
+  	height: 42.36px;
+}
+
+#btnCerrarMelom:hover {
+	border: 2px solid #68b6a1;
+	color: #68b6a1;
+}
+
+@media (min-width: 992px) {
+	.modal .col-md-offset-3 {
+		margin-left: 0;
+	}
+	.modal .col-md-6 { 
+		width: 100%;
+		float: none;
 	}
 }

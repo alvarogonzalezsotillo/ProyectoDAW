@@ -44,7 +44,7 @@
 	width: 1px;
 }
 
-span {
+p>span {
 	font-weight: 600;
 }
 
