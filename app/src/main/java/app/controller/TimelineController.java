@@ -14,7 +14,12 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.List;
 
@@ -41,20 +46,29 @@ public class TimelineController implements Controller, Serializable {
         }
     }
 
-    private FacesContext getFacesContext() {
+    public void write(byte[] file) throws IOException {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
 
-        return FacesContext.getCurrentInstance();
-    }
+        HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
 
-    public void writeFile(byte[] file) throws IOException {
-        FacesContext facesContext = getFacesContext();
-        ExternalContext externalContext = facesContext.getExternalContext();
+        ServletContext servletcontext = (ServletContext) facesContext.getExternalContext().getContext();
 
-        externalContext.setResponseContentType("audio/mpeg");
-        externalContext.setResponseContentLength(file.length);
-        externalContext.getResponseOutputStream().write(file);
-        externalContext.getResponseOutputStream().flush();
-        facesContext.responseComplete();
+        try {
+
+            response.setContentType("audio/mpeg");
+            response.setContentLength(file.length);
+            response.getOutputStream().write(file, 0, file.length);
+            response.getOutputStream().flush();
+
+            facesContext.responseComplete();
+            facesContext.renderResponse();
+
+        }
+        catch (Exception e){
+
+            System.out.print(e.getStackTrace());
+
+        }
     }
 
     private void checkUserIsAnonymous() {
