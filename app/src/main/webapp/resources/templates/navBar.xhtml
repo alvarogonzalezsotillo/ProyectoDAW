@@ -14,8 +14,7 @@
 	    <title>Melomify</title>
 	    <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
 	    <h:outputStylesheet library="css" name="navBar.css"></h:outputStylesheet>
-	    <!--  <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/bootstrap.css" />
-	    <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/bienvenida.css" />-->
+
 	    <!--[if lt IE 9]>
 	        <script>document.createElement('video');</script>
 	        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -64,14 +63,13 @@
             </div>
         </nav>
         
-        <!-- Modal -->
+        <!-- Modal de Melom -->
                
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 				      
-				      <div class="modal-body">
-				       
+				      <div class="modal-body">				       
 
 						<h:form class="form-horizontal col-md-6 col-md-offset-3" enctype="multipart/form-data">
 						
@@ -153,8 +151,8 @@
 							
 							<div class="form-group">
 					    		<div class="col-sm-offset-3 col-sm-9">
-					    			<button type="button" id="btnCerrarMelom" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-						    		<h:commandButton styleClass="pull-right" value="Melom!">
+					    			<button type="button" id="btnCerrarMelom" data-dismiss="modal">Cerrar</button>
+						    		<h:commandButton styleClass="btnMelom pull-right" value="Melom!">
 										<f:ajax execute="@all" listener="#{melomController.insertMelom}" />
 									</h:commandButton>
 					    		</div>
@@ -162,12 +160,11 @@
 					
 						</h:form>
 	
-			
 				      </div>
 				      
 				</div>
 			</div>
-		</div>
+		</div> <!-- Fin de modal de Melom -->
 
 		<h:outputScript library="js" name="jquery-1.12.3.min.js" />
 		<h:outputScript library="js" name="bootstrap.min.js" />

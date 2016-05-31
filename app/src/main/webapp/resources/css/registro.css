@@ -10,7 +10,7 @@ body {
   	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(121, 190, 172, 0.6);
 }
 
-#btnRegistro {
+.btnRegistro {
 	border: 0px;
   	border-radius: 10px;
   	color: #fff;
@@ -23,7 +23,7 @@ body {
 }
 
 
-#btnRegistro:hover {
+.btnRegistro:hover {
   	border: 0px;
   	text-shadow: 0 1px rgba(0,0,0,0.3);
   	background-color: #68b6a1;

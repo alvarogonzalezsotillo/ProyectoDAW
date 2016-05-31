@@ -206,7 +206,7 @@ legend {
 	font-size: 200%;
 }
 
-#btnMelom {
+.btnMelom {
 	border: 0px;
   	border-radius: 10px;
   	color: #fff;
@@ -219,7 +219,7 @@ legend {
 }
 
 
-#btnMelom:hover {
+.btnMelom:hover {
   	border: 0px;
   	text-shadow: 0 1px rgba(0,0,0,0.3);
   	background-color: #68b6a1;
@@ -250,4 +250,14 @@ legend {
 		width: 100%;
 		float: none;
 	}
+}
+
+/*** MENSAJES DE ERROR ****/
+
+.ui-messages-error, .ui-message-error {
+	color: #be798b;
+	border-style: none !important;
+	background-color: transparent !important;
+	font-weight: bold;
+	font-size: small;
 }
