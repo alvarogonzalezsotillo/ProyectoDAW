@@ -16,7 +16,7 @@ public class MelomBuilder implements Serializable, Builder<MelomBean> {
     private String album;
     private String tipoMusica;
     private String comentarioMusico;
-    private byte[] cancion;
+    private String rutaCancion;
     private byte[] imagenAlbum;
     private Long idUsuario;
     private String autor;
@@ -35,7 +35,7 @@ public class MelomBuilder implements Serializable, Builder<MelomBean> {
 
     public MelomBean build() {
 
-        return new MelomBean(titulo, album, tipoMusica, comentarioMusico, cancion, imagenAlbum, idUsuario, autor);
+        return new MelomBean(titulo, album, tipoMusica, comentarioMusico, rutaCancion, imagenAlbum, idUsuario, autor);
 
     }
     
@@ -73,7 +73,7 @@ public class MelomBuilder implements Serializable, Builder<MelomBean> {
     
     public MelomBuilder cancion(UploadedFile cancion) {
 
-        this.cancion = UtilFiles.transformFile(cancion);
+        this.rutaCancion = cancion.getFileName();
 
         return this;
 

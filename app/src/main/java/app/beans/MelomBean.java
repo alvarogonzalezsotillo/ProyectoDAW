@@ -30,7 +30,7 @@ public class MelomBean implements Serializable, Bean {
     private String comentarioMusico;
 
     @Column(name = "cancion", columnDefinition = "LONGBLOB")
-    private byte[] cancion;
+    private String rutaCancion;
 
     @Column(name = "imagenAlbum", columnDefinition = "LONGBLOB")
     private byte[] imagenAlbum;
@@ -45,12 +45,12 @@ public class MelomBean implements Serializable, Bean {
         //Constructor por defecto
     }
 
-    public MelomBean(String titulo, String album, String tipoMusica, String comentarioMusico, byte[] cancion, byte[] imagenAlbum, Long idUsuario, String autor) {
+    public MelomBean(String titulo, String album, String tipoMusica, String comentarioMusico, String rutaCancion, byte[] imagenAlbum, Long idUsuario, String autor) {
         this.titulo = titulo;
         this.album = album;
         this.tipoMusica = tipoMusica;
         this.comentarioMusico = comentarioMusico;
-        this.cancion = cancion;
+        this.rutaCancion = rutaCancion;
         this.imagenAlbum = imagenAlbum;
         this.idUsuario = idUsuario;
         this.autor = autor;
@@ -80,9 +80,9 @@ public class MelomBean implements Serializable, Bean {
         return comentarioMusico;
     }
 
-    public String getCancion(){
+    public String getRutaCancion(){
 
-        return UtilFiles.transformFileToBase64(this.cancion);
+        return this.rutaCancion;
 
     }
 
@@ -117,8 +117,8 @@ public class MelomBean implements Serializable, Bean {
         this.comentarioMusico = comentarioMusico;
     }
 
-    public void setCancion(byte[] cancion) {
-        this.cancion = cancion;
+    public void setRutaCancion(String rutaCancion) {
+        this.rutaCancion = rutaCancion;
     }
 
     public void setImagenAlbum(byte[] imagenAlbum) {
