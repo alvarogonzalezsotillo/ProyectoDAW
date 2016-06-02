@@ -45,7 +45,8 @@ public class MelomController implements Serializable, Controller {
         melomDao.insert(melom);
         commitAndCloseSession();
 
-        String route = "/views/index/login.xhtml";
+//TODO        String route = "/views/timeline/timeline.xhtml";
+        String route = "/index.xhtml";
 
         UtilViews.redirect(route);
     }
