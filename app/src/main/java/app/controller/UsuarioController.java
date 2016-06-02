@@ -55,7 +55,7 @@ public class UsuarioController implements Serializable, Controller {
             usuarioDao.insert(usuario);
             commitAndCloseSession();
 
-            String route = "/views/index/login.xhtml";
+            String route = "/views/index/bienvenida.xhtml";
             String summary = "¡Bienvenid@ " + nombre + "!";
             String detail = "Tu usuario " + nick + " ha sido registrado, ¡ahora a Rockear!";
 
