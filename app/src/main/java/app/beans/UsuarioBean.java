@@ -144,4 +144,15 @@ public class UsuarioBean implements Serializable, Bean {
     public void setImagenDeUsuario(byte[] imagenDeUsuario) {
         this.imagenDeUsuario = imagenDeUsuario;
     }
+
+    @Override
+    public String toString() {
+        return "UsuarioBean{" +
+                "id=" + id +
+                ", nombreDeUsuario='" + nombreDeUsuario + '\'' +
+                ", apellidoDeUsuario='" + apellidoDeUsuario + '\'' +
+                ", nickDeUsuario='" + nickDeUsuario + '\'' +
+                ", passwordDeUsuario='" + passwordDeUsuario + '\'' +
+                '}';
+    }
 }

@@ -3,23 +3,17 @@ package app.controller;
 import app.beans.MelomBean;
 import app.controller.interfaces.Controller;
 import app.model.MelomDAO;
-import app.utils.UtilFacesContext;
 import app.utils.UtilSessionHibernate;
 import app.utils.UtilUserSession;
-import app.utils.UtilViews;
 import org.hibernate.Session;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.List;
 
@@ -43,31 +37,6 @@ public class TimelineController implements Controller, Serializable {
             initSessionForDao();
             this.listaMeloms = melomDao.getAllMelomsByIdFollower(UtilUserSession.getUserId());
             closeSession();
-        }
-    }
-
-    public void write(byte[] file) throws IOException {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-
-        HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
-
-        ServletContext servletcontext = (ServletContext) facesContext.getExternalContext().getContext();
-
-        try {
-
-            response.setContentType("audio/mpeg");
-            response.setContentLength(file.length);
-            response.getOutputStream().write(file, 0, file.length);
-            response.getOutputStream().flush();
-
-            facesContext.responseComplete();
-            facesContext.renderResponse();
-
-        }
-        catch (Exception e){
-
-            System.out.print(e.getStackTrace());
-
         }
     }
 
