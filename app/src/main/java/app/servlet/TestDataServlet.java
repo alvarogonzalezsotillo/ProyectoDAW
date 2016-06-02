@@ -35,14 +35,4 @@ public class TestDataServlet extends HttpServlet {
         response.getWriter().append(u1.toString());
     }
 
-    private void writeBytesInStream(HttpServletResponse response, ServletOutputStream outputStream, byte[] bytes) throws IOException {
-
-        response.setContentType("audio/mpeg3");
-
-        response.setContentLength(bytes.length);
-
-        outputStream.write(bytes);
-
-        outputStream.flush();
-    }
 }
