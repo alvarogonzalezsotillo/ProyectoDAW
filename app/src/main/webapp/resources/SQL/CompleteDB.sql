@@ -15,7 +15,7 @@ CREATE TABLE `iesrey`.`usuarios` (
   `fechaRegistro` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`));
 
-CREATE TABLE `iesrey`.`BETAmeloms` (
+CREATE TABLE `iesrey`.`meloms` (
   `id` BIGINT(11) NOT NULL,
   `autor` VARCHAR(60) NOT NULL,
   `titulo` VARCHAR(150) NOT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE `iesrey`.`BETAconciertos` (
   `idUsuario` BIGINT(11) NOT NULL,
   PRIMARY KEY (`id`));
 
-CREATE TABLE `iesrey`.`BETAfollowers` (
+CREATE TABLE `iesrey`.`followers` (
   `idUsuario`  BIGINT (11) NOT NULL,
   `idFollower` BIGINT (11) NOT NULL,
   PRIMARY KEY (`idUsuario`, `idFollower`)
