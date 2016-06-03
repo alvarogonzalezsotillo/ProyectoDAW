@@ -34,12 +34,13 @@ CREATE TABLE `iesrey`.`meloms` (
     ON DELETE CASCADE
     ON UPDATE NO ACTION);
 
-CREATE TABLE `iesrey`.`BETAcomentarios` (
+CREATE TABLE `iesrey`.`comentarios` (
   `id` BIGINT(11) NOT NULL,
   `texto` VARCHAR(200) NOT NULL,
   `nombreUsuario` VARCHAR(200) NOT NULL,
   `idUsuario` BIGINT(11) NOT NULL,
   `idMelom` BIGINT(11) NOT NULL,
+  `fechaPublicacion` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   INDEX `idMelom_idx` (`idMelom` ASC),
   CONSTRAINT `idMelom`

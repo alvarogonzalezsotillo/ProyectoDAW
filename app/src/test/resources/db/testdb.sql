@@ -1,6 +1,6 @@
 DROP TABLE usuarios
 IF EXISTS;
-DROP TABLE BETAcomentarios
+DROP TABLE comentarios
 IF EXISTS;
 DROP TABLE meloms
 IF EXISTS;
@@ -42,12 +42,13 @@ CREATE TABLE meloms (
     ON UPDATE NO ACTION
 );
 
-CREATE TABLE BETAcomentarios (
+CREATE TABLE comentarios (
   id            BIGINT (11) NOT NULL,
   texto         VARCHAR(45) NOT NULL,
   nombreUsuario VARCHAR(45) NOT NULL,
   idUsuario     BIGINT (11) NOT NULL,
   idMelom       BIGINT (11) NOT NULL,
+  fechaPublicacion DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   CONSTRAINT idMelom
   FOREIGN KEY (idMelom)
@@ -89,11 +90,11 @@ INTO meloms (id, autor, titulo, album, tipoMusica, comentarioMusico, rutaCancion
 VALUES (2, 'autorTest', 'tituloTest2', NULL, NULL, NULL, NULL, NULL, 1);
 
 INSERT
-INTO BETAcomentarios (id, texto, idUsuario, nombreUsuario, idMelom)
+INTO comentarios (id, texto, idUsuario, nombreUsuario, idMelom)
 VALUES (1, 'textoTest', 1, 'usuarioTest', 1);
 
 INSERT
-INTO BETAcomentarios (id, texto, idUsuario, nombreUsuario, idMelom)
+INTO comentarios (id, texto, idUsuario, nombreUsuario, idMelom)
 VALUES (2, 'textoTest2', 1, 'usuarioTest', 1);
 
 INSERT
