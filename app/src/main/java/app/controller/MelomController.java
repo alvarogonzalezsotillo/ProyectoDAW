@@ -64,6 +64,11 @@ public class MelomController implements Serializable, Controller {
         melomDao.deleteById(id);
         commitAndCloseSession();
 
+        //TODO        String route = "/views/timeline/timeline.xhtml";
+        String route = "/index.xhtml";
+
+        UtilViews.redirect(route);
+
     }
 
     public void updateMelom(){

@@ -12,11 +12,6 @@
 	<h:body>
 		<h:form>
 		<p:panel style="width:560px;height:215px;">
-			<f:facet name="header">
-				<p:media value="http://www.stephaniequinn.com/Music/Mozart%20-%20Presto.mp3" width="525" height="50" player="quicktime">
-	    			<f:param name="autoPlay" value="true" />
-				</p:media>
-			</f:facet>
 			<p:inputTextarea rows="2" cols="60" value="#{comentarioController.texto}" counter="display" counterTemplate="{0}" maxlength="45" placeholder="Escribe un comentario..." autoResize="false" /> 
 			<f:facet name="footer">
 				<h:outputText id="display" />

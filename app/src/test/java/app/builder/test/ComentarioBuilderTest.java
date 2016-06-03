@@ -13,6 +13,7 @@ public class ComentarioBuilderTest {
     ComentarioBuilder returned;
 
     private String textoTest = "textoTest";
+    private String nombreUsuarioTest = "usuarioTest";
     private Long idUsuarioTest = 1L;
     private Long idMelomTest = 1L;
 
@@ -46,7 +47,7 @@ public class ComentarioBuilderTest {
     @Test
     public void shouldConstructANewComentarioBuilder(){
 
-        ComentarioBuilder comentarioBuilder = new ComentarioBuilder(textoTest,idUsuarioTest,idMelomTest);
+        ComentarioBuilder comentarioBuilder = new ComentarioBuilder(textoTest,idUsuarioTest,nombreUsuarioTest,idMelomTest);
 
         assertNotNull(comentarioBuilder);
 

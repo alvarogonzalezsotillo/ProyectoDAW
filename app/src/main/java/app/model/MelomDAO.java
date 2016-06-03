@@ -37,8 +37,10 @@ public class MelomDAO extends SessionFactoryImpl implements Serializable, DAO<Me
 
 
     public void deleteById(Long id) {
-        MelomBean melomToDelete = session.load(MelomBean.class, id);
-        session.delete(melomToDelete);
+
+        Query query = session.createQuery("delete from MelomBean meloms where meloms.id = :id");
+        query.setParameter("id",id);
+        query.executeUpdate();
     }
 
 

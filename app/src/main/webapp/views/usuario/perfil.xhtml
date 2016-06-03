@@ -61,7 +61,7 @@
 
 
         <ui:repeat var="melom" value="#{perfilUsuarioController.listaMelomsAjenos}">
-            <h:panelGrid columns="6">
+            <h:panelGrid columns="7">
 
                 <h:outputText value="#{melom.titulo}"/>
                 <h:outputText value="#{melom.album}"/>
@@ -74,6 +74,14 @@
 
                 <h:graphicImage value="#{melom.rutaImagenAlbum}" height="10%"/>
 
+                <my:condition condition="#{perfilUsuarioController.itsaMeMario == true}">
+
+                    <f:facet name="then">
+
+                        <h:commandLink actionListener="#{melomController.deleteMelom(melom.id)}"><h:graphicImage name="delete.png" library="images" height="30%"/></h:commandLink>
+
+                    </f:facet>
+                </my:condition>
             </h:panelGrid>
         </ui:repeat>
 

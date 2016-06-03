@@ -37,6 +37,7 @@ CREATE TABLE `iesrey`.`meloms` (
 CREATE TABLE `iesrey`.`BETAcomentarios` (
   `id` BIGINT(11) NOT NULL,
   `texto` VARCHAR(200) NOT NULL,
+  `nombreUsuario` VARCHAR(200) NOT NULL,
   `idUsuario` BIGINT(11) NOT NULL,
   `idMelom` BIGINT(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -44,8 +45,8 @@ CREATE TABLE `iesrey`.`BETAcomentarios` (
   CONSTRAINT `idMelom`
     FOREIGN KEY (`idMelom`)
     REFERENCES `iesrey`.meloms (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON DELETE CASCADE 
+    ON UPDATE CASCADE );
 
 CREATE TABLE `iesrey`.`BETAconciertos` (
   `id` BIGINT(11) NOT NULL,
@@ -54,6 +55,7 @@ CREATE TABLE `iesrey`.`BETAconciertos` (
   `ciudad` VARCHAR(60) NOT NULL,
   `lugar` VARCHAR(80) NOT NULL,
   `idUsuario` BIGINT(11) NOT NULL,
+  `fechaPublicacion` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`));
 
 CREATE TABLE `iesrey`.`followers` (

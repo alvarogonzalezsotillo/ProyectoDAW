@@ -36,8 +36,10 @@ public class ComentarioDAO extends SessionFactoryImpl implements Serializable,DA
 
     public void deleteById(Long id){
 
-        ComentarioBean comentarioToDelete = session.load(ComentarioBean.class, id);
-        session.delete(comentarioToDelete);
+        Query query = session.createQuery("delete from ComentarioBean comentarios where comentarios.id = :id");
+        query.setParameter("id",id);
+        query.executeUpdate();
+
     }
 
 
@@ -82,7 +84,7 @@ public class ComentarioDAO extends SessionFactoryImpl implements Serializable,DA
 
         List<ComentarioBean> listaComentarios;
 
-        Query query = session.createQuery("from ComentarioBean comentario where comentario.idMelom = :idMelom");
+        Query query = session.createQuery("from ComentarioBean comentario where comentario.idMelom = :idMelom order by fechaPublicacion desc");
         query.setParameter("idMelom",idMelom);
         listaComentarios = query.list();
 

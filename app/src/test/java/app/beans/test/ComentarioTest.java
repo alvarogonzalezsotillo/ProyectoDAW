@@ -12,6 +12,7 @@ public class ComentarioTest {
 
     private Long idTest = 1l;
     private String textoTest = "textoTest";
+    private String nombreUsuarioTest = "usuarioTest";
     private Long idUsuarioTest = 1L;
     private Long idMelomTest = 1L;
 
@@ -22,7 +23,7 @@ public class ComentarioTest {
 
         try {
 
-            sut = new ComentarioBean(textoTest, idUsuarioTest, idMelomTest);
+            sut = new ComentarioBean(textoTest, idUsuarioTest, nombreUsuarioTest, idMelomTest);
             sut.setId(idTest);
 
         }
@@ -58,6 +59,9 @@ public class ComentarioTest {
         String textoActual = sut.getTexto();
         assertEquals(textoTest,textoActual);
 
+        String usuarioActual = sut.getNombreUsuario();
+        assertEquals(nombreUsuarioTest,usuarioActual);
+
         Long idUsuarioActual = sut.getIdUsuario();
         assertEquals(idUsuarioTest,idUsuarioActual);
 
@@ -75,6 +79,10 @@ public class ComentarioTest {
         String nuevoTexto = "nuevoTexto";
         sut.setTexto(nuevoTexto);
         assertEquals(nuevoTexto,sut.getTexto());
+
+        String nuevoUsuario = "nuevoUsuario";
+        sut.setNombreUsuario(nuevoUsuario);
+        assertEquals(nuevoUsuario,sut.getNombreUsuario());
 
         Long nuevoIdUsuario = 2L;
         sut.setIdUsuario(nuevoIdUsuario);
