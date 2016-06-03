@@ -79,6 +79,16 @@ public class ComentarioController implements Serializable, Controller {
         UtilViews.redirect(route);
 
     }
+    public void verComentarios(MelomBean melom){
+
+        UtilComments.setMelom(melom);
+        UtilComments.setIdMelom(melom.getId());
+
+        String route = "/views/melom/comentarios.xhtml";
+
+        UtilViews.redirect(route);
+
+    }
 
     public void insertComentario() {
 

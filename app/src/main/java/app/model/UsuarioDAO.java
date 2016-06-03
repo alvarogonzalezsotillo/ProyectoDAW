@@ -132,7 +132,7 @@ public class UsuarioDAO extends SessionFactoryImpl implements Serializable,DAO<U
 
     public void followNewUser(Long idToFollow, Long idFollower){
 
-        Query query = session.createSQLQuery("insert into BETAfollowers (idUsuario,idFollower) values (:idToFollow, :idFollower)");
+        Query query = session.createSQLQuery("insert into followers (idUsuario,idFollower) values (:idToFollow, :idFollower)");
         query.setParameter("idToFollow", idToFollow);
         query.setParameter("idFollower", idFollower);
         query.executeUpdate();

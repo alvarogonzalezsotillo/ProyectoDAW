@@ -60,7 +60,8 @@
 
                         <h:commandLink value="#{melom.autor}"
                                        actionListener="#{perfilUsuarioController.viewProfile(melom.autor)}"/>
-                        <h:outputText value="#{melom.titulo}"/>
+                        <h:commandLink value="#{melom.titulo}"
+                                       actionListener="#{comentarioController.verComentarios(melom)}"/>
                         <h:outputText value="#{melom.album}"/>
                         <h:outputText value="#{melom.tipoMusica}"/>
                         <h:outputText value="#{melom.comentarioMusico}"/>
