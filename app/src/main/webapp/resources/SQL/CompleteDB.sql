@@ -22,8 +22,8 @@ CREATE TABLE `iesrey`.`BETAmeloms` (
   `album` VARCHAR(20) NULL,
   `tipoMusica` VARCHAR(45) NULL,
   `comentarioMusico` VARCHAR(100) NULL,
-  `cancion` LONGBLOB NULL DEFAULT NULL,
-  `imagenAlbum` LONGBLOB NULL DEFAULT NULL,
+  `rutaCancion` VARCHAR(240) NULL DEFAULT NULL,
+  `rutaImagenAlbum` VARCHAR(240) NULL DEFAULT NULL,
   `idUsuario` BIGINT(11) NOT NULL,
   `fechaPublicacion` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -43,7 +43,7 @@ CREATE TABLE `iesrey`.`BETAcomentarios` (
   INDEX `idMelom_idx` (`idMelom` ASC),
   CONSTRAINT `idMelom`
     FOREIGN KEY (`idMelom`)
-    REFERENCES `iesrey`.BETAmeloms (`id`)
+    REFERENCES `iesrey`.meloms (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 

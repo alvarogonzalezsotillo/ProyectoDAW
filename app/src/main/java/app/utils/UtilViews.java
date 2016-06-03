@@ -4,6 +4,7 @@ import org.mockito.internal.creation.instance.InstantationException;
 import org.primefaces.model.UploadedFile;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import java.io.IOException;
 import java.security.MessageDigest;
@@ -39,9 +40,13 @@ public class UtilViews {
 
         FacesContext context = FacesContext.getCurrentInstance();
 
+        ExternalContext ec = context.getExternalContext();
+
+        String contextPath = ec.getApplicationContextPath();
+
         try {
 
-            context.getExternalContext().redirect(route);
+            context.getExternalContext().redirect(contextPath + route);
 
         }
 

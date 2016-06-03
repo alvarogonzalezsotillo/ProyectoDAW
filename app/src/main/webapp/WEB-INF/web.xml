@@ -27,43 +27,4 @@
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>servletMusica</servlet-name>
-        <servlet-class>app.servlet.ServletMusic</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>servletMusica</servlet-name>
-        <url-pattern>/servletMusica</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>servletMelomImages</servlet-name>
-        <servlet-class>app.servlet.ServletMelomImages</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>servletMelomImages</servlet-name>
-        <url-pattern>/servletMelomImages</url-pattern>
-    </servlet-mapping>
-
-    <filter>
-        <filter-name>PrimeFaces FileUpload Filter</filter-name>
-        <filter-class>
-            org.primefaces.webapp.filter.FileUploadFilter
-        </filter-class>
-        <init-param>
-            <param-name>thresholdSize</param-name>
-            <param-value>51200</param-value>
-        </init-param>
-        <init-param>
-            <param-name>uploadDirectory</param-name>
-            <param-value>/files/temp</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>PrimeFaces FileUpload Filter</filter-name>
-        <servlet-name>Faces Servlet</servlet-name>
-    </filter-mapping>
-
 </web-app>

@@ -7,6 +7,6 @@ CREATE TABLE `iesrey`.`BETAcomentarios` (
   INDEX `idMelom_idx` (`idMelom` ASC),
   CONSTRAINT `idMelom`
     FOREIGN KEY (`idMelom`)
-    REFERENCES `iesrey`.BETAmeloms (`id`)
+    REFERENCES `iesrey`.meloms (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);

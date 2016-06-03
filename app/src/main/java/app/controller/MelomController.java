@@ -4,6 +4,7 @@ import app.beans.MelomBean;
 import app.builder.MelomBuilder;
 import app.controller.interfaces.Controller;
 import app.model.MelomDAO;
+import app.utils.UtilFiles;
 import app.utils.UtilSessionHibernate;
 import app.utils.UtilUserSession;
 import app.utils.UtilViews;
@@ -13,7 +14,7 @@ import org.primefaces.model.UploadedFile;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import java.io.Serializable;
+import java.io.*;
 import java.util.List;
 
 @ManagedBean(name = "melomController")
@@ -35,9 +36,14 @@ public class MelomController implements Serializable, Controller {
     private transient UploadedFile cancion;
     private Long idUsuario = UtilUserSession.getUserId();
     private String autor = UtilUserSession.getUserName();
+    private String rutaCancion = null;
+    private String rutaImagenAlbum = null;
 
 
-    public void insertMelom() {
+    public void insertMelom() throws IOException {
+
+        this.rutaImagenAlbum = upload(imagenAlbum);
+        this.rutaCancion = upload(cancion);
 
         MelomBean melom = createMelomBean();
         initSessionForDao();
@@ -74,7 +80,7 @@ public class MelomController implements Serializable, Controller {
 
         initSessionForDao();
         initTransactionForDao();
-        List<MelomBean> listaMeloms = melomDao.getAll();//Falta saber como enviarlo a la vista
+        List<MelomBean> listaMeloms = melomDao.getAll();
         commitAndCloseSession();
 
     }
@@ -83,7 +89,7 @@ public class MelomController implements Serializable, Controller {
 
         initSessionForDao();
         initTransactionForDao();
-        MelomBean melomReturned = melomDao.getById(id);//Falta saber como enviarlo a la vista
+        MelomBean melomReturned = melomDao.getById(id);
         commitAndCloseSession();
     }
 
@@ -112,10 +118,42 @@ public class MelomController implements Serializable, Controller {
         return melomBuilder.album(album)
                             .tipoMusica(tipoMusica)
                             .comentarioMusico(comentario)
-                            .cancion(cancion)
-                            .imagenAlbum(imagenAlbum)
+                            .rutaCancion(rutaCancion)
+                            .rutaImagenAlbum(rutaImagenAlbum)
                             .autor(autor)
                             .build();
+    }
+
+    public String upload(UploadedFile uploadedFile) throws IOException {
+
+        String randomNameFile = UtilFiles.getRandomName();
+
+        String typeFile = UtilFiles.getTypeFile(uploadedFile);
+
+        String newName = randomNameFile + typeFile;
+
+        byte[] contents = uploadedFile.getContents();
+
+        InputStream dataFile = uploadedFile.getInputstream();
+
+        File file = new File(UtilFiles.getPath(), newName);
+
+        return saveFile(file, dataFile, contents);
+
+    }
+
+    public String saveFile(File file, InputStream dataFile, byte[] contents) throws IOException {
+
+        OutputStream streamOut = new FileOutputStream(file);
+
+        int read = 0;
+        byte[] bytes = new byte[contents.length];
+        while ((read = dataFile.read(bytes)) != -1) {
+            streamOut.write(bytes, 0, read);
+        }
+        streamOut.flush();
+
+        return UtilFiles.getFileRoute(file);
     }
 
     public String getTitulo() {
@@ -196,5 +234,21 @@ public class MelomController implements Serializable, Controller {
 
     public void setAutor(String autor) {
         this.autor = autor;
+    }
+
+    public String getRutaCancion() {
+        return rutaCancion;
+    }
+
+    public void setRutaCancion(String rutaCancion) {
+        this.rutaCancion = rutaCancion;
+    }
+
+    public String getRutaImagenAlbum() {
+        return rutaImagenAlbum;
+    }
+
+    public void setRutaImagenAlbum(String rutaImagenAlbum) {
+        this.rutaImagenAlbum = rutaImagenAlbum;
     }
 }

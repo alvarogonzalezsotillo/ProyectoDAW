@@ -43,13 +43,13 @@ public class ServletMelomImages extends HttpServlet implements Servlet<MelomDAO>
 
     private void writeBytesInStream(HttpServletResponse response, ServletOutputStream outputStream, MelomBean melomReturned) throws IOException {
 
-        byte[] imagenAlbumBytes = melomReturned.getImagenAlbumBytes();
+//        byte[] imagenAlbumBytes = melomReturned.getImagenAlbumBytes();
 
         response.setContentType("image/jpeg");
 
-        response.setContentLength(imagenAlbumBytes.length);
+//        response.setContentLength(imagenAlbumBytes.length);
 
-        outputStream.write(imagenAlbumBytes);
+//        outputStream.write(imagenAlbumBytes);
 
         outputStream.flush();
     }

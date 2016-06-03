@@ -1,12 +1,9 @@
 package app.builder;
 
-import java.io.Serializable;
-
-import app.builder.interfaces.Builder;
-import app.utils.UtilFiles;
-import org.primefaces.model.UploadedFile;
-
 import app.beans.MelomBean;
+import app.builder.interfaces.Builder;
+
+import java.io.Serializable;
 
 public class MelomBuilder implements Serializable, Builder<MelomBean> {
 
@@ -17,7 +14,7 @@ public class MelomBuilder implements Serializable, Builder<MelomBean> {
     private String tipoMusica;
     private String comentarioMusico;
     private String rutaCancion;
-    private byte[] imagenAlbum;
+    private String rutaImagenAlbum;
     private Long idUsuario;
     private String autor;
 
@@ -35,7 +32,7 @@ public class MelomBuilder implements Serializable, Builder<MelomBean> {
 
     public MelomBean build() {
 
-        return new MelomBean(titulo, album, tipoMusica, comentarioMusico, rutaCancion, imagenAlbum, idUsuario, autor);
+        return new MelomBean(titulo, album, tipoMusica, comentarioMusico, rutaCancion, rutaImagenAlbum, idUsuario, autor);
 
     }
     
@@ -71,17 +68,17 @@ public class MelomBuilder implements Serializable, Builder<MelomBean> {
 
     }
     
-    public MelomBuilder cancion(UploadedFile cancion) {
+    public MelomBuilder rutaCancion(String rutaCancion) {
 
-        this.rutaCancion = cancion.getFileName();
+        this.rutaCancion = rutaCancion;
 
         return this;
 
     }
     
-    public MelomBuilder imagenAlbum(UploadedFile imagenAlbum) {
+    public MelomBuilder rutaImagenAlbum(String rutaImagenAlbum) {
 
-        this.imagenAlbum = UtilFiles.transformFile(imagenAlbum);
+        this.rutaImagenAlbum = rutaImagenAlbum;
 
         return this;
 
