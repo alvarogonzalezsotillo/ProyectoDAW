@@ -56,10 +56,16 @@ public class MelomController implements Serializable, Controller {
         melomDao.insert(melom);
         commitAndCloseSession();
 
-//TODO        String route = "/views/timeline/timeline.xhtml";
-        String route = "/index.xhtml";
+        refreshPage();
+    }
 
-        UtilViews.redirect(route);
+    public void deleteMelom(Long id) {
+
+        initSessionForDao();
+        initTransactionForDao();
+        melomDao.deleteById(id);
+        commitAndCloseSession();
+        refreshPage();
     }
 
     private boolean checkImageIsNull() {
@@ -69,45 +75,12 @@ public class MelomController implements Serializable, Controller {
         return !(fileName.equals(""));
     }
 
-    public void deleteMelom(Long id) {
 
-        initSessionForDao();
-        initTransactionForDao();
-        melomDao.deleteById(id);
-        commitAndCloseSession();
-
+    private void refreshPage() {
         //TODO        String route = "/views/timeline/timeline.xhtml";
         String route = "/index.xhtml";
 
         UtilViews.redirect(route);
-
-    }
-
-    public void updateMelom() {
-
-        MelomBean melom = createMelomBean();
-        initSessionForDao();
-        initTransactionForDao();
-        melomDao.update(melom);
-        commitAndCloseSession();
-
-    }
-
-    public void listMelom() {
-
-        initSessionForDao();
-        initTransactionForDao();
-        List<MelomBean> listaMeloms = melomDao.getAll();
-        commitAndCloseSession();
-
-    }
-
-    public void getMelomById(Long id) {
-
-        initSessionForDao();
-        initTransactionForDao();
-        MelomBean melomReturned = melomDao.getById(id);
-        commitAndCloseSession();
     }
 
     public void initSessionForDao() {

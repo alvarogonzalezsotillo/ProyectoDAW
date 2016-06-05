@@ -81,15 +81,6 @@ public class UsuarioController implements Serializable, Controller {
         return isNull;
     }
 
-    public void deleteUsuarioById(Long id) {
-
-        initSessionForDao();
-        initTransactionForDao();
-        usuarioDao.deleteById(id);
-        commitAndCloseSession();
-
-    }
-
     public void updateUsuario() {
 
         UsuarioBean usuario = createUsuarioBean();
@@ -100,25 +91,6 @@ public class UsuarioController implements Serializable, Controller {
         commitAndCloseSession();
 
     }
-
-    public void listUsuario() {
-
-        initSessionForDao();
-        initTransactionForDao();
-        List<UsuarioBean> listaUsuarios = usuarioDao.getAll();//Falta saber como enviarlo a la vista
-        commitAndCloseSession();
-
-    }
-
-    public void getUsuarioById(Long id) {
-
-        initSessionForDao();
-        initTransactionForDao();
-        UsuarioBean usuarioReturned = usuarioDao.getById(id);//Falta saber como enviarlo a la vista
-        commitAndCloseSession();
-
-    }
-
 
     public void initSessionForDao() {
         Session session = UtilSessionHibernate.initSession();

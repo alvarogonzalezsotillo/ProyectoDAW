@@ -44,12 +44,6 @@ public class ComentarioBuilder implements Serializable, Builder<ComentarioBean> 
         return this;
     }
 
-    public ComentarioBuilder nombreUsuario(String nombreUsuario) {
-
-        this.nombreUsuario = nombreUsuario;
-        return this;
-    }
-
     public ComentarioBuilder idMelom(Long idMelom) {
 
         this.idMelom = idMelom;

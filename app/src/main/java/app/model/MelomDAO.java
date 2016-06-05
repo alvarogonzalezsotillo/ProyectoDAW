@@ -104,20 +104,4 @@ public class MelomDAO extends SessionFactoryImpl implements Serializable, DAO<Me
 
         return listMelomsFilterByidUsuario;
     }
-
-    @SuppressWarnings("unchecked")
-    public List<String> getAllAutoresByIdFollower(Long idFollower) {
-
-        List<String> listAutores;
-
-        Query subQuery = session.createQuery("select idUsuario from FollowerBean where idFollower = :idFollower");
-        subQuery.setParameter("idFollower", idFollower);
-        List subQueryResult = subQuery.list();
-
-        Query query = session.createQuery("select usuarios.nombreDeUsuario from UsuarioBean usuarios where usuarios.id in (:subQueryResult)");
-        query.setParameterList("subQueryResult", subQueryResult);
-        listAutores = query.list();
-
-        return listAutores;
-    }
 }

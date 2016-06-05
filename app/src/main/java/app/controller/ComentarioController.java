@@ -103,16 +103,6 @@ public class ComentarioController implements Serializable, Controller {
 
     }
 
-    public void updateComentario() {
-        ComentarioBean comentario = createComentarioBean();
-
-        initSessionForDao();
-        initTransactionForDao();
-        comentarioDao.update(comentario);
-        commitAndCloseSession();
-
-    }
-
     public void deleteComentario(Long id) {
 
         initSessionForDao();
@@ -125,39 +115,6 @@ public class ComentarioController implements Serializable, Controller {
         UtilViews.redirect(route);
 
     }
-
-    public void listComentario() {
-
-        initSessionForDao();
-        List<ComentarioBean> listaComentarios = comentarioDao.getAll();
-        closeSession();
-
-    }
-
-    public void getComentario(Long id) {
-
-        initSessionForDao();
-        ComentarioBean comentarioReturned = comentarioDao.getById(id);
-        closeSession();
-
-    }
-
-    public void listComentarioByIdUsuario(Long idusuario) {
-
-        initSessionForDao();
-        List<ComentarioBean> listaComentariosFilterByIdUsuario = comentarioDao.getAllByIdUsuario(idusuario);
-        closeSession();
-
-    }
-
-    public void listComentarioByIdMelom(Long idMelom) {
-
-        initSessionForDao();
-        List<ComentarioBean> listaComentariosFilterByIdMelom = comentarioDao.getAllByIdMelom(idMelom);
-        closeSession();
-
-    }
-
 
     public void initSessionForDao() {
         Session session = UtilSessionHibernate.initSession();
@@ -188,14 +145,6 @@ public class ComentarioController implements Serializable, Controller {
         comentarioBuilder = new ComentarioBuilder(texto, idUsuario, nombreUsuario, idMelom);
 
         return comentarioBuilder.build();
-    }
-
-    public ComentarioBuilder getComentarioBuilder() {
-        return comentarioBuilder;
-    }
-
-    public void setComentarioBuilder(ComentarioBuilder comentarioBuilder) {
-        this.comentarioBuilder = comentarioBuilder;
     }
 
     public String getTexto() {

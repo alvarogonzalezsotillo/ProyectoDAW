@@ -82,19 +82,6 @@ public class PerfilUsuarioController implements Controller, Serializable {
         }
     }
 
-
-    private void checkUserIsAnonymous() {
-
-        if (UtilUserSession.getUserId() == null) {
-
-            isAnonymous = true;
-        } else {
-
-            isAnonymous = false;
-        }
-
-    }
-
     public void viewProfile(String nickAjeno) {
 
         initSessionForDao();
@@ -131,31 +118,6 @@ public class PerfilUsuarioController implements Controller, Serializable {
 
     }
 
-    public void refreshProfile() {
-
-        userIsFollowed();
-        String route = "/views/usuario/perfil.xhtml";
-        UtilViews.redirect(route);
-
-
-    }
-
-    private void userIsFollowed() {
-
-        if (this.idAjeno == UtilUserSession.getUserId()) {
-
-            this.isFollowed = false;
-            this.ItsaMeMario = true;
-
-        } else {
-            initSessionForDao();
-            List<Long> listaUsuariosSeguidos = usuarioDao.getFollowedUsers(UtilUserSession.getUserId());
-            closeSession();
-            this.isFollowed = listaUsuariosSeguidos.contains(idAjeno);
-            this.ItsaMeMario = false;
-        }
-    }
-
     public void follow() {
 
         initSessionForDao();
@@ -186,9 +148,7 @@ public class PerfilUsuarioController implements Controller, Serializable {
         usuarioDao.update(usuario);
         commitAndCloseSession();
 
-        String route = "views/usuario/perfil.xhtml";
-
-        UtilViews.redirect(route);
+        refreshProfile();
     }
 
     private void updateUserProfile(UsuarioBean usuario) {
@@ -201,6 +161,43 @@ public class PerfilUsuarioController implements Controller, Serializable {
         usuario.setTipoMusicaDeUsuario(this.tipoMusicaPersonal);
         usuario.setWebDeUsuario(this.webPersonal);
 
+    }
+
+    private void checkUserIsAnonymous() {
+
+        if (UtilUserSession.getUserId() == null) {
+
+            isAnonymous = true;
+        } else {
+
+            isAnonymous = false;
+        }
+
+    }
+
+    public void refreshProfile() {
+
+        userIsFollowed();
+        String route = "/views/usuario/perfil.xhtml";
+        UtilViews.redirect(route);
+
+
+    }
+
+    private void userIsFollowed() {
+
+        if (this.idAjeno == UtilUserSession.getUserId()) {
+
+            this.isFollowed = false;
+            this.ItsaMeMario = true;
+
+        } else {
+            initSessionForDao();
+            List<Long> listaUsuariosSeguidos = usuarioDao.getFollowedUsers(UtilUserSession.getUserId());
+            closeSession();
+            this.isFollowed = listaUsuariosSeguidos.contains(idAjeno);
+            this.ItsaMeMario = false;
+        }
     }
 
     public void initSessionForDao() {
