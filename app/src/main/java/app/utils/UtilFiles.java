@@ -8,7 +8,8 @@ import java.util.Random;
 
 public class UtilFiles {
 
-    private final static String PATH = "/Users/guillermo/apache-tomcat-8.0.33/webapps/ROOT/resources/files";
+//    private final static String PATH = "/Users/guillermo/apache-tomcat-8.0.33/webapps/ROOT/resources/files";
+    private final static String PATH = "C:\\xampp\\tomcat\\webapps\\ROOT";
     private final static String FILE_ROUTE = "/resources/files/";
     public static final String PERFIL_DEFAULT_PNG = "perfilDefault.png";
 
