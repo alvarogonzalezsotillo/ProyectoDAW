@@ -166,7 +166,6 @@ public class UsuarioDAO extends SessionFactoryImpl implements Serializable, DAO<
 
     }
 
-    @Override
     public void update(UsuarioBean usuarioBean) {
         //Do nothing
     }
