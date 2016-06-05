@@ -16,7 +16,12 @@ p {
 
 .mensajeDeError a {
 	outline: 0;
-	color: #79beac;
+	color: #333;
+	font-weight: bold;
+	text-decoration: underline solid #79beac;
+	-moz-text-decoration-color: #79beac;
+	-webkit-text-decoration-color: #79beac;
+    text-decoration-color: #79beac;
 }
 
 .mensajeDeError a:hover {
