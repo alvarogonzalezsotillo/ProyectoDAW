@@ -46,7 +46,7 @@
                     <ul class="nav navbar-inverse navbar-nav navbar-right">
                     	
                     	<li class="dropdown">
-                    		<h:graphicImage ps:role="button" ps:data-toggle="dropdown" styleClass="dropdown-toggle" ps:id="imagenDePerfil" value="data:image/jpeg;base64,#{perfilUsuarioController.imagenPersonal}"></h:graphicImage>
+                    		<h:graphicImage ps:role="button" ps:data-toggle="dropdown" styleClass="dropdown-toggle" ps:id="imagenDePerfil" value="#{perfilUsuarioController.imagenPersonal}"></h:graphicImage>
 							<ul class="dropdown-menu" role="menu" aria-labelledby="drop">
 								<h:form>
 									<li><h:commandLink value="#{perfilUsuarioController.nickPersonal}" actionListener="#{perfilUsuarioController.viewProfile(perfilUsuarioController.nickPersonal)}" ps:tabindex="-1"></h:commandLink></li>

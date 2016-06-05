@@ -21,7 +21,7 @@
             <h:outputText value="#{perfilUsuarioController.webAjeno}"/>
             <h:outputText value="#{perfilUsuarioController.tipoMusicaAjeno}"/>
 
-            <h:graphicImage value="data:image/jpeg;base64,#{perfilUsuarioController.imagenAjeno}"/>
+            <h:graphicImage value="#{perfilUsuarioController.imagenAjeno}"/>
 
             <my:condition condition="#{perfilUsuarioController.isFollowed == true}">
 

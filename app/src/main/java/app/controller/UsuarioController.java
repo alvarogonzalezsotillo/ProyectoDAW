@@ -4,6 +4,7 @@ import app.beans.UsuarioBean;
 import app.builder.UsuarioBuilder;
 import app.controller.interfaces.Controller;
 import app.model.UsuarioDAO;
+import app.utils.UtilFiles;
 import app.utils.UtilViews;
 import app.utils.UtilSessionHibernate;
 import org.hibernate.Session;
@@ -12,6 +13,7 @@ import org.primefaces.model.UploadedFile;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -31,12 +33,15 @@ public class UsuarioController implements Serializable, Controller {
     private String web;
     private String grupo;
     private String tipoMusica;
+
+    private String rutaImagen = UtilFiles.getDefaultUserRoute();
+
     private transient UploadedFile imagen;
 
     @ManagedProperty(value = "#{usuarioDao}")
     private UsuarioDAO usuarioDao;
 
-    public void insertUsuario() {
+    public void insertUsuario() throws IOException {
 
         if(nickAlreadyExists()){
 
@@ -48,6 +53,11 @@ public class UsuarioController implements Serializable, Controller {
         }
 
         else{
+
+            if(checkImagenIsNull()){
+
+                this.rutaImagen = UtilFiles.upload(imagen);
+            }
 
             UsuarioBean usuario = createUsuarioBean();
             initSessionForDao();
@@ -62,6 +72,15 @@ public class UsuarioController implements Serializable, Controller {
             UtilViews.redirectWithInfoMessage(route, summary, detail);
 
         }
+    }
+
+    private boolean checkImagenIsNull() {
+
+        String fileName = imagen.getFileName();
+
+        boolean isNull = !(fileName.equals(""));
+
+        return isNull;
     }
 
     public void deleteUsuarioById(Long id){
@@ -134,7 +153,7 @@ public class UsuarioController implements Serializable, Controller {
                                 .web(web)
                                 .grupo(grupo)
                                 .tipoMusica(tipoMusica)
-                                .imagen(imagen)
+                                .rutaImagen(rutaImagen)
                                 .build();
     }
 

@@ -19,7 +19,7 @@ public class UsuarioBuilder implements Serializable, Builder<UsuarioBean> {
     private String web;
     private String grupo;
     private String tipoMusica;
-    private byte[] imagen;
+    private String rutaImagen;
 
     public UsuarioBuilder(){
         
@@ -39,7 +39,7 @@ public class UsuarioBuilder implements Serializable, Builder<UsuarioBean> {
 
     public UsuarioBean build() {
 
-        return new UsuarioBean(nombre,apellido,nick,correo,tipoMusica,grupo,web,password,imagen);
+        return new UsuarioBean(nombre,apellido,nick,correo,tipoMusica,grupo,web,password,rutaImagen);
 
     }
 
@@ -106,9 +106,9 @@ public class UsuarioBuilder implements Serializable, Builder<UsuarioBean> {
 
     }
 
-    public UsuarioBuilder imagen(UploadedFile imagen){
+    public UsuarioBuilder rutaImagen(String rutaImagen){
 
-        this.imagen = UtilFiles.transformFile(imagen);
+        this.rutaImagen = rutaImagen;
 
         return this;
 

@@ -14,7 +14,7 @@ CREATE TABLE usuarios (
   nickDeUsuario       VARCHAR(65)  NOT NULL,
   passwordDeUsuario   VARCHAR(254) NOT NULL,
   correoDeUsuario     VARCHAR(85)  NULL,
-  imagenDeUsuario LONGBLOB NULL,
+  rutaImagenDeUsuario VARCHAR(200) NOT NULL,
   grupoDeUsuario      VARCHAR(35)  NULL,
   webDeUsuario        VARCHAR(100) NULL,
   tipoMusicaDeUsuario VARCHAR(20)  NULL,

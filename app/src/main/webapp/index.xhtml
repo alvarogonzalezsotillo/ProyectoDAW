@@ -28,7 +28,7 @@
                     <h:outputText value="#{perfilUsuarioController.webPersonal}"/>
                     <h:outputText value="#{perfilUsuarioController.tipoMusicaPersonal}"/>
 
-                    <h:graphicImage value="data:image/jpeg;base64,#{perfilUsuarioController.imagenPersonal}"/>
+                    <h:graphicImage value="#{perfilUsuarioController.imagenPersonal}"/>
 
                     <p:commandButton value="Logout" id="logout" actionListener="#{loginController.logout}"
                                      styleClass="ui-priority-primary"/>

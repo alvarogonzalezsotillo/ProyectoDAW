@@ -73,7 +73,7 @@ public class PerfilUsuarioController implements Controller, Serializable {
             this.grupoPersonal = usuarioActual.getGrupoDeUsuario();
             this.webPersonal = usuarioActual.getWebDeUsuario();
             this.tipoMusicaPersonal = usuarioActual.getTipoMusicaDeUsuario();
-            this.imagenPersonal = UtilFiles.transformFileToBase64(usuarioActual.getImagenDeUsuario());
+            this.imagenPersonal = usuarioActual.getRutaImagenDeUsuario();
         }
 
         else{
@@ -116,7 +116,7 @@ public class PerfilUsuarioController implements Controller, Serializable {
         this.grupoAjeno = usuarioActual.getGrupoDeUsuario();
         this.webAjeno = usuarioActual.getWebDeUsuario();
         this.tipoMusicaAjeno = usuarioActual.getTipoMusicaDeUsuario();
-        this.imagenAjeno = UtilFiles.transformFileToBase64(usuarioActual.getImagenDeUsuario());
+        this.imagenAjeno = usuarioActual.getRutaImagenDeUsuario();
 
         initSessionForDao();
         this.listaMelomsAjenos = usuarioDao.getListMelomsByUser(idAjeno);

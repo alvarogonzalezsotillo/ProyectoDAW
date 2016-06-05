@@ -3,14 +3,14 @@ package app.utils;
 import org.primefaces.model.UploadedFile;
 import org.primefaces.util.Base64;
 
-import java.io.File;
+import java.io.*;
 import java.util.Random;
 
 public class UtilFiles {
 
     private final static String PATH = "/Users/guillermo/apache-tomcat-8.0.33/webapps/ROOT/resources/files";
-
     private final static String FILE_ROUTE = "/resources/files/";
+    public static final String PERFIL_DEFAULT_PNG = "perfilDefault.png";
 
     public static byte[] transformFile(UploadedFile file){
 
@@ -55,12 +55,66 @@ public class UtilFiles {
 
     public static String getTypeFile(UploadedFile uploadedFile) {
 
-        String originalName = uploadedFile.getFileName();
+        String typeFile = "";
 
-        int index = originalName.indexOf(".");
+        if(uploadedFile != null){
 
-        String typeFile = originalName.substring(index);
+            String originalName = uploadedFile.getFileName();
+
+            int index = originalName.indexOf(".");
+
+            typeFile = originalName.substring(index);
+
+        }
 
         return typeFile;
+
+    }
+
+    public static String upload(UploadedFile uploadedFile) throws IOException {
+
+        String randomNameFile = UtilFiles.getRandomName();
+
+        String typeFile = UtilFiles.getTypeFile(uploadedFile);
+
+        String newName = randomNameFile + typeFile;
+
+        byte[] contents = uploadedFile.getContents();
+
+        InputStream dataFile = uploadedFile.getInputstream();
+
+        File file = new File(UtilFiles.getPath(), newName);
+
+        return saveFile(file, dataFile, contents);
+
+    }
+
+    public static String getDefaultAlbumRoute() {
+
+        Random rand = new Random();
+
+        int randomNum = rand.nextInt((2 - 1) + 1) + 1;
+
+        return FILE_ROUTE+"albumDefault"+randomNum+".png";
+    }
+
+    public static String getDefaultUserRoute(){
+
+        return FILE_ROUTE+ PERFIL_DEFAULT_PNG;
+
+    }
+
+    private static String saveFile(File file, InputStream dataFile, byte[] contents) throws IOException {
+
+        OutputStream streamOut = new FileOutputStream(file);
+
+        int read = 0;
+        byte[] bytes = new byte[contents.length];
+        while ((read = dataFile.read(bytes)) != -1) {
+            streamOut.write(bytes, 0, read);
+        }
+        streamOut.flush();
+
+        return UtilFiles.getFileRoute(file);
     }
 }

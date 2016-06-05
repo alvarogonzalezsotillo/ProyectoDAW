@@ -37,13 +37,18 @@ public class MelomController implements Serializable, Controller {
     private Long idUsuario = UtilUserSession.getUserId();
     private String autor = UtilUserSession.getUserName();
     private String rutaCancion = null;
-    private String rutaImagenAlbum = null;
+    private String rutaImagenAlbum = UtilFiles.getDefaultAlbumRoute();
+
 
 
     public void insertMelom() throws IOException {
 
-        this.rutaImagenAlbum = upload(imagenAlbum);
-        this.rutaCancion = upload(cancion);
+        if(checkImageIsNull()){
+
+            this.rutaImagenAlbum = UtilFiles.upload(imagenAlbum);
+        }
+
+        this.rutaCancion = UtilFiles.upload(cancion);
 
         MelomBean melom = createMelomBean();
         initSessionForDao();
@@ -55,6 +60,13 @@ public class MelomController implements Serializable, Controller {
         String route = "/index.xhtml";
 
         UtilViews.redirect(route);
+    }
+
+    private boolean checkImageIsNull() {
+
+        String fileName = imagenAlbum.getFileName();
+
+        return !(fileName.equals(""));
     }
 
     public void deleteMelom(Long id){
@@ -111,6 +123,7 @@ public class MelomController implements Serializable, Controller {
     public void commitAndCloseSession() {
         Session session = melomDao.getSession();
         UtilSessionHibernate.commitAndCloseSession(session);
+
     }
 
     public void closeSession() {
@@ -129,37 +142,7 @@ public class MelomController implements Serializable, Controller {
                             .build();
     }
 
-    public String upload(UploadedFile uploadedFile) throws IOException {
 
-        String randomNameFile = UtilFiles.getRandomName();
-
-        String typeFile = UtilFiles.getTypeFile(uploadedFile);
-
-        String newName = randomNameFile + typeFile;
-
-        byte[] contents = uploadedFile.getContents();
-
-        InputStream dataFile = uploadedFile.getInputstream();
-
-        File file = new File(UtilFiles.getPath(), newName);
-
-        return saveFile(file, dataFile, contents);
-
-    }
-
-    public String saveFile(File file, InputStream dataFile, byte[] contents) throws IOException {
-
-        OutputStream streamOut = new FileOutputStream(file);
-
-        int read = 0;
-        byte[] bytes = new byte[contents.length];
-        while ((read = dataFile.read(bytes)) != -1) {
-            streamOut.write(bytes, 0, read);
-        }
-        streamOut.flush();
-
-        return UtilFiles.getFileRoute(file);
-    }
 
     public String getTitulo() {
         return titulo;
