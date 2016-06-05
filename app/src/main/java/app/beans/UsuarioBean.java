@@ -124,8 +124,7 @@ public class UsuarioBean implements Serializable, Bean {
     }
 
     public void setPasswordDeUsuario(String passwordDeUsuario) {
-        String salt = UtilPasswords.getSalt();
-        this.passwordDeUsuario = UtilPasswords.hashPasswordSHA(passwordDeUsuario + salt);
+        this.passwordDeUsuario = passwordDeUsuario;
     }
 
     public String getPasswordDeUsuario() {

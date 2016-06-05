@@ -4,6 +4,7 @@ import app.beans.MelomBean;
 import app.beans.UsuarioBean;
 import app.controller.interfaces.Controller;
 import app.model.UsuarioDAO;
+import app.utils.UtilPasswords;
 import app.utils.UtilSessionHibernate;
 import app.utils.UtilUserSession;
 import app.utils.UtilViews;
@@ -32,6 +33,10 @@ public class PerfilUsuarioController implements Controller, Serializable {
     private String webPersonal;
     private String tipoMusicaPersonal;
     private String imagenPersonal;
+
+    private String oldPass;
+    private String newPass;
+    private String newPassOk;
 
     private Long idAjeno;
 
@@ -140,26 +145,70 @@ public class PerfilUsuarioController implements Controller, Serializable {
     public void modifyProfile(Long id) {
 
         initSessionForDao();
-        UsuarioBean usuario = usuarioDao.getById(id);
-
-        updateUserProfile(usuario);
-
         initTransactionForDao();
-        usuarioDao.update(usuario);
+        usuarioDao.update(idPersonal, nombrePersonal, apellidoPersonal, correoPersonal, grupoPersonal, webPersonal, tipoMusicaPersonal);
         commitAndCloseSession();
 
-        refreshProfile();
+        String summary = "¡Ahora sí que rockeas!";
+        String detail = "La información de tu perfil fue actualizada";
+//TODO        String route = "/views/timeline/timeline.xhtml";
+        String route = "/index.xhtml";
+
+        UtilViews.redirectWithInfoMessage(route,summary,detail);
     }
 
-    private void updateUserProfile(UsuarioBean usuario) {
+    public void modifyPassword() {
 
-        usuario.setNombreDeUsuario(this.nombrePersonal);
-        usuario.setApellidoDeUsuario(this.apellidoPersonal);
-        usuario.setNickDeUsuario(this.nickPersonal);
-        usuario.setGrupoDeUsuario(this.grupoPersonal);
-        usuario.setCorreoDeUsuario(this.correoPersonal);
-        usuario.setTipoMusicaDeUsuario(this.tipoMusicaPersonal);
-        usuario.setWebDeUsuario(this.webPersonal);
+        initSessionForDao();
+        UsuarioBean usuario = usuarioDao.getById(idPersonal);
+        closeSession();
+
+        if (oldPasswordIsOk(usuario) && newPassIsOk()) {
+
+            String newPassHashed = hashNewPassword();
+
+            initSessionForDao();
+            initTransactionForDao();
+            usuarioDao.updatePassword(usuario.getId(), newPassHashed);
+            commitAndCloseSession();
+
+            String summary = "¡Buena afinación!";
+            String detail = "La password fue cambiada satisfactoriamente";
+            String route = "/views/formulario/modificacionUsuario.xhtml";
+
+            UtilViews.redirectWithInfoMessage(route,summary,detail);
+
+        } else {
+
+            String summary = "¡Eso ha desafinado!";
+            String detail = "Verifica las passwords, alguna de ellas no fue bien introducida";
+
+            UtilViews.sendErrorMessage(summary, detail);
+        }
+
+    }
+
+    private String hashNewPassword() {
+        String salt = UtilPasswords.getSalt();
+        return UtilPasswords.hashPasswordSHA(newPass + salt);
+    }
+
+    private boolean newPassIsOk() {
+        return newPass.equals(newPassOk);
+    }
+
+    private boolean oldPasswordIsOk(UsuarioBean usuario) {
+
+        String salt = UtilPasswords.getSalt();
+        String hashOldPassword = UtilPasswords.hashPasswordSHA(oldPass + salt);
+        String oldPassword = usuario.getPasswordDeUsuario();
+
+        return hashOldPassword.equals(oldPassword);
+    }
+
+    public void redirectToFormPassword() {
+
+        UtilViews.redirect("/views/formulario/modificarPassword.xhtml");
 
     }
 
@@ -412,5 +461,29 @@ public class PerfilUsuarioController implements Controller, Serializable {
 
     public void setListaMelomsAjenos(List<MelomBean> listaMelomsAjenos) {
         this.listaMelomsAjenos = listaMelomsAjenos;
+    }
+
+    public String getOldPass() {
+        return oldPass;
+    }
+
+    public void setOldPass(String oldPass) {
+        this.oldPass = oldPass;
+    }
+
+    public String getNewPass() {
+        return newPass;
+    }
+
+    public void setNewPass(String newPass) {
+        this.newPass = newPass;
+    }
+
+    public String getNewPassOk() {
+        return newPassOk;
+    }
+
+    public void setNewPassOk(String newPassOk) {
+        this.newPassOk = newPassOk;
     }
 }

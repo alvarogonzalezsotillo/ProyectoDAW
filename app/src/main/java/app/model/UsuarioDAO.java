@@ -27,14 +27,6 @@ public class UsuarioDAO extends SessionFactoryImpl implements Serializable, DAO<
 
     }
 
-
-    public void update(UsuarioBean usuarioToUpdate) {
-
-        session.update(usuarioToUpdate);
-
-    }
-
-
     public void deleteById(Long id) {
 
         UsuarioBean usuarioToDelete = session.load(UsuarioBean.class, id);
@@ -158,5 +150,32 @@ public class UsuarioDAO extends SessionFactoryImpl implements Serializable, DAO<
 
         return list;
 
+    }
+
+    public void update(Long id, String nuevoNombre, String nuevoApellido, String nuevoCorreo, String nuevoGrupo, String nuevaWeb, String nuevoTipoMusica) {
+
+        Query query = session.createQuery("update UsuarioBean set nombreDeUsuario = :nombre, apellidoDeUsuario = :apellido, correoDeUsuario = :correo, grupoDeUsuario = :grupo, webDeUsuario = :web, tipoMusicaDeUsuario = :tipoMusica where id = :id");
+        query.setParameter("id", id);
+        query.setParameter("nombre", nuevoNombre);
+        query.setParameter("apellido", nuevoApellido);
+        query.setParameter("correo", nuevoCorreo);
+        query.setParameter("grupo", nuevoGrupo);
+        query.setParameter("web", nuevaWeb);
+        query.setParameter("tipoMusica", nuevoTipoMusica);
+        query.executeUpdate();
+
+    }
+
+    @Override
+    public void update(UsuarioBean usuarioBean) {
+        //Do nothing
+    }
+
+
+    public void updatePassword(Long id, String nuevaPassword) {
+        Query query = session.createQuery("update UsuarioBean set passwordDeUsuario = :password where id = :id");
+        query.setParameter("id", id);
+        query.setParameter("password", nuevaPassword);
+        query.executeUpdate();
     }
 }

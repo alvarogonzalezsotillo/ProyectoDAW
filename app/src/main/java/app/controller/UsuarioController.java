@@ -81,17 +81,6 @@ public class UsuarioController implements Serializable, Controller {
         return isNull;
     }
 
-    public void updateUsuario() {
-
-        UsuarioBean usuario = createUsuarioBean();
-
-        initSessionForDao();
-        initTransactionForDao();
-        usuarioDao.update(usuario);
-        commitAndCloseSession();
-
-    }
-
     public void initSessionForDao() {
         Session session = UtilSessionHibernate.initSession();
         usuarioDao.setSession(session);
