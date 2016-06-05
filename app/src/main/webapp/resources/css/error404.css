@@ -1,0 +1,26 @@
+@CHARSET "ISO-8859-1";
+
+body {
+	padding-top: 150px;
+}
+
+p {
+	font-size: 160%;
+}
+
+#imgError {
+	width: 82%;
+    height: auto;
+    width: auto\9; /* ie8 */
+}
+
+.mensajeDeError a {
+	outline: 0;
+	color: #79beac;
+}
+
+.mensajeDeError a:hover {
+	outline: 0;
+	color: #68b6a1;
+	text-decoration: none;
+}
