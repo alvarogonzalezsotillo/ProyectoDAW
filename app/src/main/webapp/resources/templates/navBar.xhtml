@@ -3,7 +3,8 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ps="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:my="http://java.sun.com/jsf/composite/melomify">
 
 <h:head>
     <meta charset="UTF-8"/>
@@ -42,6 +43,12 @@
                     <li><h:outputLink value="/views/timeline/timeline.xhtml">Inicio</h:outputLink></li>
                     <li><h:outputLink value="/views/index/meetUs.xhtml">Quiénes somos</h:outputLink></li>
                 </ul>
+                
+                <my:condition condition="#{perfilUsuarioController.isAnonymous == false}">
+                
+                	<f:facet name="then">
+                	
+                <!-- Imagen de perfil y botón para subir un Melom para usuarios logueados -->
                 <ul class="nav navbar-inverse navbar-nav navbar-right">
 
                     <li class="dropdown">
@@ -66,6 +73,43 @@
                                          value="Melom!"></h:commandButton>
                     </li>
                 </ul>
+                
+                	</f:facet>
+                	
+                	<f:facet name="else">
+                	
+                	<!-- Inicio de sesión para usuarios anónimos -->
+                    <ul class="nav navbar-inverse navbar-nav navbar-right">
+                    	<li><p class="navbar-text">¿Tienes cuenta?</p></li>
+                    	<li class="dropdown">
+                    		<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Iniciar sesión</b> <span class="caret"></span></a>
+	                    	<ul class="dropdown-menu" role="menu" aria-labelledby="drop">
+								<h:form class="formularioAnonimos">
+									<div class="form-group">
+										<h:outputLabel for="nickDeUsuario" />
+						        		<h:inputText styleClass="form-control" ps:tabindex="-1" value="#{loginController.nick}" id="nickDeUsuario" required="required" autofocus="autofocus" ps:placeholder="Melóman@" label="nickDeUsuario" />
+						        	</div>
+						        	
+						        	<div class="form-group">
+						        		<h:outputLabel for="passwordDeUsuario" />
+						        		<h:inputSecret styleClass="form-control" ps:tabindex="-1" value="#{loginController.password}" id="passwordDeUsuario" required="required" ps:placeholder="Contraseña" label="passwordDeUsuario" />
+									</div>
+									
+									<h:commandButton styleClass="btnIniciarSesion btn-block" ps:tabindex="-1" actionListener="#{loginController.login}" value="Iniciar sesión"></h:commandButton>
+									
+								 </h:form>
+								 
+								 <li class="divider"></li>
+								 <li class="text-center"><p>Empieza a marcar el ritmo</p><h:outputLink styleClass="footerRegistro" value="/views/formulario/registro.xhtml">¡Regístrate!</h:outputLink></li>
+								  	
+							</ul>
+                    	</li>
+                   	</ul>
+                   	
+                   	</f:facet>
+                   	
+            	</my:condition>
+            	
             </div>
 
         </div>
