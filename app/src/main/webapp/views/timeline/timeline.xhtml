@@ -1,39 +1,69 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ps="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:my="http://java.sun.com/jsf/composite/melomify">
 
-<ui:include src="/resources/templates/header.xhtml"/>
+<ui:include src="/resources/templates/navBar.xhtml"/>
+<h:outputStylesheet library="css" name="timeline.css"></h:outputStylesheet>
 
 <h:body>
-    <h:form>
-        <p:menubar>
-            <p:submenu label="Comentarios" icon="ui-icon-comment">
-                <p:menuitem value="Nuevo comentario" icon="ui-icon-plusthick" url="#"/>
-                <p:menuitem value="Editar comentario" icon="ui-icon-clipboard" url="#"/>
-                <p:menuitem value="Borrar comentario" icon="ui-icon-minusthick" url="#"/>
-            </p:submenu>
-            <p:submenu label="Ayuda" icon="ui-icon-help">
-                <p:menuitem value="Usar la aplicacion" icon="ui-icon-info" url="#"/>
-            </p:submenu>
 
-            <p:submenu label="Músicos" icon="ui-icon-person">
-                <p:menuitem value="Músicos a los que sigo" icon="ui-icon-contact" url="#"/>
-            </p:submenu>
+    <my:condition condition="#{perfilUsuarioController.isAnonymous == false}">
 
-            <f:facet name="options">
-                <p:inputText style="margin-right:10px" placeholder="Buscar"/>
-                <p:commandButton type="button" value="Salir de la aplicacion" icon="ui-icon-extlink"/>
-            </f:facet>
-        </p:menubar>
-        <p:panelGrid columns="1">
-            <f:facet name="header">TimeLine</f:facet>
-            <h:outputLabel value="Aqui estará situado el timeline."/>
-        </p:panelGrid>
-    </h:form>
+        <f:facet name="then">
+
+            <h:form>
+                <ui:repeat var="melom" value="#{timelineController.listaMeloms}">
+                    <h:panelGrid columns="9">
+
+                        <h:commandLink value="#{melom.autor}"
+                                       actionListener="#{perfilUsuarioController.viewProfile(melom.autor)}"/>
+                        <h:commandLink value="#{melom.titulo}"
+                                       actionListener="#{comentarioController.verComentarios(melom)}"/>
+                        <h:outputText value="#{melom.album}"/>
+                        <h:outputText value="#{melom.tipoMusica}"/>
+                        <h:outputText value="#{melom.comentarioMusico}"/>
+
+                        <audio controls="controls">
+                            <source src="#{melom.rutaCancion}" type="audio/mpeg"/>
+                        </audio>
+
+                        <h:graphicImage value="#{melom.rutaImagenAlbum}" height="10%"/>
+
+                        <p:commandButton value="Comentar" id="comentar"
+                                         actionListener="#{comentarioController.comentar(melom)}"
+                                         styleClass="ui-priority-primary"/>
+
+                        <my:condition condition="#{melom.idUsuario == perfilUsuarioController.idPersonal}">
+
+                            <f:facet name="then">
+
+                                <h:commandLink actionListener="#{melomController.deleteMelom(melom.id)}"><h:graphicImage
+                                        name="delete.png" library="images" height="30%"/></h:commandLink>
+
+                            </f:facet>
+                        </my:condition>
+
+
+                    </h:panelGrid>
+                </ui:repeat>
+            </h:form>
+        </f:facet>
+
+        <f:facet name="else">
+
+            <h:panelGrid columns="1">
+                <h:outputText value="Debes estar registrado para ver tu perfil"/>
+            </h:panelGrid>
+
+        </f:facet>
+    </my:condition>
+    
+    <h:outputScript library="js" name="jquery-1.12.3.min.js"/>
+    <h:outputScript library="js" name="bootstrap.min.js"/>
 </h:body>
 </html>
