@@ -11,6 +11,8 @@ import static org.junit.Assert.assertEquals;
 
 public class UsuarioTest {
 
+    String salt = UtilPasswords.getSalt();
+
     Long idTest = 1L;
     String nombreTest = "testingNombre";
     String apellidoTest = "testingApellido";
@@ -19,8 +21,7 @@ public class UsuarioTest {
     String tipoMusicaTest = "testingTipoMusica";
     String grupoTest = "testingGrupo";
     String webTest = "testingWeb";
-    String passwordTest = "testingPass";
-    String salt = UtilPasswords.getSalt();
+    String passwordTest = UtilPasswords.hashPasswordSHA("testingPass" + salt);
     UsuarioBean sut;
 
     UsuarioBuilder usuarioBuilder;
@@ -170,7 +171,7 @@ public class UsuarioTest {
 
     @Test
     public void shouldEstablishTheUserPasswordHashed() {
-        String hash = UtilPasswords.hashPasswordSHA(passwordTest + salt);
+        String hash = UtilPasswords.hashPasswordSHA("testingPass" + salt);
         sut.setPasswordDeUsuario(passwordTest);
         assertEquals(hash, sut.getPasswordDeUsuario());
     }

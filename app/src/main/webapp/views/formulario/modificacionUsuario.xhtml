@@ -17,6 +17,12 @@
         <p:messages id="messages" autoUpdate="true" showDetail="true" closable="true"/>
 
         <h:panelGrid columns="3">
+            <p:outputLabel value="Nick/Apodo " for="nick"/>
+            <p:inputText value="#{perfilUsuarioController.nickPersonal}" id="nick" title="nick" disabled="true">
+                <f:validateLength minimum="3" maximum="65"/>
+                <p:ajax update="nickOK" event="keyup"/>
+            </p:inputText>
+            <p:message id="nickOK" for="nick" display="text"/>
 
             <p:outputLabel value="Nombre " for="nombre"/>
             <p:inputText value="#{perfilUsuarioController.nombrePersonal}" id="nombre" title="nombre">
@@ -32,28 +38,6 @@
                 <p:ajax update="apellidoOK" event="keyup"/>
             </p:inputText>
             <p:message id="apellidoOK" for="apellido" display="text"/>
-
-
-            <p:outputLabel value="Nick/Apodo " for="nick"/>
-            <p:inputText value="#{perfilUsuarioController.nickPersonal}" id="nick" title="nick">
-                <f:validateLength minimum="3" maximum="65"/>
-                <p:ajax update="nickOK" event="keyup"/>
-            </p:inputText>
-            <p:message id="nickOK" for="nick" display="text"/>
-
-            <!--<p:outputLabel value="Nueva password " for="newPassword" />-->
-            <!--<p:password value="" id="newPassword" title="newPassword">-->
-            <!--<f:validateLength minimum="8" maximum="254" />-->
-            <!--<p:ajax update="newPasswordOK" event="keyup"/>-->
-            <!--</p:password>-->
-            <!--<p:message id="newPasswordOK" for="newPassword" display="text"/>-->
-
-            <!--<p:outputLabel value="Repite la nueva password " for="newPassRepeat" />-->
-            <!--<p:password value="" id="newPassRepeat" title="newPassRepeat" >-->
-            <!--<f:validateLength minimum="8" maximum="254" />-->
-            <!--<p:ajax update="newPassRepeatOK" event="keyup"/>-->
-            <!--</p:password>-->
-            <!--<p:message id="newPassRepeatOK" for="newPassRepeat" display="text"/>-->
 
             <p:outputLabel value="Correo " for="correo"/>
             <p:inputText value="#{perfilUsuarioController.correoPersonal}" id="correo" title="correo" required="false">
@@ -85,9 +69,13 @@
             </p:inputText>
             <p:message id="webOK" for="web" display="text"/>
 
+            <p:commandButton value="Cambiar password" id="password"
+                             actionListener="#{perfilUsuarioController.redirectToFormPassword}"
+                             styleClass="ui-priority-primary"/>
+
         </h:panelGrid>
 
-        <p:commandButton value="Empieza el show!">
+        <p:commandButton value="Cambiar la información">
             <f:ajax execute="@all"
                     listener="#{perfilUsuarioController.modifyProfile(perfilUsuarioController.idPersonal)}"/>
         </p:commandButton>

@@ -14,6 +14,8 @@
     <f:event type="preRenderView" listener="#{perfilUsuarioController.init()}"/>
     <f:event type="preRenderView" listener="#{timelineController.init()}"/>
 
+    <p:messages id="messages" autoUpdate="true" showDetail="true" closable="true"/>
+
     <my:condition condition="#{perfilUsuarioController.isAnonymous == false}">
 
         <f:facet name="then">
