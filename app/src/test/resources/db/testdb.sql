@@ -57,16 +57,6 @@ CREATE TABLE comentarios (
     ON UPDATE CASCADE
 );
 
-CREATE TABLE BETAconciertos (
-  id        BIGINT (11) NOT NULL,
-  fecha     DATETIME    NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  pais      VARCHAR(50) NOT NULL,
-  ciudad    VARCHAR(60) NOT NULL,
-  lugar     VARCHAR(80) NOT NULL,
-  idUsuario BIGINT (11) NOT NULL,
-  PRIMARY KEY (id)
-);
-
 CREATE TABLE followers (
   idUsuario  BIGINT (11) NOT NULL,
   idFollower BIGINT (11) NOT NULL,

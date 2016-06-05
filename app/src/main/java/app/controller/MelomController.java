@@ -14,7 +14,8 @@ import org.primefaces.model.UploadedFile;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import java.io.*;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 
 @ManagedBean(name = "melomController")
@@ -40,10 +41,9 @@ public class MelomController implements Serializable, Controller {
     private String rutaImagenAlbum = UtilFiles.getDefaultAlbumRoute();
 
 
-
     public void insertMelom() throws IOException {
 
-        if(checkImageIsNull()){
+        if (checkImageIsNull()) {
 
             this.rutaImagenAlbum = UtilFiles.upload(imagenAlbum);
         }
@@ -69,7 +69,7 @@ public class MelomController implements Serializable, Controller {
         return !(fileName.equals(""));
     }
 
-    public void deleteMelom(Long id){
+    public void deleteMelom(Long id) {
 
         initSessionForDao();
         initTransactionForDao();
@@ -83,7 +83,7 @@ public class MelomController implements Serializable, Controller {
 
     }
 
-    public void updateMelom(){
+    public void updateMelom() {
 
         MelomBean melom = createMelomBean();
         initSessionForDao();
@@ -93,7 +93,7 @@ public class MelomController implements Serializable, Controller {
 
     }
 
-    public void listMelom(){
+    public void listMelom() {
 
         initSessionForDao();
         initTransactionForDao();
@@ -102,7 +102,7 @@ public class MelomController implements Serializable, Controller {
 
     }
 
-    public void getMelomById(Long id){
+    public void getMelomById(Long id) {
 
         initSessionForDao();
         initTransactionForDao();
@@ -134,14 +134,13 @@ public class MelomController implements Serializable, Controller {
     private MelomBean createMelomBean() {
         melomBuilder = new MelomBuilder(titulo, idUsuario);
         return melomBuilder.album(album)
-                            .tipoMusica(tipoMusica)
-                            .comentarioMusico(comentario)
-                            .rutaCancion(rutaCancion)
-                            .rutaImagenAlbum(rutaImagenAlbum)
-                            .autor(autor)
-                            .build();
+                .tipoMusica(tipoMusica)
+                .comentarioMusico(comentario)
+                .rutaCancion(rutaCancion)
+                .rutaImagenAlbum(rutaImagenAlbum)
+                .autor(autor)
+                .build();
     }
-
 
 
     public String getTitulo() {

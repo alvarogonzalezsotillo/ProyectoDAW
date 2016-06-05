@@ -26,9 +26,7 @@ public class ComentarioTest {
             sut = new ComentarioBean(textoTest, idUsuarioTest, nombreUsuarioTest, idMelomTest);
             sut.setId(idTest);
 
-        }
-
-        catch (ExceptionInInitializerError e) {
+        } catch (ExceptionInInitializerError e) {
 
             throw new ExceptionInInitializerError("No se ha podido inicializar el SUT" + e);
 
@@ -41,9 +39,7 @@ public class ComentarioTest {
         try {
 
             sut = null;
-        }
-
-        catch (Exception e) {
+        } catch (Exception e) {
 
             throw new ExceptionInInitializerError("No se ha podido destruir el SUT" + e);
 
@@ -51,46 +47,46 @@ public class ComentarioTest {
     }
 
     @Test
-    public void shouldReturnTheAttributedWhenCallingGetters(){
+    public void shouldReturnTheAttributedWhenCallingGetters() {
 
         Long idActual = sut.getId();
-        assertEquals(idTest,idActual);
+        assertEquals(idTest, idActual);
 
         String textoActual = sut.getTexto();
-        assertEquals(textoTest,textoActual);
+        assertEquals(textoTest, textoActual);
 
         String usuarioActual = sut.getNombreUsuario();
-        assertEquals(nombreUsuarioTest,usuarioActual);
+        assertEquals(nombreUsuarioTest, usuarioActual);
 
         Long idUsuarioActual = sut.getIdUsuario();
-        assertEquals(idUsuarioTest,idUsuarioActual);
+        assertEquals(idUsuarioTest, idUsuarioActual);
 
         Long idMelomTest = sut.getIdMelom();
-        assertEquals(idMelomTest,idMelomTest);
+        assertEquals(idMelomTest, idMelomTest);
     }
 
     @Test
-    public void shouldSetTheNewAttributesWhenCallingSetters(){
+    public void shouldSetTheNewAttributesWhenCallingSetters() {
 
         Long nuevoId = 2L;
         sut.setId(nuevoId);
-        assertEquals(nuevoId,sut.getId());
+        assertEquals(nuevoId, sut.getId());
 
         String nuevoTexto = "nuevoTexto";
         sut.setTexto(nuevoTexto);
-        assertEquals(nuevoTexto,sut.getTexto());
+        assertEquals(nuevoTexto, sut.getTexto());
 
         String nuevoUsuario = "nuevoUsuario";
         sut.setNombreUsuario(nuevoUsuario);
-        assertEquals(nuevoUsuario,sut.getNombreUsuario());
+        assertEquals(nuevoUsuario, sut.getNombreUsuario());
 
         Long nuevoIdUsuario = 2L;
         sut.setIdUsuario(nuevoIdUsuario);
-        assertEquals(nuevoIdUsuario,sut.getIdUsuario());
+        assertEquals(nuevoIdUsuario, sut.getIdUsuario());
 
         Long nuevoIdMelom = 2L;
         sut.setIdMelom(nuevoIdMelom);
-        assertEquals(nuevoIdMelom,sut.getIdMelom());
+        assertEquals(nuevoIdMelom, sut.getIdMelom());
     }
 
 }

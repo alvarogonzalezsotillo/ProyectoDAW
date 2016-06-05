@@ -1,7 +1,7 @@
 package app.model.test;
 
-import app.utils.UtilSessionHibernate;
 import app.model.SessionFactoryImpl;
+import app.utils.UtilSessionHibernate;
 import org.hibernate.Session;
 import org.junit.After;
 

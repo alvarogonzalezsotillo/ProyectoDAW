@@ -1,15 +1,10 @@
 package app.beans;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import app.beans.interfaces.Bean;
 import app.utils.UtilPasswords;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "usuarios")
@@ -41,11 +36,11 @@ public class UsuarioBean implements Serializable, Bean {
     private String grupoDeUsuario;
     @Column(name = "tipoMusicaDeUsuario")
     private String tipoMusicaDeUsuario;
-    
-    public UsuarioBean(){
+
+    public UsuarioBean() {
         //Constructor por defecto
     }
-    
+
     public UsuarioBean(String nombreDeUsuario, String apellidoDeUsuario, String nickDeUsuario, String correoDeUsuario, String tipoMusicaDeUsuario, String grupoDeUsuario, String webDeUsuario, String passwordDeUsuario, String rutaImagenDeUsuario) {
 
         this.nombreDeUsuario = nombreDeUsuario;
@@ -56,8 +51,8 @@ public class UsuarioBean implements Serializable, Bean {
         this.grupoDeUsuario = grupoDeUsuario;
         this.webDeUsuario = webDeUsuario;
         String saltPassword = UtilPasswords.getSalt();
-        this.passwordDeUsuario = UtilPasswords.hashPasswordSHA(passwordDeUsuario+saltPassword);
-        this.rutaImagenDeUsuario= rutaImagenDeUsuario ;
+        this.passwordDeUsuario = UtilPasswords.hashPasswordSHA(passwordDeUsuario + saltPassword);
+        this.rutaImagenDeUsuario = rutaImagenDeUsuario;
     }
 
 

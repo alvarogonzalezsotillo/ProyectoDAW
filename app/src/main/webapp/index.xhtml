@@ -72,14 +72,16 @@
 
                         <h:graphicImage value="#{melom.rutaImagenAlbum}" height="10%"/>
 
-                        <p:commandButton value="Comentar" id="comentar" actionListener="#{comentarioController.comentar(melom)}"
+                        <p:commandButton value="Comentar" id="comentar"
+                                         actionListener="#{comentarioController.comentar(melom)}"
                                          styleClass="ui-priority-primary"/>
 
                         <my:condition condition="#{melom.idUsuario == perfilUsuarioController.idPersonal}">
 
                             <f:facet name="then">
 
-                                <h:commandLink actionListener="#{melomController.deleteMelom(melom.id)}"><h:graphicImage name="delete.png" library="images" height="30%"/></h:commandLink>
+                                <h:commandLink actionListener="#{melomController.deleteMelom(melom.id)}"><h:graphicImage
+                                        name="delete.png" library="images" height="30%"/></h:commandLink>
 
                             </f:facet>
                         </my:condition>

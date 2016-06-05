@@ -28,7 +28,7 @@ public class TimelineController implements Controller, Serializable {
 
         checkUserIsAnonymous();
 
-        if(!isAnonymous){
+        if (!isAnonymous) {
 
             initSessionForDao();
             this.listaMeloms = melomDao.getAllMelomsByIdFollower(UtilUserSession.getUserId());
@@ -38,12 +38,10 @@ public class TimelineController implements Controller, Serializable {
 
     private void checkUserIsAnonymous() {
 
-        if(UtilUserSession.getUserId() == null){
+        if (UtilUserSession.getUserId() == null) {
 
             isAnonymous = true;
-        }
-
-        else{
+        } else {
 
             isAnonymous = false;
         }

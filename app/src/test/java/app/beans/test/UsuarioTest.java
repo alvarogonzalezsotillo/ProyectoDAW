@@ -1,12 +1,13 @@
 package app.beans.test;
 
-import static org.junit.Assert.*;
-
-import app.utils.UtilPasswords;
-import org.junit.*;
-
 import app.beans.UsuarioBean;
 import app.builder.UsuarioBuilder;
+import app.utils.UtilPasswords;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class UsuarioTest {
 
@@ -32,9 +33,7 @@ public class UsuarioTest {
             sut = new UsuarioBean(nombreTest, apellidoTest, nickTest, correoTest, tipoMusicaTest, grupoTest, webTest, passwordTest, null);
             sut.setId(idTest);
 
-        }
-
-        catch (ExceptionInInitializerError e) {
+        } catch (ExceptionInInitializerError e) {
 
             throw new ExceptionInInitializerError("No se ha podido inicializar el SUT" + e);
 
@@ -47,9 +46,7 @@ public class UsuarioTest {
         try {
 
             sut = null;
-        }
-
-        catch (Exception e) {
+        } catch (Exception e) {
 
             throw new ExceptionInInitializerError("No se ha podido destruir el SUT" + e);
 

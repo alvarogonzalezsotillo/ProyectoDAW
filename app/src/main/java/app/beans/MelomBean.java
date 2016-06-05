@@ -1,7 +1,6 @@
 package app.beans;
 
 import app.beans.interfaces.Bean;
-import app.utils.UtilFiles;
 import org.primefaces.model.UploadedFile;
 
 import javax.persistence.*;

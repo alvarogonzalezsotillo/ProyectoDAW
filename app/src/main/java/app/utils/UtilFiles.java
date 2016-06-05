@@ -12,19 +12,19 @@ public class UtilFiles {
     private final static String FILE_ROUTE = "/resources/files/";
     public static final String PERFIL_DEFAULT_PNG = "perfilDefault.png";
 
-    public static byte[] transformFile(UploadedFile file){
+    public static byte[] transformFile(UploadedFile file) {
 
         return file.getContents();
 
     }
 
-    public static String transformFileToBase64(byte[] file){
+    public static String transformFileToBase64(byte[] file) {
 
-        return Base64.encodeToString(file,false);
+        return Base64.encodeToString(file, false);
 
     }
 
-    public static String getPath(){
+    public static String getPath() {
 
         return PATH;
 
@@ -32,10 +32,10 @@ public class UtilFiles {
 
     public static String getFileRoute(File file) {
 
-        return FILE_ROUTE+file.getName();
+        return FILE_ROUTE + file.getName();
     }
 
-    public static String getRandomName(){
+    public static String getRandomName() {
 
         char[] chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 
@@ -57,7 +57,7 @@ public class UtilFiles {
 
         String typeFile = "";
 
-        if(uploadedFile != null){
+        if (uploadedFile != null) {
 
             String originalName = uploadedFile.getFileName();
 
@@ -95,12 +95,12 @@ public class UtilFiles {
 
         int randomNum = rand.nextInt((2 - 1) + 1) + 1;
 
-        return FILE_ROUTE+"albumDefault"+randomNum+".png";
+        return FILE_ROUTE + "albumDefault" + randomNum + ".png";
     }
 
-    public static String getDefaultUserRoute(){
+    public static String getDefaultUserRoute() {
 
-        return FILE_ROUTE+ PERFIL_DEFAULT_PNG;
+        return FILE_ROUTE + PERFIL_DEFAULT_PNG;
 
     }
 

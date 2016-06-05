@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 
-<ui:include src="/resources/templates/header.xhtml" />
+<ui:include src="/resources/templates/header.xhtml"/>
 
 <h:body>
-	<h:form>
-	 <p:menubar>
-       <p:submenu label="Comentarios" icon="ui-icon-comment">
-       		<p:menuitem value="Nuevo comentario" icon="ui-icon-plusthick" url="#"/>
-       		<p:menuitem value="Editar comentario" icon="ui-icon-clipboard" url="#"/>
-       		<p:menuitem value="Borrar comentario" icon="ui-icon-minusthick" url="#"/>
-       </p:submenu>
-       <p:submenu label="Ayuda" icon="ui-icon-help">
-       		<p:menuitem value="Usar la aplicacion" icon="ui-icon-info" url="#"/>
-       </p:submenu>
-       
-       <p:submenu label="Músicos" icon="ui-icon-person">
-       		<p:menuitem value="Músicos a los que sigo" icon="ui-icon-contact" url="#"/>
-       </p:submenu>
-       
-       	<f:facet name="options">
-           <p:inputText style="margin-right:10px" placeholder="Buscar"/>
-            <p:commandButton type="button" value="Salir de la aplicacion" icon="ui-icon-extlink" />
-        </f:facet>
-    </p:menubar>	
-	<p:panelGrid columns="1">
-		<f:facet name="header">TimeLine</f:facet>
-		<h:outputLabel value="Aqui estará situado el timeline." />
-	</p:panelGrid>
-	</h:form>
+    <h:form>
+        <p:menubar>
+            <p:submenu label="Comentarios" icon="ui-icon-comment">
+                <p:menuitem value="Nuevo comentario" icon="ui-icon-plusthick" url="#"/>
+                <p:menuitem value="Editar comentario" icon="ui-icon-clipboard" url="#"/>
+                <p:menuitem value="Borrar comentario" icon="ui-icon-minusthick" url="#"/>
+            </p:submenu>
+            <p:submenu label="Ayuda" icon="ui-icon-help">
+                <p:menuitem value="Usar la aplicacion" icon="ui-icon-info" url="#"/>
+            </p:submenu>
+
+            <p:submenu label="Músicos" icon="ui-icon-person">
+                <p:menuitem value="Músicos a los que sigo" icon="ui-icon-contact" url="#"/>
+            </p:submenu>
+
+            <f:facet name="options">
+                <p:inputText style="margin-right:10px" placeholder="Buscar"/>
+                <p:commandButton type="button" value="Salir de la aplicacion" icon="ui-icon-extlink"/>
+            </f:facet>
+        </p:menubar>
+        <p:panelGrid columns="1">
+            <f:facet name="header">TimeLine</f:facet>
+            <h:outputLabel value="Aqui estará situado el timeline."/>
+        </p:panelGrid>
+    </h:form>
 </h:body>
 </html>

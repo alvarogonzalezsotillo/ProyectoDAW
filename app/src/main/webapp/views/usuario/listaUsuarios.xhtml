@@ -4,7 +4,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+>
 
 <!--<ui:include src="/resources/templates/navBar.xhtml"/>-->
 <h:head></h:head>
@@ -15,7 +15,7 @@
     <h:form>
         <ui:repeat var="nick" value="#{perfilUsuarioController.listNicks}">
             <h:panelGrid columns="1">
-                <h:commandLink value="#{nick}" actionListener="#{perfilUsuarioController.viewProfile(nick)}" />
+                <h:commandLink value="#{nick}" actionListener="#{perfilUsuarioController.viewProfile(nick)}"/>
             </h:panelGrid>
         </ui:repeat>
     </h:form>

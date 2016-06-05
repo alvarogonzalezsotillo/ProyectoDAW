@@ -4,7 +4,6 @@ import app.beans.MelomBean;
 import app.beans.UsuarioBean;
 import app.controller.interfaces.Controller;
 import app.model.UsuarioDAO;
-import app.utils.UtilFiles;
 import app.utils.UtilSessionHibernate;
 import app.utils.UtilUserSession;
 import app.utils.UtilViews;
@@ -58,7 +57,7 @@ public class PerfilUsuarioController implements Controller, Serializable {
 
         checkUserIsAnonymous();
 
-        if(!isAnonymous){
+        if (!isAnonymous) {
             initSessionForDao();
             UsuarioBean usuarioActual = usuarioDao.getById(UtilUserSession.getUserId());
             this.listNicks = usuarioDao.getAllNicks();
@@ -74,9 +73,7 @@ public class PerfilUsuarioController implements Controller, Serializable {
             this.webPersonal = usuarioActual.getWebDeUsuario();
             this.tipoMusicaPersonal = usuarioActual.getTipoMusicaDeUsuario();
             this.imagenPersonal = usuarioActual.getRutaImagenDeUsuario();
-        }
-
-        else{
+        } else {
 
             initSessionForDao();
             this.listNicks = usuarioDao.getAllNicks();
@@ -88,12 +85,10 @@ public class PerfilUsuarioController implements Controller, Serializable {
 
     private void checkUserIsAnonymous() {
 
-        if(UtilUserSession.getUserId() == null){
+        if (UtilUserSession.getUserId() == null) {
 
             isAnonymous = true;
-        }
-
-        else{
+        } else {
 
             isAnonymous = false;
         }
@@ -129,14 +124,14 @@ public class PerfilUsuarioController implements Controller, Serializable {
 
     }
 
-    public void viewAllProfiles(){
+    public void viewAllProfiles() {
 
         String route = "/views/usuario/listaUsuarios.xhtml";
         UtilViews.redirect(route);
 
     }
 
-    public void refreshProfile(){
+    public void refreshProfile() {
 
         userIsFollowed();
         String route = "/views/usuario/perfil.xhtml";
@@ -152,9 +147,7 @@ public class PerfilUsuarioController implements Controller, Serializable {
             this.isFollowed = false;
             this.ItsaMeMario = true;
 
-        }
-
-        else {
+        } else {
             initSessionForDao();
             List<Long> listaUsuariosSeguidos = usuarioDao.getFollowedUsers(UtilUserSession.getUserId());
             closeSession();
@@ -182,7 +175,7 @@ public class PerfilUsuarioController implements Controller, Serializable {
         refreshProfile();
     }
 
-    public void modifyProfile(Long id){
+    public void modifyProfile(Long id) {
 
         initSessionForDao();
         UsuarioBean usuario = usuarioDao.getById(id);

@@ -5,7 +5,7 @@ import app.builder.interfaces.Builder;
 
 import java.io.Serializable;
 
-public class FollowerBuilder  implements Serializable, Builder<FollowerBean>{
+public class FollowerBuilder implements Serializable, Builder<FollowerBean> {
 
     private Long idUsuarioToFollow;
     private Long idFollower;
@@ -16,6 +16,6 @@ public class FollowerBuilder  implements Serializable, Builder<FollowerBean>{
     }
 
     public FollowerBean build() {
-        return new FollowerBean(idUsuarioToFollow,idFollower);
+        return new FollowerBean(idUsuarioToFollow, idFollower);
     }
 }

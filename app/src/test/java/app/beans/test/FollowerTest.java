@@ -18,11 +18,9 @@ public class FollowerTest {
 
         try {
 
-            sut = new FollowerBean(idUsuarioTest,idFollowerTest);
+            sut = new FollowerBean(idUsuarioTest, idFollowerTest);
 
-        }
-
-        catch (ExceptionInInitializerError e) {
+        } catch (ExceptionInInitializerError e) {
 
             throw new ExceptionInInitializerError("No se ha podido inicializar el SUT" + e);
 
@@ -35,9 +33,7 @@ public class FollowerTest {
         try {
 
             sut = null;
-        }
-
-        catch (Exception e) {
+        } catch (Exception e) {
 
             throw new ExceptionInInitializerError("No se ha podido destruir el SUT" + e);
 
@@ -45,13 +41,13 @@ public class FollowerTest {
     }
 
     @Test
-    public void shouldReturnAllFollowerBeanAttributes(){
+    public void shouldReturnAllFollowerBeanAttributes() {
 
         Long idFollowerReturned = sut.getIdFollower();
         Long idUsuarioReturned = sut.getIdUsuario();
 
-        Assert.assertEquals(idFollowerTest,idFollowerReturned);
-        Assert.assertEquals(idUsuarioTest,idUsuarioReturned);
+        Assert.assertEquals(idFollowerTest, idFollowerReturned);
+        Assert.assertEquals(idUsuarioTest, idUsuarioReturned);
 
     }
 }

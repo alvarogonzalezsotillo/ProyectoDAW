@@ -5,8 +5,8 @@ import app.builder.UsuarioBuilder;
 import app.controller.interfaces.Controller;
 import app.model.UsuarioDAO;
 import app.utils.UtilFiles;
-import app.utils.UtilViews;
 import app.utils.UtilSessionHibernate;
+import app.utils.UtilViews;
 import org.hibernate.Session;
 import org.primefaces.model.UploadedFile;
 
@@ -43,18 +43,16 @@ public class UsuarioController implements Serializable, Controller {
 
     public void insertUsuario() throws IOException {
 
-        if(nickAlreadyExists()){
+        if (nickAlreadyExists()) {
 
             String summary = "Has sido más lento";
             String detail = "Otro usuario ha registrado el nick " + nick + ", elige otro.";
 
-            UtilViews.sendErrorMessage(summary,detail);
+            UtilViews.sendErrorMessage(summary, detail);
 
-        }
+        } else {
 
-        else{
-
-            if(checkImagenIsNull()){
+            if (checkImagenIsNull()) {
 
                 this.rutaImagen = UtilFiles.upload(imagen);
             }
@@ -83,7 +81,7 @@ public class UsuarioController implements Serializable, Controller {
         return isNull;
     }
 
-    public void deleteUsuarioById(Long id){
+    public void deleteUsuarioById(Long id) {
 
         initSessionForDao();
         initTransactionForDao();
@@ -92,7 +90,7 @@ public class UsuarioController implements Serializable, Controller {
 
     }
 
-    public void updateUsuario(){
+    public void updateUsuario() {
 
         UsuarioBean usuario = createUsuarioBean();
 
@@ -103,7 +101,7 @@ public class UsuarioController implements Serializable, Controller {
 
     }
 
-    public void listUsuario(){
+    public void listUsuario() {
 
         initSessionForDao();
         initTransactionForDao();
@@ -112,7 +110,7 @@ public class UsuarioController implements Serializable, Controller {
 
     }
 
-    public void getUsuarioById(Long id){
+    public void getUsuarioById(Long id) {
 
         initSessionForDao();
         initTransactionForDao();
@@ -122,27 +120,27 @@ public class UsuarioController implements Serializable, Controller {
     }
 
 
-    public void initSessionForDao(){
+    public void initSessionForDao() {
         Session session = UtilSessionHibernate.initSession();
         usuarioDao.setSession(session);
     }
 
 
-    public void commitAndCloseSession(){
+    public void commitAndCloseSession() {
         Session session = usuarioDao.getSession();
         UtilSessionHibernate.commitAndCloseSession(session);
 
     }
 
 
-    public void initTransactionForDao(){
+    public void initTransactionForDao() {
         Session session = usuarioDao.getSession();
         UtilSessionHibernate.initTransaction(session);
 
     }
 
 
-    public void closeSession(){
+    public void closeSession() {
         Session session = usuarioDao.getSession();
         UtilSessionHibernate.closeSession(session);
     }
@@ -150,11 +148,11 @@ public class UsuarioController implements Serializable, Controller {
     private UsuarioBean createUsuarioBean() {
         usuarioBuilder = new UsuarioBuilder(nombre, apellido, nick, password);
         return usuarioBuilder.correo(correo)
-                                .web(web)
-                                .grupo(grupo)
-                                .tipoMusica(tipoMusica)
-                                .rutaImagen(rutaImagen)
-                                .build();
+                .web(web)
+                .grupo(grupo)
+                .tipoMusica(tipoMusica)
+                .rutaImagen(rutaImagen)
+                .build();
     }
 
     private boolean nickAlreadyExists() {

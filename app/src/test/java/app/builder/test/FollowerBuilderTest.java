@@ -19,11 +19,9 @@ public class FollowerBuilderTest {
 
         try {
 
-            sut = new FollowerBuilder(idUsuarioTest,idFollowerTest);
+            sut = new FollowerBuilder(idUsuarioTest, idFollowerTest);
 
-        }
-
-        catch (ExceptionInInitializerError e) {
+        } catch (ExceptionInInitializerError e) {
 
             throw new ExceptionInInitializerError("No se ha podido inicializar el SUT" + e);
 
@@ -36,9 +34,7 @@ public class FollowerBuilderTest {
         try {
 
             sut = null;
-        }
-
-        catch (Exception e) {
+        } catch (Exception e) {
 
             throw new ExceptionInInitializerError("No se ha podido destruir el SUT" + e);
 
@@ -46,7 +42,7 @@ public class FollowerBuilderTest {
     }
 
     @Test
-    public void shouldCreateANewFollowerBean(){
+    public void shouldCreateANewFollowerBean() {
 
         FollowerBean followerBean = sut.build();
 

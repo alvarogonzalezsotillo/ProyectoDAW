@@ -61,7 +61,6 @@ public class ServletMelomImages extends HttpServlet implements Servlet<MelomDAO>
     }
 
 
-
     public void initSessionForDao(MelomDAO melomDao) {
         Session session = UtilSessionHibernate.initSession();
         melomDao.setSession(session);

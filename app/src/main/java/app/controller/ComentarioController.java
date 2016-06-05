@@ -14,7 +14,6 @@ import org.hibernate.Session;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.util.List;
 
@@ -43,7 +42,7 @@ public class ComentarioController implements Serializable, Controller {
 
         checkUserIsAnonymous();
 
-        if(!isAnonymous){
+        if (!isAnonymous) {
 
             initSessionForDao();
             this.listaComentarios = comentarioDao.getAllByIdMelom(idMelom);
@@ -57,19 +56,17 @@ public class ComentarioController implements Serializable, Controller {
 
     private void checkUserIsAnonymous() {
 
-        if(UtilUserSession.getUserId() == null){
+        if (UtilUserSession.getUserId() == null) {
 
             isAnonymous = true;
-        }
-
-        else{
+        } else {
 
             isAnonymous = false;
         }
 
     }
 
-    public void comentar(MelomBean melom){
+    public void comentar(MelomBean melom) {
 
         UtilComments.setMelom(melom);
         UtilComments.setIdMelom(melom.getId());
@@ -79,7 +76,8 @@ public class ComentarioController implements Serializable, Controller {
         UtilViews.redirect(route);
 
     }
-    public void verComentarios(MelomBean melom){
+
+    public void verComentarios(MelomBean melom) {
 
         UtilComments.setMelom(melom);
         UtilComments.setIdMelom(melom.getId());
@@ -161,27 +159,26 @@ public class ComentarioController implements Serializable, Controller {
     }
 
 
-
-    public void initSessionForDao(){
+    public void initSessionForDao() {
         Session session = UtilSessionHibernate.initSession();
         comentarioDao.setSession(session);
     }
 
 
-    public void commitAndCloseSession(){
+    public void commitAndCloseSession() {
         Session session = comentarioDao.getSession();
         UtilSessionHibernate.commitAndCloseSession(session);
 
     }
 
 
-    public void closeSession(){
+    public void closeSession() {
         Session session = comentarioDao.getSession();
         UtilSessionHibernate.closeSession(session);
     }
 
 
-    public void initTransactionForDao(){
+    public void initTransactionForDao() {
         Session session = comentarioDao.getSession();
         UtilSessionHibernate.initTransaction(session);
 
@@ -192,7 +189,7 @@ public class ComentarioController implements Serializable, Controller {
 
         return comentarioBuilder.build();
     }
-    
+
     public ComentarioBuilder getComentarioBuilder() {
         return comentarioBuilder;
     }
@@ -265,43 +262,43 @@ public class ComentarioController implements Serializable, Controller {
         this.melom = melom;
     }
 
-    public String getMelomAutor(){
+    public String getMelomAutor() {
 
         return melom.getAutor();
 
     }
 
-    public String getMelomTitulo(){
+    public String getMelomTitulo() {
 
         return melom.getTitulo();
 
     }
 
-    public String getMelomAlbum(){
+    public String getMelomAlbum() {
 
         return melom.getAlbum();
 
     }
 
-    public String getMelomTipoMusica(){
+    public String getMelomTipoMusica() {
 
         return melom.getTipoMusica();
 
     }
 
-    public String getMelomComentario(){
+    public String getMelomComentario() {
 
         return melom.getComentarioMusico();
 
     }
 
-    public String getMelomCancion(){
+    public String getMelomCancion() {
 
         return melom.getRutaCancion();
 
     }
 
-    public String getMelomImagenAlbum(){
+    public String getMelomImagenAlbum() {
 
         return melom.getRutaImagenAlbum();
 

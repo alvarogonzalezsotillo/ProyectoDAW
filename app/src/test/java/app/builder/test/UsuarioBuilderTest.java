@@ -1,21 +1,20 @@
 package app.builder.test;
 
-import static org.junit.Assert.*;
-
+import app.beans.UsuarioBean;
+import app.builder.UsuarioBuilder;
 import app.utils.UtilPasswords;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import app.beans.UsuarioBean;
-import app.builder.UsuarioBuilder;
+import static org.junit.Assert.*;
 
 public class UsuarioBuilderTest {
-    
+
     UsuarioBuilder sut;
     UsuarioBuilder returned;
     UsuarioBean usuarioTest;
-    
+
     String nombreTest = "nombreTest";
     String apellidoTest = "apellidoTest";
     String nickTest = "nickTest";
@@ -29,79 +28,77 @@ public class UsuarioBuilderTest {
 
     @Before
     public void setUp() throws Exception {
-        
+
         try {
 
             sut = new UsuarioBuilder();
-            
-            
-        }
 
-        catch (ExceptionInInitializerError e) {
+
+        } catch (ExceptionInInitializerError e) {
 
             throw new ExceptionInInitializerError("No se ha podido inicializar el SUT" + e);
 
         }
-        
+
     }
 
     @After
     public void tearDown() throws Exception {
-        
+
         sut = null;
-        
+
     }
 
     @Test
-    public void testUsuarioBuilder(){
-        
-        UsuarioBuilder uBTest = new UsuarioBuilder(nombreTest,apellidoTest,nickTest,passwordTest);
-        
+    public void testUsuarioBuilder() {
+
+        UsuarioBuilder uBTest = new UsuarioBuilder(nombreTest, apellidoTest, nickTest, passwordTest);
+
         assertNotNull(uBTest);
-        
+
     }
 
     @Test
     public void shouldSetAllUsuarioAttributesReturnTheUsuarioBuilderOnEachOneAndBuildNewUsusario() {
-        
+
         returned = sut.nombre(nombreTest);
         assertSame(sut, returned);
-        
+
         returned = sut.apellido(apellidoTest);
         assertSame(sut, returned);
-        
+
         returned = sut.nick(nickTest);
         assertSame(sut, returned);
-        
+
         returned = sut.password(passwordTest);
         assertSame(sut, returned);
-        
+
         returned = sut.correo(correoTest);
         assertSame(sut, returned);
-        
+
         returned = sut.grupo(grupoTest);
         assertSame(sut, returned);
-        
+
         returned = sut.tipoMusica(tipoMusicaTest);
         assertSame(sut, returned);
-        
+
         returned = sut.web(webTest);
         assertSame(sut, returned);
-        
+
         usuarioTest = sut.build();
         assertNotNull(usuarioTest);
-        
-        assertEquals(nombreTest,usuarioTest.getNombreDeUsuario());
-        assertEquals(apellidoTest,usuarioTest.getApellidoDeUsuario());
-        assertEquals(nickTest,usuarioTest.getNickDeUsuario());
-        assertEquals(correoTest,usuarioTest.getCorreoDeUsuario());
-        assertEquals(grupoTest,usuarioTest.getGrupoDeUsuario());
-        assertEquals(tipoMusicaTest,usuarioTest.getTipoMusicaDeUsuario());
-        assertEquals(webTest,usuarioTest.getWebDeUsuario());
-        
+
+        assertEquals(nombreTest, usuarioTest.getNombreDeUsuario());
+        assertEquals(apellidoTest, usuarioTest.getApellidoDeUsuario());
+        assertEquals(nickTest, usuarioTest.getNickDeUsuario());
+        assertEquals(correoTest, usuarioTest.getCorreoDeUsuario());
+        assertEquals(grupoTest, usuarioTest.getGrupoDeUsuario());
+        assertEquals(tipoMusicaTest, usuarioTest.getTipoMusicaDeUsuario());
+        assertEquals(webTest, usuarioTest.getWebDeUsuario());
+
         String salt = UtilPasswords.getSalt();
-        
-        assertEquals(UtilPasswords.hashPasswordSHA(passwordTest + salt),usuarioTest.getPasswordDeUsuario());
-        
+
+        assertEquals(UtilPasswords.hashPasswordSHA(passwordTest + salt), usuarioTest.getPasswordDeUsuario());
+
     }
 }

@@ -14,8 +14,8 @@ public class MelomTest {
     String tituloTest = "tituloTest";
     String albumTest = "albumTest";
     String tipoMusicaTest = "tipoMusicaTest";
-    String comentarioTest= "comentarioTest";
-    String autorTest= "autorTest";
+    String comentarioTest = "comentarioTest";
+    String autorTest = "autorTest";
 
     MelomBean sut;
 
@@ -24,12 +24,10 @@ public class MelomTest {
 
         try {
 
-            sut = new MelomBean(tituloTest, albumTest, tipoMusicaTest,comentarioTest,null,null,idUsuarioTest, autorTest);
+            sut = new MelomBean(tituloTest, albumTest, tipoMusicaTest, comentarioTest, null, null, idUsuarioTest, autorTest);
             sut.setId(idTest);
 
-        }
-
-        catch (ExceptionInInitializerError e) {
+        } catch (ExceptionInInitializerError e) {
 
             throw new ExceptionInInitializerError("No se ha podido inicializar el SUT" + e);
 
@@ -42,9 +40,7 @@ public class MelomTest {
         try {
 
             sut = null;
-        }
-
-        catch (Exception e) {
+        } catch (Exception e) {
 
             throw new ExceptionInInitializerError("No se ha podido destruir el SUT" + e);
 
@@ -52,57 +48,57 @@ public class MelomTest {
     }
 
     @Test
-    public void shouldReturnTheAttributedWhenCallingGetters(){
+    public void shouldReturnTheAttributedWhenCallingGetters() {
 
         Long idActual = sut.getId();
-        assertEquals(idTest,idActual);
+        assertEquals(idTest, idActual);
 
         String tituloActual = sut.getTitulo();
-        assertEquals(tituloTest,tituloActual);
+        assertEquals(tituloTest, tituloActual);
 
         String albumActual = sut.getAlbum();
-        assertEquals(albumTest,albumActual);
+        assertEquals(albumTest, albumActual);
 
         String tipoMusicaActual = sut.getTipoMusica();
-        assertEquals(tipoMusicaTest,tipoMusicaActual);
+        assertEquals(tipoMusicaTest, tipoMusicaActual);
 
         String comentarioActual = sut.getComentarioMusico();
-        assertEquals(comentarioTest,comentarioActual);
+        assertEquals(comentarioTest, comentarioActual);
 
         String autorActual = sut.getAutor();
-        assertEquals(autorTest,autorActual);
+        assertEquals(autorTest, autorActual);
 
         Long idUsuarioActual = sut.getIdUsuario();
-        assertEquals(idUsuarioTest,idUsuarioActual);
+        assertEquals(idUsuarioTest, idUsuarioActual);
 
     }
 
     @Test
-    public void shouldSetTheNewAttributesWhenCallingSetters(){
+    public void shouldSetTheNewAttributesWhenCallingSetters() {
 
         Long nuevoId = 2L;
         sut.setId(nuevoId);
-        assertEquals(nuevoId,sut.getId());
+        assertEquals(nuevoId, sut.getId());
 
         String nuevoTitulo = "nuevoTitulo";
         sut.setTitulo(nuevoTitulo);
-        assertEquals(nuevoTitulo,sut.getTitulo());
+        assertEquals(nuevoTitulo, sut.getTitulo());
 
         String nuevoAlbum = "nuevoAlbum";
         sut.setAlbum(nuevoAlbum);
-        assertEquals(nuevoAlbum,sut.getAlbum());
+        assertEquals(nuevoAlbum, sut.getAlbum());
 
         String nuevoTipoMusica = "nuevoTipoMusica";
         sut.setTipoMusica(nuevoTipoMusica);
-        assertEquals(nuevoTipoMusica,sut.getTipoMusica());
+        assertEquals(nuevoTipoMusica, sut.getTipoMusica());
 
         String nuevoComentario = "nuevoComentario";
         sut.setComentarioMusico(nuevoComentario);
-        assertEquals(nuevoComentario,sut.getComentarioMusico());
+        assertEquals(nuevoComentario, sut.getComentarioMusico());
 
         Long nuevoIdUsuario = 2L;
         sut.setIdUsuario(nuevoIdUsuario);
-        assertEquals(nuevoIdUsuario,sut.getIdUsuario());
+        assertEquals(nuevoIdUsuario, sut.getIdUsuario());
 
     }
 
