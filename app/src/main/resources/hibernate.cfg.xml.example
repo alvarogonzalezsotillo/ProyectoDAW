@@ -15,6 +15,5 @@
         <mapping class="app.beans.UsuarioBean" />
         <mapping class="app.beans.ComentarioBean" />
         <mapping class="app.beans.MelomBean" />
-        <mapping class="app.beans.ConciertoBean" />
     </session-factory>
 </hibernate-configuration>
