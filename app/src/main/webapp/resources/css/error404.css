@@ -18,14 +18,16 @@ p {
 	outline: 0;
 	color: #333;
 	font-weight: bold;
-	text-decoration: underline solid #79beac;
-	-moz-text-decoration-color: #79beac;
-	-webkit-text-decoration-color: #79beac;
-    text-decoration-color: #79beac;
+    background: linear-gradient(#fff,#fff),linear-gradient(#fff,#fff),linear-gradient(#79beac,#79beac);
+	background-size: .05em 1px,.05em 1px,1px 2px;
+	background-repeat: no-repeat,no-repeat,repeat-x;
+	text-shadow: .03em 0 #fff,-.03em 0 #fff,0 .03em #fff,0 -.03em #fff,.06em 0 #fff,-.06em 0 #fff,.09em 0 #fff,-.09em 0 #fff,.12em 0 #fff,-.12em 0 #fff,.15em 0 #fff,-.15em 0 #fff;
+	background-position: 0 95%,100% 95%,0 95%;
 }
 
 .mensajeDeError a:hover {
 	outline: 0;
 	color: #68b6a1;
 	text-decoration: none;
+	background: none;
 }
