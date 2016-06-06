@@ -11,6 +11,7 @@ public class ComentarioBuilder implements Serializable, Builder<ComentarioBean> 
 
     private String texto;
     private Long idUsuario;
+    private String nombreUsuario;
     private Long idMelom;
 
     public ComentarioBuilder() {
@@ -18,16 +19,17 @@ public class ComentarioBuilder implements Serializable, Builder<ComentarioBean> 
         //Constructor para test
     }
 
-    public ComentarioBuilder(String texto, Long idUsuario, Long idMelom) {
+    public ComentarioBuilder(String texto, Long idUsuario, String nombreUsuario, Long idMelom) {
         this.texto = texto;
         this.idUsuario = idUsuario;
+        this.nombreUsuario = nombreUsuario;
         this.idMelom = idMelom;
     }
 
 
-    public ComentarioBean build(){
+    public ComentarioBean build() {
 
-        return new ComentarioBean(texto,idUsuario,idMelom);
+        return new ComentarioBean(texto, idUsuario, nombreUsuario, idMelom);
 
     }
 
@@ -36,13 +38,13 @@ public class ComentarioBuilder implements Serializable, Builder<ComentarioBean> 
         return this;
     }
 
-    public ComentarioBuilder idUsuario(Long idUsuario){
+    public ComentarioBuilder idUsuario(Long idUsuario) {
 
         this.idUsuario = idUsuario;
         return this;
     }
 
-    public ComentarioBuilder idMelom(Long idMelom){
+    public ComentarioBuilder idMelom(Long idMelom) {
 
         this.idMelom = idMelom;
         return this;

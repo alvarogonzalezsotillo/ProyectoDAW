@@ -1,10 +1,10 @@
 package app.controller;
 
-import app.utils.UtilUserSession;
 import app.controller.interfaces.Controller;
 import app.model.UsuarioDAO;
 import app.utils.UtilPasswords;
 import app.utils.UtilSessionHibernate;
+import app.utils.UtilUserSession;
 import app.utils.UtilViews;
 import org.hibernate.Session;
 

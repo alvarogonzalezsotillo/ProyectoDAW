@@ -1,13 +1,13 @@
 package app.beans;
 
 import app.beans.interfaces.Bean;
-import app.utils.UtilFiles;
+import org.primefaces.model.UploadedFile;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "BETAmeloms")//TODO NO OLVIDAR CAMBIAR CUANDO TERMINEMOS LA TABLA DE MELOMS!!!!!!!!!!!!!!!!!!!
+@Table(name = "meloms")
 public class MelomBean implements Serializable, Bean {
 
     private static final long serialVersionUID = 1L;
@@ -29,11 +29,15 @@ public class MelomBean implements Serializable, Bean {
     @Column(name ="comentarioMusico")
     private String comentarioMusico;
 
-    @Column(name = "cancion", columnDefinition = "LONGBLOB")
-    private byte[] cancion;
+    @Column(name = "rutaCancion", columnDefinition = "LONGBLOB")
+    private String rutaCancion;
 
-    @Column(name = "imagenAlbum", columnDefinition = "LONGBLOB")
-    private byte[] imagenAlbum;
+    private transient UploadedFile cancion;
+
+    @Column(name = "rutaImagenAlbum", columnDefinition = "LONGBLOB")
+    private String rutaImagenAlbum;
+
+    private transient UploadedFile imagenAlbum;
 
     @Column(name ="idUsuario")
     private Long idUsuario;
@@ -45,13 +49,13 @@ public class MelomBean implements Serializable, Bean {
         //Constructor por defecto
     }
 
-    public MelomBean(String titulo, String album, String tipoMusica, String comentarioMusico, byte[] cancion, byte[] imagenAlbum, Long idUsuario, String autor) {
+    public MelomBean(String titulo, String album, String tipoMusica, String comentarioMusico, String rutaCancion, String rutaImagenAlbum, Long idUsuario, String autor) {
         this.titulo = titulo;
         this.album = album;
         this.tipoMusica = tipoMusica;
         this.comentarioMusico = comentarioMusico;
-        this.cancion = cancion;
-        this.imagenAlbum = imagenAlbum;
+        this.rutaCancion = rutaCancion;
+        this.rutaImagenAlbum = rutaImagenAlbum;
         this.idUsuario = idUsuario;
         this.autor = autor;
     }
@@ -80,22 +84,17 @@ public class MelomBean implements Serializable, Bean {
         return comentarioMusico;
     }
 
-    public String getCancion(){
+    public String getRutaCancion(){
 
-        return UtilFiles.transformFileToBase64(this.cancion);
-
-    }
-
-    public String getImagenAlbum() {
-
-        return UtilFiles.transformFileToBase64(imagenAlbum);
-    }
-
-    public byte[] getImagenAlbumBytes(){
-
-        return this.imagenAlbum;
+        return this.rutaCancion;
 
     }
+
+    public String getRutaImagenAlbum() {
+
+        return rutaImagenAlbum;
+    }
+
 
     public Long getIdUsuario() {
         return idUsuario;
@@ -117,12 +116,12 @@ public class MelomBean implements Serializable, Bean {
         this.comentarioMusico = comentarioMusico;
     }
 
-    public void setCancion(byte[] cancion) {
-        this.cancion = cancion;
+    public void setRutaCancion(String rutaCancion) {
+        this.rutaCancion = rutaCancion;
     }
 
-    public void setImagenAlbum(byte[] imagenAlbum) {
-        this.imagenAlbum = imagenAlbum;
+    public void setRutaImagenAlbum(String rutaImagenAlbum) {
+        this.rutaImagenAlbum = rutaImagenAlbum;
     }
 
     public void setIdUsuario(Long idUsuario) {
@@ -135,5 +134,21 @@ public class MelomBean implements Serializable, Bean {
 
     public void setAutor(String autor) {
         this.autor = autor;
+    }
+
+    public UploadedFile getCancion() {
+        return cancion;
+    }
+
+    public void setCancion(UploadedFile cancion) {
+        this.cancion = cancion;
+    }
+
+    public UploadedFile getImagenAlbum() {
+        return imagenAlbum;
+    }
+
+    public void setImagenAlbum(UploadedFile imagenAlbum) {
+        this.imagenAlbum = imagenAlbum;
     }
 }

@@ -1,15 +1,10 @@
 package app.beans;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import app.beans.interfaces.Bean;
 import app.utils.UtilPasswords;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "usuarios")
@@ -29,8 +24,8 @@ public class UsuarioBean implements Serializable, Bean {
     @Column(name = "passwordDeUsuario")
     private String passwordDeUsuario;
 
-    @Column(name = "imagenDeUsuario", columnDefinition = "LONGBLOB")
-    private byte[] imagenDeUsuario;
+    @Column(name = "rutaImagenDeUsuario")
+    private String rutaImagenDeUsuario;
 
     @Column(name = "correoDeUsuario")
     private String correoDeUsuario;
@@ -41,12 +36,12 @@ public class UsuarioBean implements Serializable, Bean {
     private String grupoDeUsuario;
     @Column(name = "tipoMusicaDeUsuario")
     private String tipoMusicaDeUsuario;
-    
-    public UsuarioBean(){
+
+    public UsuarioBean() {
         //Constructor por defecto
     }
-    
-    public UsuarioBean(String nombreDeUsuario, String apellidoDeUsuario, String nickDeUsuario, String correoDeUsuario, String tipoMusicaDeUsuario, String grupoDeUsuario, String webDeUsuario, String passwordDeUsuario, byte[] imagenDeUsuario) {
+
+    public UsuarioBean(String nombreDeUsuario, String apellidoDeUsuario, String nickDeUsuario, String correoDeUsuario, String tipoMusicaDeUsuario, String grupoDeUsuario, String webDeUsuario, String passwordDeUsuario, String rutaImagenDeUsuario) {
 
         this.nombreDeUsuario = nombreDeUsuario;
         this.apellidoDeUsuario = apellidoDeUsuario;
@@ -56,8 +51,8 @@ public class UsuarioBean implements Serializable, Bean {
         this.grupoDeUsuario = grupoDeUsuario;
         this.webDeUsuario = webDeUsuario;
         String saltPassword = UtilPasswords.getSalt();
-        this.passwordDeUsuario = UtilPasswords.hashPasswordSHA(passwordDeUsuario+saltPassword);
-        this.imagenDeUsuario = imagenDeUsuario ;
+        this.passwordDeUsuario = UtilPasswords.hashPasswordSHA(passwordDeUsuario + saltPassword);
+        this.rutaImagenDeUsuario = rutaImagenDeUsuario;
     }
 
 
@@ -129,20 +124,19 @@ public class UsuarioBean implements Serializable, Bean {
     }
 
     public void setPasswordDeUsuario(String passwordDeUsuario) {
-        String salt = UtilPasswords.getSalt();
-        this.passwordDeUsuario = UtilPasswords.hashPasswordSHA(passwordDeUsuario + salt);
+        this.passwordDeUsuario = passwordDeUsuario;
     }
 
     public String getPasswordDeUsuario() {
         return passwordDeUsuario;
     }
 
-    public byte[] getImagenDeUsuario() {
-        return imagenDeUsuario;
+    public String getRutaImagenDeUsuario() {
+        return rutaImagenDeUsuario;
     }
 
-    public void setImagenDeUsuario(byte[] imagenDeUsuario) {
-        this.imagenDeUsuario = imagenDeUsuario;
+    public void setRutaImagenDeUsuario(String rutaImagenDeUsuario) {
+        this.rutaImagenDeUsuario = rutaImagenDeUsuario;
     }
 
     @Override

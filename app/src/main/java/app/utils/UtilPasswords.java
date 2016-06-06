@@ -1,7 +1,5 @@
 package app.utils;
 
-import org.primefaces.model.UploadedFile;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -31,9 +29,7 @@ public class UtilPasswords {
             }
 
             generatedPassword = sb.toString();
-        }
-
-        catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
 
             throw new RuntimeException("Problema en hashPassword" + e);
         }

@@ -4,7 +4,7 @@ import app.beans.MelomBean;
 import app.beans.UsuarioBean;
 import app.controller.interfaces.Controller;
 import app.model.UsuarioDAO;
-import app.utils.UtilFiles;
+import app.utils.UtilPasswords;
 import app.utils.UtilSessionHibernate;
 import app.utils.UtilUserSession;
 import app.utils.UtilViews;
@@ -34,6 +34,10 @@ public class PerfilUsuarioController implements Controller, Serializable {
     private String tipoMusicaPersonal;
     private String imagenPersonal;
 
+    private String oldPass;
+    private String newPass;
+    private String newPassOk;
+
     private Long idAjeno;
 
     private String nombreAjeno;
@@ -62,7 +66,7 @@ public class PerfilUsuarioController implements Controller, Serializable {
         java.util.logging.Logger.getLogger(getClass().getName()).log( java.util.logging.Level.INFO, "init" );
         checkUserIsAnonymous();
 
-        if(!isAnonymous){
+        if (!isAnonymous) {
             initSessionForDao();
             UsuarioBean usuarioActual = usuarioDao.getById(UtilUserSession.getUserId());
             this.listNicks = usuarioDao.getAllNicks();
@@ -77,31 +81,14 @@ public class PerfilUsuarioController implements Controller, Serializable {
             this.grupoPersonal = usuarioActual.getGrupoDeUsuario();
             this.webPersonal = usuarioActual.getWebDeUsuario();
             this.tipoMusicaPersonal = usuarioActual.getTipoMusicaDeUsuario();
-            this.imagenPersonal = UtilFiles.transformFileToBase64(usuarioActual.getImagenDeUsuario());
-        }
-
-        else{
+            this.imagenPersonal = usuarioActual.getRutaImagenDeUsuario();
+        } else {
 
             initSessionForDao();
             this.listNicks = usuarioDao.getAllNicks();
             closeSession();
 
         }
-    }
-
-
-    private void checkUserIsAnonymous() {
-
-        if(UtilUserSession.getUserId() == null){
-
-            isAnonymous = true;
-        }
-
-        else{
-
-            isAnonymous = false;
-        }
-
     }
 
     public void viewProfile(String nickAjeno) {
@@ -120,7 +107,7 @@ public class PerfilUsuarioController implements Controller, Serializable {
         this.grupoAjeno = usuarioActual.getGrupoDeUsuario();
         this.webAjeno = usuarioActual.getWebDeUsuario();
         this.tipoMusicaAjeno = usuarioActual.getTipoMusicaDeUsuario();
-        this.imagenAjeno = UtilFiles.transformFileToBase64(usuarioActual.getImagenDeUsuario());
+        this.imagenAjeno = usuarioActual.getRutaImagenDeUsuario();
 
         initSessionForDao();
         this.listaMelomsAjenos = usuarioDao.getListMelomsByUser(idAjeno);
@@ -133,38 +120,11 @@ public class PerfilUsuarioController implements Controller, Serializable {
 
     }
 
-    public void viewAllProfiles(){
+    public void viewAllProfiles() {
 
         String route = "/views/usuario/listaUsuarios.xhtml";
         UtilViews.redirect(route);
 
-    }
-
-    public void refreshProfile(){
-
-        userIsFollowed();
-        String route = "/views/usuario/perfil.xhtml";
-        UtilViews.redirect(route);
-
-
-    }
-
-    private void userIsFollowed() {
-
-        if (this.idAjeno == UtilUserSession.getUserId()) {
-
-            this.isFollowed = false;
-            this.ItsaMeMario = true;
-
-        }
-
-        else {
-            initSessionForDao();
-            List<Long> listaUsuariosSeguidos = usuarioDao.getFollowedUsers(UtilUserSession.getUserId());
-            closeSession();
-            this.isFollowed = listaUsuariosSeguidos.contains(idAjeno);
-            this.ItsaMeMario = false;
-        }
     }
 
     public void follow() {
@@ -186,32 +146,111 @@ public class PerfilUsuarioController implements Controller, Serializable {
         refreshProfile();
     }
 
-    public void modifyProfile(Long id){
+    public void modifyProfile(Long id) {
 
         initSessionForDao();
-        UsuarioBean usuario = usuarioDao.getById(id);
-
-        updateUserProfile(usuario);
-
         initTransactionForDao();
-        usuarioDao.update(usuario);
+        usuarioDao.update(idPersonal, nombrePersonal, apellidoPersonal, correoPersonal, grupoPersonal, webPersonal, tipoMusicaPersonal);
         commitAndCloseSession();
 
-        String route = "views/usuario/perfil.xhtml";
+        String summary = "¡Ahora sí que rockeas!";
+        String detail = "La información de tu perfil fue actualizada";
+//TODO        String route = "/views/timeline/timeline.xhtml";
+        String route = "/index.xhtml";
 
-        UtilViews.redirect(route);
+        UtilViews.redirectWithInfoMessage(route,summary,detail);
     }
 
-    private void updateUserProfile(UsuarioBean usuario) {
+    public void modifyPassword() {
 
-        usuario.setNombreDeUsuario(this.nombrePersonal);
-        usuario.setApellidoDeUsuario(this.apellidoPersonal);
-        usuario.setNickDeUsuario(this.nickPersonal);
-        usuario.setGrupoDeUsuario(this.grupoPersonal);
-        usuario.setCorreoDeUsuario(this.correoPersonal);
-        usuario.setTipoMusicaDeUsuario(this.tipoMusicaPersonal);
-        usuario.setWebDeUsuario(this.webPersonal);
+        initSessionForDao();
+        UsuarioBean usuario = usuarioDao.getById(idPersonal);
+        closeSession();
 
+        if (oldPasswordIsOk(usuario) && newPassIsOk()) {
+
+            String newPassHashed = hashNewPassword();
+
+            initSessionForDao();
+            initTransactionForDao();
+            usuarioDao.updatePassword(usuario.getId(), newPassHashed);
+            commitAndCloseSession();
+
+            String summary = "¡Buena afinación!";
+            String detail = "La password fue cambiada satisfactoriamente";
+            String route = "/views/formulario/modificacionUsuario.xhtml";
+
+            UtilViews.redirectWithInfoMessage(route,summary,detail);
+
+        } else {
+
+            String summary = "¡Eso ha desafinado!";
+            String detail = "Verifica las passwords, alguna de ellas no fue bien introducida";
+
+            UtilViews.sendErrorMessage(summary, detail);
+        }
+
+    }
+
+    private String hashNewPassword() {
+        String salt = UtilPasswords.getSalt();
+        return UtilPasswords.hashPasswordSHA(newPass + salt);
+    }
+
+    private boolean newPassIsOk() {
+        return newPass.equals(newPassOk);
+    }
+
+    private boolean oldPasswordIsOk(UsuarioBean usuario) {
+
+        String salt = UtilPasswords.getSalt();
+        String hashOldPassword = UtilPasswords.hashPasswordSHA(oldPass + salt);
+        String oldPassword = usuario.getPasswordDeUsuario();
+
+        return hashOldPassword.equals(oldPassword);
+    }
+
+    public void redirectToFormPassword() {
+
+        UtilViews.redirect("/views/formulario/modificarPassword.xhtml");
+
+    }
+
+    private void checkUserIsAnonymous() {
+
+        if (UtilUserSession.getUserId() == null) {
+
+            isAnonymous = true;
+        } else {
+
+            isAnonymous = false;
+        }
+
+    }
+
+    public void refreshProfile() {
+
+        userIsFollowed();
+        String route = "/views/usuario/perfil.xhtml";
+        UtilViews.redirect(route);
+
+
+    }
+
+    private void userIsFollowed() {
+
+        if (this.idAjeno == UtilUserSession.getUserId()) {
+
+            this.isFollowed = false;
+            this.ItsaMeMario = true;
+
+        } else {
+            initSessionForDao();
+            List<Long> listaUsuariosSeguidos = usuarioDao.getFollowedUsers(UtilUserSession.getUserId());
+            closeSession();
+            this.isFollowed = listaUsuariosSeguidos.contains(idAjeno);
+            this.ItsaMeMario = false;
+        }
     }
 
     public void initSessionForDao() {
@@ -428,5 +467,29 @@ public class PerfilUsuarioController implements Controller, Serializable {
 
     public void setListaMelomsAjenos(List<MelomBean> listaMelomsAjenos) {
         this.listaMelomsAjenos = listaMelomsAjenos;
+    }
+
+    public String getOldPass() {
+        return oldPass;
+    }
+
+    public void setOldPass(String oldPass) {
+        this.oldPass = oldPass;
+    }
+
+    public String getNewPass() {
+        return newPass;
+    }
+
+    public void setNewPass(String newPass) {
+        this.newPass = newPass;
+    }
+
+    public String getNewPassOk() {
+        return newPassOk;
+    }
+
+    public void setNewPassOk(String newPassOk) {
+        this.newPassOk = newPassOk;
     }
 }

@@ -7,7 +7,7 @@ CREATE TABLE `iesrey`.`usuarios` (
   `nickDeUsuario` VARCHAR(65) NOT NULL,
   `passwordDeUsuario` VARCHAR(254) NOT NULL,
   `correoDeUsuario` VARCHAR(85) NULL,
-  `imagenDeUsuario` LONGBLOB NULL,
+  `rutaImagenDeUsuario` VARCHAR(200) NOT NULL,
   `grupoDeUsuario` VARCHAR(35) NULL,
   `webDeUsuario` VARCHAR(100) NULL,
   `tipoMusicaDeUsuario` VARCHAR(20) NULL,
@@ -15,15 +15,15 @@ CREATE TABLE `iesrey`.`usuarios` (
   `fechaRegistro` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`));
 
-CREATE TABLE `iesrey`.`BETAmeloms` (
+CREATE TABLE `iesrey`.`meloms` (
   `id` BIGINT(11) NOT NULL,
   `autor` VARCHAR(60) NOT NULL,
   `titulo` VARCHAR(150) NOT NULL,
   `album` VARCHAR(20) NULL,
   `tipoMusica` VARCHAR(45) NULL,
   `comentarioMusico` VARCHAR(100) NULL,
-  `cancion` LONGBLOB NULL DEFAULT NULL,
-  `imagenAlbum` LONGBLOB NULL DEFAULT NULL,
+  `rutaCancion` VARCHAR(240) NULL DEFAULT NULL,
+  `rutaImagenAlbum` VARCHAR(240) NOT NULL DEFAULT '/resources/images/albumDefault2.png',
   `idUsuario` BIGINT(11) NOT NULL,
   `fechaPublicacion` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -34,29 +34,22 @@ CREATE TABLE `iesrey`.`BETAmeloms` (
     ON DELETE CASCADE
     ON UPDATE NO ACTION);
 
-CREATE TABLE `iesrey`.`BETAcomentarios` (
+CREATE TABLE `iesrey`.`comentarios` (
   `id` BIGINT(11) NOT NULL,
   `texto` VARCHAR(200) NOT NULL,
+  `nombreUsuario` VARCHAR(200) NOT NULL,
   `idUsuario` BIGINT(11) NOT NULL,
   `idMelom` BIGINT(11) NOT NULL,
+  `fechaPublicacion` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   INDEX `idMelom_idx` (`idMelom` ASC),
   CONSTRAINT `idMelom`
     FOREIGN KEY (`idMelom`)
-    REFERENCES `iesrey`.BETAmeloms (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    REFERENCES `iesrey`.meloms (`id`)
+    ON DELETE CASCADE 
+    ON UPDATE CASCADE );
 
-CREATE TABLE `iesrey`.`BETAconciertos` (
-  `id` BIGINT(11) NOT NULL,
-  `fecha` DATETIME NOT NULL,
-  `pais` VARCHAR(50) NOT NULL,
-  `ciudad` VARCHAR(60) NOT NULL,
-  `lugar` VARCHAR(80) NOT NULL,
-  `idUsuario` BIGINT(11) NOT NULL,
-  PRIMARY KEY (`id`));
-
-CREATE TABLE `iesrey`.`BETAfollowers` (
+CREATE TABLE `iesrey`.`followers` (
   `idUsuario`  BIGINT (11) NOT NULL,
   `idFollower` BIGINT (11) NOT NULL,
   PRIMARY KEY (`idUsuario`, `idFollower`)

@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "BETAcomentarios")//TODO NO OLVIDAR CAMBIAR CUANDO TERMINEMOS LA TABLA DE COMENTARIOS!!!!!!!!!!!!!!!!!!!
+@Table(name = "comentarios")
 public class ComentarioBean implements Serializable, Bean {
 
     private static final long serialVersionUID = 1L;
@@ -19,6 +19,10 @@ public class ComentarioBean implements Serializable, Bean {
 
     @Column(name = "idUsuario")
     private Long idUsuario;
+
+    @Column(name = "nombreUsuario")
+    private String nombreUsuario;
+
     @Column(name = "idMelom")
     private Long idMelom;
 
@@ -26,9 +30,10 @@ public class ComentarioBean implements Serializable, Bean {
         //Constructor por defecto
     }
 
-    public ComentarioBean(String texto, Long idUsuario, Long idMelom) {
+    public ComentarioBean(String texto, Long idUsuario, String nombreUsuario, Long idMelom) {
         this.texto = texto;
         this.idUsuario = idUsuario;
+        this.nombreUsuario = nombreUsuario;
         this.idMelom = idMelom;
     }
 
@@ -66,5 +71,13 @@ public class ComentarioBean implements Serializable, Bean {
 
     public void setIdMelom(Long idMelom) {
         this.idMelom = idMelom;
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 }

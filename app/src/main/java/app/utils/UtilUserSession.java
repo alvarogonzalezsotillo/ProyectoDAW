@@ -13,15 +13,15 @@ public class UtilUserSession {
     public static HttpSession getSession() {
 
         return (HttpSession) FacesContext.getCurrentInstance()
-                                         .getExternalContext()
-                                         .getSession(false);
+                .getExternalContext()
+                .getSession(false);
     }
 
     public static HttpServletRequest getRequest() {
 
         return (HttpServletRequest) FacesContext.getCurrentInstance()
-                                                .getExternalContext()
-                                                .getRequest();
+                .getExternalContext()
+                .getRequest();
     }
 
     public static Long getUserId() {
@@ -31,9 +31,7 @@ public class UtilUserSession {
         if (session != null) {
 
             return (Long) session.getAttribute("userId");
-        }
-
-        else {
+        } else {
 
             return null;
         }
@@ -47,11 +45,10 @@ public class UtilUserSession {
         if (session != null) {
 
             return (String) session.getAttribute("userName");
-        }
-
-        else {
+        } else {
 
             return null;
         }
     }
+
 }

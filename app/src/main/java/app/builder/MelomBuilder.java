@@ -1,12 +1,9 @@
 package app.builder;
 
-import java.io.Serializable;
-
-import app.builder.interfaces.Builder;
-import app.utils.UtilFiles;
-import org.primefaces.model.UploadedFile;
-
 import app.beans.MelomBean;
+import app.builder.interfaces.Builder;
+
+import java.io.Serializable;
 
 public class MelomBuilder implements Serializable, Builder<MelomBean> {
 
@@ -16,18 +13,18 @@ public class MelomBuilder implements Serializable, Builder<MelomBean> {
     private String album;
     private String tipoMusica;
     private String comentarioMusico;
-    private byte[] cancion;
-    private byte[] imagenAlbum;
+    private String rutaCancion;
+    private String rutaImagenAlbum;
     private Long idUsuario;
     private String autor;
 
-    public MelomBuilder(){
-        
+    public MelomBuilder() {
+
         //Constructor por defecto para los test
-        
+
     }
 
-    public MelomBuilder(String titulo, Long idUsuario){
+    public MelomBuilder(String titulo, Long idUsuario) {
         this.titulo = titulo;
         this.idUsuario = idUsuario;
     }
@@ -35,10 +32,10 @@ public class MelomBuilder implements Serializable, Builder<MelomBean> {
 
     public MelomBean build() {
 
-        return new MelomBean(titulo, album, tipoMusica, comentarioMusico, cancion, imagenAlbum, idUsuario, autor);
+        return new MelomBean(titulo, album, tipoMusica, comentarioMusico, rutaCancion, rutaImagenAlbum, idUsuario, autor);
 
     }
-    
+
     public MelomBuilder titulo(String titulo) {
 
         this.titulo = titulo;
@@ -46,7 +43,7 @@ public class MelomBuilder implements Serializable, Builder<MelomBean> {
         return this;
 
     }
-    
+
     public MelomBuilder album(String album) {
 
         this.album = album;
@@ -54,7 +51,7 @@ public class MelomBuilder implements Serializable, Builder<MelomBean> {
         return this;
 
     }
-    
+
     public MelomBuilder tipoMusica(String tipoMusica) {
 
         this.tipoMusica = tipoMusica;
@@ -62,7 +59,7 @@ public class MelomBuilder implements Serializable, Builder<MelomBean> {
         return this;
 
     }
-    
+
     public MelomBuilder comentarioMusico(String comentarioMusico) {
 
         this.comentarioMusico = comentarioMusico;
@@ -70,23 +67,23 @@ public class MelomBuilder implements Serializable, Builder<MelomBean> {
         return this;
 
     }
-    
-    public MelomBuilder cancion(UploadedFile cancion) {
 
-        this.cancion = UtilFiles.transformFile(cancion);
+    public MelomBuilder rutaCancion(String rutaCancion) {
 
-        return this;
-
-    }
-    
-    public MelomBuilder imagenAlbum(UploadedFile imagenAlbum) {
-
-        this.imagenAlbum = UtilFiles.transformFile(imagenAlbum);
+        this.rutaCancion = rutaCancion;
 
         return this;
 
     }
-    
+
+    public MelomBuilder rutaImagenAlbum(String rutaImagenAlbum) {
+
+        this.rutaImagenAlbum = rutaImagenAlbum;
+
+        return this;
+
+    }
+
     public MelomBuilder idUsuario(Long idUsuario) {
 
         this.idUsuario = idUsuario;
@@ -95,12 +92,12 @@ public class MelomBuilder implements Serializable, Builder<MelomBean> {
 
     }
 
-    public MelomBuilder autor(String autor){
+    public MelomBuilder autor(String autor) {
 
         this.autor = autor;
 
         return this;
 
     }
-    
+
 }

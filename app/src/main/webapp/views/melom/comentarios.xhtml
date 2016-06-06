@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:my="http://java.sun.com/jsf/composite/melomify"
+      xmlns:p="http://primefaces.org/ui">
+
+<!--<ui:include src="/resources/templates/navBar.xhtml"/>-->
+
+<h:head></h:head>
+
+<h:body>
+
+    <f:event type="preRenderView" listener="#{comentarioController.init()}"/>
+    <f:event type="preRenderView" listener="#{perfilUsuarioController.init()}"/>
+
+    <h:form>
+        <h:panelGrid columns="7">
+            <h:commandLink value="#{comentarioController.melomAutor}"
+                           actionListener="#{perfilUsuarioController.viewProfile(comentarioController.melomAutor)}"/>
+            <h:outputText value="#{comentarioController.melomTitulo}"/>
+            <h:outputText value="#{comentarioController.melomAlbum}"/>
+            <h:outputText value="#{comentarioController.melomTipoMusica}"/>
+            <h:outputText value="#{comentarioController.melomComentario}"/>
+
+            <audio controls="controls">
+                <source src="#{comentarioController.melomCancion}" type="audio/mpeg"/>
+            </audio>
+
+            <h:graphicImage value="#{comentarioController.melomImagenAlbum}" height="10%"/>
+        </h:panelGrid>
+        <ui:repeat var="comentario" value="#{comentarioController.listaComentarios}">
+            <h:panelGrid columns="3">
+
+                <h:commandLink value="#{comentario.nombreUsuario}"
+                               actionListener="#{perfilUsuarioController.viewProfile(comentario.nombreUsuario)}"/>
+                <h:outputText value="#{comentario.texto}"/>
+
+                <my:condition condition="#{comentario.idUsuario == perfilUsuarioController.idPersonal}">
+
+                    <f:facet name="then">
+
+                        <h:commandLink
+                                actionListener="#{comentarioController.deleteComentario(comentario.id)}"><h:graphicImage
+                                name="delete.png" library="images" height="30%"/></h:commandLink>
+
+                    </f:facet>
+                </my:condition>
+
+            </h:panelGrid>
+        </ui:repeat>
+    </h:form>
+
+    <my:condition condition="#{comentarioController.isAnonymous == false}">
+
+        <f:facet name="then">
+
+            <h:form>
+                <p:panel style="width:560px;height:215px;">
+                    <p:inputTextarea rows="2" cols="60" value="#{comentarioController.texto}" counter="display"
+                                     counterTemplate="{0}" maxlength="45" placeholder="Escribe un comentario..."
+                                     autoResize="false"/>
+                    <f:facet name="footer">
+                        <h:outputText id="display"/>
+                        <p:commandButton id="commentButton" value="Comentar" style="float:right">
+                            <f:ajax execute="@all" listener="#{comentarioController.insertComentario}"/>
+                        </p:commandButton>
+                    </f:facet>
+                </p:panel>
+            </h:form>
+
+        </f:facet>
+
+        <f:facet name="else">
+
+            <h:outputText value="¡Regístrate para comentar!"/>
+
+        </f:facet>
+
+    </my:condition>
+
+
+</h:body>
+</html>

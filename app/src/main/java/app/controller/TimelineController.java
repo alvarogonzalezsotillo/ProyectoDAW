@@ -10,10 +10,6 @@ import org.hibernate.Session;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -32,7 +28,7 @@ public class TimelineController implements Controller, Serializable {
 
         checkUserIsAnonymous();
 
-        if(!isAnonymous){
+        if (!isAnonymous) {
 
             initSessionForDao();
             this.listaMeloms = melomDao.getAllMelomsByIdFollower(UtilUserSession.getUserId());
@@ -42,12 +38,10 @@ public class TimelineController implements Controller, Serializable {
 
     private void checkUserIsAnonymous() {
 
-        if(UtilUserSession.getUserId() == null){
+        if (UtilUserSession.getUserId() == null) {
 
             isAnonymous = true;
-        }
-
-        else{
+        } else {
 
             isAnonymous = false;
         }

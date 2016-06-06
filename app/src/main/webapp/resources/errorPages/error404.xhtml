@@ -3,12 +3,23 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ps="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:ps="http://xmlns.jcp.org/jsf/passthrough">
+
+<ui:include src="/resources/templates/navBar.xhtml"/>
+<h:outputStylesheet library="css" name="error404.css"></h:outputStylesheet>
 
 
-
-<h:body>
-
-</h:body>
+	<h:body>
+	<div class="container">
+		<div class="row text-center">
+			<p class="mensajeDeError">Rebobina hasta la <h:outputLink
+                        value="/views/formulario/bienvenida.xhtml">página de bienvenida</h:outputLink> o vuelve a la tienda a por unos cascos nuevos.</p>
+		</div>
+	</div>
+		
+		<h:graphicImage ps:id="imgError" name="error404.jpeg" library="images"></h:graphicImage>
+	
+		<h:outputScript library="js" name="jquery-1.12.3.min.js"/>
+	    <h:outputScript library="js" name="bootstrap.min.js"/>
+	</h:body>
 </html>

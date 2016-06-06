@@ -21,7 +21,7 @@
             <h:outputText value="#{perfilUsuarioController.webAjeno}"/>
             <h:outputText value="#{perfilUsuarioController.tipoMusicaAjeno}"/>
 
-            <h:graphicImage value="data:image/jpeg;base64,#{perfilUsuarioController.imagenAjeno}"/>
+            <h:graphicImage value="#{perfilUsuarioController.imagenAjeno}"/>
 
             <my:condition condition="#{perfilUsuarioController.isFollowed == true}">
 
@@ -61,19 +61,29 @@
 
 
         <ui:repeat var="melom" value="#{perfilUsuarioController.listaMelomsAjenos}">
-            <h:panelGrid columns="6">
+            <h:panelGrid columns="7">
 
-                <h:outputText value="#{melom.titulo}"/>
+                <h:commandLink value="#{melom.titulo}"
+                               actionListener="#{comentarioController.verComentarios(melom)}"/>
                 <h:outputText value="#{melom.album}"/>
                 <h:outputText value="#{melom.tipoMusica}"/>
                 <h:outputText value="#{melom.comentarioMusico}"/>
 
                 <audio controls="controls">
-                    <source src="/servletMusica?idMelom=#{melom.id}" type="audio/mpeg"/>
+                    <source src="#{melom.rutaCancion}" type="audio/mpeg"/>
                 </audio>
 
-                <!--<h:graphicImage value="data:image/jpeg;base64,#{melom.imagenAlbum}" height="10%"/>-->
-                <img src="/servletMelomImages?idMelom=#{melom.id}" height="10%"/>
+                <h:graphicImage value="#{melom.rutaImagenAlbum}" height="10%"/>
+
+                <my:condition condition="#{perfilUsuarioController.itsaMeMario == true}">
+
+                    <f:facet name="then">
+
+                        <h:commandLink actionListener="#{melomController.deleteMelom(melom.id)}"><h:graphicImage
+                                name="delete.png" library="images" height="30%"/></h:commandLink>
+
+                    </f:facet>
+                </my:condition>
             </h:panelGrid>
         </ui:repeat>
 

@@ -1,18 +1,19 @@
 package app.model.test;
 
-import static org.junit.Assert.*;
-
-import org.junit.*;
-
 import app.beans.UsuarioBean;
 import app.model.UsuarioDAO;
+import org.junit.Before;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
+
+import static org.junit.Assert.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UsuarioDAOIT extends BaseIT<UsuarioDAO> {
 
     @Before
-    public void setUp(){
+    public void setUp() {
         sut = new UsuarioDAO();
         open();
     }
@@ -36,14 +37,14 @@ public class UsuarioDAOIT extends BaseIT<UsuarioDAO> {
     public void shouldReturnTheUsuarioIdWhenCallingGetUserId() {
 
         Long userId = sut.getUserId("nickTest");
-        assertEquals((Long)1L,userId);
+        assertEquals((Long) 1L, userId);
 
     }
 
     @Test
     public void shouldReturnTrueWhenNickAndPasswordAreFindInDBWhenCallingLoginUsuario() {
 
-        assertTrue(sut.loginUsuario("nickTest","passwordTest"));
+        assertTrue(sut.loginUsuario("nickTest", "passwordTest"));
 
     }
 
@@ -68,7 +69,7 @@ public class UsuarioDAOIT extends BaseIT<UsuarioDAO> {
     }
 
     @Test
-    public void shouldZDeleteTheUsuarioIdentifiedByIdWhenCallingDeleteById(){
+    public void shouldZDeleteTheUsuarioIdentifiedByIdWhenCallingDeleteById() {
 
         sut.deleteById(2L);
         assertEquals(1, sut.getAll().size());

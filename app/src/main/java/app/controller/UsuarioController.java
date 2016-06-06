@@ -4,14 +4,16 @@ import app.beans.UsuarioBean;
 import app.builder.UsuarioBuilder;
 import app.controller.interfaces.Controller;
 import app.model.UsuarioDAO;
-import app.utils.UtilViews;
+import app.utils.UtilFiles;
 import app.utils.UtilSessionHibernate;
+import app.utils.UtilViews;
 import org.hibernate.Session;
 import org.primefaces.model.UploadedFile;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -31,24 +33,32 @@ public class UsuarioController implements Serializable, Controller {
     private String web;
     private String grupo;
     private String tipoMusica;
+
+    private String rutaImagen = UtilFiles.getDefaultUserRoute();
+
     private transient UploadedFile imagen;
 
     @ManagedProperty(value = "#{usuarioDao}")
     private UsuarioDAO usuarioDao;
 
-    public void insertUsuario() {
+    public void insertUsuario() throws IOException {
+
 
         System.out.println( "Insertando usuario:" + createUsuarioBean() );
         if(nickAlreadyExists()){
 
+
             String summary = "Has sido más lento";
             String detail = "Otro usuario ha registrado el nick " + nick + ", elige otro.";
 
-            UtilViews.sendErrorMessage(summary,detail);
+            UtilViews.sendErrorMessage(summary, detail);
 
-        }
+        } else {
 
-        else{
+            if (checkImagenIsNull()) {
+
+                this.rutaImagen = UtilFiles.upload(imagen);
+            }
 
             UsuarioBean usuario = createUsuarioBean();
             initSessionForDao();
@@ -56,7 +66,7 @@ public class UsuarioController implements Serializable, Controller {
             usuarioDao.insert(usuario);
             commitAndCloseSession();
 
-            String route = "/views/index/login.xhtml";
+            String route = "/views/index/bienvenida.xhtml";
             String summary = "¡Bienvenid@ " + nombre + "!";
             String detail = "Tu usuario " + nick + " ha sido registrado, ¡ahora a Rockear!";
 
@@ -65,66 +75,36 @@ public class UsuarioController implements Serializable, Controller {
         }
     }
 
-    public void deleteUsuarioById(Long id){
+    private boolean checkImagenIsNull() {
 
-        initSessionForDao();
-        initTransactionForDao();
-        usuarioDao.deleteById(id);
-        commitAndCloseSession();
+        String fileName = imagen.getFileName();
 
+        boolean isNull = !(fileName.equals(""));
+
+        return isNull;
     }
 
-    public void updateUsuario(){
-
-        UsuarioBean usuario = createUsuarioBean();
-
-        initSessionForDao();
-        initTransactionForDao();
-        usuarioDao.update(usuario);
-        commitAndCloseSession();
-
-    }
-
-    public void listUsuario(){
-
-        initSessionForDao();
-        initTransactionForDao();
-        List<UsuarioBean> listaUsuarios = usuarioDao.getAll();//Falta saber como enviarlo a la vista
-        commitAndCloseSession();
-
-    }
-
-    public void getUsuarioById(Long id){
-
-        initSessionForDao();
-        initTransactionForDao();
-        UsuarioBean usuarioReturned = usuarioDao.getById(id);//Falta saber como enviarlo a la vista
-        commitAndCloseSession();
-
-    }
-
-
-    public void initSessionForDao(){
+    public void initSessionForDao() {
         Session session = UtilSessionHibernate.initSession();
         usuarioDao.setSession(session);
     }
 
 
-    public void commitAndCloseSession(){
+    public void commitAndCloseSession() {
         Session session = usuarioDao.getSession();
         UtilSessionHibernate.commitAndCloseSession(session);
 
     }
 
 
-    public void initTransactionForDao(){
+    public void initTransactionForDao() {
         Session session = usuarioDao.getSession();
         UtilSessionHibernate.initTransaction(session);
 
     }
 
 
-    public void closeSession(){
+    public void closeSession() {
         Session session = usuarioDao.getSession();
         UtilSessionHibernate.closeSession(session);
     }
@@ -132,11 +112,11 @@ public class UsuarioController implements Serializable, Controller {
     private UsuarioBean createUsuarioBean() {
         usuarioBuilder = new UsuarioBuilder(nombre, apellido, nick, password);
         return usuarioBuilder.correo(correo)
-                                .web(web)
-                                .grupo(grupo)
-                                .tipoMusica(tipoMusica)
-                                .imagen(imagen)
-                                .build();
+                .web(web)
+                .grupo(grupo)
+                .tipoMusica(tipoMusica)
+                .rutaImagen(rutaImagen)
+                .build();
     }
 
     private boolean nickAlreadyExists() {

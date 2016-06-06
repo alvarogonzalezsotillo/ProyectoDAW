@@ -1,69 +1,77 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-		xmlns:h="http://java.sun.com/jsf/html"
-		xmlns:ps="http://xmlns.jcp.org/jsf/passthrough"
-		xmlns:p="http://primefaces.org/ui">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ps="http://xmlns.jcp.org/jsf/passthrough"
+>
 
-	<h:head>
-	    <meta charset="UTF-8" />
-	    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	    <meta name="viewport" content="width=device-width, initial-scale=1" />
-	
-	    <title>Melomify</title>
-	    <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
-	    <h:outputStylesheet library="css" name="bienvenida.css"></h:outputStylesheet>
-	    
-	    <!--  <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/bootstrap.css" />
-	    <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/bienvenida.css" />-->
-	    <!--[if lt IE 9]>
-	        <script>document.createElement('video');</script>
-	        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-	    <![endif]-->
-	</h:head>
-	
-	<h:body> 
-		<video autoplay="autoplay" loop="loop" poster="#{request.contextPath}/resources/images/videoBienvenida.jpg" id="videoBienvenida">
-		    <source src="#{request.contextPath}/resources/video/videoBienvenida.mp4" type="video/mp4" />
-		</video>
-		<div class="container-fluid">
-		    <div class="row-fluid">
-		        <div class="centering text-center">
-		            <h:form>
-		                <a href="#" data-toggle="modal" data-target="#login">
-		                    <h:graphicImage ps:id="logoCompleto" name="logoB.png" library="images"></h:graphicImage>
-		                </a>
-		                <a href="#" data-toggle="modal" data-target="#login">
-		                    <h:graphicImage ps:id="logoReducido" name="Mblanco.png" library="images"></h:graphicImage>
-		                </a>
-		            </h:form>
-		        </div>
-		    </div>
-		</div>
-		
-		<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    	  	<div class="modal-dialog">
-				<div class="loginmodal-container">
-					
-				  <h:form>
-				  	<h:graphicImage ps:id="logoReducidoLogin" name="Mnegro.png" library="images"></h:graphicImage>
-					<h:outputLabel for="nickDeUsuario" />
-		        	<h:inputText value="#{loginController.nick}" id="nickDeUsuario" required="required" autofocus="autofocus" styleClass="input-lg" ps:placeholder="Melóman@" label="nickDeUsuario" />
-		        
-		        	<h:outputLabel for="passwordDeUsuario" />
-		        	<h:inputSecret value="#{loginController.password}" id="passwordDeUsuario" required="required" styleClass="input-lg" ps:placeholder="Contraseña" label="passwordDeUsuario" />
-					
-					<h:commandButton styleClass="login loginmodal-submit" actionListener="#{loginController.login}" value="Iniciar sesión"></h:commandButton>
+<h:head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-				  </h:form>
-				  	<div class="modal-footer">
-				  		Empieza a marcar el ritmo <h:outputLink value="/views/formulario/registro.xhtml">¡Regístrate!</h:outputLink> o <h:outputLink value="/views/timeline/timeline.xhtml">¡Conócenos!</h:outputLink>
-				  	</div>
-				</div>
-			</div>
-		 </div>
-		
-	<h:outputScript library="js" name="jquery-1.12.3.min.js" />
-	<h:outputScript library="js" name="bootstrap.min.js" />
-	</h:body>
+    <title>Melomify</title>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+    <h:outputStylesheet library="css" name="bienvenida.css"></h:outputStylesheet>
+
+    <!--  <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/bienvenida.css" />-->
+    <!--[if lt IE 9]>
+        <script>document.createElement('video');</script>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</h:head>
+
+<h:body>
+    <video autoplay="autoplay" loop="loop" poster="#{request.contextPath}/resources/images/videoBienvenida.jpg"
+           id="videoBienvenida">
+        <source src="#{request.contextPath}/resources/video/videoBienvenida.mp4" type="video/mp4"/>
+    </video>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="centering text-center">
+                <h:form>
+                    <a href="#" data-toggle="modal" data-target="#login">
+                        <h:graphicImage ps:id="logoCompleto" name="logoB.png" library="images"></h:graphicImage>
+                    </a>
+                    <a href="#" data-toggle="modal" data-target="#login">
+                        <h:graphicImage ps:id="logoReducido" name="Mblanco.png" library="images"></h:graphicImage>
+                    </a>
+                </h:form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+         style="display: none;">
+        <div class="modal-dialog">
+            <div class="loginmodal-container">
+
+                <h:form>
+                    <h:graphicImage ps:id="logoReducidoLogin" name="Mnegro.png" library="images"></h:graphicImage>
+                    <h:outputLabel for="nickDeUsuario"/>
+                    <h:inputText value="#{loginController.nick}" id="nickDeUsuario" required="required"
+                                 autofocus="autofocus" styleClass="input-lg" ps:placeholder="Melóman@"
+                                 label="nickDeUsuario"/>
+
+                    <h:outputLabel for="passwordDeUsuario"/>
+                    <h:inputSecret value="#{loginController.password}" id="passwordDeUsuario" required="required"
+                                   styleClass="input-lg" ps:placeholder="Contraseña" label="passwordDeUsuario"/>
+
+                    <h:commandButton styleClass="login loginmodal-submit" actionListener="#{loginController.login}"
+                                     value="Iniciar sesión"></h:commandButton>
+
+                </h:form>
+                <div class="modal-footer">
+                    Empieza a marcar el ritmo <h:outputLink
+                        value="/views/formulario/registro.xhtml">¡Regístrate!</h:outputLink> o <h:outputLink
+                        value="/views/timeline/timeline.xhtml">¡Conócenos!</h:outputLink>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h:outputScript library="js" name="jquery-1.12.3.min.js"/>
+    <h:outputScript library="js" name="bootstrap.min.js"/>
+</h:body>
 </html>

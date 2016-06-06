@@ -6,9 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.*;
 
 public class MelomBuilderTest {
 
@@ -19,7 +17,7 @@ public class MelomBuilderTest {
     String tituloTest = "tituloTest";
     String albumTest = "albumTest";
     String tipoMusicaTest = "tipoMusicaTest";
-    String comentarioTest= "comentarioTest";
+    String comentarioTest = "comentarioTest";
 
     MelomBean melom;
 
@@ -31,9 +29,7 @@ public class MelomBuilderTest {
             sut = new MelomBuilder();
 
 
-        }
-
-        catch (ExceptionInInitializerError e) {
+        } catch (ExceptionInInitializerError e) {
 
             throw new ExceptionInInitializerError("No se ha podido inicializar el SUT" + e);
 
@@ -49,7 +45,7 @@ public class MelomBuilderTest {
     }
 
     @Test
-    public void shouldConstructANewComentarioBuilder(){
+    public void shouldConstructANewComentarioBuilder() {
 
         MelomBuilder melomBuilder = new MelomBuilder();
 
@@ -58,23 +54,23 @@ public class MelomBuilderTest {
     }
 
     @Test
-    public void shouldSetAllAttributesReturnComentarioBuilderOnEachOneAndBuildNewComentario(){
+    public void shouldSetAllAttributesReturnComentarioBuilderOnEachOneAndBuildNewComentario() {
 
 
         returned = sut.titulo(tituloTest);
-        assertSame(returned,sut);
+        assertSame(returned, sut);
 
         returned = sut.album(albumTest);
-        assertSame(returned,sut);
+        assertSame(returned, sut);
 
         returned = sut.tipoMusica(tipoMusicaTest);
-        assertSame(returned,sut);
+        assertSame(returned, sut);
 
         returned = sut.comentarioMusico(comentarioTest);
-        assertSame(returned,sut);
+        assertSame(returned, sut);
 
         returned = sut.idUsuario(idUsuarioTest);
-        assertSame(returned,sut);
+        assertSame(returned, sut);
 
         melom = sut.build();
 

@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "BETAfollowers")//TODO NO OLVIDAR CAMBIAR CUANDO TERMINEMOS LA TABLA DE FOLLOWERS!!!!!!!!!!!!!!!!!!!
+@Table(name = "followers")
 public class FollowerBean implements Serializable, Bean {
 
     @Id
@@ -44,11 +44,12 @@ public class FollowerBean implements Serializable, Bean {
         this.idFollower = idFollower;
     }
 
-    public Long getId(){
+    public Long getId() {
 
         return null;
     }
-    public void setId(Long id){
+
+    public void setId(Long id) {
 
         //Do nothing
 

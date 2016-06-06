@@ -12,7 +12,7 @@ import java.util.List;
 
 @ManagedBean(name = "usuarioDao")
 @ApplicationScoped
-public class UsuarioDAO extends SessionFactoryImpl implements Serializable,DAO<UsuarioBean> {
+public class UsuarioDAO extends SessionFactoryImpl implements Serializable, DAO<UsuarioBean> {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,14 +26,6 @@ public class UsuarioDAO extends SessionFactoryImpl implements Serializable,DAO<U
         session.save(usuario);
 
     }
-
-
-    public void update(UsuarioBean usuarioToUpdate) {
-
-        session.update(usuarioToUpdate);
-
-    }
-
 
     public void deleteById(Long id) {
 
@@ -97,7 +89,7 @@ public class UsuarioDAO extends SessionFactoryImpl implements Serializable,DAO<U
 
     }
 
-    public Long getUserId(String nick){
+    public Long getUserId(String nick) {
 
         Query query = session.createQuery("from UsuarioBean usuario where usuario.nickDeUsuario = :nick");
         query.setParameter("nick", nick);
@@ -130,9 +122,9 @@ public class UsuarioDAO extends SessionFactoryImpl implements Serializable,DAO<U
 
     }
 
-    public void followNewUser(Long idToFollow, Long idFollower){
+    public void followNewUser(Long idToFollow, Long idFollower) {
 
-        Query query = session.createSQLQuery("insert into BETAfollowers (idUsuario,idFollower) values (:idToFollow, :idFollower)");
+        Query query = session.createSQLQuery("insert into followers (idUsuario,idFollower) values (:idToFollow, :idFollower)");
         query.setParameter("idToFollow", idToFollow);
         query.setParameter("idFollower", idFollower);
         query.executeUpdate();
@@ -149,7 +141,7 @@ public class UsuarioDAO extends SessionFactoryImpl implements Serializable,DAO<U
 
     }
 
-    public List<MelomBean> getListMelomsByUser(Long idUsuario){
+    public List<MelomBean> getListMelomsByUser(Long idUsuario) {
 
         Query query = session.createQuery("from MelomBean meloms where idUsuario = :idUsuario");
         query.setParameter("idUsuario", idUsuario);
@@ -158,5 +150,31 @@ public class UsuarioDAO extends SessionFactoryImpl implements Serializable,DAO<U
 
         return list;
 
+    }
+
+    public void update(Long id, String nuevoNombre, String nuevoApellido, String nuevoCorreo, String nuevoGrupo, String nuevaWeb, String nuevoTipoMusica) {
+
+        Query query = session.createQuery("update UsuarioBean set nombreDeUsuario = :nombre, apellidoDeUsuario = :apellido, correoDeUsuario = :correo, grupoDeUsuario = :grupo, webDeUsuario = :web, tipoMusicaDeUsuario = :tipoMusica where id = :id");
+        query.setParameter("id", id);
+        query.setParameter("nombre", nuevoNombre);
+        query.setParameter("apellido", nuevoApellido);
+        query.setParameter("correo", nuevoCorreo);
+        query.setParameter("grupo", nuevoGrupo);
+        query.setParameter("web", nuevaWeb);
+        query.setParameter("tipoMusica", nuevoTipoMusica);
+        query.executeUpdate();
+
+    }
+
+    public void update(UsuarioBean usuarioBean) {
+        //Do nothing
+    }
+
+
+    public void updatePassword(Long id, String nuevaPassword) {
+        Query query = session.createQuery("update UsuarioBean set passwordDeUsuario = :password where id = :id");
+        query.setParameter("id", id);
+        query.setParameter("password", nuevaPassword);
+        query.executeUpdate();
     }
 }

@@ -4,6 +4,7 @@ import app.beans.MelomBean;
 import app.builder.MelomBuilder;
 import app.controller.interfaces.Controller;
 import app.model.MelomDAO;
+import app.utils.UtilFiles;
 import app.utils.UtilSessionHibernate;
 import app.utils.UtilUserSession;
 import app.utils.UtilViews;
@@ -13,6 +14,7 @@ import org.primefaces.model.UploadedFile;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -35,9 +37,18 @@ public class MelomController implements Serializable, Controller {
     private transient UploadedFile cancion;
     private Long idUsuario = UtilUserSession.getUserId();
     private String autor = UtilUserSession.getUserName();
+    private String rutaCancion = null;
+    private String rutaImagenAlbum = UtilFiles.getDefaultAlbumRoute();
 
 
-    public void insertMelom() {
+    public void insertMelom() throws IOException {
+
+        if (checkImageIsNull()) {
+
+            this.rutaImagenAlbum = UtilFiles.upload(imagenAlbum);
+        }
+
+        this.rutaCancion = UtilFiles.upload(cancion);
 
         MelomBean melom = createMelomBean();
         initSessionForDao();
@@ -45,45 +56,31 @@ public class MelomController implements Serializable, Controller {
         melomDao.insert(melom);
         commitAndCloseSession();
 
-        String route = "/views/index/login.xhtml";
-
-        UtilViews.redirect(route);
+        refreshPage();
     }
 
-    public void deleteMelom(Long id){
+    public void deleteMelom(Long id) {
 
         initSessionForDao();
         initTransactionForDao();
         melomDao.deleteById(id);
         commitAndCloseSession();
-
+        refreshPage();
     }
 
-    public void updateMelom(){
+    private boolean checkImageIsNull() {
 
-        MelomBean melom = createMelomBean();
-        initSessionForDao();
-        initTransactionForDao();
-        melomDao.update(melom);
-        commitAndCloseSession();
+        String fileName = imagenAlbum.getFileName();
 
+        return !(fileName.equals(""));
     }
 
-    public void listMelom(){
 
-        initSessionForDao();
-        initTransactionForDao();
-        List<MelomBean> listaMeloms = melomDao.getAll();//Falta saber como enviarlo a la vista
-        commitAndCloseSession();
+    private void refreshPage() {
+        //TODO        String route = "/views/timeline/timeline.xhtml";
+        String route = "/index.xhtml";
 
-    }
-
-    public void getMelomById(Long id){
-
-        initSessionForDao();
-        initTransactionForDao();
-        MelomBean melomReturned = melomDao.getById(id);//Falta saber como enviarlo a la vista
-        commitAndCloseSession();
+        UtilViews.redirect(route);
     }
 
     public void initSessionForDao() {
@@ -99,6 +96,7 @@ public class MelomController implements Serializable, Controller {
     public void commitAndCloseSession() {
         Session session = melomDao.getSession();
         UtilSessionHibernate.commitAndCloseSession(session);
+
     }
 
     public void closeSession() {
@@ -109,13 +107,14 @@ public class MelomController implements Serializable, Controller {
     private MelomBean createMelomBean() {
         melomBuilder = new MelomBuilder(titulo, idUsuario);
         return melomBuilder.album(album)
-                            .tipoMusica(tipoMusica)
-                            .comentarioMusico(comentario)
-                            .cancion(cancion)
-                            .imagenAlbum(imagenAlbum)
-                            .autor(autor)
-                            .build();
+                .tipoMusica(tipoMusica)
+                .comentarioMusico(comentario)
+                .rutaCancion(rutaCancion)
+                .rutaImagenAlbum(rutaImagenAlbum)
+                .autor(autor)
+                .build();
     }
+
 
     public String getTitulo() {
         return titulo;
@@ -195,5 +194,21 @@ public class MelomController implements Serializable, Controller {
 
     public void setAutor(String autor) {
         this.autor = autor;
+    }
+
+    public String getRutaCancion() {
+        return rutaCancion;
+    }
+
+    public void setRutaCancion(String rutaCancion) {
+        this.rutaCancion = rutaCancion;
+    }
+
+    public String getRutaImagenAlbum() {
+        return rutaImagenAlbum;
+    }
+
+    public void setRutaImagenAlbum(String rutaImagenAlbum) {
+        this.rutaImagenAlbum = rutaImagenAlbum;
     }
 }

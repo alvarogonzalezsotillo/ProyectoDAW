@@ -14,6 +14,8 @@
     <f:event type="preRenderView" listener="#{perfilUsuarioController.init()}"/>
     <f:event type="preRenderView" listener="#{timelineController.init()}"/>
 
+    <p:messages id="messages" autoUpdate="true" showDetail="true" closable="true"/>
+
     <my:condition condition="#{perfilUsuarioController.isAnonymous == false}">
 
         <f:facet name="then">
@@ -28,7 +30,7 @@
                     <h:outputText value="#{perfilUsuarioController.webPersonal}"/>
                     <h:outputText value="#{perfilUsuarioController.tipoMusicaPersonal}"/>
 
-                    <h:graphicImage value="data:image/jpeg;base64,#{perfilUsuarioController.imagenPersonal}"/>
+                    <h:graphicImage value="#{perfilUsuarioController.imagenPersonal}"/>
 
                     <p:commandButton value="Logout" id="logout" actionListener="#{loginController.logout}"
                                      styleClass="ui-priority-primary"/>
@@ -48,26 +50,44 @@
     </my:condition>
 
 
+    <!--**********************************************ESTA PARTE ES EL TIMELINE**********************************************-->
+
     <my:condition condition="#{perfilUsuarioController.isAnonymous == false}">
 
         <f:facet name="then">
 
             <h:form>
                 <ui:repeat var="melom" value="#{timelineController.listaMeloms}">
-                    <h:panelGrid columns="7">
+                    <h:panelGrid columns="9">
 
                         <h:commandLink value="#{melom.autor}"
                                        actionListener="#{perfilUsuarioController.viewProfile(melom.autor)}"/>
-                        <h:outputText value="#{melom.titulo}"/>
+                        <h:commandLink value="#{melom.titulo}"
+                                       actionListener="#{comentarioController.verComentarios(melom)}"/>
                         <h:outputText value="#{melom.album}"/>
                         <h:outputText value="#{melom.tipoMusica}"/>
                         <h:outputText value="#{melom.comentarioMusico}"/>
 
                         <audio controls="controls">
-                            <source src="data:audio/mpeg3;base64,#{melom.cancion}" type="audio/mpeg"/>
+                            <source src="#{melom.rutaCancion}" type="audio/mpeg"/>
                         </audio>
 
-                        <h:graphicImage value="data:image/jpeg;base64,#{melom.imagenAlbum}" height="10%"/>
+                        <h:graphicImage value="#{melom.rutaImagenAlbum}" height="10%"/>
+
+                        <p:commandButton value="Comentar" id="comentar"
+                                         actionListener="#{comentarioController.comentar(melom)}"
+                                         styleClass="ui-priority-primary"/>
+
+                        <my:condition condition="#{melom.idUsuario == perfilUsuarioController.idPersonal}">
+
+                            <f:facet name="then">
+
+                                <h:commandLink actionListener="#{melomController.deleteMelom(melom.id)}"><h:graphicImage
+                                        name="delete.png" library="images" height="30%"/></h:commandLink>
+
+                            </f:facet>
+                        </my:condition>
+
 
                     </h:panelGrid>
                 </ui:repeat>
@@ -82,9 +102,6 @@
 
         </f:facet>
     </my:condition>
-
-    <p:commandButton value="Ver usuarios" id="viewProfiles" actionListener="#{perfilUsuarioController.viewAllProfiles}"
-                     styleClass="ui-priority-primary"/>
 
 </h:body>
 </html>

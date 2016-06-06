@@ -1,7 +1,6 @@
 package app.model;
 
 import app.beans.MelomBean;
-import app.beans.UsuarioBean;
 import app.model.interfaces.DAO;
 import org.hibernate.Query;
 
@@ -37,8 +36,10 @@ public class MelomDAO extends SessionFactoryImpl implements Serializable, DAO<Me
 
 
     public void deleteById(Long id) {
-        MelomBean melomToDelete = session.load(MelomBean.class, id);
-        session.delete(melomToDelete);
+
+        Query query = session.createQuery("delete from MelomBean meloms where meloms.id = :id");
+        query.setParameter("id", id);
+        query.executeUpdate();
     }
 
 
@@ -47,7 +48,7 @@ public class MelomDAO extends SessionFactoryImpl implements Serializable, DAO<Me
 
         List<MelomBean> listaMeloms;
         Query query = session.createQuery("from MelomBean meloms where meloms.id = :id");
-        query.setParameter("id",id);
+        query.setParameter("id", id);
         listaMeloms = query.list();
 
         return listaMeloms.get(0);
@@ -66,19 +67,19 @@ public class MelomDAO extends SessionFactoryImpl implements Serializable, DAO<Me
     }
 
     @SuppressWarnings("unchecked")
-    public List<MelomBean> getAllByIdUsuario(Collection<Long> listaIdUsuario){
+    public List<MelomBean> getAllByIdUsuario(Collection<Long> listaIdUsuario) {
 
         List<MelomBean> listaMelomsFilterByUsuarioId;
 
         Query query = session.createQuery("from MelomBean meloms where meloms.idUsuario in (:listaIdUsuario) order by fechaPublicacion");
-        query.setParameterList("listaIdUsuario",listaIdUsuario);
+        query.setParameterList("listaIdUsuario", listaIdUsuario);
         listaMelomsFilterByUsuarioId = query.list();
 
         return listaMelomsFilterByUsuarioId;
     }
 
     @SuppressWarnings("unchecked")
-    public List<MelomBean> getAllMelomsByIdFollower(Long idFollower){
+    public List<MelomBean> getAllMelomsByIdFollower(Long idFollower) {
 
         List listUserWhoFollow;
         List<MelomBean> listMelomsFilterByidUsuario;
@@ -88,14 +89,12 @@ public class MelomDAO extends SessionFactoryImpl implements Serializable, DAO<Me
         query.setParameter("idFollower", idFollower);
         listUserWhoFollow = query.list();
 
-        if(listUserWhoFollow.size() == 0){
+        if (listUserWhoFollow.size() == 0) {
 
             Query query2 = session.createQuery("from MelomBean where idUsuario = :idFollower order by fechaPublicacion desc");
             query2.setParameter("idFollower", idFollower);
             listMelomsFilterByidUsuario = query2.list();
-        }
-
-        else {
+        } else {
 
             Query query2 = session.createQuery("from MelomBean where idUsuario in (:listId, :idFollower) order by fechaPublicacion desc");
             query2.setParameterList("listId", listUserWhoFollow);
@@ -104,21 +103,5 @@ public class MelomDAO extends SessionFactoryImpl implements Serializable, DAO<Me
         }
 
         return listMelomsFilterByidUsuario;
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<String> getAllAutoresByIdFollower(Long idFollower){
-
-        List<String> listAutores;
-
-        Query subQuery = session.createQuery("select idUsuario from FollowerBean where idFollower = :idFollower");
-        subQuery.setParameter("idFollower", idFollower);
-        List subQueryResult = subQuery.list();
-
-        Query query = session.createQuery("select usuarios.nombreDeUsuario from UsuarioBean usuarios where usuarios.id in (:subQueryResult)");
-        query.setParameterList("subQueryResult", subQueryResult);
-        listAutores = query.list();
-
-        return listAutores;
     }
 }

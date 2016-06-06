@@ -2,15 +2,13 @@ package app.builder;
 
 import app.beans.UsuarioBean;
 import app.builder.interfaces.Builder;
-import app.utils.UtilFiles;
-import org.primefaces.model.UploadedFile;
 
 import java.io.Serializable;
 
 public class UsuarioBuilder implements Serializable, Builder<UsuarioBean> {
 
     private static final long serialVersionUID = 1L;
-    
+
     private String nombre;
     private String apellido;
     private String nick;
@@ -19,27 +17,27 @@ public class UsuarioBuilder implements Serializable, Builder<UsuarioBean> {
     private String web;
     private String grupo;
     private String tipoMusica;
-    private byte[] imagen;
+    private String rutaImagen;
 
-    public UsuarioBuilder(){
-        
+    public UsuarioBuilder() {
+
         //Constructor por defecto para los test
-        
+
     }
-    
-    public UsuarioBuilder(String nombre, String apellido, String nick, String password){
-        
+
+    public UsuarioBuilder(String nombre, String apellido, String nick, String password) {
+
         this.nombre = nombre;
         this.apellido = apellido;
         this.nick = nick;
-        this. password = password;
-        
+        this.password = password;
+
     }
 
 
     public UsuarioBean build() {
 
-        return new UsuarioBean(nombre,apellido,nick,correo,tipoMusica,grupo,web,password,imagen);
+        return new UsuarioBean(nombre, apellido, nick, correo, tipoMusica, grupo, web, password, rutaImagen);
 
     }
 
@@ -100,15 +98,15 @@ public class UsuarioBuilder implements Serializable, Builder<UsuarioBean> {
 
     public UsuarioBuilder password(String password) {
 
-        this.password= password;
+        this.password = password;
 
         return this;
 
     }
 
-    public UsuarioBuilder imagen(UploadedFile imagen){
+    public UsuarioBuilder rutaImagen(String rutaImagen) {
 
-        this.imagen = UtilFiles.transformFile(imagen);
+        this.rutaImagen = rutaImagen;
 
         return this;
 

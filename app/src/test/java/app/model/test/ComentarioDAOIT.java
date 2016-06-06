@@ -3,16 +3,19 @@ package app.model.test;
 
 import app.beans.ComentarioBean;
 import app.model.ComentarioDAO;
-import org.junit.*;
+import org.junit.Before;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ComentarioDAOIT extends BaseIT<ComentarioDAO>{
+public class ComentarioDAOIT extends BaseIT<ComentarioDAO> {
 
     @Before
-    public void setUp(){
+    public void setUp() {
         sut = new ComentarioDAO();
         open();
     }
@@ -34,7 +37,6 @@ public class ComentarioDAOIT extends BaseIT<ComentarioDAO>{
     }
 
 
-
     @Test
     public void testShouldUpdateTheUsuarioWhenCallingUpdateUsuario() {
 
@@ -47,22 +49,22 @@ public class ComentarioDAOIT extends BaseIT<ComentarioDAO>{
     }
 
     @Test
-    public void testShouldReturnAllComentariosFilterByIdUsuarioWhenCallingGetAllByIdUsuario(){
+    public void testShouldReturnAllComentariosFilterByIdUsuarioWhenCallingGetAllByIdUsuario() {
 
-        assertEquals(2,sut.getAllByIdUsuario(1L).size());
-
-    }
-
-    @Test
-    public void testShouldReturnAllComentariosFilterByIdMelomWhenCallingGetAllByIdMelom(){
-
-
-        assertEquals(2,sut.getAllByIdMelom(1L).size());
+        assertEquals(2, sut.getAllByIdUsuario(1L).size());
 
     }
 
     @Test
-    public void testZShouldDeleteTheComentarioIdentifiedByIdWhenCallingDeleteById(){
+    public void testShouldReturnAllComentariosFilterByIdMelomWhenCallingGetAllByIdMelom() {
+
+
+        assertEquals(2, sut.getAllByIdMelom(1L).size());
+
+    }
+
+    @Test
+    public void testZShouldDeleteTheComentarioIdentifiedByIdWhenCallingDeleteById() {
 
         sut.deleteById(2L);
         assertEquals(1, sut.getAll().size());

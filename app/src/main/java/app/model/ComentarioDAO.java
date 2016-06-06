@@ -11,43 +11,45 @@ import java.util.List;
 
 @ManagedBean(name = "comentarioDao")
 @ApplicationScoped
-public class ComentarioDAO extends SessionFactoryImpl implements Serializable,DAO<ComentarioBean> {
+public class ComentarioDAO extends SessionFactoryImpl implements Serializable, DAO<ComentarioBean> {
 
     private static final long serialVersionUID = 1L;
 
-    public ComentarioDAO(){
+    public ComentarioDAO() {
 
         super();
 
     }
 
 
-    public void insert(ComentarioBean comentario){
+    public void insert(ComentarioBean comentario) {
 
         session.save(comentario);
     }
 
 
-    public void update(ComentarioBean comentarioToUpdate){
+    public void update(ComentarioBean comentarioToUpdate) {
 
         session.update(comentarioToUpdate);
     }
 
 
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
 
-        ComentarioBean comentarioToDelete = session.load(ComentarioBean.class, id);
-        session.delete(comentarioToDelete);
+        Query query = session.createQuery("delete from ComentarioBean comentarios where comentarios.id = :id");
+        query.setParameter("id", id);
+        query.executeUpdate();
+
     }
 
 
     @SuppressWarnings("unchecked")
-    public ComentarioBean getById(Long id){
+    public ComentarioBean getById(Long id) {
 
         List<ComentarioBean> listaComentarios;
 
         Query query = session.createQuery("from ComentarioBean comentario where comentario.id = :id");
-        query.setParameter("id",id);
+        query.setParameter("id", id);
         listaComentarios = query.list();
 
         return listaComentarios.get(0);
@@ -55,7 +57,7 @@ public class ComentarioDAO extends SessionFactoryImpl implements Serializable,DA
 
 
     @SuppressWarnings("unchecked")
-    public List<ComentarioBean> getAll(){
+    public List<ComentarioBean> getAll() {
 
         List<ComentarioBean> listaComentarios;
 
@@ -66,24 +68,24 @@ public class ComentarioDAO extends SessionFactoryImpl implements Serializable,DA
     }
 
     @SuppressWarnings("unchecked")
-    public List<ComentarioBean> getAllByIdUsuario(Long idUsuario){
+    public List<ComentarioBean> getAllByIdUsuario(Long idUsuario) {
 
         List<ComentarioBean> listaComentarios;
 
         Query query = session.createQuery("from ComentarioBean comentario where comentario.idUsuario = :idUsuario");
-        query.setParameter("idUsuario",idUsuario);
+        query.setParameter("idUsuario", idUsuario);
         listaComentarios = query.list();
 
         return listaComentarios;
     }
 
     @SuppressWarnings("unchecked")
-    public List<ComentarioBean> getAllByIdMelom(Long idMelom){
+    public List<ComentarioBean> getAllByIdMelom(Long idMelom) {
 
         List<ComentarioBean> listaComentarios;
 
-        Query query = session.createQuery("from ComentarioBean comentario where comentario.idMelom = :idMelom");
-        query.setParameter("idMelom",idMelom);
+        Query query = session.createQuery("from ComentarioBean comentario where comentario.idMelom = :idMelom order by fechaPublicacion desc");
+        query.setParameter("idMelom", idMelom);
         listaComentarios = query.list();
 
         return listaComentarios;

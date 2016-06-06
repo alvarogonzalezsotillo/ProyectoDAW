@@ -1,14 +1,17 @@
 package app.beans.test;
 
-import static org.junit.Assert.*;
-
-import app.utils.UtilPasswords;
-import org.junit.*;
-
 import app.beans.UsuarioBean;
 import app.builder.UsuarioBuilder;
+import app.utils.UtilPasswords;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class UsuarioTest {
+
+    String salt = UtilPasswords.getSalt();
 
     Long idTest = 1L;
     String nombreTest = "testingNombre";
@@ -18,8 +21,7 @@ public class UsuarioTest {
     String tipoMusicaTest = "testingTipoMusica";
     String grupoTest = "testingGrupo";
     String webTest = "testingWeb";
-    String passwordTest = "testingPass";
-    String salt = UtilPasswords.getSalt();
+    String passwordTest = UtilPasswords.hashPasswordSHA("testingPass" + salt);
     UsuarioBean sut;
 
     UsuarioBuilder usuarioBuilder;
@@ -32,9 +34,7 @@ public class UsuarioTest {
             sut = new UsuarioBean(nombreTest, apellidoTest, nickTest, correoTest, tipoMusicaTest, grupoTest, webTest, passwordTest, null);
             sut.setId(idTest);
 
-        }
-
-        catch (ExceptionInInitializerError e) {
+        } catch (ExceptionInInitializerError e) {
 
             throw new ExceptionInInitializerError("No se ha podido inicializar el SUT" + e);
 
@@ -47,9 +47,7 @@ public class UsuarioTest {
         try {
 
             sut = null;
-        }
-
-        catch (Exception e) {
+        } catch (Exception e) {
 
             throw new ExceptionInInitializerError("No se ha podido destruir el SUT" + e);
 
@@ -173,7 +171,7 @@ public class UsuarioTest {
 
     @Test
     public void shouldEstablishTheUserPasswordHashed() {
-        String hash = UtilPasswords.hashPasswordSHA(passwordTest + salt);
+        String hash = UtilPasswords.hashPasswordSHA("testingPass" + salt);
         sut.setPasswordDeUsuario(passwordTest);
         assertEquals(hash, sut.getPasswordDeUsuario());
     }

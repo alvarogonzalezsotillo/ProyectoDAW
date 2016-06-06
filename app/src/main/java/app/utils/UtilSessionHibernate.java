@@ -39,7 +39,7 @@ public class UtilSessionHibernate {
 
     }
 
-    public static void commitAndCloseSession(Session session){
+    public static void commitAndCloseSession(Session session) {
         session.getTransaction().commit();
         session.close();
     }

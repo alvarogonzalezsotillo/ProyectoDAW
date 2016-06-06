@@ -12,13 +12,12 @@ import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class MelomDAOIT extends BaseIT<MelomDAO>{
+public class MelomDAOIT extends BaseIT<MelomDAO> {
 
     @Before
-    public void setUp(){
+    public void setUp() {
         sut = new MelomDAO();
         open();
     }
@@ -50,26 +49,16 @@ public class MelomDAOIT extends BaseIT<MelomDAO>{
     }
 
     @Test
-    public void shoulReturnAllMelomsFilterByListIdUsuarioWhenCallingGetAllByIdUsuario(){
+    public void shoulReturnAllMelomsFilterByListIdUsuarioWhenCallingGetAllByIdUsuario() {
 
         Collection<Long> listaId = new ArrayList<Long>();
         listaId.add(1L);
-        assertEquals(2,sut.getAllByIdUsuario(listaId).size());
+        assertEquals(2, sut.getAllByIdUsuario(listaId).size());
 
     }
 
-    /*@Test
-    public void shouldReturnAllMelomsFilterByIdUsuarioWhenCallingGetAllMelomsByIdFollower(){
-
-        Collection<MelomBean> listMelomFilterByIdFollower;
-        listMelomFilterByIdFollower = sut.getAllMelomsByIdFollower(2L);
-        MelomBean melomReturned = sut.getById(1L);
-        MelomBean melomReturned2 = sut.getById(2L);
-        assertNotNull(listMelomFilterByIdFollower);
-    }*/
-
     @Test
-    public void shouldZDeleteTheMelomIdentifiedByIdWhenCallingDeleteById(){
+    public void shouldZDeleteTheMelomIdentifiedByIdWhenCallingDeleteById() {
 
         sut.deleteById(2L);
         assertEquals(1, sut.getAll().size());
