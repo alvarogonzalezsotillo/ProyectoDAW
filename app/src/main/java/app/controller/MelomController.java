@@ -42,19 +42,21 @@ public class MelomController implements Serializable, Controller {
 
 
     public void insertMelom() throws IOException {
-
+        java.util.logging.Logger.getLogger(getClass().getName()).log( java.util.logging.Level.SEVERE, "insertando Melom" );
         if (checkImageIsNull()) {
 
             this.rutaImagenAlbum = UtilFiles.upload(imagenAlbum);
         }
 
         this.rutaCancion = UtilFiles.upload(cancion);
-
+        java.util.logging.Logger.getLogger(getClass().getName()).log( java.util.logging.Level.SEVERE, "Fichero subido:" + this.rutaCancion );
+        
         MelomBean melom = createMelomBean();
         initSessionForDao();
         initTransactionForDao();
         melomDao.insert(melom);
         commitAndCloseSession();
+        java.util.logging.Logger.getLogger(getClass().getName()).log( java.util.logging.Level.SEVERE, "Melom insertado:" + melom );
 
         refreshPage();
     }
