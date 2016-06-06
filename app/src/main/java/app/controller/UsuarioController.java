@@ -38,6 +38,7 @@ public class UsuarioController implements Serializable, Controller {
 
     public void insertUsuario() {
 
+        System.out.println( "Insertando usuario:" + createUsuarioBean() );
         if(nickAlreadyExists()){
 
             String summary = "Has sido más lento";

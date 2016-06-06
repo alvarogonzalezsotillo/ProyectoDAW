@@ -5,12 +5,15 @@ import app.controller.interfaces.Controller;
 import app.model.MelomDAO;
 import app.utils.UtilSessionHibernate;
 import app.utils.UtilUserSession;
-import app.utils.UtilViews;
 import org.hibernate.Session;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 

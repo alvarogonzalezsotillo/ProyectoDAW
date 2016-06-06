@@ -54,8 +54,12 @@ public class PerfilUsuarioController implements Controller, Serializable {
 
     private boolean isAnonymous;
 
+    public PerfilUsuarioController(){
+        java.util.logging.Logger.getLogger(getClass().getName()).log( java.util.logging.Level.INFO, "*********************" );
+    }
+    
     public void init() {
-
+        java.util.logging.Logger.getLogger(getClass().getName()).log( java.util.logging.Level.INFO, "init" );
         checkUserIsAnonymous();
 
         if(!isAnonymous){
@@ -409,6 +413,8 @@ public class PerfilUsuarioController implements Controller, Serializable {
     }
 
     public boolean getIsAnonymous() {
+        System.out.println( "isAnonymous:" + isAnonymous );
+        java.util.logging.Logger.getLogger(getClass().getName()).log( java.util.logging.Level.INFO, "*********************isAnonymous:" + isAnonymous );
         return isAnonymous;
     }
 

@@ -1,12 +1,5 @@
 package app.servlet;
 
-import app.beans.MelomBean;
-import app.model.MelomDAO;
-import app.servlet.interfaces.Servlet;
-import app.utils.UtilSessionHibernate;
-import org.hibernate.Session;
-
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name = "servletMusica")
-public class ServletMusic extends HttpServlet implements Servlet<MelomDAO> {
+public class ServletMusic extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request,response);
@@ -24,63 +17,25 @@ public class ServletMusic extends HttpServlet implements Servlet<MelomDAO> {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        MelomDAO melomDao = initDao(request);
-
         ServletOutputStream outputStream = response.getOutputStream();
 
-        String id = request.getParameter("idMelom");
+        String cancion = request.getParameter("cancionMelom");
 
-        Long idMelom = Long.parseLong(id);
+        byte[] bytes = cancion.getBytes();
 
-        initSessionForDao(melomDao);
-
-        MelomBean melomReturned = melomDao.getById(idMelom);
-
-        closeSession(melomDao);
-
-        writeBytesInStream(response, outputStream, melomReturned);
+        writeBytesInStream(response, outputStream, bytes);
 
 
     }
 
-    private void writeBytesInStream(HttpServletResponse response, ServletOutputStream outputStream, MelomBean melomReturned) throws IOException {
-
-        byte[] cancionBytes = melomReturned.getCancion();
+    private void writeBytesInStream(HttpServletResponse response, ServletOutputStream outputStream, byte[] bytes) throws IOException {
 
         response.setContentType("audio/mpeg3");
 
-        response.setContentLength(cancionBytes.length);
+        response.setContentLength(bytes.length);
 
-        outputStream.write(cancionBytes);
+        outputStream.write(bytes);
 
         outputStream.flush();
-    }
-
-    public MelomDAO initDao(HttpServletRequest request) {
-
-        ServletContext context = request.getSession().getServletContext();
-        return (MelomDAO) context.getAttribute("melomDao");
-    }
-
-
-
-    public void initSessionForDao(MelomDAO melomDao) {
-        Session session = UtilSessionHibernate.initSession();
-        melomDao.setSession(session);
-    }
-
-    public void initTransactionForDao(MelomDAO melomDao) {
-        Session session = melomDao.getSession();
-        UtilSessionHibernate.initTransaction(session);
-    }
-
-    public void commitAndCloseSession(MelomDAO melomDao) {
-        Session session = melomDao.getSession();
-        UtilSessionHibernate.commitAndCloseSession(session);
-    }
-
-    public void closeSession(MelomDAO melomDao) {
-        Session session = melomDao.getSession();
-        UtilSessionHibernate.closeSession(session);
     }
 }

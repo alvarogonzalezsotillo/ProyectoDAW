@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:ps="http://xmlns.jcp.org/jsf/passthrough"
-	xmlns:p="http://primefaces.org/ui">
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:ps="http://xmlns.jcp.org/jsf/passthrough"
+	  xmlns:p="http://primefaces.org/ui">
 
 	<ui:include src="/resources/templates/navBar.xhtml" />
 	<h:outputStylesheet library="css" name="registro.css"></h:outputStylesheet>
@@ -16,7 +16,7 @@
 		
 				<h:form class="form-horizontal col-md-6 col-md-offset-3" enctype="multipart/form-data">
 				
-					<legend>Empieza a marcar el ritmo.</legend>
+					<legend>Empieza a marcar el ritmo</legend>
 					
 					<div class="form-group">
 			    		<label for="nick" class="col-sm-4 control-label">Nombre de usuario</label>
@@ -130,14 +130,13 @@
 			  		
 			  		<div class="form-group">
 			    		<div class="col-sm-offset-4 col-sm-8">
-				    		<h:commandButton styleClass="pull-right" ps:id="btnRegistro" value="Regístrate">
+				    		<h:commandButton styleClass="btnRegistro pull-right" value="Regístrate">
 								<f:ajax execute="@all" listener="#{usuarioController.insertUsuario}" />
 							</h:commandButton>
 			    		</div>
 			  		</div>
 			  		
 				</h:form>
-	
 	
 			</div>
 		</div>
